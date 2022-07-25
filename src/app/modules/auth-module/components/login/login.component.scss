@@ -1,0 +1,50 @@
+.background-img {
+  background-image: url("../../../../../assets/images/imageedit_3_4787130474.jpg");
+  height: 91.8vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+:host ::ng-deep .p-divider .p-divider-content {
+  background-color: rgb(251, 248, 248) !important;
+}
+.card {
+  background-color: rgb(251, 248, 248);
+  border: none;
+}
+.form-style {
+  width: 80%;
+  color: white;
+  opacity: 0.96;
+}
+.view-height {
+  height: 80vh;
+}
+
+:host ::ng-deep .main-color {
+  background-color: #999;
+  border: #999;
+}
+:host ::ng-deep .main-color:hover {
+  background-color: #999;
+}
+.main-text {
+  color: #999;
+}
+
+@media (min-width: 768px) {
+  .form-style {
+    width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .form-style {
+    width: 50%;
+  }
+}
+@media (min-width: 1200px) {
+  .form-style {
+    width: 25%;
+  }
+}

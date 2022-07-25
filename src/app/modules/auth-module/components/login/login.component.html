@@ -1,0 +1,96 @@
+<section class="background-img pt-4">
+  <div class="container view-height card mx-auto form-style shadow">
+    <h1 class="text-center pt-3 pt-xl-5 main-text mt-2 mb-3 mb-xl-0">Login</h1>
+    <form
+      [formGroup]="loginForm"
+      class="p-1 h-100 d-flex flex-column justify-content-evenly"
+      (ngSubmit)="loginFormSubmit()"
+    >
+      <div>
+        <!-- Email input -->
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon bg-light"
+            ><i class="fa-solid fa-envelope"></i
+          ></span>
+          <input
+            pTooltip="email@address.com"
+            tooltipPosition="top"
+            type="text"
+            pInputText
+            class="p-inputtext-sm"
+            placeholder="Email"
+            aria-describedby="username2-help"
+            formControlName="email"
+          />
+        </div>
+        <!-- Email errors -->
+        <ng-template
+          [ngIf]="
+            (!controlValidation['email'].valid &&
+              controlValidation['email'].touched) ||
+            showErrors
+          "
+        >
+          <small
+            id="username2-help"
+            class="p-error block"
+            *ngIf="controlValidation['email'].errors?.['required']"
+            >This field is required.</small
+          >
+          <small
+            id="username2-help"
+            class="p-error block"
+            *ngIf="controlValidation['email'].errors?.['pattern']"
+            >Wrong email format.</small
+          >
+        </ng-template>
+        <!-- Password input -->
+        <div class="p-inputgroup mt-4">
+          <span class="p-inputgroup-addon bg-light"
+            ><i class="fa-solid fa-lock"></i
+          ></span>
+          <input
+            type="password"
+            pInputText
+            class="p-inputtext-sm"
+            placeholder="Password"
+            formControlName="password"
+          />
+        </div>
+
+        <!-- Password errors -->
+        <ng-template
+          [ngIf]="
+            (!controlValidation['password'].valid &&
+              controlValidation['password'].touched) ||
+            showErrors
+          "
+        >
+          <small
+            id="username2-help"
+            class="p-error block"
+            *ngIf="controlValidation['password'].errors?.['required']"
+            >This field is required.</small
+          >
+        </ng-template>
+      </div>
+      <!-- Submit form -->
+      <button
+        pButton
+        pRipple
+        type="submit"
+        label="Sign in"
+        class="p-button-raised main-color w-100 mt-3"
+      ></button>
+    </form>
+    <!-- Form ends -->
+    <!-- Register new account section -->
+    <p-divider align="center" layout="horizontal" class="mb-3">
+      <b class="main-text">OR</b>
+    </p-divider>
+    <p class="text-dark text-center mb-5">
+      Don't have an account?
+      <a routerLink="/auth/register" class="main-text"> <b>Sign up</b></a>
+    </p>
+  </div>
+</section>
