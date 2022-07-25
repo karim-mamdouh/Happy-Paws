@@ -21,6 +21,7 @@
     "@angular/router": "^14.0.0",
     "@angular/service-worker": "^14.0.0",
     "@fortawesome/fontawesome-free": "^6.1.1",
+    "@ngrx/store": "^14.0.2",
     "bootstrap": "^5.2.0",
     "primeicons": "^5.0.0",
     "primeng": "^14.0.0",
