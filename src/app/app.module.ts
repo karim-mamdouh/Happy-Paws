@@ -17,6 +17,10 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+//NgRx Store
+import { storeReducer } from './store/store/store-reducer';
+import { blogReducer } from './store/blog/blog-reducer';
+import { adoptionReducer } from './store/adoption/adoption-reducer';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({
+      store: storeReducer,
+      blog: blogReducer,
+      adoption: adoptionReducer,
+    }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable

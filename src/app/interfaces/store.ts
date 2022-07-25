@@ -21,6 +21,10 @@ export interface ProductItem {
   quantity?: number;
 }
 
+export interface CartItem extends ProductItem {
+  count: number;
+}
+
 export enum ProductCategory {
   Supplies = 'Supplies',
   Accessories = 'Accessories',
