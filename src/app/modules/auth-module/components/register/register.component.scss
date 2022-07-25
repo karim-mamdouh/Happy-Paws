@@ -1,0 +1,39 @@
+.background-img {
+  background-image: url("../../../../../assets/images/catcat.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.form-style {
+  background-color: rgb(251, 248, 248);
+}
+.view-height {
+  height: 90vh;
+}
+
+:host ::ng-deep .main-color {
+  background-color: #999;
+  border: #999;
+}
+:host ::ng-deep .main-color:hover {
+  background-color: #999;
+}
+.main-text {
+  color: #999;
+}
+
+:host ::ng-deep .ui-datepicker {
+  z-index: 99999999999 !important;
+}
+
+@media (min-width: 768px) {
+  .form-style {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 992px) {
+  .form-style {
+    width: 50%;
+  }
+}
