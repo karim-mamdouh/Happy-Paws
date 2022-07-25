@@ -1,6 +1,6 @@
 interface Content {
-  data: string;
-  image: string;
+  data?: string;
+  image?: string;
 }
 
 export interface Article {
