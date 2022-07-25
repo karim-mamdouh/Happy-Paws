@@ -1,8 +1,8 @@
-<section class="container-fluid">
-  <div class="row view-height">
-    <div class="background-img col-6 d-none d-lg-block"></div>
-    <div class="col-lg-6 col-12 form-style">
-      <h1 class="text-center pt-4 main-text">Register</h1>
+<section class="container-fluid register">
+  <div class="row">
+    <div class="register__img col-6 d-none d-lg-block"></div>
+    <div class="col-xl-6 col-12 register__form">
+      <h1 class="text-center pt-4 register__text">Register</h1>
       <form
         [formGroup]="registerForm"
         (ngSubmit)="submitReactiveForm()"
@@ -139,7 +139,6 @@
             >
           </ng-template>
         </div>
-
         <!-- Gender dropdown menu-->
         <div class="row">
           <div class="col-sm-6">
@@ -329,18 +328,18 @@
             pRipple
             type="submit"
             label="Sign up"
-            class="p-button-raised main-color w-75 mx-auto"
+            class="p-button-raised register__button w-75 mx-auto"
           ></button>
         </div>
       </form>
       <!-- Form ends -->
       <!-- Have account section -->
       <p-divider align="center" layout="horizontal" class="mb-3">
-        <b class="main-text">OR</b>
+        <b class="register__text">OR</b>
       </p-divider>
       <p class="text-dark text-center mb-5">
         Already have an account?
-        <a routerLink="/auth/login" class="main-text"> <b>Sign in</b> </a>
+        <a routerLink="/auth" class="register__text"> <b>Sign in</b> </a>
       </p>
     </div>
   </div>

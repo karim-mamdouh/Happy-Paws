@@ -5,6 +5,15 @@ app-root {
   display: flex;
   flex-direction: column;
 }
-app-root {
+
+app-root,
+app-login,
+app-register {
   flex-grow: 1;
+}
+
+app-login,
+app-register {
+  display: flex;
+  flex-direction: column;
 }
