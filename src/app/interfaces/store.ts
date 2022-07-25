@@ -2,8 +2,8 @@ import { AnimalType } from './adoption';
 
 export interface Review {
   userID: string;
-  comment: string;
   rate: number;
+  comment?: string;
 }
 
 export interface ProductItem {
@@ -11,7 +11,6 @@ export interface ProductItem {
   title: string;
   description: string;
   price: number;
-  quantity?: number;
   wishList: boolean;
   reviews: Array<Review>;
   rate: number;
@@ -19,6 +18,7 @@ export interface ProductItem {
   animalType: AnimalType;
   brand: Brand;
   images: Array<string>;
+  quantity?: number;
 }
 
 export enum ProductCategory {

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 //Components
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot({}, {}),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
