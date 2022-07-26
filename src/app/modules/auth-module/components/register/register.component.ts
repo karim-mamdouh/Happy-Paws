@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit {
       //Empty form data
       this.registerForm.reset();
       this.showErrors = false;
-      this._router.navigate(['/auth/login']);
+      this._router.navigate(['/auth']);
     } else {
       this.showErrors = true;
     }

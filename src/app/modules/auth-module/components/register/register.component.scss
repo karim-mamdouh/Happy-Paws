@@ -2,6 +2,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  background-color: rgb(251, 248, 248);
 
   .row {
     flex-grow: 1;
@@ -13,16 +14,16 @@
     background-repeat: no-repeat;
   }
   .register__form {
-    background-color: rgb(251, 248, 248);
+    width: 95%;
+    margin: 0 auto;
   }
   .register__text {
     color: #999;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 576px) {
     .register__form {
       width: 80%;
-      margin: 0 auto;
     }
   }
   @media (min-width: 992px) {
