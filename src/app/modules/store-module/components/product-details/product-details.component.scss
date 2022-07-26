@@ -1,0 +1,72 @@
+section {
+  background-color: #f5f0ea;
+  .main {
+    background-color: white;
+    padding-top: 10px;
+    button {
+      background-color: #999 !important;
+      border-color: #999 !important;
+    }
+    .details-section {
+      background-color: white;
+      margin-top: 1.25rem;
+
+      .outofstock {
+        background-color: #ffcdd2;
+        color: #c63737;
+        width: 120px;
+        text-align: center;
+        border-radius: 10px;
+        padding: 2px;
+      }
+      .instock {
+        background-color: #c8e6c9;
+        color: #256029;
+        width: 120px;
+        text-align: center;
+        border-radius: 10px;
+        padding: 2px;
+      }
+    }
+    .rate-display {
+    }
+  }
+}
+
+// Image Dimensions
+:host ::ng-deep .p-image img {
+  width: 350px;
+  height: 450px;
+  box-shadow: 5px 5px 10px #888888;
+  border-radius: 10px;
+}
+
+//Stars Icons Size
+:host ::ng-deep .p-rating .p-rating-icon {
+  font-size: medium;
+}
+
+//Stars inside colors
+:host ::ng-deep .p-rating .p-rating-icon.pi-star-fill {
+  color: #e5b80b !important;
+}
+
+//Stars hover and focus colors
+:host
+  ::ng-deep
+  .p-rating:not(.p-disabled):not(.p-readonly)
+  .p-rating-icon:hover {
+  color: #e5b80b !important;
+}
+:host ::ng-deep .p-rating .p-rating-icon:focus {
+  box-shadow: none !important;
+}
+
+//TextArea focus and hover Color
+:host ::ng-deep .p-inputtext:enabled:focus {
+  box-shadow: 0 0 0 0.2rem #ffcdd2 !important;
+  border-color: #ffcdd2 !important;
+}
+:host ::ng-deep .p-inputtext:enabled:hover {
+  border-color: none !important;
+}
