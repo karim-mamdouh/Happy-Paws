@@ -1,50 +1,46 @@
-.background-img {
+.login {
+  flex-grow: 1;
   background-image: url("../../../../../assets/images/imageedit_3_4787130474.jpg");
-  height: 91.8vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  .login__form {
+    width: 80%;
+    color: white;
+    opacity: 0.96;
+    background-color: rgb(251, 248, 248);
+    height: 80vh;
+    border: none;
+  }
+  .login__text {
+    color: #999;
+  }
+
+  @media (min-width: 768px) {
+    .login__form {
+      width: 50%;
+    }
+  }
+  @media (min-width: 992px) {
+    .login__form {
+      width: 50%;
+    }
+  }
+  @media (min-width: 1200px) {
+    .login__form {
+      width: 25%;
+    }
+  }
 }
+
 :host ::ng-deep .p-divider .p-divider-content {
   background-color: rgb(251, 248, 248) !important;
 }
-.card {
-  background-color: rgb(251, 248, 248);
-  border: none;
-}
-.form-style {
-  width: 80%;
-  color: white;
-  opacity: 0.96;
-}
-.view-height {
-  height: 80vh;
-}
-
-:host ::ng-deep .main-color {
+:host ::ng-deep .login__button {
   background-color: #999;
   border: #999;
 }
-:host ::ng-deep .main-color:hover {
+:host ::ng-deep .login__button:hover {
   background-color: #999;
-}
-.main-text {
-  color: #999;
-}
-
-@media (min-width: 768px) {
-  .form-style {
-    width: 50%;
-  }
-}
-
-@media (min-width: 992px) {
-  .form-style {
-    width: 50%;
-  }
-}
-@media (min-width: 1200px) {
-  .form-style {
-    width: 25%;
-  }
 }
