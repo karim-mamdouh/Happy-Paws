@@ -1,6 +1,8 @@
-<section class="background-img pt-4">
-  <div class="container view-height card mx-auto form-style shadow">
-    <h1 class="text-center pt-3 pt-xl-5 main-text mt-2 mb-3 mb-xl-0">Login</h1>
+<section class="pt-4 login">
+  <div class="container card mx-auto login__form shadow">
+    <h1 class="text-center pt-3 pt-xl-5 login__text mt-2 mb-3 mb-xl-0">
+      Login
+    </h1>
     <form
       [formGroup]="loginForm"
       class="p-1 h-100 d-flex flex-column justify-content-evenly"
@@ -80,17 +82,17 @@
         pRipple
         type="submit"
         label="Sign in"
-        class="p-button-raised main-color w-100 mt-3"
+        class="p-button-raised login__button w-100 mt-3"
       ></button>
     </form>
     <!-- Form ends -->
     <!-- Register new account section -->
     <p-divider align="center" layout="horizontal" class="mb-3">
-      <b class="main-text">OR</b>
+      <b class="login__text">OR</b>
     </p-divider>
     <p class="text-dark text-center mb-5">
       Don't have an account?
-      <a routerLink="/auth/register" class="main-text"> <b>Sign up</b></a>
+      <a routerLink="/auth/register" class="login__text"> <b>Sign up</b></a>
     </p>
   </div>
 </section>
