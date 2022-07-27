@@ -7,6 +7,11 @@ section {
     button {
       background-color: #999 !important;
       border-color: #999 !important;
+      box-shadow: none !important;
+    }
+    button:hover {
+      background-color: #ecada6 !important;
+      border-color: #ecada6 !important;
     }
     .details-section {
       background-color: white;
@@ -28,8 +33,6 @@ section {
         border-radius: 10px;
         padding: 2px;
       }
-    }
-    .rate-display {
     }
   }
 }
@@ -68,18 +71,18 @@ section {
   padding: 1rem !important;
 }
 :host ::ng-deep .p-togglebutton.p-button.p-highlight {
-  background: #999;
-  border-color: #999;
+  background: #ecada6;
+  border-color: #ecada6;
   color: #ffffff;
 }
 :host ::ng-deep .p-togglebutton.p-button.p-highlight:hover {
-  background: #999 !important;
-  border-color: #999 !important;
+  background: #ecada6 !important;
+  border-color: #ecada6 !important;
   color: #ffffff;
 }
 
 :host ::ng-deep .p-button:focus {
-  box-shadow: 0 0 0 0.2rem #999 !important;
+  box-shadow: none !important;
 }
 
 //TextArea focus and hover Color
@@ -99,6 +102,5 @@ section {
 @media screen and (max-width: 389px) {
   .cart-button {
     margin-bottom: 20px;
-    font-size: x-small;
   }
 }
