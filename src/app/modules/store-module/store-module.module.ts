@@ -7,6 +7,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { FormsModule } from '@angular/forms';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
 
 import { StoreModuleRoutingModule } from './store-module-routing.module';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -31,6 +32,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     FormsModule,
     InputTextareaModule,
     ToggleButtonModule,
+    VirtualScrollerModule,
   ],
 })
 export class StoreModuleModule {}

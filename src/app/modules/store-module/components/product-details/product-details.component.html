@@ -41,7 +41,7 @@
             pRipple
             type="button"
             label="ADD TO CART"
-            class="p-button-raised p-button-secondary me-3"
+            class="p-button-raised p-button-secondary me-3 cart-button"
           >
             <i class="fa-solid fa-cart-shopping me-3"></i>
           </button>
@@ -55,7 +55,7 @@
           </button> -->
           <p-toggleButton
             [(ngModel)]="checked1"
-            onIcon="pi pi-heart-fill"
+            [onIcon]="'pi pi-heart-fill'"
             offIcon="pi pi-heart"
           ></p-toggleButton>
         </div>
@@ -111,7 +111,7 @@
           <textarea
             id="float-input"
             rows="5"
-            cols="50"
+            cols="40"
             pInputTextarea
             class="comment"
           ></textarea>

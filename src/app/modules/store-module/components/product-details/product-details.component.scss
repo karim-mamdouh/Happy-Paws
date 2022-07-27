@@ -99,3 +99,9 @@ section {
     display: flex;
   }
 }
+@media screen and (max-width: 389px) {
+  .cart-button {
+    margin-bottom: 20px;
+    font-size: x-small;
+  }
+}
