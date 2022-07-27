@@ -1,7 +1,11 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/profile';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmPasswordValidator } from './validators/confirm-password.validator';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register',
@@ -60,7 +64,9 @@ export class RegisterComponent implements OnInit {
   }
   constructor(
     private _registerFormBuilder: FormBuilder,
-    private _router: Router
+    private _router: Router,
+    private _authService: AuthService,
+    private _messageService: MessageService
   ) {}
 
   ngOnInit(): void {}
@@ -71,27 +77,53 @@ export class RegisterComponent implements OnInit {
   submitReactiveForm(): void {
     //Check for register form if not valid
     if (this.registerForm.status !== 'INVALID') {
-      //Get from local storage the users array if found
-      let getUsers = localStorage.getItem('users');
-      if (getUsers) {
-        //If users found
-        let temp = JSON.parse(getUsers as string); //Convert getUsers to object
-        temp.push(this.registerForm.value); //Add new user to users array in local storage
-        localStorage.setItem('users', JSON.stringify(temp)); //Update users array in local storage
-      } else {
-        //if users not found in local storage then create one and add new user to it
-        localStorage.setItem(
-          'users',
-          JSON.stringify([this.registerForm.value])
-        );
-      }
-      alert('Account created successfully');
-      //Empty form data
-      this.registerForm.reset();
-      this.showErrors = false;
-      this._router.navigate(['/auth']);
+      //create user details object
+      let user: User = {
+        email: this.registerForm.value['email'],
+        password: this.registerForm.value['password'],
+        firstName: this.registerForm.value['firstName'],
+        lastName: this.registerForm.value['lastName'],
+        birthdate: `${this.registerForm.value['date']}`,
+        userName: this.registerForm.value['userName'],
+        gender: this.registerForm.value['gender']['name'],
+      };
+      // 1- save user data in the database,
+      // 2- take the id from firebase and save it in the user id defined in the object
+      // 3- Navigate to login page
+      this._authService
+        .register(user)
+        .then((response) => {
+          user.id = response.user?.uid;
+          return this._authService.saveUserToFireStore(user);
+        })
+        .then((response) => {
+          this.showSuccessToast();
+          setTimeout(() => {
+            this._router.navigate(['/auth']);
+          }, 1500);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       this.showErrors = true;
+      this.showErrorToast();
     }
+  }
+  showSuccessToast() {
+    this._messageService.add({
+      key: 'Successtoast',
+      severity: 'success',
+      summary: '',
+      detail: 'Account created successfully',
+    });
+  }
+  showErrorToast() {
+    this._messageService.add({
+      key: 'Errortoast',
+      severity: 'error',
+      summary: '',
+      detail: 'Please enter data correctly!',
+    });
   }
 }
