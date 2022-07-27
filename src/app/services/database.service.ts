@@ -24,61 +24,15 @@ export class DatabaseService {
   fetchBlogPosts() {
     return this.afs.collection(FireStoreCollections.Blog).snapshotChanges();
   }
-  //fetch user profile Tested
-  fetchUserProfile(userID: string) {
-    return this.afs.collection(FireStoreCollections.Users).doc(userID).snapshotChanges().pipe(
-      map(snapshot => {
-        return snapshot.payload.data();
-      })).subscribe(userProfileData => {
-        console.log(userProfileData);   // User Profile Data 
-      });
-  }
-  //get token (login) tested
-  login(email: string, password: string) {
-    return new Promise((resolove, reject) => {
-      this.fireAuth
-        .signInWithEmailAndPassword(email, password)
-        .then(userData => resolove(userData), err => reject(err));
-    });
-  }
+  
+ 
 
-  // current logged in user tested
-  getCurrentUser() {
-    this.fireAuth.authState.subscribe(user => {
-      if (user) {
-        // call user.id to get he UID
-        // this.fetchUserProfile(user.uid); 
 
-      } else {
-        console.log('AUTHSTATE USER EMPTY', user);
-      }
-    },
-      err => {
-        console.log('Please try again')
-      });
-  }
 
-  // logout Tested
-  logout() {
-    return new Promise((resolove, reject) => {
-      this.fireAuth
-        .signOut()
-        .then(response => resolove(response), err => reject(err));
-    });
-  }
+ 
 
-  // register tested
-  register(user: User) {
-    return new Promise((resolove, reject) => {
-      this.fireAuth
-        .createUserWithEmailAndPassword(user.email, user.password)
-        .then(response => resolove(response), err => reject(err));
-    });
-  }
-  // tested
-  saveUserToFireStore(user: User) {
-    return this.afs.collection(FireStoreCollections.Users).doc(user.id).set(user);
-  }
+  
+
 
   //fetch all wishlist
   fetchAllWishlistItems(userID: string) {
@@ -113,7 +67,7 @@ export class DatabaseService {
 
 }
 
-enum FireStoreCollections {
+export enum FireStoreCollections {
   Users = '/Users',
   Store = '/Store',
   Blog = '/Blog',
