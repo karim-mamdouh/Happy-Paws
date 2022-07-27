@@ -1,6 +1,13 @@
-<nav class="navbar navbar-expand-lg bg-light sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top d-flex flex-column">
   <div class="container">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <figure class="d-inline-block m-0">
+        <img src="assets/icons/icon-72x72.png" class="img-fluid" />
+      </figure>
+      <p class="d-inline-block my-0 ms-2 navbar__logo-text"><b>Happy Paws</b></p>
+    </a>
+    <!-- Small screen button -->
     <button
       class="navbar-toggler"
       type="button"
@@ -12,38 +19,13 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="auth"
-            >Home</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
+    <!-- Top section -->
+    <div
+      class="collapse navbar-collapse mx-3 mx-lg-0 mt-3 mt-lg-0 justify-content-end"
+      id="navbarSupportedContent"
+    >
+      <!-- Search section -->
+      <form class="d-flex me-lg-auto ms-lg-5" role="search">
         <input
           class="form-control me-2"
           type="search"
@@ -52,6 +34,98 @@
         />
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      <!-- User section (large screen) -->
+      <div
+        class="nav-item mx-2 d-lg-flex justify-content-center align-items-center d-none"
+      >
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="fa-solid fa-user"
+          class="p-button-rounded p-button navbar__user-btn"
+          (click)="userMenu.toggle($event)"
+        ></button>
+        <p-menu #userMenu [popup]="true" [model]="userMenuItems"></p-menu>
+      </div>
+      <!-- User section (smaller screen) -->
+      <div class="nav-item mx-2 d-lg-none my-lg-3 pt-2 pt-lg-0">
+        <button
+          #btn
+          type="button"
+          pButton
+          (click)="smallUserMenu.toggle($event)"
+          class="navbar__store-btn p-0"
+        >
+          <i class="pi pi-user me-2"></i> User
+          <i class="pi pi-angle-down ms-3"></i>
+        </button>
+        <p-menu
+          #smallUserMenu
+          [popup]="true"
+          [model]="userMenuItems"
+          styleClass="mt-2"
+        ></p-menu>
+      </div>
+    </div>
+  </div>
+  <!-- Bottom section -->
+  <div class="container my-lg-3">
+    <div
+      class="navbar__links collapse navbar-collapse "
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav mb-2 mb-lg-0 mx-3 d-lg-flex justify-content-center w-100">
+        <!-- Home link -->
+        <li
+          class="nav-item px-2 d-lg-flex justify-content-center align-items-center"
+        >
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="/"
+            routerLinkActive="active"
+            ><i class="fa-solid fa-house me-1"></i> Home</a
+          >
+        </li>
+        <!-- Store drop down menu -->
+        <li
+          class="nav-item d-lg-flex justify-content-center align-items-center px-lg-3 px-2"
+        >
+          <button
+            #btn
+            type="button"
+            pButton
+            (click)="storeMenu.toggle($event)"
+            class="navbar__store-btn p-0"
+          >
+            <i class="fa-solid fa-bag-shopping me-2"></i> Store
+            <i class="pi pi-angle-down ms-2"></i>
+          </button>
+          <p-tieredMenu
+            #storeMenu
+            [model]="storeMenuItems"
+            [popup]="true"
+            styleClass="mt-2"
+          ></p-tieredMenu>
+        </li>
+        <!-- Adoption link -->
+        <li
+          class="nav-item px-2 d-lg-flex justify-content-center align-items-center"
+        >
+          <a class="nav-link" routerLink="/adoption" routerLinkActive="active"
+            ><i class="fa-solid fa-hand-holding-heart me-1"></i> Adoption</a
+          >
+        </li>
+        <!-- Blog link -->
+        <li
+          class="nav-item px-2 d-lg-flex justify-content-center align-items-center"
+        >
+          <a class="nav-link" routerLink="/blog" routerLinkActive="active"
+            ><i class="fa-solid fa-newspaper"></i> Blog</a
+          >
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

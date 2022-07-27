@@ -6,6 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
 //Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -31,6 +34,9 @@ import { adoptionReducer } from './store/adoption/adoption-reducer';
     NotFoundComponent,
   ],
   imports: [
+    MenuModule,
+    ButtonModule,
+    TieredMenuModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -43,7 +49,7 @@ import { adoptionReducer } from './store/adoption/adoption-reducer';
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000',
+      registrationStrategy: 'registerWhenStable:2000',
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

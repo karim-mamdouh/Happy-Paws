@@ -37,7 +37,7 @@ const routes: Routes = [
   },
   //Adoption Module Route
   {
-    path: '',
+    path: 'adoption',
     loadChildren: () =>
       import('./modules/adoption-module/adoption-module.module').then(
         (module) => module.AdoptionModuleModule
