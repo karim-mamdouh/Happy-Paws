@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  showErrors: boolean = false;
+  showErrors: boolean = false; //Flag that shows all form errors
   gender = [
     { name: 'Male', value: 'm' },
     { name: 'Female', value: 'f' },
@@ -62,6 +62,7 @@ export class RegisterComponent implements OnInit {
   get controlValidation() {
     return this.registerForm.controls;
   }
+
   constructor(
     private _registerFormBuilder: FormBuilder,
     private _router: Router,
@@ -73,7 +74,7 @@ export class RegisterComponent implements OnInit {
   ngOnDestroy(): void {
     this.registerForm.reset();
   }
-
+  //Function that creates new user in database
   submitReactiveForm(): void {
     //Check for register form if not valid
     if (this.registerForm.status !== 'INVALID') {
@@ -103,14 +104,15 @@ export class RegisterComponent implements OnInit {
           }, 1500);
         })
         .catch((error) => {
-          console.log(error);
+          this.showErrorToast();
         });
     } else {
       this.showErrors = true;
       this.showErrorToast();
     }
   }
-  showSuccessToast() {
+  //Function that shows success toast
+  showSuccessToast(): void {
     this._messageService.add({
       key: 'Successtoast',
       severity: 'success',
@@ -118,7 +120,8 @@ export class RegisterComponent implements OnInit {
       detail: 'Account created successfully',
     });
   }
-  showErrorToast() {
+  // Function that shows error toast
+  showErrorToast(): void {
     this._messageService.add({
       key: 'Errortoast',
       severity: 'error',

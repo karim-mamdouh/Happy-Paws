@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   ngOnDestroy(): void {
     this.loginForm.reset();
   }
-
+  //Function that logs user in when called
   loginFormSubmit(): void {
     //check login form status => if validators not valid return false
     if (this.loginForm.status === 'INVALID') {
@@ -65,12 +65,12 @@ export class LoginComponent implements OnInit {
           }, 1500);
         })
         .catch((error) => {
-          console.log(error);
           this.showErrorToast('Wrong email or password');
         });
     }
   }
-  showSuccessToast() {
+  //Function that shows success toaster
+  showSuccessToast(): void {
     this._messageService.add({
       key: 'Successtoast',
       severity: 'success',
@@ -78,7 +78,8 @@ export class LoginComponent implements OnInit {
       detail: 'Account created successfully',
     });
   }
-  showErrorToast(errorMsg: string) {
+  //Function that shows error toaster
+  showErrorToast(errorMsg: string): void {
     this._messageService.add({
       key: 'Errortoast',
       severity: 'error',
