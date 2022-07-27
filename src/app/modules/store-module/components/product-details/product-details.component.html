@@ -1,20 +1,24 @@
 <section>
-  <div class="container main shadow px-4">
+  <div class="container main px-4">
     <!-- Details Section -->
-    <div class="details-section d-flex">
-      <figure class="my-5 col-5 d-flex justify-content-center">
+    <div class="details-section">
+      <!-- Product Image -->
+      <figure
+        class="my-5 col-lg-5 col-md-12 d-flex justify-content-center img-fluid"
+      >
         <p-image
           src="assets/images/cat.jpg"
           alt="Image"
           [preview]="true"
         ></p-image>
       </figure>
-
-      <div class="m-5 col-7">
+      <!-- Product Details -->
+      <div class="m-5 col-lg-7 col-md-12">
         <h3 class="my-3">
           BARS® Flea & Ticks Drops For Dogs 10 Kg (1 pipette)
         </h3>
-        <p-rating [(ngModel)]="val2" [cancel]="false"></p-rating>
+        <p-rating [(ngModel)]="val" [cancel]="false"></p-rating>
+
         <p class="my-3 fs-3" style="color: #ecada6"><b> 300.5 EGP</b></p>
         <p class="fs-4">
           Category:
@@ -41,23 +45,27 @@
           >
             <i class="fa-solid fa-cart-shopping me-3"></i>
           </button>
-          <button
+          <!-- <button
             pButton
             pRipple
             type="button"
             class="p-button-raised p-button-secondary"
           >
             <i class="fa-solid fa-bookmark"></i>
-          </button>
+          </button> -->
+          <p-toggleButton
+            [(ngModel)]="checked1"
+            onIcon="pi pi-heart-fill"
+            offIcon="pi pi-heart"
+          ></p-toggleButton>
         </div>
       </div>
     </div>
 
     <!-- Description Section  -->
-    <div class="my-5">
+    <div class="my-5 container col-12">
       <h4>Description</h4>
       <hr />
-      <h4 class="my-3">BARS® Flea & Ticks Drops For Dogs 10 Kg (1 pipette)</h4>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam culpa
         nesciunt, aperiam assumenda, animi odit aliquid repellat nobis dolorum
@@ -83,12 +91,12 @@
     </div>
 
     <!-- Review Section -->
-    <div class="my-5 pb-4">
+    <div class="my-5 container pb-4 col-12">
       <h4>Reviews</h4>
       <hr />
       <div class="rate-display mb-5 p-2 border rounded">
         <p>Abdelrahman Youssef</p>
-        <p-rating [(ngModel)]="val2" [cancel]="false"></p-rating>
+        <p-rating [(ngModel)]="val1" [cancel]="false"></p-rating>
         <p class="my-4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur in
         </p>
@@ -96,15 +104,16 @@
       <div class="user-rate">
         <div class="d-flex my-3">
           <span class="me-3">Your Rating:</span>
-          <p-rating [(ngModel)]="val2" [cancel]="false"></p-rating>
+          <p-rating [(ngModel)]="val1" [cancel]="false"></p-rating>
         </div>
         <span class="p-float-label my-4">
           <p>Comment:</p>
           <textarea
             id="float-input"
             rows="5"
-            cols="60"
+            cols="50"
             pInputTextarea
+            class="comment"
           ></textarea>
         </span>
         <button

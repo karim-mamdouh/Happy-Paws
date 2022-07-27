@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  val2: number = 0;
-  quantity: number = 0;
+  val: number = 0;
+  val1: number = 4;
+  quantity: number = 1;
+  checked1: boolean = false;
+  checked2: boolean = true;
 
   constructor() {}
 

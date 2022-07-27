@@ -1,5 +1,6 @@
 section {
-  background-color: #f5f0ea;
+  //   background-color: #f5f0ea;
+  background-color: rgb(251, 248, 248);
   .main {
     background-color: white;
     padding-top: 10px;
@@ -62,6 +63,28 @@ section {
   box-shadow: none !important;
 }
 
+//wishlist button
+// :host ::ng-deep .p-togglebutton {
+//   border: none;
+// }
+:host ::ng-deep .p-button.p-button-icon-only {
+  padding: 1rem !important;
+}
+:host ::ng-deep .p-togglebutton.p-button.p-highlight {
+  background: #999;
+  border-color: #999;
+  color: #ffffff;
+}
+:host ::ng-deep .p-togglebutton.p-button.p-highlight:hover {
+  background: #999 !important;
+  border-color: #999 !important;
+  color: #ffffff;
+}
+
+:host ::ng-deep .p-button:focus {
+  box-shadow: 0 0 0 0.2rem #999 !important;
+}
+
 //TextArea focus and hover Color
 :host ::ng-deep .p-inputtext:enabled:focus {
   box-shadow: 0 0 0 0.2rem #ffcdd2 !important;
@@ -69,4 +92,10 @@ section {
 }
 :host ::ng-deep .p-inputtext:enabled:hover {
   border-color: none !important;
+}
+
+@media screen and (min-width: 992px) {
+  .details-section {
+    display: flex;
+  }
 }
