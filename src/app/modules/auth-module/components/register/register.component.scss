@@ -4,6 +4,13 @@
   flex-direction: column;
   background-color: rgb(251, 248, 248);
 
+  .register__sub-title {
+    font-size: 1.6rem;
+    color: rgb(103, 102, 102);
+  }
+  .register__logo-text b {
+    color: rgb(103, 102, 102);
+  }
   .row {
     flex-grow: 1;
   }
@@ -39,6 +46,7 @@
 :host ::ng-deep .register__button {
   background-color: #999;
   border: #999;
+  font-size: 1.25rem;
 }
 :host ::ng-deep .register__button:hover {
   background-color: #999;
