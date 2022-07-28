@@ -1,34 +1,14 @@
+//--------------------------- VARIABLES ------------------------
 $color-primary: #ecada6;
 $color-secondary: #888888;
 $color-accent: #ffcdd2;
 $color-black: #000000;
 
-
-
-.outofstock {
-    background-color: #ffcdd2;
-    color: #c63737;
-    width: 8rem;
-    text-align: center;
-    border-radius: 10px;
-    margin: auto 0;
-    font-size: 1rem;
-    padding: 8px 0;
-}
-
-.instock {
-    background-color: #c8e6c9;
-    color: #256029;
-    width: 6rem;
-    text-align: center;
-    border-radius: 10px;
-    margin: auto 0;
-    font-size: 1rem;
-    padding: 8px 0;
-}
-
-
 //--------------------------- CARD START------------------------
+:host ::ng-deep .p-card {
+    width: 20rem;
+    border-radius: 15px;
+}
 
 :host ::ng-deep .p-card .p-card-content {
     padding: 0 !important;
@@ -50,7 +30,6 @@ $color-black: #000000;
 
     &__title {
         font-size: medium;
-
     }
 
     &__price {
@@ -60,7 +39,37 @@ $color-black: #000000;
 
 }
 
-//--------------------------- CARD END ------------------------
+// ADD TO CART BUTTON
+:host ::ng-deep .p-button {
+    width: 100%;
+}
+
+.card__actions {
+
+    &__instock {
+        background-color: #c8e6c9;
+        color: #256029;
+        width: 6rem;
+        text-align: center;
+        border-radius: 10px;
+        margin: auto 0;
+        font-size: 1rem;
+        padding: 8px 0;
+    }
+
+    &__outofstock {
+        background-color: #ffcdd2;
+        color: #c63737;
+        width: 8rem;
+        text-align: center;
+        border-radius: 10px;
+        margin: auto 0;
+        font-size: 1rem;
+        padding: 8px 0;
+    }
+}
+
+//--------------------------- CARD END ------------------------------------
 
 
 //--------------------------- ADD TO WISHLIST START------------------------
@@ -107,11 +116,16 @@ $color-black: #000000;
     color: #e5b80b !important;
 }
 
+// Cursor 
+:host ::ng-deep .p-rating .p-rating-icon {
+    cursor: default !important;
+}
+
 :host ::ng-deep .p-rating .p-rating-icon:focus {
     box-shadow: none !important;
 }
 
-//--------------------------- RATING STARS END ------------------------
+//--------------------------- RATING STARS END -------------------------------
 
 //--------------------------- ADD TO CART BUTTON START------------------------
 
@@ -138,14 +152,7 @@ $color-black: #000000;
 
 //--------------------------- ADD TO CART BUTTON END------------------------
 
-:host ::ng-deep .p-card {
-    width: 20rem;
-    border-radius: 15px;
-}
 
-:host ::ng-deep .p-button {
-    width: 100%;
-}
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
@@ -155,13 +162,8 @@ $color-black: #000000;
 }
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) {}
-
-// X-Large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {}
-
-// XX-Large devices (larger desktops, 1400px and up)
-@media (min-width: 1400px) {}
+@media (min-width: 768px) {
+    :host ::ng-deep .p-card {
+        width: 23rem;
+    }
+}

@@ -1,25 +1,26 @@
 <p-card styleClass="p-card-shadow card m-3 p-2 m-sm-4 p-sm-3 m-md-4 p-md-4">
     <ng-template pTemplate="header">
         <div class="card__actions d-flex justify-content-between m-1">
-          <div *ngIf="quantity > 0; then instock; else outofstock"></div>
-          <ng-template #instock><p class="instock">In Stock</p></ng-template>
-          <ng-template #outofstock
-            ><p class="outofstock">Out Of Stock</p></ng-template
-          >
-          <p-toggleButton
-          class="card__actions__addToWishlist"
-          [onIcon]="'pi pi-heart-fill'"
-          offIcon="pi pi-heart"
-        ></p-toggleButton>
+            <div *ngIf="product.quantity!>0; then instock; else outofstock"></div>
+            <ng-template #instock>
+                <p class="card__actions__instock">In Stock</p>
+            </ng-template>
+            <ng-template #outofstock>
+                <p class="card__actions__outofstock">Out Of Stock</p>
+            </ng-template>
+            <p-toggleButton class="card__actions__addToWishlist" [onIcon]="'pi pi-heart-fill'" offIcon="pi pi-heart">
+            </p-toggleButton>
         </div>
-        <figure><img alt="Card" class="card__img p-2" src="https://cdn.shopify.com/s/files/1/1733/0973/products/moderna-litter-box-jumbo-57cm-hot-pink-moderna-flip-cat-enclosed-cat-litter-box-hot-pink-7010596225127_2000x.png?v=1635103271"></figure>
+        <figure>
+            <img alt="Card" class="card__img p-2" src="{{product.images[0]}}">
+        </figure>
     </ng-template>
-    <p class="card__category">Bewi</p>
-    <p class="card__title">MODERNA 'Road Runner' Pet Carrier Metal Door - Multi Colour</p>
-    <p-rating  [cancel]="false"></p-rating>
-    <p class="card__price fw-bold my-3 fs-3" >300 EGP</p>
+    <p class="card__category">{{ product.category }}</p>
+    <p class="card__title">{{ product.title}}</p>
+    <p-rating [(ngModel)]="rating" [readonly]="true" [cancel]="false"></p-rating>
+    <p class="card__price fw-bold my-3 fs-3">{{product.price}} EGP</p>
     <ng-template pTemplate="footer">
-        <p-button styleClass="card__addToCart" label="Add to Cart" icon="pi pi-shopping-cart" >
+        <p-button styleClass="card__addToCart" label="Add to Cart" icon="pi pi-shopping-cart">
         </p-button>
     </ng-template>
 </p-card>
