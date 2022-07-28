@@ -1,0 +1,91 @@
+.navbar {
+  background-color: rgb(251, 248, 248);
+  figure {
+    font-size: 0;
+    width: 20%;
+  }
+  .navbar__logo-text b{
+    color:rgb(103, 102, 102)
+  }
+  
+}
+
+:host ::ng-deep .p-button-label {
+  display: none;
+}
+:host ::ng-deep .p-menu .p-submenu-header {
+  display: none;
+}
+:host ::ng-deep .navbar__user-btn {
+  background-color: white;
+  color: rgb(115, 115, 115);
+  border: 1px solid #ecada6;
+}
+:host ::ng-deep .navbar__user-btn:hover,
+:host ::ng-deep .navbar__user-btn:active {
+  background-color: #ecada6;
+  color: white;
+  border: 2px solid #ecada6;
+}
+:host ::ng-deep .navbar__user-btn:hover:active,
+:host ::ng-deep .navbar__user-btn:hover:focus {
+  background-color: #ecada6;
+  color: white;
+  border: 2px solid #ecada6;
+}
+:host ::ng-deep .navbar__user-btn:focus {
+  outline: #ecada6;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ecada6, 0 1px 2px 0 black;
+  color: #999;
+}
+:host ::ng-deep .p-tieredmenu .p-menuitem.p-menuitem-active > .p-menuitem-link {
+  background: #e9ecef;
+}
+:host ::ng-deep .p-tieredmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-text ,
+:host ::ng-deep .p-tieredmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-icon,
+:host ::ng-deep .p-tieredmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-submenu-icon  {
+  color: #495057;
+}
+:host ::ng-deep .p-tieredmenu .p-menuitem-link:focus {
+  box-shadow: none;
+}
+:host ::ng-deep .p-menu .p-menuitem-link:focus {
+
+  box-shadow: none;
+}
+:host ::ng-deep .navbar__store-btn {
+  background-color: transparent;
+  border: transparent;
+  color: rgba(0, 0, 0, 0.55);
+  margin: 0.5rem 0;
+}
+:host ::ng-deep .navbar__store-btn:hover {
+  background-color: transparent;
+  border: transparent;
+}
+:host ::ng-deep .navbar__store-btn:focus {
+  outline: none;
+  box-shadow: none;
+  color: black;
+}
+
+@media (min-width: 992px) {
+  .navbar__links {
+    border-radius: 20px;
+    background-color: #999;
+    a {
+      color: white;
+    }
+    .nav-item:focus,.nav-item:hover{
+      background-color:#ecada6
+    }
+  }
+  :host ::ng-deep .navbar__store-btn {
+    color: white;
+  }
+  :host ::ng-deep .navbar__store-btn:focus {
+    outline: none;
+    box-shadow: none;
+    color: white;
+  }
+}

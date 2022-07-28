@@ -2,11 +2,22 @@
   <div class="row">
     <div class="register__img col-6 d-none d-lg-block"></div>
     <div class="col-xl-6 col-12 register__form">
-      <h1 class="text-center pt-4 register__text">Register</h1>
+      <a
+        class="navbar-brand d-flex justify-content-center align-items-center mx-auto mt-5"
+        routerLink="/"
+      >
+        <figure class="d-inline-block m-0">
+          <img src="assets/icons/icon-72x72.png" class="img-fluid" />
+        </figure>
+        <h1 class="d-inline-block my-0 ms-3 text-dark fs-3 register__logo-text">
+          <b>Happy Paws</b>
+        </h1>
+      </a>
+      <h2 class="pt-4 ps-4 register__sub-title mb-2">Create new account</h2>
       <form
         [formGroup]="registerForm"
         (ngSubmit)="submitReactiveForm()"
-        class="p-4"
+        class="p-4 pt-2"
       >
         <div class="row">
           <!-- First name input -->
@@ -343,4 +354,6 @@
       </p>
     </div>
   </div>
+  <p-toast key="Successtoast"></p-toast>
+  <p-toast key="Errortoast"></p-toast>
 </section>
