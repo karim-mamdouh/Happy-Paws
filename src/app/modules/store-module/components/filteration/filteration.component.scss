@@ -1,0 +1,23 @@
+:host ::ng-deep .p-checkbox .p-checkbox-box:hover {
+  border-color: #ecada6;
+}
+
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+  border-color: #ecada6;
+  background: #ecada6;
+}
+
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight:hover {
+  border-color: #ecada6;
+  background: #ecada6;
+  color: #ffffff;
+}
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-focus {
+  border-color: #ecada6;
+  box-shadow: none !important;
+}
+section {
+  .filtersContainer {
+    background-color: #ffffff;
+  }
+}
