@@ -6,11 +6,18 @@ $color-black: #000000;
 
 //--------------------------- CARD START------------------------
 :host ::ng-deep .p-card {
-    width: 20rem;
     border-radius: 15px;
 }
 
+:host ::ng-deep .p-card .p-card-body {
+    padding: .5rem;
+}
+
 :host ::ng-deep .p-card .p-card-content {
+    padding: 0 !important;
+}
+
+:host ::ng-deep .p-card .p-card-footer {
     padding: 0 !important;
 }
 
@@ -18,7 +25,7 @@ $color-black: #000000;
 
     &__img {
         width: 100%;
-        height: 30vh;
+        height: 150px;
         object-fit: contain;
     }
 
@@ -45,9 +52,14 @@ $color-black: #000000;
 }
 
 .card__actions {
+    position: absolute;
+    width: 90%;
+    top: 10px;
+    right: 10px;
 
     &__instock {
         background-color: #c8e6c9;
+        opacity: 0.5;
         color: #256029;
         width: 6rem;
         text-align: center;
@@ -57,9 +69,14 @@ $color-black: #000000;
         padding: 8px 0;
     }
 
+    &__instock:hover {
+        opacity: 1;
+    }
+
     &__outofstock {
         background-color: #ffcdd2;
         color: #c63737;
+        opacity: 0.5;
         width: 8rem;
         text-align: center;
         border-radius: 10px;
@@ -67,6 +84,11 @@ $color-black: #000000;
         font-size: 1rem;
         padding: 8px 0;
     }
+
+    &__outofstock:hover {
+        opacity: 1;
+    }
+
 }
 
 //--------------------------- CARD END ------------------------------------
@@ -151,19 +173,3 @@ $color-black: #000000;
 }
 
 //--------------------------- ADD TO CART BUTTON END------------------------
-
-
-
-// Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {
-    :host ::ng-deep .p-card {
-        width: 20rem;
-    }
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-    :host ::ng-deep .p-card {
-        width: 23rem;
-    }
-}
