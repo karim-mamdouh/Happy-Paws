@@ -3,148 +3,165 @@ $color-primary: #ecada6;
 $color-secondary: #888888;
 $color-accent: #ffcdd2;
 $color-black: #000000;
+$color-white: #ffffff;
 
 //--------------------------- CARD START------------------------
 :host ::ng-deep .p-card {
-    border-radius: 15px;
+  border-radius: 15px;
 }
 
 :host ::ng-deep .p-card .p-card-body {
-    padding: .5rem;
+  padding: 0.5rem;
 }
 
 :host ::ng-deep .p-card .p-card-content {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 :host ::ng-deep .p-card .p-card-footer {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .card {
+  &__img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+  }
 
-    &__img {
-        width: 100%;
-        height: 150px;
-        object-fit: contain;
-    }
+  &__category {
+    font-size: 0.9rem;
+    text-decoration: underline;
+    color: $color-secondary;
+  }
 
-    &__category {
-        font-size: 1rem;
-        text-decoration: underline;
-        color: $color-secondary;
-    }
+  &__title {
+    font-size: small;
+  }
 
-    &__title {
-        font-size: medium;
-    }
-
-    &__price {
-        font-weight: bold;
-        color: $color-primary;
-    }
-
+  &__price {
+    font-weight: bold;
+    color: $color-primary;
+  }
 }
 
 // ADD TO CART BUTTON
 :host ::ng-deep .p-button {
-    width: 100%;
+  width: 100%;
 }
 
 .card__actions {
-    position: absolute;
-    width: 90%;
-    top: 10px;
-    right: 10px;
+  position: absolute;
+  width: 90%;
+  top: 10px;
+  right: 10px;
 
-    &__instock {
-        background-color: #c8e6c9;
-        opacity: 0.5;
-        color: #256029;
-        width: 6rem;
-        text-align: center;
-        border-radius: 10px;
-        margin: auto 0;
-        font-size: 1rem;
-        padding: 8px 0;
-    }
+  &__instock {
+    background-color: #c8e6c9;
+    opacity: 0.8;
+    color: #256029;
+    width: 6rem;
+    text-align: center;
+    border-radius: 10px;
+    margin: auto 0;
+    font-size: 1rem;
+    padding: 3px 0;
+  }
 
-    &__instock:hover {
-        opacity: 1;
-    }
+  // &__instock:hover {
+  //   opacity: 1;
+  // }
 
-    &__outofstock {
-        background-color: #ffcdd2;
-        color: #c63737;
-        opacity: 0.5;
-        width: 8rem;
-        text-align: center;
-        border-radius: 10px;
-        margin: auto 0;
-        font-size: 1rem;
-        padding: 8px 0;
-    }
+  &__outofstock {
+    background-color: #ffcdd2;
+    color: #c63737;
+    opacity: 0.8;
+    width: 8rem;
+    text-align: center;
+    border-radius: 10px;
+    margin: auto 0;
+    font-size: 1rem;
+    padding: 3px 0;
+  }
 
-    &__outofstock:hover {
-        opacity: 1;
-    }
-
+  // &__outofstock:hover {
+  //   opacity: 1;
+  // }
 }
 
 //--------------------------- CARD END ------------------------------------
 
-
 //--------------------------- ADD TO WISHLIST START------------------------
+:host ::ng-deep .p-button {
+  border: none !important;
+}
+:host ::ng-deep .p-button.p-button-icon-only .p-button-icon-left,
+.p-button.p-button-icon-only .p-button-icon-right {
+  font-size: 30px;
+}
+:host ::ng-deep .p-togglebutton.p-button.p-highlight .p-button-icon-left,
+.p-togglebutton.p-button.p-highlight .p-button-icon-right {
+  color: $color-primary;
+}
+
 :host ::ng-deep .p-button.p-button-icon-only {
-    padding: 1rem !important;
-    background-color: #fff;
-    color: #ffffff;
+  padding: 0.4rem !important;
+  background-color: transparent;
+  color: transparent;
 }
 
 :host ::ng-deep .p-togglebutton.p-button.p-highlight {
-    background: $color-primary  !important;
-    border-color: $color-accent  !important;
-    color: #ffffff;
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #ffffff;
 }
 
 :host ::ng-deep .p-togglebutton.p-button.p-highlight:hover {
-    background-color: $color-accent  !important;
-    border-color: $color-primary  !important;
-    color: #ffffff;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #ffffff;
 }
 
-:host ::ng-deep .p-togglebutton.p-button:not(.p-disabled):not(.p-highlight):hover {
-    background: $color-accent;
-    border-color: $color-primary;
-    color: #495057;
+:host
+  ::ng-deep
+  .p-togglebutton.p-button:not(.p-disabled):not(.p-highlight):hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #495057;
 }
 
 //--------------------------- ADD TO WISHLIST END------------------------
 
 //--------------------------- RATING STARS START------------------------
 
+:host ::ng-deep .p-rating {
+  margin-bottom: 6px;
+}
 //Stars Icons Size
 :host ::ng-deep .p-rating .p-rating-icon {
-    font-size: medium;
+  font-size: medium;
 }
 
 //Stars inside colors
 :host ::ng-deep .p-rating .p-rating-icon.pi-star-fill {
-    color: #e5b80b !important;
+  color: #e5b80b !important;
 }
 
 //Stars hover and focus colors
-:host ::ng-deep .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
-    color: #e5b80b !important;
+:host
+  ::ng-deep
+  .p-rating:not(.p-disabled):not(.p-readonly)
+  .p-rating-icon:hover {
+  color: #e5b80b !important;
 }
 
-// Cursor 
+// Cursor
 :host ::ng-deep .p-rating .p-rating-icon {
-    cursor: default !important;
+  cursor: default !important;
 }
 
 :host ::ng-deep .p-rating .p-rating-icon:focus {
-    box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 //--------------------------- RATING STARS END -------------------------------
@@ -152,24 +169,24 @@ $color-black: #000000;
 //--------------------------- ADD TO CART BUTTON START------------------------
 
 :host ::ng-deep .p-button {
-    background: $color-secondary;
-    border: 1px solid $color-secondary;
+  background: $color-secondary;
+  border: 1px solid $color-secondary;
 }
 
 :host ::ng-deep .p-button:enabled:hover {
-    background: $color-primary;
-    color: $color-black;
-    border-color: $color-accent;
+  background: $color-primary;
+  color: $color-white;
+  border-color: $color-accent;
 }
 
 :host ::ng-deep .p-button:focus {
-    background-color: $color-primary;
-    box-shadow: 0 0 0 0.1rem $color-primary  !important;
+  background-color: none;
+  box-shadow: 0 0 0 0.1rem $color-white !important;
 }
 
 :host ::ng-deep .p-button:enabled:focus {
-    box-shadow: 0 0 0 0.2rem $color-primary  !important;
-    border-color: #ffcdd2 !important;
+  box-shadow: 0 0 0 0.2rem !important;
+  border-color: none !important;
 }
 
 //--------------------------- ADD TO CART BUTTON END------------------------
