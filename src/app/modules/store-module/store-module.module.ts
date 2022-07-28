@@ -8,14 +8,16 @@ import { FormsModule } from '@angular/forms';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
+import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
-
 import { StoreModuleRoutingModule } from './store-module-routing.module';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 import { FilterationComponent } from './components/filteration/filteration.component';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { FilterationComponent } from './components/filteration/filteration.compo
     ProductsComponent,
     CartComponent,
     WishlistComponent,
+    ProductCardComponent,
     FilterationComponent,
   ],
   imports: [
@@ -36,7 +39,8 @@ import { FilterationComponent } from './components/filteration/filteration.compo
     InputTextareaModule,
     ToggleButtonModule,
     VirtualScrollerModule,
-    CheckboxModule,
+    CardModule,
+    CheckboxModule
   ],
 })
 export class StoreModuleModule {}
