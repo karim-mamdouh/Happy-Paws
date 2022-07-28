@@ -2,14 +2,14 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  background-color: rgb(251, 248, 248);
+  background-color: var(--auth-background);
 
   .register__sub-title {
     font-size: 1.6rem;
-    color: rgb(103, 102, 102);
+    color: var(--dark-grey-color);
   }
   .register__logo-text b {
-    color: rgb(103, 102, 102);
+    color: var(--dark-grey-color);
   }
   .row {
     flex-grow: 1;
@@ -25,7 +25,7 @@
     margin: 0 auto;
   }
   .register__text {
-    color: #999;
+    color: var(--grey-color);
   }
 
   @media (min-width: 576px) {
@@ -41,15 +41,15 @@
 }
 
 :host ::ng-deep .p-divider .p-divider-content {
-  background-color: rgb(251, 248, 248) !important;
+  background-color: var(--auth-background) !important;
 }
 :host ::ng-deep .register__button {
-  background-color: #999;
-  border: #999;
+  background-color: var(--grey-color);
+  border: var(--grey-color);
   font-size: 1.25rem;
 }
 :host ::ng-deep .register__button:hover {
-  background-color: #999;
+  background-color: var(--grey-color);
 }
 
 @media (min-width: 576px) {

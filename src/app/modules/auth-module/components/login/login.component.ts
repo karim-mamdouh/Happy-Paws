@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
       key: 'Successtoast',
       severity: 'success',
       summary: '',
-      detail: 'Account created successfully',
+      detail: 'Welcome back to Happy Paws',
     });
   }
   //Function that shows error toaster

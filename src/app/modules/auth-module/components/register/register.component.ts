@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/profile';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -100,7 +99,7 @@ export class RegisterComponent implements OnInit {
         .then((response) => {
           this.showSuccessToast();
           setTimeout(() => {
-            this._router.navigate(['/auth']);
+            this._router.navigate(['/auth/login']);
           }, 1500);
         })
         .catch((error) => {

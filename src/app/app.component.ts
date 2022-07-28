@@ -9,15 +9,17 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent {
   title = 'Happy Paws';
-  activeURL: string = '';
-
+  showNavbarFooter: boolean = false;
   constructor(private _router: Router, private primengConfig: PrimeNGConfig) {}
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this._router.events.subscribe((event: any) => {
-      if (event.url !== undefined && event.type === 1)
-        this.activeURL = event.url;
+      if (event.url !== undefined && event.type === 1) {
+        if (event.url.includes('login') || event.url.includes('register'))
+          this.showNavbarFooter = false;
+        else this.showNavbarFooter = true;
+      }
     });
   }
 }

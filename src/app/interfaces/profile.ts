@@ -2,9 +2,11 @@ import { ProductItem } from './store';
 
 export interface Address {
   street: string;
-  apartment: string;
   city: string;
-  building: string;
+  area: string;
+  buildingNumber: string;
+  floorNumber: number;
+  apartmentNumber: string;
 }
 
 export interface User {
@@ -12,6 +14,7 @@ export interface User {
   email: string;
   password: string;
   userName: string;
+  phoneNumber?: number;
   firstName: string;
   lastName: string;
   gender: string;
