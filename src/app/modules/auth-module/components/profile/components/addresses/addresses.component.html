@@ -1,1 +1,211 @@
-<p>addresses works!</p>
+<section class="px-md-5">
+  <h3><b>Add new address</b></h3>
+  <!-- City input -->
+  <form [formGroup]="addressForm" (ngSubmit)="submitAddressForm()">
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <input
+                placeholder="City"
+                type="text"
+                pInputText
+                class="p-inputtext-md"
+                aria-describedby="username2-help"
+                formControlName="city"
+              />
+            </div>
+          </div>
+          <!-- City validation -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['city'].valid &&
+                controlValidation['city'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              id="username2-help"
+              class="p-error block m-0 p-0"
+              *ngIf="controlValidation['city'].errors?.['required']"
+              >This field is required.</small
+            >
+          </ng-template>
+        </div>
+      </div>
+      <!-- Area input-->
+      <div class="col-md-6 mt-md-0 mt-3">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <input
+                type="text"
+                placeholder="Area"
+                pInputText
+                class="p-inputtext-md"
+                aria-describedby="username2-help"
+                formControlName="area"
+              />
+            </div>
+          </div>
+          <!-- Area validation -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['area'].valid &&
+                controlValidation['area'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              id="username2-help"
+              class="p-error block m-0 p-0"
+              *ngIf="controlValidation['area'].errors?.['required']"
+              >This field is required.</small
+            >
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <!-- Street input -->
+    <div class="row mt-3">
+      <div class="grid p-fluid">
+        <div class="col-12 md:col-4">
+          <div class="p-inputgroup">
+            <input
+              type="text"
+              placeholder="Street"
+              pInputText
+              class="p-inputtext-md"
+              aria-describedby="username2-help"
+              formControlName="street"
+            />
+          </div>
+        </div>
+        <!-- Street validation -->
+        <ng-template
+          [ngIf]="
+            (!controlValidation['street'].valid &&
+              controlValidation['street'].touched) ||
+            showErrors
+          "
+        >
+          <small
+            id="username2-help"
+            class="p-error block m-0 p-0"
+            *ngIf="controlValidation['street'].errors?.['required']"
+            >This field is required.</small
+          >
+        </ng-template>
+      </div>
+    </div>
+    <!-- Buliding number input -->
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <input
+                type="text"
+                placeholder="Building No."
+                pInputText
+                class="p-inputtext-md"
+                aria-describedby="username2-help"
+                formControlName="buildingNumber"
+              />
+            </div>
+          </div>
+          <!-- Building number validation -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['buildingNumber'].valid &&
+                controlValidation['buildingNumber'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              id="username2-help"
+              class="p-error block m-0 p-0"
+              *ngIf="controlValidation['buildingNumber'].errors?.['required']"
+              >This field is required.</small
+            >
+          </ng-template>
+        </div>
+      </div>
+      <!-- Apartment number input-->
+      <div class="col-md-4 mt-md-0 mt-3">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <input
+                type="text"
+                placeholder="Apartment No."
+                pInputText
+                class="p-inputtext-md"
+                aria-describedby="username2-help"
+                formControlName="apartment"
+              />
+            </div>
+          </div>
+          <!-- Apartment number validation -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['apartment'].valid &&
+                controlValidation['apartment'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              id="username2-help"
+              class="p-error block m-0 p-0"
+              *ngIf="controlValidation['apartment'].errors?.['required']"
+              >This field is required.</small
+            >
+          </ng-template>
+        </div>
+      </div>
+      <!-- Floor number input -->
+      <div class="col-md-4 mt-md-0 mt-3">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <input
+                type="text"
+                placeholder="Floor No."
+                pInputText
+                class="p-inputtext-md"
+                aria-describedby="username2-help"
+                formControlName="floor"
+              />
+            </div>
+          </div>
+          <!-- Floor number validation -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['floor'].valid &&
+                controlValidation['floor'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              id="username2-help"
+              class="p-error block m-0 p-0"
+              *ngIf="controlValidation['floor'].errors?.['required']"
+              >This field is required.</small
+            >
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <!-- Save button -->
+    <div class="row justify-content-center mt-md-5 mt-3">
+      <button
+        pButton
+        pRipple
+        type="submit"
+        label="Save Changes"
+        class="p-button-rounded save-btn col-md-4 col-lg-3 col-11"
+      ></button>
+    </div>
+  </form>
+</section>
