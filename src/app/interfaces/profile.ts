@@ -8,14 +8,13 @@ export interface Address {
 }
 
 export interface User {
-  id: string;
+  id?: string;
   email: string;
   password: string;
-  phone: number;
   userName: string;
   firstName: string;
   lastName: string;
-  gender: Gender;
+  gender: string;
   birthdate: string;
   address?: Address;
   previousOrders?: Array<ProductItem>;

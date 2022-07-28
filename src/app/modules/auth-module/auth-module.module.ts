@@ -15,9 +15,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Components
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
+//Services
+import { MessageService } from 'primeng/api';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, ProfileComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -33,5 +36,6 @@ import { RegisterComponent } from './components/register/register.component';
     CommonModule,
     AuthModuleRoutingModule,
   ],
+  providers: [MessageService],
 })
 export class AuthModuleModule {}

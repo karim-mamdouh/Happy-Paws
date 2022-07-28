@@ -1,5 +1,10 @@
-<app-nav-bar></app-nav-bar>
+<app-nav-bar *ngIf="!activeURL.includes('auth')"></app-nav-bar>
 <main class="main">
   <router-outlet></router-outlet>
 </main>
 <app-footer *ngIf="!activeURL.includes('auth')"></app-footer>
+<p-scrollTop
+  [threshold]="100"
+  icon="fa-solid fa-circle-arrow-up"
+  styleClass="floating-btn"
+></p-scrollTop>

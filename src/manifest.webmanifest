@@ -6,6 +6,8 @@
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
+  "id": "/",
+  "description": "Animal platform with all services and supplies",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

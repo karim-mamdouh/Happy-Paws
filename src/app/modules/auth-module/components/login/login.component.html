@@ -1,11 +1,24 @@
-<section class="pt-4 login">
+<section class="py-4 login d-flex justify-content-center align-items-center">
   <div class="container card mx-auto login__form shadow">
-    <h1 class="text-center pt-3 pt-xl-5 login__text mt-2 mb-3 mb-xl-0">
-      Login
-    </h1>
+    <a
+      class="navbar-brand d-flex align-items-center mx-auto mt-5"
+      routerLink="/"
+    >
+      <figure class="d-inline-block m-0">
+        <img src="assets/icons/icon-72x72.png" class="img-fluid" />
+      </figure>
+      <h1 class="d-inline-block my-0 ms-3 text-dark fs-3 login__logo-text">
+        <b>Happy Paws</b>
+      </h1>
+    </a>
+    <h2
+      class="ms-1 pt-5 pt-xl-5 login__text mt-2 mb-3 mb-xl-0 login__sub-title"
+    >
+      Sign-in to your account
+    </h2>
     <form
       [formGroup]="loginForm"
-      class="p-1 h-100 d-flex flex-column justify-content-evenly"
+      class="p-1 pt-2 h-100 d-flex flex-column justify-content-evenly"
       (ngSubmit)="loginFormSubmit()"
     >
       <div>
@@ -95,4 +108,6 @@
       <a routerLink="/auth/register" class="login__text"> <b>Sign up</b></a>
     </p>
   </div>
+  <p-toast key="Successtoast"></p-toast>
+  <p-toast key="Errortoast"></p-toast>
 </section>

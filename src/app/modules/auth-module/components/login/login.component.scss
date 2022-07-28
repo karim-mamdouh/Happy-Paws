@@ -4,6 +4,9 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  .login__logo-text b {
+    color: rgb(103, 102, 102);
+  }
 
   .login__form {
     width: 80%;
@@ -16,6 +19,10 @@
   .login__text {
     color: #999;
   }
+  .login__sub-title {
+    font-size: 1.6rem;
+    color: rgb(103, 102, 102);
+  }
 
   @media (min-width: 768px) {
     .login__form {
@@ -27,11 +34,6 @@
       width: 50%;
     }
   }
-  @media (min-width: 1200px) {
-    .login__form {
-      width: 25%;
-    }
-  }
 }
 
 :host ::ng-deep .p-divider .p-divider-content {
@@ -40,6 +42,7 @@
 :host ::ng-deep .login__button {
   background-color: #999;
   border: #999;
+  font-size: 1.25rem;
 }
 :host ::ng-deep .login__button:hover {
   background-color: #999;
