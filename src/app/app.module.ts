@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { ScrollTopModule } from 'primeng/scrolltop';
 //Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -35,6 +36,7 @@ import { adoptionReducer } from './store/adoption/adoption-reducer';
     NotFoundComponent,
   ],
   imports: [
+    ScrollTopModule,
     MenuModule,
     ButtonModule,
     TieredMenuModule,

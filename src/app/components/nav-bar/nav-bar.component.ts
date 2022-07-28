@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AnimalType } from 'src/app/interfaces/adoption';
 import { ProductCategory } from 'src/app/interfaces/store';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -99,15 +100,18 @@ export class NavBarComponent implements OnInit {
         },
       ],
     },
-  ];
-  userMenuItems: Array<MenuItem> = [{ items: this.getUserItems() }];
+  ]; // Store navbar menu items
+  userMenuItems: Array<MenuItem> = []; // User profile menu items
 
-  constructor(private _router: Router) {}
+  constructor(private _router: Router, private _authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userMenuItems = [{ items: this.getUserItems() }];
+  }
+  // Function that fills user menu items data based on existance of token in local storage
   getUserItems(): Array<MenuItem> {
     let items: Array<MenuItem> = [];
-    let token = JSON.parse(localStorage.getItem('token')!);
+    let token = localStorage.getItem('token');
     if (token) {
       items = [
         {
@@ -159,5 +163,12 @@ export class NavBarComponent implements OnInit {
     }
     return items;
   }
-  logout() {}
+  // Function that logs user out and reloads app
+  logout(): void {
+    this._authService.logout().then((response) => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userID');
+      window.location.href = '/';
+    });
+  }
 }
