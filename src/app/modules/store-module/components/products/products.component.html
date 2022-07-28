@@ -1,14 +1,19 @@
 <main class="container-fluid">
-    <div class="container">
-        <section class="wrapper__store d-flex justify-content-between ">
-            <div style="  height: 100%;" class="wrapper__store__filter col-3"></div>
-            <div style="  height: 100%;" class="wrapper__store__content col-9 ">
-    
-                <div class="p-4 d-flex flex-wrap">
-                    <app-product-card class="col-4" *ngFor="let product of (productsObservable | async)?.products" [product]="product">
-                    </app-product-card>
-                </div>
-            </div>
-        </section>
-    </div>
+  <div class="container">
+    <section class="wrapper__store d-flex justify-content-between">
+      <div style="height: 100%" class="wrapper__store__filter col-3">
+        <app-filteration></app-filteration>
+      </div>
+      <div style="height: 100%" class="wrapper__store__content col-9">
+        <div class="p-4 d-flex flex-wrap">
+          <app-product-card
+            class="col-4"
+            *ngFor="let product of (productsObservable | async)?.products"
+            [product]="product"
+          >
+          </app-product-card>
+        </div>
+      </div>
+    </section>
+  </div>
 </main>
