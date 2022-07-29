@@ -22,17 +22,17 @@ export class RegisterComponent implements OnInit {
       firstName: [
         '',
         [Validators.required, Validators.pattern(/^[\S][A-Za-z]{2,}$/)],
-      ],
+      ], // No whitespaces or numbers and at least two characters
       date: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       lastName: [
         '',
         [Validators.required, Validators.pattern(/^[\S][A-Za-z]{2,}$/)],
-      ],
+      ], // No whitespaces or numbers and at least two characters
       userName: [
         '',
         [Validators.required, Validators.pattern(/^[\S][A-Za-z0-9]{5,}$/)],
-      ], //no spaces,6 char or more,no special character
+      ], //No spaces,6 char or more,no special character
       email: [
         '',
         [
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
           ),
-        ],
+        ], // Should have email format
       ],
       password: [
         '',
@@ -70,6 +70,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+  //Resets form data on destroy
   ngOnDestroy(): void {
     this.registerForm.reset();
   }

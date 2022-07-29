@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
-import { User } from '../interfaces/profile';
+import { Address, User } from '../interfaces/profile';
 
 @Injectable({
   providedIn: 'root',
@@ -37,10 +37,7 @@ export class AuthService {
         map((snapshot) => {
           return snapshot.payload.data();
         })
-      )
-      .subscribe((userProfileData) => {
-        console.log(userProfileData); // User Profile Data
-      });
+      );
   }
   // Login user to database
   login(email: string, password: string) {

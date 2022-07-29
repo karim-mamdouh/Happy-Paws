@@ -12,11 +12,11 @@ export class AccountDetailsComponent implements OnInit {
     firstName: [
       '',
       [Validators.required, Validators.pattern(/^[\S][A-Za-z]{2,}$/)],
-    ],
+    ], //Should have no whitespaces or numbers and at least 2 letters
     lastName: [
       '',
       [Validators.required, Validators.pattern(/^[\S][A-Za-z]{2,}$/)],
-    ],
+    ], //Should have no whitespaces or numbers and at least 2 letters
     password: [
       '',
       [
@@ -29,7 +29,7 @@ export class AccountDetailsComponent implements OnInit {
     userName: [
       '',
       [Validators.required, Validators.pattern(/^[\S][A-Za-z0-9]{5,}$/)],
-    ],
+    ], //Should have no whitespaces and at least 5 characters
     phoneNumber: ['', [Validators.required, Validators.minLength(11)]],
   });
 
@@ -40,6 +40,7 @@ export class AccountDetailsComponent implements OnInit {
   constructor(private _detailsBuilder: FormBuilder) {}
 
   ngOnInit(): void {}
+  //Resets form data on destroy
   ngOnDestroy(): void {
     this.detailsForm.reset();
   }
