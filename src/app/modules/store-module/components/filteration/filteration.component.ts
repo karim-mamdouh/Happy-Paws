@@ -1,19 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Brand, ProductCategory } from 'src/app/interfaces/store';
 import { AnimalType } from 'src/app/interfaces/adoption';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-filteration',
   templateUrl: './filteration.component.html',
   styleUrls: ['./filteration.component.scss'],
 })
+
 export class FilterationComponent implements OnInit {
   categories: string[] = Object.keys(ProductCategory);
   brands: string[] = Object.keys(Brand);
   animals: string[] = Object.keys(AnimalType);
 
-  checked: boolean = false;
+  selectedAnimalType: string[] = [];
+  selectedCategory: string[] = [];
+  selectedBrand: string[] = [];
+  @Output() filterOptions = new EventEmitter<filterData>();
+  constructor(private router: ActivatedRoute) { }
 
-  constructor() {}
 
-  ngOnInit(): void {}
+  onCheckboxValueChange() {
+    this.filterOptions.emit(this.getFilterValues());
+  }
+
+  getFilterValues(): filterData {
+    return {"animalType": this.selectedAnimalType,"category": this.selectedCategory,"brand": this.selectedBrand};
+  }
+
+  ngOnInit(): void {
+    this.router.parent?.queryParams.subscribe(res => {
+      res['animalType'] === undefined
+        ?
+        this.selectedAnimalType = []
+        :
+        this.selectedAnimalType = [`${res['animalType']}`];
+
+      res['category'] === undefined
+        ?
+        this.selectedCategory = []
+        :
+        this.selectedCategory = [`${res['category']}`];
+
+      this.filterOptions.emit(this.getFilterValues());
+    });
+  }
+}
+
+export interface filterData {
+  "animalType": string[],
+  "category": string[],
+  "brand": string[]
 }
