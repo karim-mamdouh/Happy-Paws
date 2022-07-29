@@ -6,6 +6,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { FilterationComponent } from './components/filteration/filteration.component';
 
 const routes: Routes = [
+  {path: '',redirectTo:'products',pathMatch:'full'},
   { path: 'details', component: ProductDetailsComponent },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'products', component: ProductsComponent },
