@@ -1,1 +1,79 @@
-<p>cart works!</p>
+<h1 class="text-center mt-4">Shopping Cart</h1>
+<ng-template [ngIf]="item == 0" [ngIfElse]="elseBlock">
+  <!-- Empty cart title -->
+  <h2 class="emptyCart mt-5 text-center p-5 border rounded bg-light">
+    <figure class="img-fluid">
+      <img src="assets/images/Dog.png" alt="Dog" />
+    </figure>
+    <div>
+      <em>Your Happy Paws Cart Is Empty</em>
+    </div>
+    <p-button
+      styleClass="card__addToCart"
+      label="Shop Now"
+      icon="pi pi-shopping-bag"
+    >
+    </p-button>
+  </h2>
+</ng-template>
+
+<!-- Cart Items -->
+<ng-template #elseBlock>
+  <section class="mt-5 container border rounded">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-danger my-3 mx-4">Empty Cart</button>
+    </div>
+
+    <!-- Cart items table -->
+    <table class="table">
+      <thead>
+        <!-- Table header -->
+        <tr>
+          <th scope="col" class="fs-5">Image</th>
+          <th scope="col" class="fs-5">Name</th>
+          <th scope="col" class="fs-5">Price</th>
+          <th scope="col" class="fs-5">Quantity</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cart item -->
+        <tr>
+          <td class="w-25 align-middle">
+            <figure class="m-0">
+              <img
+                src="assets/images/cat.jpg"
+                alt="Item Image"
+                class="img-fluid rounded"
+              />
+            </figure>
+          </td>
+          <td class="align-middle"><p class="fs-5">Cat</p></td>
+          <td class="align-middle"><p class="fs-5">200 EGP</p></td>
+          <td class="align-middle">
+            <button
+              class="fs-5 text-secondary btn btn-light QuantityBtn"
+              (click)="increaseQty()"
+            >
+              <i class="fa-solid fa-circle-plus fs-4"></i>
+            </button>
+            &nbsp; <span class="fs-5">{{ count }}</span> &nbsp;
+            <button
+              class="fs-5 text-secondary btn btn-light QuantityBtn"
+              (click)="decreaseQty()"
+            >
+              <i class="fa-solid fa-circle-minus fs-4"></i>
+            </button>
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-light removeBtn">
+              <i class="fa-solid fa-trash-can fs-3"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Total price -->
+    <h4 class="mt-4 text-end mb-5">Total Price: 1000 EGP</h4>
+  </section>
+</ng-template>

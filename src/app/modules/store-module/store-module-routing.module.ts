@@ -4,12 +4,14 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ProductsComponent } from './components/products/products.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { FilterationComponent } from './components/filteration/filteration.component';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   { path: 'details', component: ProductDetailsComponent },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'filter', component: FilterationComponent },
+  { path: 'cart', component: CartComponent },
 ];
 
 @NgModule({

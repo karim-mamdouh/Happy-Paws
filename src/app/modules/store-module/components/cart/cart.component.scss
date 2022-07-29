@@ -1,0 +1,93 @@
+//--------------------------- VARIABLES ------------------------
+$color-primary: #ecada6;
+$color-secondary: #888888;
+$color-accent: #ffcdd2;
+$color-black: #000000;
+$color-white: #ffffff;
+
+//empty cart button
+:host ::ng-deep .p-button {
+  background: $color-secondary;
+  border: 1px solid $color-secondary;
+  margin-top: 40px;
+}
+
+:host ::ng-deep .p-button:enabled:hover {
+  background: $color-primary;
+  color: $color-white;
+  border-color: $color-accent;
+}
+
+:host ::ng-deep .p-button:focus {
+  background-color: none;
+  box-shadow: 0 0 0 0.1rem transparent !important;
+}
+
+:host ::ng-deep .p-button:enabled:focus {
+  box-shadow: 0 0 0 0.2rem !important;
+  border-color: none !important;
+}
+
+section {
+  .table {
+    tbody {
+      tr {
+        figure {
+          width: 120px;
+        }
+        .QuantityBtn:focus {
+          background-color: transparent;
+          box-shadow: none;
+          border-color: transparent;
+        }
+        .QuantityBtn:hover {
+          background-color: transparent;
+          border-color: transparent;
+        }
+        .QuantityBtn {
+          background-color: transparent;
+          i {
+            color: #ecada6;
+          }
+        }
+        .removeBtn:focus {
+          background-color: transparent;
+          box-shadow: none;
+          border-color: transparent;
+        }
+        .removeBtn:hover {
+          background-color: transparent;
+          border-color: transparent;
+        }
+        .removeBtn {
+          i {
+            color: #dc2626;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .emptyCart {
+    font-size: 2rem !important;
+    figure {
+      img {
+        width: 350px;
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 551px) {
+  .emptyCart {
+    font-size: 1rem !important;
+    figure {
+      img {
+        width: 250px;
+      }
+    }
+  }
+}
