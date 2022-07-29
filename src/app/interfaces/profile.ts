@@ -1,3 +1,4 @@
+import { Animal } from './adoption';
 import { ProductItem } from './store';
 
 export interface Address {
@@ -12,7 +13,7 @@ export interface Address {
 export interface User {
   id?: string;
   email: string;
-  password: string;
+  pet?: Animal;
   userName: string;
   phoneNumber?: number;
   firstName: string;

@@ -81,7 +81,6 @@ export class RegisterComponent implements OnInit {
       //create user details object
       let user: User = {
         email: this.registerForm.value['email'],
-        password: this.registerForm.value['password'],
         firstName: this.registerForm.value['firstName'],
         lastName: this.registerForm.value['lastName'],
         birthdate: `${this.registerForm.value['date']}`,
@@ -92,7 +91,10 @@ export class RegisterComponent implements OnInit {
       // 2- take the id from firebase and save it in the user id defined in the object
       // 3- Navigate to login page
       this._authService
-        .register(user)
+        .register(
+          this.registerForm.value['email'],
+          this.registerForm.value['password']
+        )
         .then((response) => {
           user.id = response.user?.uid;
           return this._authService.saveUserToFireStore(user);

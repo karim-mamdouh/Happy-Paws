@@ -8,12 +8,11 @@ export interface Animal {
   name: string;
   id: string;
   owner: Owner;
-  age: number;
-  vaccines?: Array<string>;
-  images: Array<string>;
+  age: string;
+  gender: string;
+  images?: Array<string>;
   description?: string;
-  color?: string;
-  type: AnimalType;
+  type: string;
 }
 
 export enum AnimalType {

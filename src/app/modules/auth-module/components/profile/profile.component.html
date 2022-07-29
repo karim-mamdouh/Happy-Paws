@@ -5,14 +5,19 @@
     <h6 class="pb-3">Here you can modify your information.</h6>
     <p-tabView>
       <p-tabPanel header="Profile" leftIcon="fa-regular fa-circle-user">
-        <app-account-details></app-account-details>
+        <app-account-details
+          (profileEmitter)="profileUpdated($event)"
+        ></app-account-details>
       </p-tabPanel>
-      <!-- <p-tabPanel header="My Orders" leftIcon="pi pi-shopping-bag">
-        <app-my-orders></app-my-orders>
-      </p-tabPanel> -->
       <p-tabPanel header="My Address" leftIcon="pi pi-map-marker">
-        <app-addresses></app-addresses>
+        <app-addresses
+          (addressEmitter)="addressUpdated($event)"
+        ></app-addresses>
+      </p-tabPanel>
+      <p-tabPanel header="My Pets" leftIcon="fa-solid fa-paw">
+        <app-my-pets (petEmitter)="petUpdated($event)"></app-my-pets>
       </p-tabPanel>
     </p-tabView>
   </div>
+  <p-toast key="database"></p-toast>
 </section>

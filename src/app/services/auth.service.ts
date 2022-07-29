@@ -14,11 +14,8 @@ export class AuthService {
   ) {}
 
   // Register new user to database
-  register(user: User) {
-    return this._fireAuth.createUserWithEmailAndPassword(
-      user.email,
-      user.password
-    );
+  register(email: string, password: string) {
+    return this._fireAuth.createUserWithEmailAndPassword(email, password);
   }
   // Save user profile to database after registering
   saveUserToFireStore(user: User) {
@@ -26,6 +23,21 @@ export class AuthService {
       .collection(FireStoreCollections.Users)
       .doc(user.id)
       .set(user);
+  }
+  //Deletes user from database collection
+  removeUserFromFireStore(userID: string) {
+    return this._fireStore
+      .collection(FireStoreCollections.Users)
+      .doc(userID)
+      .delete();
+  }
+  //Gets current logged in user from database and delete this account
+  removeUser() {
+    return this._fireAuth.currentUser.then((response) => response?.delete());
+  }
+  //Sends reset password email to input email
+  changePassword(email: string) {
+    return this._fireAuth.sendPasswordResetEmail(email);
   }
   // Fetch user profile from database based on user id
   fetchUserProfile(userID: string) {
