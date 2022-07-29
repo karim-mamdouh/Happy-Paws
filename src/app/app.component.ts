@@ -29,13 +29,23 @@ export class AppComponent {
         this.activeURL = event.url;
     });
 
-    this.afs.fetchAllStoreItems().pipe(
-      map(changes =>
-        changes.map(c => (c.payload.doc.data()))
-      )
-    ).subscribe((res) => {
-      let temp = res as Array<ProductItem>;
+    if (sessionStorage.getItem('product') == null) {
+      this.afs.fetchAllStoreItems().pipe(
+        map(changes =>
+          changes.map(c => (c.payload.doc.data()))
+
+        )
+      ).subscribe((res) => {
+        let temp = res as Array<ProductItem>;
+        console.log("From Firebase", temp);
+        sessionStorage.setItem('product', JSON.stringify(temp));
+        this.store.dispatch(fillProducts({ payload: temp }));
+      });
+    }
+    else {
+      let temp = JSON.parse(sessionStorage.getItem('product')!);
+      console.log("From Cache", temp);
       this.store.dispatch(fillProducts({ payload: temp }));
-    })
+    }
   }
 }
