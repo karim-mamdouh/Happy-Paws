@@ -30,7 +30,7 @@ export enum ProductCategory {
   Accessories = 'Accessories',
   Toys = 'Toys',
   Litter = 'Litter',
-  Grooming = 'Gromming',
+  Grooming = 'Grooming',
 }
 
 export enum Brand {

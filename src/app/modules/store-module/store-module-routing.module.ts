@@ -7,6 +7,7 @@ import { FilterationComponent } from './components/filteration/filteration.compo
 import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
+  {path: '',redirectTo:'products',pathMatch:'full'},
   { path: 'details', component: ProductDetailsComponent },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'products', component: ProductsComponent },
