@@ -81,6 +81,7 @@ export class AccountDetailsComponent implements OnInit {
     this.userData.userName = this.detailsForm.value['userName'];
     this.userData.phoneNumber = this.detailsForm.value['phoneNumber'];
     this.profileEmitter.emit(this.userData);
+    this.showErrors = false;
   }
   //On toast cancel or closing toast function
   onToastReject(): void {

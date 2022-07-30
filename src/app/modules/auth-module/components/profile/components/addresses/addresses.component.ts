@@ -9,9 +9,9 @@ import { Address, User } from 'src/app/interfaces/profile';
   styleUrls: ['./addresses.component.scss'],
 })
 export class AddressesComponent implements OnInit {
-  @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User);
-  @Output() addressEmitter = new EventEmitter<Address>();
-  userAddress = {} as Address;
+  @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userAddress with data from parent
+  @Output() addressEmitter = new EventEmitter<Address>(); // Event emiiter to notify parent with changes occured by sending modified object
+  userAddress = {} as Address; // Address object to be viewed and editied
   showErrors: boolean = false; //Flag to show form errors
   addressForm: FormGroup = this._addressForm.group({
     city: ['', [Validators.required]],
@@ -20,7 +20,7 @@ export class AddressesComponent implements OnInit {
     buildingNumber: ['', [Validators.required]],
     apartment: ['', [Validators.required]],
     floor: ['', [Validators.required]],
-  });
+  }); // Form controls
 
   get controlValidation() {
     return this.addressForm.controls;
@@ -29,9 +29,10 @@ export class AddressesComponent implements OnInit {
   constructor(private _addressForm: FormBuilder) {}
 
   ngOnInit(): void {
-    this.user.subscribe((res) => {
-      if (res.address) {
-        this.userAddress = res.address!;
+    //Subscribes to observable and updates object and form data with new input data
+    this.user.subscribe((reposnse) => {
+      if (reposnse.address) {
+        this.userAddress = reposnse.address!;
         this.addressForm.controls['city'].setValue(this.userAddress.city);
         this.addressForm.controls['area'].setValue(this.userAddress.area);
         this.addressForm.controls['street'].setValue(this.userAddress.street);
@@ -47,9 +48,12 @@ export class AddressesComponent implements OnInit {
       }
     });
   }
+  //Resets form data and unsubscribe observable on destroy
   ngOnDestroy(): void {
     this.addressForm.reset();
+    this.user.unsubscribe();
   }
+  //Submit form function, fills userAddress object with new data from form and emits event to parent
   submitAddressForm(): void {
     if (this.addressForm.status === 'INVALID') {
       this.showErrors = true;
@@ -62,6 +66,7 @@ export class AddressesComponent implements OnInit {
       this.userAddress.buildingNumber =
         this.addressForm.value['buildingNumber'];
       this.addressEmitter.emit(this.userAddress);
+      this.showErrors = false;
     }
   }
 }

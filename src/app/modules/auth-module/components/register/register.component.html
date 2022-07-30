@@ -34,10 +34,8 @@
                     placeholder="First name"
                     pTooltip="Characters only"
                     tooltipPosition="top"
-                    type="text"
                     pInputText
                     class="p-inputtext-sm"
-                    aria-describedby="username2-help"
                     formControlName="firstName"
                   />
                 </div>
@@ -51,13 +49,11 @@
                 "
               >
                 <small
-                  id="username2-help"
                   class="p-error block"
                   *ngIf="controlValidation['firstName'].errors?.['required']"
                   >This field is required.</small
                 >
                 <small
-                  id="username2-help"
                   class="p-error block"
                   *ngIf="controlValidation['firstName'].errors?.['pattern']"
                   >Wrong name format.</small
@@ -78,10 +74,8 @@
                     placeholder="Last name"
                     pTooltip="Characters only"
                     tooltipPosition="top"
-                    type="text"
                     pInputText
                     class="p-inputtext-sm"
-                    aria-describedby="username2-help"
                     formControlName="lastName"
                   />
                 </div>
@@ -94,13 +88,11 @@
                 "
               >
                 <small
-                  id="username2-help"
                   class="p-error block"
                   *ngIf="controlValidation['lastName'].errors?.['required']"
                   >This field is required.</small
                 >
                 <small
-                  id="username2-help"
                   class="p-error block"
                   *ngIf="controlValidation['lastName'].errors?.['pattern']"
                   >Wrong name format.</small
@@ -117,14 +109,12 @@
                 ><i class="fa-solid fa-user-check"></i
               ></span>
               <input
-                type="text"
                 placeholder="Username"
                 pTooltip="At least 6 characters, no white spaces & no special characters"
                 tooltipPosition="top"
                 type="text"
                 pInputText
                 class="p-inputtext-sm"
-                aria-describedby="username2-help"
                 formControlName="userName"
               />
             </div>
@@ -138,13 +128,11 @@
             "
           >
             <small
-              id="username2-help"
               class="p-error block m-0 p-0"
               *ngIf="controlValidation['userName'].errors?.['required']"
               >This field is required.</small
             >
             <small
-              id="username2-help"
               class="p-error block"
               *ngIf="controlValidation['userName'].errors?.['pattern']"
               >Wrong name format.</small
@@ -156,14 +144,12 @@
           <div class="col-sm-6">
             <div class="grid p-fluid">
               <div class="col-12 md:col-4">
-                <div>
-                  <p-dropdown
-                    [options]="gender"
-                    formControlName="gender"
-                    optionLabel="name"
-                    placeholder="Select gender"
-                  ></p-dropdown>
-                </div>
+                <p-dropdown
+                  [options]="gender"
+                  formControlName="gender"
+                  optionLabel="name"
+                  placeholder="Select gender"
+                ></p-dropdown>
               </div>
             </div>
             <!-- Gender errors -->
@@ -175,7 +161,6 @@
               "
             >
               <small
-                id="username2-help"
                 class="p-error block m-0 p-0"
                 *ngIf="controlValidation['gender'].errors?.['required']"
                 >This field is required.</small
@@ -204,7 +189,6 @@
               "
             >
               <small
-                id="username2-help"
                 class="p-error block m-0 p-0"
                 *ngIf="controlValidation['date'].errors?.['required']"
                 >This field is required.</small
@@ -224,10 +208,8 @@
                 placeholder="Email"
                 pTooltip="email@address.com"
                 tooltipPosition="bottom"
-                type="text"
                 pInputText
                 class="p-inputtext-sm"
-                aria-describedby="username2-help"
                 formControlName="email"
               />
             </div>
@@ -241,13 +223,11 @@
             "
           >
             <small
-              id="username2-help"
               class="p-error block"
               *ngIf="controlValidation['email'].errors?.['required']"
               >This field is required.</small
             >
             <small
-              id="username2-help"
               class="p-error block"
               *ngIf="controlValidation['email'].errors?.['pattern']"
               >Wrong name format.</small
@@ -279,13 +259,11 @@
                 "
               >
                 <small
-                  id="username2-help"
                   class="p-error block"
                   *ngIf="controlValidation['password'].errors?.['required']"
                   >This field is required.</small
                 >
                 <small
-                  id="username2-help"
                   class="p-error block"
                   *ngIf="controlValidation['password'].errors?.['pattern']"
                   >Wrong format.</small
@@ -318,13 +296,11 @@
                 "
               >
                 <small
-                  id="username2-help"
                   class="p-error block"
                   *ngIf="controlValidation['confirmPassword'].errors?.['required']"
                   >This field is required.</small
                 >
                 <small
-                  id="username2-help"
                   class="p-error block"
                   *ngIf="controlValidation['confirmPassword'].errors?.['confirmPasswordValidator']"
                   >Not Matched.</small

@@ -77,7 +77,6 @@ export class ProfileComponent implements OnInit {
   }
   // Function called when user modifys/adds pet in child, then updates database
   petUpdated(event: Animal): void {
-    console.log(event);
     this.user.pet = event;
     this._authService
       .saveUserToFireStore(this.user)

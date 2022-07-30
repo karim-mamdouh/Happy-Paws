@@ -1,6 +1,6 @@
 <section class="px-md-5">
   <h3><b>Add new address</b></h3>
-  <!-- City input -->
+  <!-- City  -->
   <form [formGroup]="addressForm" (ngSubmit)="submitAddressForm()">
     <div class="row mt-3">
       <div class="col-md-6">
@@ -12,7 +12,6 @@
                 type="text"
                 pInputText
                 class="p-inputtext-md"
-                aria-describedby="username2-help"
                 formControlName="city"
               />
             </div>
@@ -26,7 +25,6 @@
             "
           >
             <small
-              id="username2-help"
               class="p-error block m-0 p-0"
               *ngIf="controlValidation['city'].errors?.['required']"
               >This field is required.</small
@@ -34,7 +32,7 @@
           </ng-template>
         </div>
       </div>
-      <!-- Area input-->
+      <!-- Area -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
           <div class="col-12 md:col-4">
@@ -44,7 +42,6 @@
                 placeholder="Area"
                 pInputText
                 class="p-inputtext-md"
-                aria-describedby="username2-help"
                 formControlName="area"
               />
             </div>
@@ -58,7 +55,6 @@
             "
           >
             <small
-              id="username2-help"
               class="p-error block m-0 p-0"
               *ngIf="controlValidation['area'].errors?.['required']"
               >This field is required.</small
@@ -67,7 +63,7 @@
         </div>
       </div>
     </div>
-    <!-- Street input -->
+    <!-- Street  -->
     <div class="row mt-3">
       <div class="grid p-fluid">
         <div class="col-12 md:col-4">
@@ -77,7 +73,6 @@
               placeholder="Street"
               pInputText
               class="p-inputtext-md"
-              aria-describedby="username2-help"
               formControlName="street"
             />
           </div>
@@ -91,7 +86,6 @@
           "
         >
           <small
-            id="username2-help"
             class="p-error block m-0 p-0"
             *ngIf="controlValidation['street'].errors?.['required']"
             >This field is required.</small
@@ -99,7 +93,7 @@
         </ng-template>
       </div>
     </div>
-    <!-- Buliding number input -->
+    <!-- Buliding number  -->
     <div class="row mt-3">
       <div class="col-md-4">
         <div class="grid p-fluid">
@@ -110,7 +104,6 @@
                 placeholder="Building No."
                 pInputText
                 class="p-inputtext-md"
-                aria-describedby="username2-help"
                 formControlName="buildingNumber"
               />
             </div>
@@ -124,7 +117,6 @@
             "
           >
             <small
-              id="username2-help"
               class="p-error block m-0 p-0"
               *ngIf="controlValidation['buildingNumber'].errors?.['required']"
               >This field is required.</small
@@ -132,7 +124,7 @@
           </ng-template>
         </div>
       </div>
-      <!-- Apartment number input-->
+      <!-- Apartment number -->
       <div class="col-md-4 mt-md-0 mt-3">
         <div class="grid p-fluid">
           <div class="col-12 md:col-4">
@@ -142,7 +134,6 @@
                 placeholder="Apartment No."
                 pInputText
                 class="p-inputtext-md"
-                aria-describedby="username2-help"
                 formControlName="apartment"
               />
             </div>
@@ -156,7 +147,6 @@
             "
           >
             <small
-              id="username2-help"
               class="p-error block m-0 p-0"
               *ngIf="controlValidation['apartment'].errors?.['required']"
               >This field is required.</small
@@ -164,7 +154,7 @@
           </ng-template>
         </div>
       </div>
-      <!-- Floor number input -->
+      <!-- Floor number  -->
       <div class="col-md-4 mt-md-0 mt-3">
         <div class="grid p-fluid">
           <div class="col-12 md:col-4">
@@ -174,7 +164,6 @@
                 placeholder="Floor No."
                 pInputText
                 class="p-inputtext-md"
-                aria-describedby="username2-help"
                 formControlName="floor"
               />
             </div>
@@ -188,7 +177,6 @@
             "
           >
             <small
-              id="username2-help"
               class="p-error block m-0 p-0"
               *ngIf="controlValidation['floor'].errors?.['required']"
               >This field is required.</small
