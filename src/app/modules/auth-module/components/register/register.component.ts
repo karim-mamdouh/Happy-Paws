@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/profile';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -23,17 +22,17 @@ export class RegisterComponent implements OnInit {
       firstName: [
         '',
         [Validators.required, Validators.pattern(/^[\S][A-Za-z]{2,}$/)],
-      ],
+      ], // No whitespaces or numbers and at least two characters
       date: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       lastName: [
         '',
         [Validators.required, Validators.pattern(/^[\S][A-Za-z]{2,}$/)],
-      ],
+      ], // No whitespaces or numbers and at least two characters
       userName: [
         '',
         [Validators.required, Validators.pattern(/^[\S][A-Za-z0-9]{5,}$/)],
-      ], //no spaces,6 char or more,no special character
+      ], //No spaces,6 char or more,no special character
       email: [
         '',
         [
@@ -41,7 +40,7 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
           ),
-        ],
+        ], // Should have email format
       ],
       password: [
         '',
@@ -71,6 +70,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+  //Resets form data on destroy
   ngOnDestroy(): void {
     this.registerForm.reset();
   }
@@ -81,7 +81,6 @@ export class RegisterComponent implements OnInit {
       //create user details object
       let user: User = {
         email: this.registerForm.value['email'],
-        password: this.registerForm.value['password'],
         firstName: this.registerForm.value['firstName'],
         lastName: this.registerForm.value['lastName'],
         birthdate: `${this.registerForm.value['date']}`,
@@ -92,7 +91,10 @@ export class RegisterComponent implements OnInit {
       // 2- take the id from firebase and save it in the user id defined in the object
       // 3- Navigate to login page
       this._authService
-        .register(user)
+        .register(
+          this.registerForm.value['email'],
+          this.registerForm.value['password']
+        )
         .then((response) => {
           user.id = response.user?.uid;
           return this._authService.saveUserToFireStore(user);
@@ -100,7 +102,7 @@ export class RegisterComponent implements OnInit {
         .then((response) => {
           this.showSuccessToast();
           setTimeout(() => {
-            this._router.navigate(['/auth']);
+            this._router.navigate(['/auth/login']);
           }, 1500);
         })
         .catch((error) => {
