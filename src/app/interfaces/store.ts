@@ -2,6 +2,7 @@ import { AnimalType } from './adoption';
 
 export interface Review {
   userID: string;
+  userName:string;
   rate: number;
   comment?: string;
 }

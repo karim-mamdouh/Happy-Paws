@@ -69,8 +69,9 @@ section {
 }
 
 //------------------------- Stars Icons Size ----------------------
-:host ::ng-deep .p-rating .p-rating-icon {
+ :host ::ng-deep .rate-display  .p-rating .p-rating-icon  {
   font-size: medium;
+  cursor: default !important;
 }
 
 //------------------------- Stars inside colors ----------------------

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductItem } from 'src/app/interfaces/store';
 
 @Component({
   selector: 'app-product-details',
@@ -12,7 +14,13 @@ export class ProductDetailsComponent implements OnInit {
   checked1: boolean = false;
   checked2: boolean = true;
 
-  constructor() {}
+  product: ProductItem = {} as ProductItem;
 
-  ngOnInit(): void {}
+  constructor(private _router: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this._router.queryParams.subscribe((res) => {
+      this.product = JSON.parse(res['product']);
+    });
+  }
 }

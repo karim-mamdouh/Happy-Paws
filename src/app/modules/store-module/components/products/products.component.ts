@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ProductItem } from 'src/app/interfaces/store';
 import { FilterData } from '../filteration/filteration.component';
