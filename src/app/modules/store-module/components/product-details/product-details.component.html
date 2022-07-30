@@ -8,28 +8,24 @@
       >
         <p-image
           src="assets/images/cat.jpg"
-          alt="Image"
+          alt="Item Image"
           [preview]="true"
         ></p-image>
       </figure>
       <!-- Product Details -->
-      <div class="m-5 col-lg-7 col-md-12">
+      <div class="my-5 mx-2 col-lg-7 col-md-12">
         <h3 class="my-3">
           BARS® Flea & Ticks Drops For Dogs 10 Kg (1 pipette)
         </h3>
         <p-rating [(ngModel)]="val" [cancel]="false"></p-rating>
 
-        <p class="my-3 fs-3" style="color: #ecada6"><b> 300.5 EGP</b></p>
+        <p class="my-2 fs-3 price"><b> 300.5 EGP</b></p>
         <p class="fs-4">
           Category:
-          <span class="fs-5" style="color: #999"> Supplies</span>
+          <span class="fs-5"> Supplies</span>
         </p>
-        <p class="fs-4">
-          animalType: <span class="fs-5" style="color: #999">Dogs</span>
-        </p>
-        <p class="fs-4">
-          Brand: <span class="fs-5" style="color: #999">Josera</span>
-        </p>
+        <p class="fs-4">animalType: <span class="fs-5">Dogs</span></p>
+        <p class="fs-4">Brand: <span class="fs-5">Josera</span></p>
         <div *ngIf="quantity > 0; then instock; else outofstock"></div>
         <ng-template #instock><p class="instock">In Stock</p></ng-template>
         <ng-template #outofstock

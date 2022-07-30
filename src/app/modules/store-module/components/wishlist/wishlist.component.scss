@@ -1,18 +1,30 @@
+//--------------------------- VARIABLES ------------------------
+$color-primary: #ecada6;
+$color-secondary: #999999;
+$color-accent: #ffcdd2;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-main: rgb(251, 248, 248);
+$color-gold: #e5b80b;
+$color-danger: #c63737;
+$color-green: #256029;
+$color-lightgreen: #c8e6c9;
+
+//---------------- virtualscroller Background Color--------------------
 :host ::ng-deep .p-virtualscroller .p-virtualscroller-content {
-  background-color: rgb(251, 248, 248);
-}
-.card {
-  background-color: rgb(251, 248, 248);
+  background-color: $color-main;
 }
 :host ::ng-deep .p-virtualscroller .p-virtualscroller-header {
-  background-color: rgb(251, 248, 248);
+  background-color: $color-main;
   border: none;
 }
 :host ::ng-deep .p-virtualscroller-item {
   height: 16rem !important;
 }
+
+//---------------- Item List Card Start--------------------
 .product-item {
-  background-color: #fff;
+  background-color: $color-white;
   display: flex;
   align-items: center;
   padding: 1rem;
@@ -25,31 +37,34 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   figure {
     margin: 0 !important;
-  }
-  img {
-    width: 12.5rem;
-    max-height: 30rem;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    margin-right: 1rem;
-    border-radius: 10px;
+    img {
+      width: 12.5rem;
+      max-height: 30rem;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      margin-right: 1rem;
+      border-radius: 10px;
+    }
   }
   .product-list-detail {
     flex: 1 1 0;
+    p,
+    span {
+      color: $color-secondary;
+    }
   }
-
   .product-list-action {
     .outofstock {
-      background-color: #ffcdd2;
-      color: #c63737;
-      width: 120px;
+      background-color: $color-accent;
+      color: $color-danger;
+      width: 7.5rem;
       text-align: center;
       border-radius: 10px;
       padding: 2px;
     }
     .instock {
-      background-color: #c8e6c9;
-      color: #256029;
-      width: 120px;
+      background-color: $color-lightgreen;
+      color: $color-green;
+      width: 7.5rem;
       text-align: center;
       border-radius: 10px;
       padding: 2px;
@@ -103,20 +118,23 @@
     }
   }
 }
+//------------------- Item List Card End -----------------------
 
+//--------------- Details & Remove Btns size -------------------
 :host ::ng-deep .p-button {
-  width: 128px;
-  height: 40px;
+  width: 8rem;
+  height: 2.5rem;
 }
 
+//--------------- Media Query For Meduim Screens  -------------------
 @media screen and (max-width: 786px) {
   :host ::ng-deep .p-virtualscroller-item {
-    height: 32rem !important;
+    height: 35rem !important;
   }
   .product-item {
     border: 1px solid lightgrey;
     border-radius: 10px;
-    box-shadow: 5px 10px 18px #888888;
+    box-shadow: 5px 10px 18px $color-secondary;
     width: 80%;
     display: block;
     margin-bottom: 5rem;
@@ -140,7 +158,7 @@
       justify-content: center;
       img {
         width: 90%;
-        box-shadow: 5px 10px 18px #888888;
+        box-shadow: 5px 10px 18px $color-secondary;
         border-radius: 10px;
         margin: auto;
       }

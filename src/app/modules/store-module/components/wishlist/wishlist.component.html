@@ -1,14 +1,11 @@
 <!-- main card container -->
 <div class="card">
   <!-- condation -->
-  <!-- <div *ngIf="Data > 0; then showData; else showText"></div> -->
   <ng-template
     [ngIf]="(wishlistItems | async)?.wishList?.length! > 0"
     [ngIfElse]="elseBlock"
   >
-    <!-- List of Items -->
-
-    <!-- primeNg contsiner -->
+    <!-- primeNg container -->
     <p-virtualScroller
       scrollHeight="600px"
       [itemSize]="100"
@@ -23,29 +20,25 @@
       <!-- item list container -->
       <ng-template pTemplate="item" let-wishlist>
         <div class="product-item container">
-          <!-- food image -->
+          <!-- product image -->
           <figure class="image-container">
             <img
               src="assets/images/cat.jpg"
-              alt="Image"
+              alt="Item Image"
               class="product-image img-fluid"
             />
           </figure>
-          <!-- food details -->
+          <!-- product details -->
           <div class="product-list-detail mt-3 mt-sm-0">
             <h5 class="product-name mb-2 mt-3 fs-4">{{ wishlist.title }}</h5>
-            <p style="color: #999">
+            <p>
               <b class="fs-6">Brand:</b>
               {{ wishlist.brand }}
             </p>
             <div class="m-2">
               <i class="pi pi-tag product-category-icon"></i>
-              <span class="product-category" style="color: #999"
-                >{{ wishlist.animalType }} /
-              </span>
-              <span class="product-category" style="color: #999">{{
-                wishlist.category
-              }}</span>
+              <span class="product-category">{{ wishlist.animalType }} / </span>
+              <span class="product-category">{{ wishlist.category }}</span>
             </div>
           </div>
           <!-- button group -->
@@ -55,9 +48,6 @@
             <ng-template #outofstock
               ><p class="outofstock">Out Of Stock</p></ng-template
             >
-            <!-- <p class="mb-3">
-              <b>Rating: {{ wishlist.rate }}</b>
-            </p> -->
             <h5 class="mb-3">{{ wishlist.price }} EGP</h5>
             <!-- buttons display at large screen -->
             <div class="buttons m-auto">

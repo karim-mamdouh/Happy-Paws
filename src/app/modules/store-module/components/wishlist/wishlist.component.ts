@@ -16,8 +16,8 @@ import { addToWishList } from 'src/app/store/store/store-actions';
   styleUrls: ['./wishlist.component.scss'],
 })
 export class WishlistComponent implements OnInit {
-  quantity: number = 0;
-  Data: number = 0;
+  quantity: number = 1;
+  Data: number = 1;
   wishlistItems: Observable<{
     cart: Array<CartItem>;
     products: Array<ProductItem>;
