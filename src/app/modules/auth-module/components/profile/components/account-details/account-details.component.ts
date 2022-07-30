@@ -11,9 +11,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./account-details.component.scss'],
 })
 export class AccountDetailsComponent implements OnInit {
-  @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User);
-  @Output() profileEmitter = new EventEmitter<User>();
-  userData = {} as User;
+  @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData with data from parent
+  @Output() profileEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
+  @Output() changePasswordEmitter = new EventEmitter(); // Event emitter to notify parent to change password
+  userData = {} as User; // User object to be viewed and editied
   showErrors: boolean = false; //Flag to show form errors
   detailsForm: FormGroup = this._detailsBuilder.group({
     firstName: [
@@ -29,7 +30,7 @@ export class AccountDetailsComponent implements OnInit {
       [Validators.required, Validators.pattern(/^[\S][A-Za-z0-9]{5,}$/)],
     ], //Should have no whitespaces and at least 5 characters
     phoneNumber: ['', [Validators.required, Validators.minLength(11)]],
-  });
+  }); // Form controls
 
   get controlValidation() {
     return this.detailsForm.controls;
@@ -37,13 +38,13 @@ export class AccountDetailsComponent implements OnInit {
 
   constructor(
     private _detailsBuilder: FormBuilder,
-    private _messageService: MessageService,
-    private _authService: AuthService
+    private _messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    this.user.subscribe((res) => {
-      this.userData = res;
+    //Subscribes to observable and updates object and form data with new input data
+    this.user.subscribe((response) => {
+      this.userData = response;
       this.detailsForm.controls['firstName'].setValue(this.userData.firstName);
       this.detailsForm.controls['lastName'].setValue(this.userData.lastName);
       this.detailsForm.controls['phoneNumber'].setValue(
@@ -52,37 +53,28 @@ export class AccountDetailsComponent implements OnInit {
       this.detailsForm.controls['userName'].setValue(this.userData.userName);
     });
   }
-  //Resets form data on destroy
+  //Resets form data and unsubscribe observable on destroy
   ngOnDestroy(): void {
+    this.user.unsubscribe();
     this.detailsForm.reset();
   }
+  // Submit form function, shows confirm toast
   submitDetailsForm(): void {
     if (this.detailsForm.status === 'INVALID') {
       this.showErrors = true;
     } else {
-      console.log(this.detailsForm.value);
+      this._messageService.clear();
+      this._messageService.add({
+        key: 'confirm',
+        sticky: true,
+        severity: 'warn',
+        summary: 'Are you sure?',
+        detail: 'Confirm to proceed',
+      });
     }
   }
-
-  //Send change password email function
-  changePassword() {
-    this._authService
-      .changePassword(this.userData.email)
-      .then((response) => {
-        this._messageService.add({
-          key: 'changePassword',
-          severity: 'success',
-          summary: 'Forget your password?',
-          detail:
-            'No worries! we will send you a reset password link, follow link to reset your password',
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  //On confirm
-  onConfirm() {
+  //On toast confirm function, fills userData object with new data from form and emits event to parent
+  onToastConfirm(): void {
     this._messageService.clear('confirm');
     this.userData.firstName = this.detailsForm.value['firstName'];
     this.userData.lastName = this.detailsForm.value['lastName'];
@@ -90,18 +82,12 @@ export class AccountDetailsComponent implements OnInit {
     this.userData.phoneNumber = this.detailsForm.value['phoneNumber'];
     this.profileEmitter.emit(this.userData);
   }
-  //On closing window
-  onReject() {
+  //On toast cancel or closing toast function
+  onToastReject(): void {
     this._messageService.clear('confirm');
   }
-  showConfirm() {
-    this._messageService.clear();
-    this._messageService.add({
-      key: 'confirm',
-      sticky: true,
-      severity: 'warn',
-      summary: 'Are you sure?',
-      detail: 'Confirm to proceed',
-    });
+  // Calls changepasswordemitter to notify parent with event
+  changePassword(): void {
+    this.changePasswordEmitter.emit();
   }
 }

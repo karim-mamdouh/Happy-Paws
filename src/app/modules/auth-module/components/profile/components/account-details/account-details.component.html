@@ -1,7 +1,7 @@
 <section class="px-md-5">
   <h3><b>Profile Account</b></h3>
   <form [formGroup]="detailsForm" (ngSubmit)="submitDetailsForm()">
-    <!-- first name -->
+    <!-- First name -->
     <div class="row mt-3">
       <div class="col-md-6">
         <div class="grid p-fluid">
@@ -40,7 +40,7 @@
           </ng-template>
         </div>
       </div>
-      <!-- Last name input-->
+      <!-- Last name -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
           <div class="col-12 md:col-4">
@@ -118,7 +118,7 @@
           </ng-template>
         </div>
       </div>
-      <!-- Phone input -->
+      <!-- Phone number -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
           <div class="col-12 md:col-4">
@@ -165,7 +165,6 @@
         pRipple
         type="submit"
         label="Save Changes"
-        (click)="showConfirm()"
         class="p-button-outlined p-button-rounded col-md-5 col-lg-3 col-11 mx-auto mt-md-auto mt-3"
       ></button>
       <!-- Change password button -->
@@ -187,11 +186,16 @@
       ></button>
     </div>
   </form>
+  <!-- Toasts -->
+  <!-- Change password success toast -->
   <p-toast key="changePassword" [hideTransitionOptions]="'25ms'"></p-toast>
+  <!-- Error toast -->
+  <p-toast key="errorToast"></p-toast>
+  <!-- Confirm saving changes toaster -->
   <p-toast
     position="bottom-center"
     key="confirm"
-    (onClose)="onReject()"
+    (onClose)="onToastReject()"
     [baseZIndex]="5000"
   >
     <ng-template let-message pTemplate="message">
@@ -205,7 +209,7 @@
             <button
               type="button"
               pButton
-              (click)="onConfirm()"
+              (click)="onToastConfirm()"
               label="Yes"
               class="p-button-success"
             ></button>
@@ -214,7 +218,7 @@
             <button
               type="button"
               pButton
-              (click)="onReject()"
+              (click)="onToastReject()"
               label="No"
               class="p-button-secondary"
             ></button>
