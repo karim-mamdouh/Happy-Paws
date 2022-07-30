@@ -1,0 +1,43 @@
+<section>
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Filters Container -->
+    <div class="border rounded-4 p-3 filtersContainer shadow">
+      <!-- Animal Type Filter -->
+      <div class="mb-4">
+        <h4>Animals</h4>
+        <div *ngFor="let type of animals" class="field-checkbox my-1">
+          <p-checkbox name="group2" value="type" [value]="type"></p-checkbox>
+          <label class="ms-2">{{ type }}</label>
+        </div>
+      </div>
+      <!-- Categories Filter -->
+      <div class="mb-4">
+        <h4>Categories</h4>
+        <div
+          *ngFor="let category of categories; let i = index"
+          class="field-checkbox my-1"
+        >
+          <p-checkbox
+            name="group2"
+            value="category"
+            [value]="category"
+          ></p-checkbox>
+          <label class="ms-2">{{ category }}</label>
+        </div>
+      </div>
+      <!-- Brands Filter -->
+      <div class="mb-4">
+        <h4>Brands</h4>
+        <div *ngFor="let brand of brands" class="field-checkbox my-1">
+          <p-checkbox
+            name="group2"
+            value="category"
+            [value]="brand"
+          ></p-checkbox>
+          <label class="ms-2">{{ brand }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

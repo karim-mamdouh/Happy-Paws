@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit {
       label: 'Cat',
       icon: 'fa-solid fa-cat',
       command: () => {
-        this._router.navigate(['/store'], {
+        this._router.navigate(['/store/products'], {
           queryParams: { animalType: AnimalType.Cat },
         });
       },
@@ -24,7 +24,7 @@ export class NavBarComponent implements OnInit {
         {
           label: 'Dry Food',
           command: () => {
-            this._router.navigate(['/store'], {
+            this._router.navigate(['/store/products'], {
               queryParams: {
                 animalType: AnimalType.Cat,
                 category: ProductCategory.Supplies,
@@ -35,7 +35,7 @@ export class NavBarComponent implements OnInit {
         {
           label: 'Litter',
           command: () => {
-            this._router.navigate(['/store'], {
+            this._router.navigate(['/store/products'], {
               queryParams: {
                 animalType: AnimalType.Cat,
                 category: ProductCategory.Litter,
@@ -46,7 +46,7 @@ export class NavBarComponent implements OnInit {
         {
           label: 'Grooming',
           command: () => {
-            this._router.navigate(['/store'], {
+            this._router.navigate(['/store/products'], {
               queryParams: {
                 animalType: AnimalType.Cat,
                 category: ProductCategory.Grooming,
@@ -60,7 +60,7 @@ export class NavBarComponent implements OnInit {
       label: 'Dog',
       icon: 'fa-solid fa-dog',
       command: () => {
-        this._router.navigate(['/store'], {
+        this._router.navigate(['/store/products'], {
           queryParams: { animalType: AnimalType.Dog },
         });
       },
@@ -68,7 +68,7 @@ export class NavBarComponent implements OnInit {
         {
           label: 'Dry Food',
           command: () => {
-            this._router.navigate(['/store'], {
+            this._router.navigate(['/store/products'], {
               queryParams: {
                 animalType: AnimalType.Dog,
                 category: ProductCategory.Supplies,
@@ -79,7 +79,7 @@ export class NavBarComponent implements OnInit {
         {
           label: 'Litter',
           command: () => {
-            this._router.navigate(['/store'], {
+            this._router.navigate(['/store/products'], {
               queryParams: {
                 animalType: AnimalType.Dog,
                 category: ProductCategory.Litter,
@@ -90,7 +90,7 @@ export class NavBarComponent implements OnInit {
         {
           label: 'Grooming',
           command: () => {
-            this._router.navigate(['/store'], {
+            this._router.navigate(['/store/products'], {
               queryParams: {
                 animalType: AnimalType.Dog,
                 category: ProductCategory.Grooming,

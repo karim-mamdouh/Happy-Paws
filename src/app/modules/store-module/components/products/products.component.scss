@@ -1,0 +1,16 @@
+main {
+  background-color: #eeeeee;
+}
+:host ::ng-deep .p-paginator {
+  background-color: transparent !important;
+  margin-bottom: 10px;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: #ecada6;
+  border-color: #ecada6;
+  color: #999;
+}
+:host ::ng-deep .p-link:focus {
+  box-shadow: 0 0 0 0.2rem #ecada6;
+}

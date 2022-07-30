@@ -1,0 +1,93 @@
+<!-- main card container -->
+<div class="card">
+  <!-- condation -->
+  <!-- <div *ngIf="Data > 0; then showData; else showText"></div> -->
+  <ng-template
+    [ngIf]="(wishlistItems | async)?.wishList?.length! > 0"
+    [ngIfElse]="elseBlock"
+  >
+    <!-- List of Items -->
+
+    <!-- primeNg contsiner -->
+    <p-virtualScroller
+      scrollHeight="600px"
+      [itemSize]="100"
+      styleClass="mb-5"
+      [value]="(wishlistItems | async)?.wishList!"
+    >
+      <!-- Header -->
+      <ng-template pTemplate="header">
+        <h2 class="text-center">WishList</h2>
+      </ng-template>
+
+      <!-- item list container -->
+      <ng-template pTemplate="item" let-wishlist>
+        <div class="product-item container">
+          <!-- food image -->
+          <figure class="image-container">
+            <img
+              src="assets/images/cat.jpg"
+              alt="Image"
+              class="product-image img-fluid"
+            />
+          </figure>
+          <!-- food details -->
+          <div class="product-list-detail mt-3 mt-sm-0">
+            <h5 class="product-name mb-2 mt-3 fs-4">{{ wishlist.title }}</h5>
+            <p style="color: #999">
+              <b class="fs-6">Brand:</b>
+              {{ wishlist.brand }}
+            </p>
+            <div class="m-2">
+              <i class="pi pi-tag product-category-icon"></i>
+              <span class="product-category" style="color: #999"
+                >{{ wishlist.animalType }} /
+              </span>
+              <span class="product-category" style="color: #999">{{
+                wishlist.category
+              }}</span>
+            </div>
+          </div>
+          <!-- button group -->
+          <div class="product-list-action">
+            <div *ngIf="quantity > 0; then instock; else outofstock"></div>
+            <ng-template #instock><p class="instock">In Stock</p></ng-template>
+            <ng-template #outofstock
+              ><p class="outofstock">Out Of Stock</p></ng-template
+            >
+            <!-- <p class="mb-3">
+              <b>Rating: {{ wishlist.rate }}</b>
+            </p> -->
+            <h5 class="mb-3">{{ wishlist.price }} EGP</h5>
+            <!-- buttons display at large screen -->
+            <div class="buttons m-auto">
+              <p-button styleClass="me-3" class="pp-button"
+                ><i class="fa-solid fa-circle-info"></i> &nbsp;
+                Details</p-button
+              >
+              <p-button styleClass="p-button-danger"
+                ><i class="fa-solid fa-ban"></i> &nbsp; Remove</p-button
+              >
+            </div>
+            <!-- small buttons display at md and small screens -->
+            <div class="buttons-sm m-auto">
+              <button type="button" class="favButton btn btn-primary me-4">
+                <i class="fa-solid fa-circle-info"></i>
+              </button>
+              <button type="button" class="favButton btn btn-danger">
+                <i class="fa-solid fa-ban"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-virtualScroller>
+  </ng-template>
+
+  <!-- Text When list is Empty -->
+  <ng-template #elseBlock>
+    <h1 class="text-center d-flex justify-content-center align-items-center">
+      Start adding items to be shown
+    </h1>
+  </ng-template>
+</div>
