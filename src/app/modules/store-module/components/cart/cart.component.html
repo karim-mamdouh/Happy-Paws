@@ -1,13 +1,12 @@
+<!-- Heading -->
 <h1 class="text-center mt-4">Shopping Cart</h1>
 <ng-template [ngIf]="item == 0" [ngIfElse]="elseBlock">
-  <!-- Empty cart title -->
+  <!-- Empty cart Page -->
   <h2 class="emptyCart mt-5 text-center p-5 border rounded bg-light">
     <figure class="img-fluid">
       <img src="assets/images/Dog.png" alt="Dog" />
     </figure>
-    <div>
-      <em>Your Happy Paws Cart Is Empty</em>
-    </div>
+    <p>Your Happy Paws Cart Is Empty</p>
     <p-button
       styleClass="card__addToCart"
       label="Shop Now"
@@ -20,12 +19,13 @@
 <!-- Cart Items -->
 <ng-template #elseBlock>
   <section class="mt-5 container border rounded">
+    <!-- Empty Cart Button -->
     <div class="d-flex justify-content-end">
       <button class="btn btn-danger my-3 mx-4">Empty Cart</button>
     </div>
 
-    <!-- Cart items table -->
-    <div class="d-none d-lg-block d-xl-block">
+    <!-- Cart items table in large screens-->
+    <div class="d-none d-lg-block">
       <table class="table">
         <thead>
           <!-- Table header -->
@@ -38,14 +38,14 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Cart item -->
+          <!-- Table Item -->
           <tr>
             <td class="w-25 align-middle">
               <figure class="m-0">
                 <img
                   src="assets/images/cat.jpg"
                   alt="Item Image"
-                  class="img-fluid rounded"
+                  class="img-fluid"
                 />
               </figure>
             </td>
@@ -76,42 +76,53 @@
       </table>
     </div>
 
-    <!-- card items -->
-    <div class="p-4 d-flex flex-wrap CardContainer d-lg-none d-xl-none">
-      <div class="col-lg-3 col-md-4 col-12 p-2">
-        <p-card styleClass="p-card-shadow card p-2 ">
+    <!-- Cart items Cards in medium and small screens-->
+    <div class="p-2 d-flex flex-wrap CardContainer d-lg-none">
+      <div class="col-12 p-2">
+        <p-card styleClass="p-card-shadow  card p-2 ">
           <ng-template pTemplate="header">
-            <div class="card__actions d-flex justify-content-end m-1">
-              <button class="btn btn-light removeBtn">
-                <i class="fa-solid fa-trash-can fs-3"></i>
-              </button>
+            <div class="d-flex card__detailsContainer">
+              <figure>
+                <img
+                  alt="Itam Image"
+                  class="card__img img-fluid"
+                  src="assets/images/cat.jpg"
+                />
+              </figure>
+              <div class="mx-3">
+                <p class="card__title fw-md-bold fs-md-6">
+                  BARS® Flea & Ticks Drops For Dogs 10 Kg (1 pipette)
+                </p>
+                <p class="card__price fw-bold my-1 fs-6" style="color: #ecada6">
+                  200 EGP
+                </p>
+              </div>
             </div>
-            <figure>
-              <img
-                alt="Card"
-                class="card__img p-2 img-fluid"
-                src="assets/images/cat.jpg"
-              />
-            </figure>
           </ng-template>
-          <p class="card__title fw-bold text-center fs-4">Cat</p>
-          <p class="card__price fw-bold my-1 fs-5 text-center">200 EGP</p>
 
           <ng-template pTemplate="footer">
-            <div class="text-center">
-              <button
-                class="fs-5 text-secondary btn btn-light QuantityBtn"
-                (click)="increaseQty()"
-              >
-                <i class="fa-solid fa-circle-plus fs-4"></i>
-              </button>
-              &nbsp; <span class="fs-5">{{ count }}</span> &nbsp;
-              <button
-                class="fs-5 text-secondary btn btn-light QuantityBtn"
-                (click)="decreaseQty()"
-              >
-                <i class="fa-solid fa-circle-minus fs-4"></i>
-              </button>
+            <div class="d-flex justify-content-between card__buttonsContainer">
+              <div>
+                <button class="btn btn-light removeBtn">
+                  <i class="fa-solid fa-trash-can fs-3"></i>
+                </button>
+              </div>
+
+              <div>
+                <button
+                  class="fs-5 text-secondary btn btn-light QuantityBtn"
+                  (click)="increaseQty()"
+                >
+                  <i class="fa-solid fa-circle-plus fs-4"></i>
+                </button>
+                &nbsp; <span class="fs-5">{{ count }}</span> &nbsp;
+                <button
+                  class="fs-5 text-secondary btn btn-light QuantityBtn"
+                  (click)="decreaseQty()"
+                >
+                  <i class="fa-solid fa-circle-minus fs-4"></i>
+                </button>
+              </div>
             </div>
           </ng-template>
         </p-card>
