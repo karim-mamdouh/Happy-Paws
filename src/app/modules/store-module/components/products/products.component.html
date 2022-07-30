@@ -2,7 +2,7 @@
   <div class="container">
     <section class="wrapper__store d-flex justify-content-between">
       <div style="height: 100%" class="wrapper__store__filter col-lg-3">
-        <app-filteration (filterOptions)="onFilterOptionChange($event)" class="col-lg-12 d-lg-block d-none"></app-filteration>
+        <app-filteration (filterOptions)="onFilterOptionsChange($event)" class="col-lg-12 d-lg-block d-none"></app-filteration>
       </div>
       <div
         style="height: 100%"
@@ -11,7 +11,7 @@
         <div class="p-4 d-flex flex-wrap">
           <div
             class="col-lg-4 col-md-6 col-12 p-2"
-            *ngFor="let product of (productsObservable | async)?.products"
+            *ngFor="let product of displayFilteredProductList"
           >
             <app-product-card [product]="product"> </app-product-card>
           </div>

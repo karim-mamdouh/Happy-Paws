@@ -16,7 +16,7 @@ export class FilterationComponent implements OnInit {
   selectedAnimalType: string[] = [];
   selectedCategory: string[] = [];
   selectedBrand: string[] = [];
-  @Output() filterOptions = new EventEmitter<filterData>();
+  @Output() filterOptions = new EventEmitter<FilterData>();
   constructor(private router: ActivatedRoute) { }
 
 
@@ -24,7 +24,7 @@ export class FilterationComponent implements OnInit {
     this.filterOptions.emit(this.getFilterValues());
   }
 
-  getFilterValues(): filterData {
+  getFilterValues(): FilterData {
     return {"animalType": this.selectedAnimalType,"category": this.selectedCategory,"brand": this.selectedBrand};
   }
 
@@ -47,7 +47,7 @@ export class FilterationComponent implements OnInit {
   }
 }
 
-export interface filterData {
+export interface FilterData {
   "animalType": string[],
   "category": string[],
   "brand": string[]
