@@ -28,6 +28,7 @@ $color-white: #ffffff;
   border-color: none !important;
 }
 
+// table style
 section {
   .table {
     tbody {
@@ -69,6 +70,55 @@ section {
   }
 }
 
+//card style
+.card__actions {
+  .removeBtn:focus {
+    background-color: transparent;
+    box-shadow: none;
+    border-color: transparent;
+  }
+  .removeBtn:hover {
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .removeBtn {
+    i {
+      color: #dc2626;
+    }
+  }
+}
+:host ::ng-deep .p-card .p-card-content {
+  padding: 0.5rem 0;
+}
+:host ::ng-deep .p-card .p-card-body {
+  padding: 0.5rem !important;
+}
+
+.CardContainer {
+  figure {
+    margin: 0 0 0.4rem;
+  }
+  .card__title {
+    margin-bottom: 0.5rem !important;
+  }
+  .QuantityBtn:focus {
+    background-color: transparent;
+    box-shadow: none;
+    border-color: transparent;
+  }
+  .QuantityBtn:hover {
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .QuantityBtn {
+    background-color: transparent;
+    i {
+      color: #ecada6;
+    }
+  }
+}
+
+// image
 @media screen and (max-width: 992px) {
   .emptyCart {
     font-size: 2rem !important;

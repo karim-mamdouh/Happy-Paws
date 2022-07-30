@@ -25,54 +25,99 @@
     </div>
 
     <!-- Cart items table -->
-    <table class="table">
-      <thead>
-        <!-- Table header -->
-        <tr>
-          <th scope="col" class="fs-5">Image</th>
-          <th scope="col" class="fs-5">Name</th>
-          <th scope="col" class="fs-5">Price</th>
-          <th scope="col" class="fs-5">Quantity</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Cart item -->
-        <tr>
-          <td class="w-25 align-middle">
-            <figure class="m-0">
+    <div class="d-none d-lg-block d-xl-block">
+      <table class="table">
+        <thead>
+          <!-- Table header -->
+          <tr>
+            <th scope="col" class="fs-5">Image</th>
+            <th scope="col" class="fs-5">Name</th>
+            <th scope="col" class="fs-5">Price</th>
+            <th scope="col" class="fs-5">Quantity</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Cart item -->
+          <tr>
+            <td class="w-25 align-middle">
+              <figure class="m-0">
+                <img
+                  src="assets/images/cat.jpg"
+                  alt="Item Image"
+                  class="img-fluid rounded"
+                />
+              </figure>
+            </td>
+            <td class="align-middle"><p class="fs-5">Cat</p></td>
+            <td class="align-middle"><p class="fs-5">200 EGP</p></td>
+            <td class="align-middle">
+              <button
+                class="fs-5 text-secondary btn btn-light QuantityBtn"
+                (click)="increaseQty()"
+              >
+                <i class="fa-solid fa-circle-plus fs-4"></i>
+              </button>
+              &nbsp; <span class="fs-5">{{ count }}</span> &nbsp;
+              <button
+                class="fs-5 text-secondary btn btn-light QuantityBtn"
+                (click)="decreaseQty()"
+              >
+                <i class="fa-solid fa-circle-minus fs-4"></i>
+              </button>
+            </td>
+            <td class="text-center align-middle">
+              <button class="btn btn-light removeBtn">
+                <i class="fa-solid fa-trash-can fs-3"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- card items -->
+    <div class="p-4 d-flex flex-wrap CardContainer d-lg-none d-xl-none">
+      <div class="col-lg-3 col-md-4 col-12 p-2">
+        <p-card styleClass="p-card-shadow card p-2 ">
+          <ng-template pTemplate="header">
+            <div class="card__actions d-flex justify-content-end m-1">
+              <button class="btn btn-light removeBtn">
+                <i class="fa-solid fa-trash-can fs-3"></i>
+              </button>
+            </div>
+            <figure>
               <img
+                alt="Card"
+                class="card__img p-2 img-fluid"
                 src="assets/images/cat.jpg"
-                alt="Item Image"
-                class="img-fluid rounded"
               />
             </figure>
-          </td>
-          <td class="align-middle"><p class="fs-5">Cat</p></td>
-          <td class="align-middle"><p class="fs-5">200 EGP</p></td>
-          <td class="align-middle">
-            <button
-              class="fs-5 text-secondary btn btn-light QuantityBtn"
-              (click)="increaseQty()"
-            >
-              <i class="fa-solid fa-circle-plus fs-4"></i>
-            </button>
-            &nbsp; <span class="fs-5">{{ count }}</span> &nbsp;
-            <button
-              class="fs-5 text-secondary btn btn-light QuantityBtn"
-              (click)="decreaseQty()"
-            >
-              <i class="fa-solid fa-circle-minus fs-4"></i>
-            </button>
-          </td>
-          <td class="text-center align-middle">
-            <button class="btn btn-light removeBtn">
-              <i class="fa-solid fa-trash-can fs-3"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </ng-template>
+          <p class="card__title fw-bold text-center fs-4">Cat</p>
+          <p class="card__price fw-bold my-1 fs-5 text-center">200 EGP</p>
+
+          <ng-template pTemplate="footer">
+            <div class="text-center">
+              <button
+                class="fs-5 text-secondary btn btn-light QuantityBtn"
+                (click)="increaseQty()"
+              >
+                <i class="fa-solid fa-circle-plus fs-4"></i>
+              </button>
+              &nbsp; <span class="fs-5">{{ count }}</span> &nbsp;
+              <button
+                class="fs-5 text-secondary btn btn-light QuantityBtn"
+                (click)="decreaseQty()"
+              >
+                <i class="fa-solid fa-circle-minus fs-4"></i>
+              </button>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+
     <!-- Total price -->
     <h4 class="mt-4 text-end mb-5">Total Price: 1000 EGP</h4>
   </section>
