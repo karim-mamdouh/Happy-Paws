@@ -14,8 +14,8 @@ import { MessageService } from 'primeng/api';
 export class RegisterComponent implements OnInit {
   showErrors: boolean = false; //Flag that shows all form errors
   gender = [
-    { name: 'Male', value: 'm' },
-    { name: 'Female', value: 'f' },
+    { name: 'Male', value: 'Male' },
+    { name: 'Female', value: 'Female' },
   ]; //List of genders
   registerForm: FormGroup = this._registerFormBuilder.group(
     {
@@ -99,13 +99,13 @@ export class RegisterComponent implements OnInit {
           user.id = response.user?.uid;
           return this._authService.saveUserToFireStore(user);
         })
-        .then((response) => {
+        .then(() => {
           this.showSuccessToast();
           setTimeout(() => {
             this._router.navigate(['/auth/login']);
           }, 1500);
         })
-        .catch((error) => {
+        .catch(() => {
           this.showErrorToast();
         });
     } else {

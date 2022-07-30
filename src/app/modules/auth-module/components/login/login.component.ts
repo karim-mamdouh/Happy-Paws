@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['/']);
           }, 1500);
         })
-        .catch((error) => {
+        .catch(() => {
           this.showErrorToast('Wrong email or password');
         });
     }
