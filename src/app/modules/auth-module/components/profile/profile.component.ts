@@ -63,30 +63,6 @@ export class ProfileComponent implements OnInit {
         );
       });
   }
-  // Function called when user modifys/adds address in child, then updates database
-  addressUpdated(event: Address): void {
-    this.user.address = event;
-    this._authService
-      .saveUserToFireStore(this.user)
-      .then(() => {
-        this.showSuccessToast();
-      })
-      .catch(() => {
-        this.showErrorToast();
-      });
-  }
-  // Function called when user modifys/adds pet in child, then updates database
-  petUpdated(event: Animal): void {
-    this.user.pet = event;
-    this._authService
-      .saveUserToFireStore(this.user)
-      .then(() => {
-        this.showSuccessToast();
-      })
-      .catch(() => {
-        this.showErrorToast();
-      });
-  }
   // Shows succes toast when called
   showSuccessToast(
     summary?: string,
