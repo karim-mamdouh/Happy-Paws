@@ -18,11 +18,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
-//Services
-import { MessageService } from 'primeng/api';
 import { AccountDetailsComponent } from './components/profile/components/account-details/account-details.component';
 import { AddressesComponent } from './components/profile/components/addresses/addresses.component';
 import { MyPetsComponent } from './components/profile/components/my-pets/my-pets.component';
+//Services
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
