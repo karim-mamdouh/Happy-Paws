@@ -11,15 +11,15 @@ export interface Address {
 }
 
 export interface User {
-  id?: string;
   email: string;
-  pet?: Animal;
   userName: string;
-  phoneNumber?: number;
   firstName: string;
   lastName: string;
   gender: string;
   birthdate: string;
+  id?: string;
+  pet?: Animal;
+  phoneNumber?: number;
   address?: Address;
   previousOrders?: Array<ProductItem>;
 }

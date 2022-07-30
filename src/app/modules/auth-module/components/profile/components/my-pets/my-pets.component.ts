@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
-import { Animal } from 'src/app/interfaces/adoption';
 import { User } from 'src/app/interfaces/profile';
 
 @Component({
@@ -10,20 +9,20 @@ import { User } from 'src/app/interfaces/profile';
   styleUrls: ['./my-pets.component.scss'],
 })
 export class MyPetsComponent implements OnInit {
-  @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User);
-  @Output() petEmitter = new EventEmitter<Animal>();
-  petData = {} as Animal;
-  showErrors: boolean = false;
-
+  @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData.pet with data from parent
+  @Output() petEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
+  userData = {} as User; // User object to be viewed and editied
+  showErrors: boolean = false; //Flag to show form errors
   gender = [
-    { name: 'Male', value: 'm' },
-    { name: 'Female', value: 'f' },
-  ];
+    { name: 'Male', value: 'Male' },
+    { name: 'Female', value: 'Female' },
+  ]; //List of genders
   petType = [
     { name: 'Cat', value: 'Cat' },
     { name: 'Dog', value: 'Dog' },
-  ];
-
+    { name: 'Fish', value: 'Fish' },
+    { name: 'Bird', value: 'Bird' },
+  ]; //List of types
   petForm: FormGroup = this._petBuilder.group({
     petName: ['', [Validators.required]],
     type: ['', [Validators.required]],
@@ -33,7 +32,7 @@ export class MyPetsComponent implements OnInit {
     location: ['', [Validators.required]],
     phoneNumber: ['', [Validators.required]],
     description: ['', [Validators.required]],
-  });
+  }); // Form controls
 
   constructor(private _petBuilder: FormBuilder) {}
 
@@ -42,42 +41,59 @@ export class MyPetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // wait for data then do action
-    this.user.subscribe((res) => {
-      if (res.pet) {
-        //fill data from object to form
-        this.petData = res.pet;
-        this.petForm.controls['petName'].setValue(this.petData.name);
+    // Wait for data then do action
+    this.user.subscribe((response) => {
+      if (response.pet) {
+        //Fill data from recieved object to form
+        this.userData = response;
+        this.petForm.controls['petName'].setValue(this.userData.pet?.name);
         this.petForm.controls['type'].setValue({
-          name: this.petData.type,
-          value: this.petData.type,
+          name: this.userData.pet?.type,
+          value: this.userData.pet?.type,
         });
         this.petForm.controls['gender'].setValue({
-          name: this.petData.gender,
-          value: this.petData.gender,
+          name: this.userData.pet?.gender,
+          value: this.userData.pet?.gender,
         });
-        this.petForm.controls['birthdate'].setValue(this.petData.age);
-        this.petForm.controls['ownerName'].setValue(this.petData.owner.name);
-        this.petForm.controls['location'].setValue(this.petData.owner.location);
-        this.petForm.controls['phoneNumber'].setValue(this.petData.owner.phone);
-        this.petForm.controls['description'].setValue(this.petData.description);
+        this.petForm.controls['birthdate'].setValue(this.userData.pet?.age);
+        this.petForm.controls['ownerName'].setValue(
+          this.userData.pet?.owner.name
+        );
+        this.petForm.controls['location'].setValue(
+          this.userData.pet?.owner.location
+        );
+        this.petForm.controls['phoneNumber'].setValue(
+          this.userData.pet?.owner.phone
+        );
+        this.petForm.controls['description'].setValue(
+          this.userData.pet?.description
+        );
       }
     });
   }
-  submitPetForm() {
+  //Resets form data and unsubscribe observable on destroy
+  ngOnDestroy(): void {
+    this.user.unsubscribe();
+    this.petForm.reset();
+  }
+  //Submit form function, fills userData.pet object with new data from form and emits event to parent
+  submitPetForm(): void {
     if (this.petForm.status === 'INVALID') {
       this.showErrors = true;
     } else {
-      console.log(this.petForm.value);
-      this.petData.name = this.petForm.value['petName'];
-      this.petData.type = this.petForm.value['type']['name'];
-      this.petData.gender = this.petForm.value['gender']['name'];
-      this.petData.age = `${this.petForm.value['birthdate']}`;
-      this.petData.owner.name = this.petForm.value['ownerName'];
-      this.petData.owner.location = this.petForm.value['location'];
-      this.petData.owner.phone = this.petForm.value['phoneNumber'];
-      this.petData.description = this.petForm.value['description'];
-      this.petEmitter.emit(this.petData);
+      this.userData.pet = {
+        name: this.petForm.value['petName'],
+        type: this.petForm.value['type']['name'],
+        gender: this.petForm.value['gender']['name'],
+        age: `${this.petForm.value['birthdate']}`,
+        owner: {
+          name: this.petForm.value['ownerName'],
+          location: this.petForm.value['location'],
+          phone: this.petForm.value['phoneNumber'],
+        },
+        description: this.petForm.value['description'],
+      };
+      this.petEmitter.emit(this.userData);
     }
   }
 }

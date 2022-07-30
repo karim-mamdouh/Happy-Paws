@@ -14,12 +14,12 @@
       <!-- Address tab -->
       <p-tabPanel header="My Address" leftIcon="pi pi-map-marker">
         <app-addresses
-          (addressEmitter)="addressUpdated($event)"
+          (addressEmitter)="profileUpdated($event)"
         ></app-addresses>
       </p-tabPanel>
       <!-- My pet tab -->
       <p-tabPanel header="My Pet" leftIcon="fa-solid fa-paw">
-        <app-my-pets (petEmitter)="petUpdated($event)"></app-my-pets>
+        <app-my-pets (petEmitter)="profileUpdated($event)"></app-my-pets>
       </p-tabPanel>
     </p-tabView>
   </div>

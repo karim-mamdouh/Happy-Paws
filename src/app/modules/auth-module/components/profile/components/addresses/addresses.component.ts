@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
-import { Address, User } from 'src/app/interfaces/profile';
+import { User } from 'src/app/interfaces/profile';
 
 @Component({
   selector: 'app-addresses',
@@ -9,9 +9,9 @@ import { Address, User } from 'src/app/interfaces/profile';
   styleUrls: ['./addresses.component.scss'],
 })
 export class AddressesComponent implements OnInit {
-  @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userAddress with data from parent
-  @Output() addressEmitter = new EventEmitter<Address>(); // Event emiiter to notify parent with changes occured by sending modified object
-  userAddress = {} as Address; // Address object to be viewed and editied
+  @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData.address? with data from parent
+  @Output() addressEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
+  userData = {} as User; // User object to be viewed and editied
   showErrors: boolean = false; //Flag to show form errors
   addressForm: FormGroup = this._addressForm.group({
     city: ['', [Validators.required]],
@@ -32,18 +32,20 @@ export class AddressesComponent implements OnInit {
     //Subscribes to observable and updates object and form data with new input data
     this.user.subscribe((reposnse) => {
       if (reposnse.address) {
-        this.userAddress = reposnse.address!;
-        this.addressForm.controls['city'].setValue(this.userAddress.city);
-        this.addressForm.controls['area'].setValue(this.userAddress.area);
-        this.addressForm.controls['street'].setValue(this.userAddress.street);
+        this.userData = reposnse!;
+        this.addressForm.controls['city'].setValue(this.userData.address?.city);
+        this.addressForm.controls['area'].setValue(this.userData.address?.area);
+        this.addressForm.controls['street'].setValue(
+          this.userData.address?.street
+        );
         this.addressForm.controls['floor'].setValue(
-          this.userAddress.floorNumber
+          this.userData.address?.floorNumber
         );
         this.addressForm.controls['buildingNumber'].setValue(
-          this.userAddress.buildingNumber
+          this.userData.address?.buildingNumber
         );
         this.addressForm.controls['apartment'].setValue(
-          this.userAddress.apartmentNumber
+          this.userData.address?.apartmentNumber
         );
       }
     });
@@ -53,19 +55,20 @@ export class AddressesComponent implements OnInit {
     this.addressForm.reset();
     this.user.unsubscribe();
   }
-  //Submit form function, fills userAddress object with new data from form and emits event to parent
+  //Submit form function, fills userData.address? object with new data from form and emits event to parent
   submitAddressForm(): void {
     if (this.addressForm.status === 'INVALID') {
       this.showErrors = true;
     } else {
-      this.userAddress.city = this.addressForm.value['city'];
-      this.userAddress.area = this.addressForm.value['area'];
-      this.userAddress.street = this.addressForm.value['street'];
-      this.userAddress.floorNumber = this.addressForm.value['floor'];
-      this.userAddress.apartmentNumber = this.addressForm.value['apartment'];
-      this.userAddress.buildingNumber =
-        this.addressForm.value['buildingNumber'];
-      this.addressEmitter.emit(this.userAddress);
+      this.userData.address = {
+        city: this.addressForm.value['city'],
+        area: this.addressForm.value['area'],
+        street: this.addressForm.value['street'],
+        floorNumber: this.addressForm.value['floor'],
+        apartmentNumber: this.addressForm.value['apartment'],
+        buildingNumber: this.addressForm.value['buildingNumber'],
+      };
+      this.addressEmitter.emit(this.userData);
       this.showErrors = false;
     }
   }
