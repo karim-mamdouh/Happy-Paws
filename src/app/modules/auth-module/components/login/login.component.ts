@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
           /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
         ),
       ],
-    ],
-    password: ['', [Validators.required]],
+    ], // Should have email format
+    password: ['', [Validators.required]], // Password should be entered
   }); //Form group having all inputs with validators
 
   get controlValidation() {
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+  //Restes form on destroy
   ngOnDestroy(): void {
     this.loginForm.reset();
   }
@@ -75,7 +76,7 @@ export class LoginComponent implements OnInit {
       key: 'Successtoast',
       severity: 'success',
       summary: '',
-      detail: 'Account created successfully',
+      detail: 'Welcome back to Happy Paws',
     });
   }
   //Function that shows error toaster

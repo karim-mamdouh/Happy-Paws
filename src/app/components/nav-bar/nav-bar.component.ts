@@ -149,7 +149,7 @@ export class NavBarComponent implements OnInit {
           label: 'Sign In',
           icon: 'pi pi-sign-in',
           command: () => {
-            this._router.navigate(['/auth']);
+            this._router.navigate(['/auth/login']);
           },
         },
         {

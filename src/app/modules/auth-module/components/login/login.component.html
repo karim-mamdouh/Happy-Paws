@@ -1,5 +1,6 @@
 <section class="py-4 login d-flex justify-content-center align-items-center">
   <div class="container card mx-auto login__form shadow">
+    <!-- Logo section -->
     <a
       class="navbar-brand d-flex align-items-center mx-auto mt-5"
       routerLink="/"
@@ -34,7 +35,6 @@
             pInputText
             class="p-inputtext-sm"
             placeholder="Email"
-            aria-describedby="username2-help"
             formControlName="email"
           />
         </div>
@@ -47,13 +47,11 @@
           "
         >
           <small
-            id="username2-help"
             class="p-error block"
             *ngIf="controlValidation['email'].errors?.['required']"
             >This field is required.</small
           >
           <small
-            id="username2-help"
             class="p-error block"
             *ngIf="controlValidation['email'].errors?.['pattern']"
             >Wrong email format.</small
@@ -82,7 +80,6 @@
           "
         >
           <small
-            id="username2-help"
             class="p-error block"
             *ngIf="controlValidation['password'].errors?.['required']"
             >This field is required.</small

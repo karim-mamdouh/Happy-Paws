@@ -1,1 +1,31 @@
-<p>profile works!</p>
+<section class="pt-4 profile">
+  <div class="container">
+    <h3 class="pb-2">Welcome Back, {{ user.firstName }}</h3>
+    <h6>Welcome to your Happy Paws account!</h6>
+    <h6 class="pb-3">Here you can modify your information.</h6>
+    <p-tabView>
+      <!-- Profile tab -->
+      <p-tabPanel header="Profile" leftIcon="fa-regular fa-circle-user">
+        <app-account-details
+          (profileEmitter)="profileUpdated($event)"
+          (changePasswordEmitter)="changePassword()"
+        ></app-account-details>
+      </p-tabPanel>
+      <!-- Address tab -->
+      <p-tabPanel header="My Address" leftIcon="pi pi-map-marker">
+        <app-addresses
+          (addressEmitter)="addressUpdated($event)"
+        ></app-addresses>
+      </p-tabPanel>
+      <!-- My pet tab -->
+      <p-tabPanel header="My Pet" leftIcon="fa-solid fa-paw">
+        <app-my-pets (petEmitter)="petUpdated($event)"></app-my-pets>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <!-- Toasts -->
+  <!-- Success toast -->
+  <p-toast key="database"></p-toast>
+  <!-- Error toast -->
+  <p-toast key="error"></p-toast>
+</section>

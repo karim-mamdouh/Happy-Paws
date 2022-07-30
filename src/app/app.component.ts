@@ -12,9 +12,8 @@ import { fillProducts } from 'src/app/store/store/store-actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Happy Paws';
-  activeURL: string = '';
-
+  title = 'Happy Paws';  
+  showNavbarFooter: boolean = false;
   constructor(
     private _router: Router,
     private primengConfig: PrimeNGConfig,
@@ -25,8 +24,11 @@ export class AppComponent {
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this._router.events.subscribe((event: any) => {
-      if (event.url !== undefined && event.type === 1)
-        this.activeURL = event.url;
+      if (event.url !== undefined && event.type === 1) {
+        if (event.url.includes('login') || event.url.includes('register'))
+          this.showNavbarFooter = false;
+        else this.showNavbarFooter = true;
+      }
     });
 
     this.afs.fetchAllStoreItems().pipe(
