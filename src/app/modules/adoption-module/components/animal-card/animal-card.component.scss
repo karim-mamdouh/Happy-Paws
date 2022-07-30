@@ -1,0 +1,79 @@
+:host ::ng-deep figure {
+  img,
+  p-image {
+    max-height: 300px;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    max-width: 100%;
+  }
+}
+.animal-card {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  h5 {
+    margin: 0;
+    color: var(--dark-grey-color);
+  }
+  p {
+    margin-top: 5px;
+    color: var(--grey-color);
+  }
+}
+:host ::ng-deep .animal-card__btn {
+  color: var(--grey-color);
+  border-color: var(--grey-color);
+  background: none;
+}
+
+:host ::ng-deep .animal-card__btn:active,
+:host ::ng-deep .p-button.p-button-outlined:hover,
+:host ::ng-deep .p-button.p-button-outlined:focus {
+  background: none;
+  color: var(--pink-color);
+  border-color: var(--pink-color);
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--pink-color), 0 1px 2px 0 black;
+}
+:host ::ng-deep figure {
+  img,
+  p-image {
+    max-height: 1000px;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    max-width: 100%;
+    object-fit: cover;
+  }
+}
+.title-font {
+  color: var(--grey-color);
+}
+.body-font {
+  color: var(--dark-grey-color);
+}
+.card {
+  border-radius: 15px;
+}
+#details {
+  max-width: 100%;
+}
+.test {
+  margin: auto;
+}
+.dialog {
+  max-width: 100%;
+}
+@media (min-width: 768px) {
+  #details {
+    max-width: 80%;
+  }
+  :host ::ng-deep .dialog {
+    max-width: 40vw;
+  }
+}
+:host ::ng-deep p-dialog {
+  background-color: var(--auth-background);
+}
+// @media (min-width: 992px) {
+//   #details {
+//     max-width: 30%;
+//   }
+// }
