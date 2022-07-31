@@ -37,6 +37,10 @@ $color-white: #ffffff;
 
   &__title {
     font-size: small;
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__price {
@@ -68,10 +72,6 @@ $color-white: #ffffff;
     padding: 3px 0;
   }
 
-  // &__instock:hover {
-  //   opacity: 1;
-  // }
-
   &__outofstock {
     background-color: #ffcdd2;
     color: #c63737;
@@ -83,10 +83,6 @@ $color-white: #ffffff;
     font-size: 1rem;
     padding: 3px 0;
   }
-
-  // &__outofstock:hover {
-  //   opacity: 1;
-  // }
 }
 
 //--------------------------- CARD END ------------------------------------

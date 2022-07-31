@@ -1,0 +1,114 @@
+//--------------------------- VARIABLES ------------------------
+$color-primary: #ecada6;
+$color-secondary: #999999;
+$color-accent: #ffcdd2;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-main: rgb(251, 248, 248);
+$color-gold: #e5b80b;
+$color-danger: #c63737;
+$color-green: #256029;
+$color-lightgreen: #c8e6c9;
+
+//--------------------------- Main Section ------------------------
+section {
+  background-color: $color-main;
+  .hero {
+    &__content {
+      h1 {
+        font-size: 60px;
+      }
+    }
+    &__img {
+    }
+  }
+  .type {
+    .typesButtons {
+      img {
+        width: 15rem;
+        height: 20rem;
+        border-radius: 10px;
+        // box-shadow: 5px 10px 18px #888888;
+      }
+      .CategoryRouter {
+        border-radius: 20px;
+        background-color: $color-primary;
+        a {
+          text-decoration: none;
+          color: #000;
+        }
+      }
+    }
+  }
+  .services {
+    &__text {
+    }
+    &__card {
+      background-color: $color-white;
+      border-radius: 40px;
+
+      .icon-container {
+        i {
+          color: $color-white;
+        }
+        border-radius: 50%;
+        background-color: $color-primary;
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    &__card:hover {
+      background-color: $color-primary;
+      .icon-container {
+        i {
+          color: $color-primary;
+        }
+
+        background-color: $color-white;
+      }
+      p {
+        color: $color-white;
+      }
+    }
+  }
+  .product-item {
+    .product-item-content {
+      border: 1px solid var(--surface-d);
+      border-radius: 3px;
+      margin: 0.3rem;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .product-image {
+      width: 50%;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+  }
+}
+
+//--------------------------- Shop Now BUTTON START------------------------
+
+:host ::ng-deep .p-button {
+  background: $color-secondary;
+  border: 1px solid $color-secondary;
+}
+
+:host ::ng-deep .p-button:enabled:hover {
+  background: $color-primary;
+  color: $color-white;
+  border-color: $color-accent;
+}
+
+:host ::ng-deep .p-button:focus {
+  background-color: none;
+  box-shadow: 0 0 0 0.1rem transparent !important;
+}
+
+:host ::ng-deep .p-button:enabled:focus {
+  box-shadow: 0 0 0 0.2rem !important;
+  border-color: none !important;
+}
+
+//--------------------------- Shop Now BUTTON END------------------------

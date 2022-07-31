@@ -1,4 +1,7 @@
-<p-card  (click)="$event.stopPropagation();onCardClick($event,product)" styleClass="p-card-shadow card p-2" >
+<p-card
+  (click)="$event.stopPropagation(); onCardClick($event, product)"
+  styleClass="p-card-shadow card p-2"
+>
   <ng-template pTemplate="header">
     <div class="card__actions d-flex justify-content-end m-1">
       <p-toggleButton
@@ -6,7 +9,9 @@
         [onIcon]="'pi pi-heart-fill'"
         offIcon="pi pi-heart"
         [ngModel]="product.wishList"
-        (click)="$event.stopPropagation();onAddToWishlistClick($event,product)"
+        (click)="
+          $event.stopPropagation(); onAddToWishlistClick($event, product)
+        "
       >
       </p-toggleButton>
     </div>
@@ -33,7 +38,7 @@
       styleClass="card__addToCart"
       label="Add to Cart"
       icon="pi pi-shopping-cart"
-      (onClick)="$event.stopPropagation();onAddToCartClick($event,product)"
+      (onClick)="$event.stopPropagation(); onAddToCartClick($event, product)"
     >
     </p-button>
   </ng-template>
