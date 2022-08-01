@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { User } from '../interfaces/profile';
 import { ProductItem, CartItem } from '../interfaces/store'
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +16,7 @@ export class DatabaseService {
   }
   //add review to product item
   addReviewToProductItem(product: ProductItem) {
-    return this.afs.collection(FireStoreCollections.Store).doc(product.id).set({ reviews: product.reviews });
+    return this.afs.collection(FireStoreCollections.Store).doc(product.id).update({ reviews: product.reviews });
   }
   //fetch all blog
   fetchBlogPosts() {

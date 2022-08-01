@@ -60,13 +60,13 @@
       <div class="user-rate">
         <div class="d-flex my-3">
           <span class="me-3">Your Rating:</span>
-          <p-rating [(ngModel)]="val1" [cancel]="false"></p-rating>
+          <p-rating [(ngModel)]="reviewRating" [cancel]="false"></p-rating>
         </div>
         <span class="p-float-label my-4">
-          <p>Comment:</p>
-          <textarea id="float-input" rows="5" cols="35" pInputTextarea class="comment"></textarea>
+          <p >Comment:</p>
+          <textarea [(ngModel)]="comment" id="float-input" rows="5" cols="35" pInputTextarea class="comment"></textarea>
         </span>
-        <button pButton pRipple type="submit" label="Submit" class="p-button-raised p-button-secondary"></button>
+        <button pButton pRipple (click)="onSubmitReviewClick($event)" type="submit" label="Submit" class="p-button-raised p-button-secondary"></button>
       </div>
     </div>
   </div>
