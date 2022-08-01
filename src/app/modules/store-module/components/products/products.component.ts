@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ProductItem } from 'src/app/interfaces/store';
+import { CartItem, ProductItem } from 'src/app/interfaces/store';
 import { FilterData } from '../filteration/filteration.component';
 
 @Component({
@@ -13,9 +13,8 @@ export class ProductsComponent implements OnInit {
   originalDataList: Array<ProductItem> = [];
   displayFilteredProductList: Array<ProductItem> = [];
 
-  constructor(
-    private store: Store<{ store: { products: Array<ProductItem> } }>) {
-    this.store.select('store').subscribe(res => {
+  constructor(private _store: Store<{ store: { cart: Array<CartItem>, products: Array<ProductItem>, wishList: Array<ProductItem> } }>) {
+    this._store.select('store').subscribe(res => {
       this.originalDataList = res.products;
       this.displayFilteredProductList = this.originalDataList;
     });

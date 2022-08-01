@@ -4,8 +4,8 @@ import { PrimeNGConfig } from 'primeng/api';
 import { map } from 'rxjs/operators';
 import { DatabaseService } from 'src/app/services/database.service';
 import { Store } from '@ngrx/store';
-import { ProductItem } from 'src/app/interfaces/store';
-import { fillProducts } from 'src/app/store/store/store-actions';
+import { CartItem, ProductItem } from 'src/app/interfaces/store';
+import { fillProducts, fillWishList, resetWishList } from 'src/app/store/store/store-actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,8 +18,8 @@ export class AppComponent {
   constructor(
     private _router: Router,
     private primengConfig: PrimeNGConfig,
-    private afs: DatabaseService,
-    private store: Store<{ store: { store: Array<ProductItem> } }>
+    private _firestoreService: DatabaseService,
+    private _store: Store<{ store: { products: Array<ProductItem>, wishList: Array<ProductItem>, cart: Array<CartItem> } }>
   ) { }
 
   ngOnInit(): void {
@@ -29,8 +29,20 @@ export class AppComponent {
         this.activeURL = event.url;
     });
 
+    // get Wishlist from firebase and save inside the store
+    this._firestoreService.fetchAllWishlistItems(localStorage.getItem('userID')!).pipe(
+      map((snapshot) => {
+        return snapshot.payload.data();
+      })
+    ).subscribe(res => {
+      this._store.dispatch(resetWishList());
+      let temp = res as Array<ProductItem>;
+      let tempToArray: Array<ProductItem> = Object.values(temp);
+      this._store.dispatch(fillWishList({ payload: tempToArray }))
+    })
+
     if (sessionStorage.getItem('product') == null) {
-      this.afs.fetchAllStoreItems().pipe(
+      this._firestoreService.fetchAllStoreItems().pipe(
         map(changes =>
           changes.map(c => (c.payload.doc.data()))
 
@@ -39,13 +51,13 @@ export class AppComponent {
         let temp = res as Array<ProductItem>;
         console.log("From Firebase", temp);
         sessionStorage.setItem('product', JSON.stringify(temp));
-        this.store.dispatch(fillProducts({ payload: temp }));
+        this._store.dispatch(fillProducts({ payload: temp }));
       });
     }
     else {
       let temp = JSON.parse(sessionStorage.getItem('product')!);
       console.log("From Cache", temp);
-      this.store.dispatch(fillProducts({ payload: temp }));
+      this._store.dispatch(fillProducts({ payload: temp }));
     }
   }
 }

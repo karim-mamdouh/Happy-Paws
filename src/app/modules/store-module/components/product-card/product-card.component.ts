@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CartItem, ProductItem } from 'src/app/interfaces/store';
-import { addToCart, addToWishList } from 'src/app/store/store/store-actions';
+import { DatabaseService } from 'src/app/services/database.service';
+import { addToCart, addToWishList, resetWishList } from 'src/app/store/store/store-actions';
 
 @Component({
   selector: 'app-product-card',
@@ -12,7 +13,7 @@ import { addToCart, addToWishList } from 'src/app/store/store/store-actions';
 export class ProductCardComponent implements OnInit {
   private _product: ProductItem = {} as ProductItem;
   rating: number | undefined = 0;
-
+  wishlist: Array<ProductItem> = [];
   @Input('product')
   set product(product: ProductItem) {
     this.rating = product.rate;
@@ -26,9 +27,12 @@ export class ProductCardComponent implements OnInit {
   constructor(
     private store: Store<{ store: { products: Array<ProductItem>, wishList: Array<ProductItem>, cart: Array<CartItem> } }>,
     private _router: Router,
+    private _firestoreService: DatabaseService,
   ) {
     this.rating = this.product?.rate;
-
+    this.store.select('store').subscribe(res => {
+      this.wishlist = res.wishList;
+    })
   }
 
   ngOnInit(): void {
@@ -43,8 +47,11 @@ export class ProductCardComponent implements OnInit {
   }
 
   onAddToWishlistClick(event: Event, product: ProductItem) {
-    console.log("add to Wishlist Button clicked");
-    this.store.dispatch(addToWishList({ payload: product }));
+    this.wishlist = [...this.wishlist, product];
+    this._firestoreService.addToWishlist(localStorage.getItem('userID')!, this.wishlist).then(res => {
+      this.store.dispatch(resetWishList());
+    })
+
   }
 
   onCardClick(event: Event, product: ProductItem): void {

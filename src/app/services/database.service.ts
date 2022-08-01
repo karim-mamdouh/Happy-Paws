@@ -22,27 +22,19 @@ export class DatabaseService {
   fetchBlogPosts() {
     return this.afs.collection(FireStoreCollections.Blog).snapshotChanges();
   }
-  
- 
-
-
-
- 
-
-  
-
 
   //fetch all wishlist
   fetchAllWishlistItems(userID: string) {
-    return this.afs.collection(FireStoreCollections.Wishlist).doc(userID).snapshotChanges();
+    return this.afs.collection(FireStoreCollections.Wishlist).doc(userID).snapshotChanges()
   }
-  //modify (add to/delete from) wishlist
-  modifyWishlist(userID: string) {
-    let wishItems: Array<ProductItem> = [];
-    this.store.select('wishList').subscribe(res => {
-      wishItems = res;
-    })
-    return this.afs.collection(FireStoreCollections.Wishlist).doc(userID).set(wishItems);
+
+  // add to wishlist 
+  addToWishlist(userID: string, products: Array<ProductItem>) {
+    const obj:any = {} as ProductItem;
+    for (const key of products) {
+      obj[key.id] = key;
+    }
+    return this.afs.collection(FireStoreCollections.Wishlist).doc(userID).update(obj)
   }
 
   //fetch user cart

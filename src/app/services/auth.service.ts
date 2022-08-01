@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import { User } from '../interfaces/profile';
+import { ProductItem } from '../interfaces/store';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,24 @@ export class AuthService {
       .collection(FireStoreCollections.Users)
       .doc(user.id)
       .set(user);
+  }
+  createUserWishlist(userID: string){
+    let wishlistProducts: Array<ProductItem> = [] as Array<ProductItem>;
+    let initialState:ProductItem = {} as ProductItem
+    wishlistProducts.push(initialState);
+    return this._fireStore
+    .collection(FireStoreCollections.Wishlist)
+    .doc(userID)
+    .set({0: '0'})
+  }
+  createUserCart(userID: string){
+    let cartProducts: Array<ProductItem> = [] as Array<ProductItem>;
+    let initialState:ProductItem = {} as ProductItem
+    cartProducts.push(initialState);
+    return this._fireStore
+    .collection(FireStoreCollections.Cart)
+    .doc(userID)
+    .set({0:'0'})
   }
   // Fetch user profile from database based on user id
   fetchUserProfile(userID: string) {
