@@ -13,26 +13,39 @@ $color-lightgreen: #c8e6c9;
 //--------------------------- Main Section ------------------------
 section {
   background-color: $color-main;
-  .hero {
-    &__content {
-      h1 {
-        font-size: 60px;
+  .hero-container {
+    background-image: url("../../../assets/images/ui.png"),
+      url("../../../assets/images/paw.png"),
+      url("../../../assets/images/paw.png"),
+      url("../../../assets/images/paw.png");
+    background-size: 50% 95%, 7% 15%, 7% 15%, 7% 15%;
+    height: 635px;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    background-position: center, 303px 0px, 1250px 200px, 103px 500px;
+    background-color: $color-main;
+    .hero {
+      &__content {
+        &__text {
+          font-size: 60px;
+        }
       }
     }
-    &__img {
-    }
   }
+
   .type {
     .typesButtons {
       img {
-        width: 15rem;
-        height: 20rem;
+        width: 10rem;
+        height: 15rem;
         border-radius: 10px;
-        // box-shadow: 5px 10px 18px #888888;
       }
       .CategoryRouter {
-        border-radius: 20px;
-        background-color: $color-primary;
+        &__content {
+          box-shadow: 5px 10px 18px #888888;
+          background-color: #e5e5e5;
+          // background-color: #d3d3d3;
+        }
         a {
           text-decoration: none;
           color: #000;
@@ -40,8 +53,15 @@ section {
       }
     }
   }
+
   .services {
     &__text {
+      background-image: url("../../../assets/images/paw.png");
+      background-size: 10% 100%;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      background-position: 600px 0px;
+      background-color: transparent;
     }
     &__card {
       background-color: $color-white;
@@ -112,3 +132,32 @@ section {
 }
 
 //--------------------------- Shop Now BUTTON END------------------------
+
+@media screen and (max-width: 992px) {
+  section {
+    .hero-container {
+      background-image: url("../../../assets/images/ui.png"),
+        url("../../../assets/images/paw.png"),
+        url("../../../assets/images/paw.png"),
+        url("../../../assets/images/paw.png");
+      background-size: 60% 70%, 12% 15%, 12% 15%, 12% 15%;
+      height: 635px;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      background-position: center, 50px 0px, 350px 200px, 20px 450px;
+      background-color: $color-main;
+      .hero {
+        &__content {
+          &__text {
+            font-size: 30px !important;
+            margin: 3px;
+          }
+          &__para {
+            font-size: 20px;
+            margin: 5px;
+          }
+        }
+      }
+    }
+  }
+}

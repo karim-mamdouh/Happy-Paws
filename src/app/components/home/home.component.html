@@ -1,51 +1,56 @@
-<Section class="h-100">
-  <!-- Hero Section -->
-  <div class="hero container d-flex">
-    <div class="hero__content my-5">
-      <h1 class="mt-5">Your Pet is Part of Your Family</h1>
-      <p class="fs-5 mt-3">
-        Let us treat your pet like our own family with best services and
-        packages.
-      </p>
-      <p-button
-        styleClass="card__addToCart mt-4 rounded-5"
-        label="Shop Now"
-        icon="pi pi-shopping-bag"
-      >
-      </p-button>
+<Section>
+  <!-- Hero Container -->
+  <div class="hero-container">
+    <!-- Hero Section -->
+    <div class="hero container d-flex justify-content-center">
+      <div class="hero__content my-1">
+        <p class="hero__content__text mt-lg-4 text-center">
+          Your Pet is Part of Your Family
+        </p>
+        <p class="hero__content__para fs-5 mt-lg-4 text-center">
+          Let us treat your pet like our own family with best services and
+          packages.
+        </p>
+        <div class="text-center">
+          <p-button
+            styleClass="card__addToCart mt-4 rounded-5 "
+            label="Shop Now"
+            icon="pi pi-shopping-bag"
+          >
+          </p-button>
+        </div>
+      </div>
     </div>
-    <figure class="hero__img m-auto">
-      <img
-        src="../../../assets/images/pets_prev_ui.png"
-        alt=""
-        class="img-fluid"
-      />
-    </figure>
   </div>
+
   <!-- Animal type -->
   <div class="type container py-5">
     <h3 class="text-center mb-5">Types</h3>
     <div class="typesButtons d-lg-flex justify-content-center my-5 d-md-block">
       <div class="CategoryRouter text-center mx-5 my-3">
         <a routerLink="/store">
-          <img src="../../../assets/images/Cat_November.png" alt="pizza" />
-          <p class="p-3">Cats</p>
+          <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
+            <img src="assets/images/Cat_November.png" alt="Cat Image" />
+            <p class="p-3 m-auto"><b>Cats Shop</b></p>
+          </div>
         </a>
       </div>
       <div class="CategoryRouter text-center mx-5 my-3">
         <a routerLink="/store">
-          <img src="../../../assets/images/bg-dog.png" alt="salad" />
-          <p class="p-3">Dogs</p>
+          <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
+            <img src="assets/images/bg-dog.png" alt="Dog Image" />
+            <p class="p-3 m-auto"><b> Dogs Shop</b></p>
+          </div>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- What We Can Do -->
+  <!-- What We Can Do (Services)-->
   <div class="services container my-5">
     <!-- heading text -->
     <div class="services__text my-5">
-      <h2 class="text-center fs-1 mb-5">What We Can Do</h2>
+      <h2 class="text-center fs-1 mb-4">What We Can Do</h2>
       <p class="text-center pb-4 m-auto fs-4">
         We look after your pet, we ensure that we will give the best treatment
         for your pet.
@@ -90,6 +95,48 @@
     </div>
   </div>
 
+  <!-- Products -->
+  <p-carousel
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+  >
+    <ng-template let-product pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="p-mb-3"></div>
+          <div>
+            <h4 class="p-mb-1">{{ product.name }}</h4>
+            <h6 class="p-mt-0 p-mb-3">${{ product.price }}</h6>
+            <span
+              [class]="
+                'product-badge status-' + product.inventoryStatus.toLowerCase()
+              "
+              >{{ product.inventoryStatus }}</span
+            >
+            <div class="car-buttons p-mt-5">
+              <p-button
+                type="button"
+                styleClass="p-button p-button-rounded p-mr-2"
+                icon="pi pi-search"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-success p-button-rounded p-mr-2"
+                icon="pi pi-star"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-help p-button-rounded"
+                icon="pi pi-cog"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
   <!-- blog -->
   <p-carousel
     [numVisible]="3"
@@ -132,8 +179,46 @@
       </div>
     </ng-template>
   </p-carousel>
-
-  <!-- brands -->
-
   <!-- Adoption -->
+  <p-carousel
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+  >
+    <ng-template let-product pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="p-mb-3"></div>
+          <div>
+            <h4 class="p-mb-1">{{ product.name }}</h4>
+            <h6 class="p-mt-0 p-mb-3">${{ product.price }}</h6>
+            <span
+              [class]="
+                'product-badge status-' + product.inventoryStatus.toLowerCase()
+              "
+              >{{ product.inventoryStatus }}</span
+            >
+            <div class="car-buttons p-mt-5">
+              <p-button
+                type="button"
+                styleClass="p-button p-button-rounded p-mr-2"
+                icon="pi pi-search"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-success p-button-rounded p-mr-2"
+                icon="pi pi-star"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-help p-button-rounded"
+                icon="pi pi-cog"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
 </Section>
