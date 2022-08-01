@@ -1,8 +1,8 @@
 <!-- main card container -->
 <div class="card">
-  <!-- condation -->
+  <!-- condetion -->
   <ng-template
-    [ngIf]="(wishlistItems | async)?.wishList?.length! > 0"
+    [ngIf]="wishlist.length! > 0"
     [ngIfElse]="elseBlock"
   >
     <!-- primeNg container -->
@@ -10,7 +10,7 @@
       scrollHeight="600px"
       [itemSize]="100"
       styleClass="mb-5"
-      [value]="(wishlistItems | async)?.wishList!"
+      [value]="wishlist!"
     >
       <!-- Header -->
       <ng-template pTemplate="header">
@@ -23,7 +23,7 @@
           <!-- product image -->
           <figure class="image-container">
             <img
-              src="assets/images/cat.jpg"
+              src="{{ wishlist.images[0] }}"
               alt="Item Image"
               class="product-image img-fluid"
             />
@@ -43,7 +43,7 @@
           </div>
           <!-- button group -->
           <div class="product-list-action">
-            <div *ngIf="quantity > 0; then instock; else outofstock"></div>
+            <div *ngIf="wishlist.quantity> 0; then instock; else outofstock"></div>
             <ng-template #instock><p class="instock">In Stock</p></ng-template>
             <ng-template #outofstock
               ><p class="outofstock">Out Of Stock</p></ng-template
@@ -52,19 +52,25 @@
             <!-- buttons display at large screen -->
             <div class="buttons m-auto">
               <p-button styleClass="me-3" class="pp-button"
+              (onClick)="$event.stopPropagation();onDetailsClick(wishlist)"
                 ><i class="fa-solid fa-circle-info"></i> &nbsp;
                 Details</p-button
               >
               <p-button styleClass="p-button-danger"
+              (onClick)="$event.stopPropagation();onRemoveItemClick(wishlist)"
                 ><i class="fa-solid fa-ban"></i> &nbsp; Remove</p-button
               >
             </div>
             <!-- small buttons display at md and small screens -->
             <div class="buttons-sm m-auto">
-              <button type="button" class="favButton btn btn-primary me-4">
+              <button type="button" class="favButton btn btn-primary me-4"
+              (click)="$event.stopPropagation();onDetailsClick(wishlist)"
+              >
                 <i class="fa-solid fa-circle-info"></i>
               </button>
-              <button type="button" class="favButton btn btn-danger">
+              <button type="button" class="favButton btn btn-danger"
+              (click)="$event.stopPropagation();onRemoveItemClick(wishlist)"
+              >
                 <i class="fa-solid fa-ban"></i>
               </button>
             </div>

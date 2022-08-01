@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { AnimalType } from 'src/app/interfaces/adoption';
-import {
-  Brand,
-  CartItem,
-  ProductCategory,
-  ProductItem,
-} from 'src/app/interfaces/store';
-import { addToWishList } from 'src/app/store/store/store-actions';
+import { CartItem, ProductItem } from 'src/app/interfaces/store';
 
 @Component({
   selector: 'app-wishlist',
@@ -16,45 +9,31 @@ import { addToWishList } from 'src/app/store/store/store-actions';
   styleUrls: ['./wishlist.component.scss'],
 })
 export class WishlistComponent implements OnInit {
-  quantity: number = 1;
-  Data: number = 1;
-  wishlistItems: Observable<{
-    cart: Array<CartItem>;
-    products: Array<ProductItem>;
-    wishList: Array<ProductItem>;
-  }>;
+  wishlist: Array<ProductItem> = [];
+
   constructor(
+    private _router: Router,
     private _store: Store<{
-      store: {
-        cart: Array<CartItem>;
-        products: Array<ProductItem>;
-        wishList: Array<ProductItem>;
-      };
-    }>
-  ) {
-    this.wishlistItems = this._store.select('store');
+      store: { cart: Array<CartItem>, products: Array<ProductItem>, wishList: Array<ProductItem> }
+    }>) {
+
+    this._store.select('store').subscribe(res => {
+      this.wishlist = res.wishList;
+    });
   }
 
   ngOnInit(): void {
-    this._store.dispatch(
-      addToWishList({
-        payload: {
-          title: 'Dray Food',
-          brand: Brand.Belcando,
-          animalType: AnimalType.Bird,
-          category: ProductCategory.Accessories,
-          description: 'sdfgdgd',
-          price: 430.5,
-          rate: 100,
-          wishList: false,
-          id: '1000',
-          images: [],
-          reviews: [],
-        },
-      })
-    );
-    this.wishlistItems.subscribe((res) => {
-      console.log(res);
+  }
+
+  onDetailsClick(product: ProductItem): void {
+    this._router.navigate([`/store/details`], {
+      queryParams: {
+        product: JSON.stringify(product)
+      },
     });
   }
+  onRemoveItemClick(product: ProductItem): void {
+    console.log("onRemoveItemClick Clicked");
+  }
+
 }
