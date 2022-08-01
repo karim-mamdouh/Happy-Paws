@@ -1,6 +1,6 @@
 interface Owner {
   name: string;
-  phone: number;
+  phone: string;
   location: string;
 }
 

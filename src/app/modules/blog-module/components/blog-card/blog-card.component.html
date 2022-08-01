@@ -1,13 +1,20 @@
 <div
   class="blog-card d-md-block d-flex justify-content-center flex-column align-items-center pb-3"
+  (click)="goToBlogDetails()"
 >
   <figure>
     <img src="assets/images/animals/cat2.jpg" class="img-fluid" />
   </figure>
   <div class="d-flex justify-content-between w-100">
     <div class="ms-2">
-      <h5>{{ article.title }}</h5>
-      <p>By: {{ article.author }}</p>
+      <h5 class="blog-title mb-3">{{ article.title }}</h5>
+      <p class="fw-light sub-title">
+        <i class="fa-regular fa-user me-1"></i> By
+        <span class="author-name me-1">{{ article.author }}</span>
+        |
+        <i class="fa-regular fa-folder-closed ms-2 me-2"></i>
+        <span>{{ article.type }}</span>
+      </p>
     </div>
   </div>
 </div>

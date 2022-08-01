@@ -9,4 +9,5 @@ export interface Article {
   body: Array<Content>;
   image: string;
   author: string;
+  type: string;
 }

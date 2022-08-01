@@ -1,27 +1,33 @@
 <section class="d-flex justify-content-center align-items-center flex-column">
   <div class="mt-5 container" id="details">
     <figure class="d-flex justify-content-center">
-      <img src="assets/images/animals/cat2.jpg" class="img-fluid d-lg-none" />
+      <img src="assets/images/animals/cat4.jpg" class="img-fluid d-lg-none" />
       <p-image
-        src="assets/images/animals/cat2.jpg"
+        src="assets/images/animals/cat4.jpg"
         class="d-none d-lg-block img-fluid"
         alt="Image"
         [preview]="true"
       ></p-image>
     </figure>
     <!-- content -->
-    <div class="d-flex justify-content-between bd-highlight p-2">
-      <div class="card p-1 ms-2 me-3 w-100">
-        <span class="text-center title-font">Age</span>
-        <span class="text-center body-font">{{ animal.age }}</span>
+    <div class="row p-2">
+      <div class="col-md-4 p-2">
+        <div class="p-2 card">
+          <span class="text-center title-font m-0">Age</span>
+          <span class="text-center body-font m-0">{{ animal.age }} Months</span>
+        </div>
       </div>
-      <div class="card p-1 me-3 w-100">
-        <span class="text-center title-font">Weight</span>
-        <span class="text-center body-font">{{ animal.age }}</span>
+      <div class="col-md-4 p-2">
+        <div class="p-2 card">
+          <span class="text-center title-font m-0">Weight</span>
+          <span class="text-center body-font m-0">{{ animal.weight }} KGs</span>
+        </div>
       </div>
-      <div class="card me-2 p-1 w-100">
-        <span class="text-center title-font">Gender</span>
-        <span class="text-center body-font">{{ animal.gender }}</span>
+      <div class="col-md-4 p-2">
+        <div class="p-2 card">
+          <p class="text-center title-font m-0">Gender</p>
+          <p class="text-center body-font m-0">{{ animal.gender }}</p>
+        </div>
       </div>
     </div>
     <div class="ms-3">
@@ -38,19 +44,17 @@
         expedita distinctio dolorem odit voluptas minus rem accusamus laudantium
         debitis ex repellendus facilis deleniti in, cumque magnam aliquid
         delectus? Aliquam. Error labore nesciunt recusandae commodi eius vitae,
-        laudantium dolorem, fugit aliquid possimus assumenda, nemo et vero
-        officia inventore unde molestiae asperiores delectus dolor accusantium
-        quidem non? Maiores praesentium vitae vel. Iure rerum impedit quis illo
-        deserunt totam, repudiandae cupiditate cum asperiores, quae beatae ipsa
-        blanditiis, delectus ducimus explicabo! At ducimus esse magnam
-        aspernatur, molestias porro ut natus eos id et. Iste, dolores soluta.
-        Necessitatibus neque ipsam vitae, libero aspernatur sit saepe impedit
-        natus quibusdam officiis odio perferendis iure nesciunt labore quia!
-        Aspernatur voluptas tempore assumenda incidunt cum doloribus quisquam
-        optio? Ab, nihil? Officia, reprehenderit! Sit id magni aspernatur,
-        exercitationem ipsam totam nulla iure nemo ullam at asperiores non ea
-        inventore odit blanditiis adipisci voluptatibus tenetur numquam magnam
-        nihil! Consequuntur, nam?
+        laudantium dolorem, fugit aliquid possimus assumenda.
+      </p>
+    </div>
+    <div class="ms-3">
+      <h5 class="blog-title mb-3">Contact Info</h5>
+      <p class="fw-light sub-title">
+        <i class="fa-regular fa-user me-2"></i>
+        <span class="author-name me-1">{{ animal.owner.name }}</span>
+        |
+        <i class="fa-solid fa-phone ms-2 me-2"></i>
+        <span>{{ animal.owner.phone }}</span>
       </p>
     </div>
   </div>

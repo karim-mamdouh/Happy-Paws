@@ -66,14 +66,14 @@
     max-width: 80%;
   }
   :host ::ng-deep .dialog {
-    max-width: 40vw;
+    max-width: 80vw;
   }
 }
 :host ::ng-deep p-dialog {
   background-color: var(--auth-background);
 }
-// @media (min-width: 992px) {
-//   #details {
-//     max-width: 30%;
-//   }
-// }
+@media (min-width: 992px) {
+  :host ::ng-deep .dialog {
+    max-width: 50vw;
+  }
+}

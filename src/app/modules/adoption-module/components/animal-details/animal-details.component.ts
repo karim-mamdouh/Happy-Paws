@@ -12,7 +12,7 @@ export class AnimalDetailsComponent implements OnInit {
   constructor() {
     this.animal = {
       name: 'Meow',
-      owner: { name: 'Yasmeen', location: 'aaa', phone: 158 },
+      owner: { name: 'Yasmeen', location: 'aaa', phone: '0111111111111' },
       age: 9,
       gender: 'Female',
       description: '',
