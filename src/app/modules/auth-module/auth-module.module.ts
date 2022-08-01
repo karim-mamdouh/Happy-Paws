@@ -13,6 +13,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DividerModule } from 'primeng/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabViewModule } from 'primeng/tabview';
+import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 //Components
 import { LoginComponent } from './components/login/login.component';
@@ -34,6 +35,7 @@ import { MessageService } from 'primeng/api';
     MyPetsComponent,
   ],
   imports: [
+    DialogModule,
     TabViewModule,
     FormsModule,
     ReactiveFormsModule,

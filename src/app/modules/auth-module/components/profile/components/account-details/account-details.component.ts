@@ -14,8 +14,11 @@ export class AccountDetailsComponent implements OnInit {
   @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData with data from parent
   @Output() profileEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   @Output() changePasswordEmitter = new EventEmitter(); // Event emitter to notify parent to change password
+  @Output() deleteUserEmitter = new EventEmitter<string>();
+  confirmedPassword: any;
   userData = {} as User; // User object to be viewed and editied
   showErrors: boolean = false; //Flag to show form errors
+  showPasswordDialog: boolean = false; // Flag to show enter password window
   detailsForm: FormGroup = this._detailsBuilder.group({
     firstName: [
       '',
@@ -29,7 +32,7 @@ export class AccountDetailsComponent implements OnInit {
       '',
       [Validators.required, Validators.pattern(/^[\S][A-Za-z0-9]{5,}$/)],
     ], //Should have no whitespaces and at least 5 characters
-    phoneNumber: ['', [Validators.required, Validators.minLength(11)]],
+    phoneNumber: ['', [Validators.maxLength(11), Validators.minLength(11)]],
   }); // Form controls
 
   get controlValidation() {
@@ -90,5 +93,11 @@ export class AccountDetailsComponent implements OnInit {
   // Calls changepasswordemitter to notify parent with event
   changePassword(): void {
     this.changePasswordEmitter.emit();
+  }
+
+  deleteAccount(): void {
+    this.showPasswordDialog = false;
+    console.log(this.confirmedPassword);
+    this.deleteUserEmitter.emit(this.confirmedPassword);
   }
 }

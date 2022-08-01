@@ -115,7 +115,7 @@
           <div class="col-12 md:col-4">
             <div class="p-inputgroup">
               <input
-                type="number"
+                type="tel"
                 placeholder="Phone number"
                 pInputText
                 class="p-inputtext-md"
@@ -138,7 +138,7 @@
             >
             <small
               class="p-error block"
-              *ngIf="controlValidation['phoneNumber'].errors?.['minlength']"
+              *ngIf="controlValidation['phoneNumber'].errors?.['minlength'] || controlValidation['phoneNumber'].errors?.['maxlength']"
               >Phone number must be 11 numbers</small
             >
           </ng-template>
@@ -167,6 +167,7 @@
       <!-- Delete account button -->
       <button
         pButton
+        (click)="showPasswordDialog = true"
         pRipple
         type="button"
         label="Delete Account"
@@ -215,4 +216,36 @@
       </div>
     </ng-template>
   </p-toast>
+  <p-dialog
+    header="Please re-enter your password"
+    [(visible)]="showPasswordDialog"
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="p-inputgroup mt-3">
+      <input
+        type="text"
+        placeholder="Password"
+        pInputText
+        class="p-inputtext-md"
+        [value]="confirmedPassword"
+      />
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button
+        icon="fa-solid fa-xmark"
+        (click)="showPasswordDialog = false"
+        label="Cancel"
+        styleClass="p-button-text"
+      ></p-button>
+      <p-button
+        icon="pi pi-check"
+        (click)="deleteAccount()"
+        label="Ok"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
 </section>

@@ -13,10 +13,11 @@ export class AnimalDetailsComponent implements OnInit {
     this.animal = {
       name: 'Meow',
       owner: { name: 'Yasmeen', location: 'aaa', phone: 158 },
-      age: '9 months',
+      age: 9,
       gender: 'Female',
       description: '',
       type: 'cat',
+      weight: 10,
     };
   }
 

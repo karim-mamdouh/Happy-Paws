@@ -7,9 +7,10 @@ interface Owner {
 export interface Animal {
   name: string;
   owner: Owner;
-  age: string;
+  age: number;
   gender: string;
   type: string;
+  weight: number;
   id?: string;
   images?: Array<string>;
   description?: string;
