@@ -5,16 +5,17 @@
     <div class="row mt-3">
       <div class="col-md-6">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
+                id="firstname"
                 type="text"
-                placeholder="First name"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="firstName"
               />
-            </div>
+              <label for="firstname">First Name</label>
+            </span>
           </div>
           <!-- First name validation -->
           <ng-template
@@ -40,16 +41,17 @@
       <!-- Last name -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
                 type="text"
-                placeholder="Last name"
+                id="lastname"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="lastName"
               />
-            </div>
+              <label for="lastname">Last Name</label>
+            </span>
           </div>
           <!-- Last name validation -->
           <ng-template
@@ -77,16 +79,17 @@
     <div class="row mt-3">
       <div class="col-md-6">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
+                id="username"
                 type="text"
-                placeholder="User name"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="userName"
               />
-            </div>
+              <label for="username">User Name</label>
+            </span>
           </div>
           <!-- User name validation -->
           <ng-template
@@ -112,16 +115,17 @@
       <!-- Phone number -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
                 type="tel"
-                placeholder="Phone number"
+                id="phonenumber"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="phoneNumber"
               />
-            </div>
+              <label for="phonenumber">Phone Number</label>
+            </span>
           </div>
           <!-- Phonenumber validation -->
           <ng-template
@@ -216,6 +220,7 @@
       </div>
     </ng-template>
   </p-toast>
+  <!-- Enter password dialog -->
   <p-dialog
     header="Please re-enter your password"
     [(visible)]="showPasswordDialog"
@@ -226,11 +231,11 @@
   >
     <div class="p-inputgroup mt-3">
       <input
-        type="text"
+        type="password"
         placeholder="Password"
         pInputText
         class="p-inputtext-md"
-        [value]="confirmedPassword"
+        [(ngModel)]="confirmedPassword"
       />
     </div>
     <ng-template pTemplate="footer">

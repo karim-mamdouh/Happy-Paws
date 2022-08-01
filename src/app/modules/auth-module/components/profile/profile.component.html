@@ -1,6 +1,6 @@
 <section class="pt-4 profile">
   <div class="container">
-    <h3 class="pb-2">Welcome Back, {{ user.firstName }}</h3>
+    <h3 class="pb-2">Welcome Back, {{ user!.firstName }}</h3>
     <h6>Welcome to your Happy Paws account!</h6>
     <h6 class="pb-3">Here you can modify your information.</h6>
     <p-tabView>
@@ -8,6 +8,7 @@
       <p-tabPanel header="Profile" leftIcon="fa-regular fa-circle-user">
         <app-account-details
           (profileEmitter)="profileUpdated($event)"
+          (deleteUserEmitter)="deleteUser($event)"
           (changePasswordEmitter)="changePassword()"
         ></app-account-details>
       </p-tabPanel>

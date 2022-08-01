@@ -1,12 +1,14 @@
 :host ::ng-deep figure {
   img,
   p-image {
-    max-height: 300px;
+    max-height: 500px;
     border: 1px solid transparent;
     border-radius: 25px;
     max-width: 100%;
+    object-fit: cover;
   }
 }
+
 .animal-card {
   border: 1px solid transparent;
   border-radius: 10px;
@@ -32,16 +34,6 @@
   color: var(--pink-color);
   border-color: var(--pink-color);
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--pink-color), 0 1px 2px 0 black;
-}
-:host ::ng-deep figure {
-  img,
-  p-image {
-    max-height: 1000px;
-    border: 1px solid transparent;
-    border-radius: 25px;
-    max-width: 100%;
-    object-fit: cover;
-  }
 }
 .title-font {
   color: var(--grey-color);

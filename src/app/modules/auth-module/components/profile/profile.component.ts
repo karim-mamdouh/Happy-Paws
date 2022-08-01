@@ -28,12 +28,17 @@ export class ProfileComponent implements OnInit {
     // Fetches user profile from database and send it to all childeren
     this._authService
       .fetchUserProfile(localStorage.getItem('userID')!)
-      .subscribe((response) => {
-        this.user = response as User;
-        this._profile.user.next(this.user);
-        this._address.user.next(this.user);
-        this._pet.user.next(this.user);
-      });
+      .subscribe(
+        (response) => {
+          this.user = response as User;
+          this._profile.user.next(this.user);
+          this._address.user.next(this.user);
+          this._pet.user.next(this.user);
+        },
+        () => {
+          this.showErrorToast('Failed to fetch data, please contact support');
+        }
+      );
   }
   // Function called when user profile is updated to update it in database
   profileUpdated(event: User): void {
@@ -60,6 +65,24 @@ export class ProfileComponent implements OnInit {
       .catch(() => {
         this.showErrorToast(
           'Error sending password reset email, please contact support!'
+        );
+      });
+  }
+  // Function called when user clicks on remove account in child
+  deleteUser(password: string): void {
+    this._authService
+      .login(this.user.email, password)
+      .then(() => {
+        return this._authService.removeUser();
+      })
+      .then(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userID');
+        window.location.href = '/';
+      })
+      .catch(() => {
+        this.showErrorToast(
+          'Failed to remove account, please contact support!'
         );
       });
   }

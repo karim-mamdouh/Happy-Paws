@@ -12,7 +12,7 @@ export interface Animal {
   type: string;
   weight: number;
   id?: string;
-  images?: Array<string>;
+  image?: string;
   description?: string;
 }
 

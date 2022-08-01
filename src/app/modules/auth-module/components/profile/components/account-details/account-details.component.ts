@@ -14,8 +14,8 @@ export class AccountDetailsComponent implements OnInit {
   @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData with data from parent
   @Output() profileEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   @Output() changePasswordEmitter = new EventEmitter(); // Event emitter to notify parent to change password
-  @Output() deleteUserEmitter = new EventEmitter<string>();
-  confirmedPassword: any;
+  @Output() deleteUserEmitter = new EventEmitter<string>(); // Event emitter to notify parent to remove user account
+  confirmedPassword: string = ''; // Input password value for removing account
   userData = {} as User; // User object to be viewed and editied
   showErrors: boolean = false; //Flag to show form errors
   showPasswordDialog: boolean = false; // Flag to show enter password window
@@ -94,10 +94,9 @@ export class AccountDetailsComponent implements OnInit {
   changePassword(): void {
     this.changePasswordEmitter.emit();
   }
-
+  // Calls deleteUserEmitter to notify parent with event
   deleteAccount(): void {
     this.showPasswordDialog = false;
-    console.log(this.confirmedPassword);
     this.deleteUserEmitter.emit(this.confirmedPassword);
   }
 }

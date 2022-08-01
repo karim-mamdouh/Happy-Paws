@@ -7,19 +7,9 @@ import { Animal } from 'src/app/interfaces/adoption';
   styleUrls: ['./animal-details.component.scss'],
 })
 export class AnimalDetailsComponent implements OnInit {
-  @Input() animal = {} as Animal;
+  @Input() animal = {} as Animal; // Animal object to be viewed
 
-  constructor() {
-    this.animal = {
-      name: 'Meow',
-      owner: { name: 'Yasmeen', location: 'aaa', phone: '0111111111111' },
-      age: 9,
-      gender: 'Female',
-      description: '',
-      type: 'cat',
-      weight: 10,
-    };
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }

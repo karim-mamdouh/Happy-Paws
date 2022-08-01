@@ -17,13 +17,15 @@ app-root {
 app-root,
 app-login,
 app-register,
-app-profile {
+app-profile,
+app-animals-list {
   flex-grow: 1;
 }
 
 app-login,
 app-register,
-app-profile {
+app-profile,
+app-animals-list {
   display: flex;
   flex-direction: column;
 }
