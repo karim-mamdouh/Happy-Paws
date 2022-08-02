@@ -1,16 +1,65 @@
-main {
-  background-color: #eeeeee;
+//--------------------------- VARIABLES ------------------------
+$color-primary: #ecada6;
+$color-secondary: #999999;
+$color-accent: #ffcdd2;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-main: rgb(251, 248, 248);
+
+//--------------------------- Main Container ------------------------
+section {
+  .wrapper__store {
+    &__filter {
+      height: 100%;
+    }
+  }
+  background-color: $color-main;
 }
+
+//---------------- pagination in large screens start -----------------
 :host ::ng-deep .p-paginator {
   background-color: transparent !important;
   margin-bottom: 10px;
 }
 
 :host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-  background: #ecada6;
-  border-color: #ecada6;
-  color: #999;
+  background: $color-primary;
+  border-color: $color-primary;
+  color: $color-white;
 }
 :host ::ng-deep .p-link:focus {
-  box-shadow: 0 0 0 0.2rem #ecada6;
+  box-shadow: 0 0 0 0.2rem $color-primary;
 }
+//---------------- pagination in large screens End -----------------
+
+//---------------- pagination in small screens start ---------------
+
+//size of small arrows
+:host ::ng-deep .p-paginator .p-paginator-first,
+:host ::ng-deep .p-paginator .p-paginator-prev,
+:host ::ng-deep .p-paginator .p-paginator-next,
+:host ::ng-deep .p-paginator .p-paginator-last {
+  min-width: 1.5rem !important;
+}
+
+//Color at focus
+:host ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
+  border-color: $color-primary;
+  box-shadow: none;
+}
+
+//Color at hover
+:host ::ng-deep .p-dropdown:not(.p-disabled):hover {
+  border-color: $color-primary;
+}
+
+//Dropdown Color
+:host
+  ::ng-deep
+  .p-dropdown-panel
+  .p-dropdown-items
+  .p-dropdown-item.p-highlight {
+  color: $color-primary;
+  background: #eeeeee;
+}
+//---------------- pagination in small screens start -----------------

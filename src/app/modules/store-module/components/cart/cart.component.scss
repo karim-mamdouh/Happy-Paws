@@ -1,0 +1,142 @@
+//--------------------------- VARIABLES ------------------------
+$color-primary: #ecada6;
+$color-secondary: #888888;
+$color-accent: #ffcdd2;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-danger: #dc2626;
+$color-transparent: transparent;
+
+//--------------------------- Empty Cart Page Button------------------------
+:host ::ng-deep .p-button {
+  background: $color-secondary;
+  border: 1px solid $color-secondary;
+  margin-top: 40px;
+}
+
+:host ::ng-deep .p-button:enabled:hover {
+  background: $color-primary;
+  color: $color-white;
+  border-color: $color-accent;
+}
+
+:host ::ng-deep .p-button:focus {
+  background-color: none;
+  box-shadow: 0 0 0 0.1rem $color-transparent !important;
+}
+
+:host ::ng-deep .p-button:enabled:focus {
+  box-shadow: 0 0 0 0.2rem !important;
+  border-color: none !important;
+}
+
+//--------------------------- Table Style------------------------
+section {
+  //--------------------------- Quantity Button------------------------
+  .QuantityBtn:focus {
+    background-color: $color-transparent;
+    box-shadow: none;
+    border-color: $color-transparent;
+  }
+  .QuantityBtn:hover {
+    background-color: $color-transparent;
+    border-color: $color-transparent;
+  }
+  .QuantityBtn {
+    background-color: $color-transparent;
+    i {
+      color: $color-primary;
+    }
+  }
+  //--------------------------- Remove Button------------------------
+  .removeBtn:focus {
+    background-color: $color-transparent;
+    box-shadow: none;
+    border-color: $color-transparent;
+  }
+  .removeBtn:hover {
+    background-color: $color-transparent;
+    border-color: $color-transparent;
+  }
+  .removeBtn {
+    i {
+      color: $color-danger;
+    }
+  }
+  //---------------------------  Image ------------------------
+  figure {
+    margin: 0 0 0.2rem !important;
+    img {
+      width: 150px;
+      height: 60;
+      border-radius: 3px;
+    }
+  }
+  table {
+    tbody {
+      td {
+        .title {
+          width: 500px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+    .card__title {
+      margin-bottom: 0.5rem !important;
+    }
+  }
+}
+
+//-------------------- Padding between image and Buttons ------------------
+:host ::ng-deep .p-card .p-card-content {
+  padding: 0.2rem 0 !important;
+}
+//--------------------------- Buttons Card Padding ------------------------
+:host ::ng-deep .p-card .p-card-body {
+  padding: 0.3rem !important;
+}
+
+:host ::ng-deep .p-card .p-card-footer {
+  padding: 0.3rem 0 0 0;
+}
+
+//--------------------------- Empty Cart Responsive------------------------
+@media screen and (max-width: 992px) {
+  .emptyCart {
+    font-size: 2rem !important;
+    figure {
+      img {
+        width: 350px;
+        height: 200px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 551px) {
+  .emptyCart {
+    font-size: 1rem !important;
+    figure {
+      img {
+        width: 250px;
+      }
+    }
+  }
+}
+
+//--------------------------- Truncate text in card ------------------------
+@media screen and (max-width: 421px) {
+  h1 {
+    font-size: 20px;
+  }
+  .CardContainer {
+    .card__title {
+      width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

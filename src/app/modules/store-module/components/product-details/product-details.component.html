@@ -7,46 +7,59 @@
         class="my-5 col-lg-5 col-md-12 d-flex justify-content-center img-fluid"
       >
         <p-image
-          src="assets/images/cat.jpg"
-          alt="Image"
+          src="{{ product.images[0] }}"
+          alt="Item Image"
           [preview]="true"
         ></p-image>
       </figure>
       <!-- Product Details -->
-      <div class="m-5 col-lg-7 col-md-12">
+      <div class="my-5 mx-2 col-lg-7 col-md-12">
         <h3 class="my-3">
-          BARS® Flea & Ticks Drops For Dogs 10 Kg (1 pipette)
+          {{ product.title }}
         </h3>
-        <p-rating [(ngModel)]="val" [cancel]="false"></p-rating>
+        <p-rating
+          class="rate-display"
+          [(ngModel)]="product.rate"
+          [readonly]="true"
+          [cancel]="false"
+        ></p-rating>
 
-        <p class="my-3 fs-3" style="color: #ecada6"><b> 300.5 EGP</b></p>
+        <p class="my-2 fs-3 price">
+          <b> {{ product.price }} EGP</b>
+        </p>
         <p class="fs-4">
           Category:
-          <span class="fs-5" style="color: #999"> Supplies</span>
+          <span class="fs-5"> {{ product.category }}</span>
         </p>
         <p class="fs-4">
-          animalType: <span class="fs-5" style="color: #999">Dogs</span>
+          animal: <span class="fs-5">{{ product.animalType }}</span>
         </p>
         <p class="fs-4">
-          Brand: <span class="fs-5" style="color: #999">Josera</span>
+          Brand: <span class="fs-5">{{ product.brand }}</span>
         </p>
-        <div *ngIf="quantity > 0; then instock; else outofstock"></div>
-        <ng-template #instock><p class="instock">In Stock</p></ng-template>
-        <ng-template #outofstock
-          ><p class="outofstock">Out Of Stock</p></ng-template
-        >
+        <div *ngIf="product.quantity! > 0; then instock; else outofstock"></div>
+        <ng-template #instock>
+          <p class="instock">In Stock</p>
+        </ng-template>
+        <ng-template #outofstock>
+          <p class="outofstock">Out Of Stock</p>
+        </ng-template>
         <div class="my-4">
           <button
             pButton
             pRipple
             type="button"
             label="ADD TO CART"
+            (click)="addToCart(product)"
             class="p-button-raised p-button-secondary me-3 cart-button"
           >
             <i class="fa-solid fa-cart-shopping me-3"></i>
           </button>
           <p-toggleButton
-            [(ngModel)]="checked1"
+            (click)="
+              $event.stopPropagation(); onAddToWishlistClick($event, product)
+            "
+            [ngModel]="product.wishList"
             [onIcon]="'pi pi-heart-fill'"
             offIcon="pi pi-heart"
           ></p-toggleButton>
@@ -59,26 +72,7 @@
       <h4>Description</h4>
       <hr />
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam culpa
-        nesciunt, aperiam assumenda, animi odit aliquid repellat nobis dolorum
-        magni quos sed? Rerum consequuntur aliquid nostrum earum excepturi
-        laudantium porro? Lorem, ipsum dolor sit amet consectetur adipisicing
-        elit. Temporibus laborum beatae alias modi expedita nostrum dolor nam,
-        distinctio blanditiis reprehenderit earum quisquam dolorem libero qui,
-        saepe, fugiat enim ratione minima. Lorem ipsum dolor sit, amet
-        consectetur adipisicing elit. Ratione quasi quidem dolor fugiat rerum
-        reprehenderit, aspernatur velit voluptates esse minus dolorum distinctio
-        maiores iure sint omnis veritatis illo nostrum vero. Lorem ipsum dolor
-        sit amet consectetur adipisicing elit. Ratione laboriosam fuga, repellat
-        rerum cumque minus qui quis suscipit ipsam nemo velit obcaecati
-        consectetur autem facilis repellendus distinctio praesentium. Similique,
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic at veniam
-        possimus dolor. Assumenda necessitatibus sunt quia obcaecati,
-        accusantium ipsam aperiam rerum suscipit labore alias blanditiis
-        repudiandae. Tempora, voluptate itaque. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Consequatur, eos, dicta, ea consectetur
-        quod quia nisi illo deleniti magni sint itaque explicabo eum. Quis a
-        itaque pariatur ullam eligendi ipsa.
+        {{ product.description }}
       </p>
     </div>
 
@@ -86,21 +80,29 @@
     <div class="my-5 container pb-4 col-12">
       <h4>Reviews</h4>
       <hr />
-      <div class="rate-display mb-5 p-2 border rounded">
-        <p>Abdelrahman Youssef</p>
-        <p-rating [(ngModel)]="val1" [cancel]="false"></p-rating>
+      <div
+        class="rate-display mb-3 p-2 border rounded"
+        *ngFor="let review of product.reviews"
+      >
+        <p>{{ review.userName }}</p>
+        <p-rating
+          [(ngModel)]="review.rate"
+          [readonly]="true"
+          [cancel]="false"
+        ></p-rating>
         <p class="my-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur in
+          {{ review.comment! }}
         </p>
       </div>
-      <div class="user-rate">
+      <div class="user-rate my-5">
         <div class="d-flex my-3">
           <span class="me-3">Your Rating:</span>
-          <p-rating [(ngModel)]="val1" [cancel]="false"></p-rating>
+          <p-rating [(ngModel)]="reviewRating" [cancel]="false"></p-rating>
         </div>
         <span class="p-float-label my-4">
           <p>Comment:</p>
           <textarea
+            [(ngModel)]="comment"
             id="float-input"
             rows="5"
             cols="35"
@@ -111,6 +113,7 @@
         <button
           pButton
           pRipple
+          (click)="onSubmitReviewClick($event)"
           type="submit"
           label="Submit"
           class="p-button-raised p-button-secondary"

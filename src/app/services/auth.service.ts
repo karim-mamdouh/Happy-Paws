@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
-import { Address, User } from '../interfaces/profile';
+import { User } from '../interfaces/profile';
+import { ProductItem } from '../interfaces/store';
+
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +26,7 @@ export class AuthService {
       .doc(user.id)
       .set(user);
   }
+
   //Deletes user from database collection
   removeUserFromFireStore(userID: string) {
     return this._fireStore
@@ -65,24 +68,23 @@ export class AuthService {
     });
   }
 
-  // // current logged in user
-  // getCurrentUser() {
-  //   this._fireAuth.authState.subscribe(
-  //     (user) => {
-  //       if (user) {
-  //         // User = the current logged in user
-  //         // call user.id to get he UID
-  //         // this.fetchUserProfile(user.uid);
-  //       } else {
-  //         // No user is logged in
-  //         console.log('AUTHSTATE USER EMPTY', user);
-  //       }
-  //     },
-  //     (err) => {
-  //       console.log('Please try again');
-  //     }
-  //   );
-  // }
+  createUserWishlist(userID: string){
+    let initialState:ProductItem = {} as ProductItem
+    initialState.id= '-999';
+    let obj = {[-999]:initialState}
+    return this._fireStore
+    .collection(FireStoreCollections.Wishlist)
+    .doc(userID)
+    .set(obj)
+  }
+  createUserCart(userID: string){
+    let initialState:ProductItem = {} as ProductItem
+    initialState.id= '-999';
+    let obj = {[-999]:initialState}
+    return this._fireStore
+    .collection(FireStoreCollections.Cart)
+    .doc(userID)
+    .set(obj)}
 }
 
 enum FireStoreCollections {
