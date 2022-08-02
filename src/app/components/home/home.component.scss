@@ -92,18 +92,48 @@ section {
       }
     }
   }
-  .product-item {
-    .product-item-content {
-      border: 1px solid var(--surface-d);
-      border-radius: 3px;
-      margin: 0.3rem;
-      text-align: center;
-      padding: 2rem 0;
-    }
 
-    .product-image {
-      width: 50%;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  .Carousels {
+    margin-top: 10rem;
+    .carousel {
+      margin-top: 8rem;
+    }
+    .product-item {
+      .product-item-content {
+        border: 1px solid var(--surface-d);
+        border-radius: 3px;
+        margin: 1rem;
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      .product-image {
+        width: 50%;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      }
+      .card__actions__instock {
+        background-color: #c8e6c9;
+        opacity: 0.8;
+        color: #256029;
+        width: 5rem;
+        text-align: center;
+        border-radius: 10px;
+        margin: auto 0;
+        font-size: 1rem;
+        padding: 3px 0;
+      }
+
+      .card__actions__outofstock {
+        background-color: #ffcdd2;
+        color: #c63737;
+        opacity: 0.8;
+        width: 6.5rem;
+        text-align: center;
+        border-radius: 10px;
+        margin: auto 0;
+        font-size: 1rem;
+        padding: 3px 0;
+      }
     }
   }
 }
@@ -161,3 +191,44 @@ section {
     }
   }
 }
+
+//--------------------------- ADD TO WISHLIST START------------------------
+:host ::ng-deep .p-button {
+  border: none !important;
+}
+:host ::ng-deep .p-button.p-button-icon-only .p-button-icon-left,
+.p-button.p-button-icon-only .p-button-icon-right {
+  font-size: 30px;
+}
+:host ::ng-deep .p-togglebutton.p-button.p-highlight .p-button-icon-left,
+.p-togglebutton.p-button.p-highlight .p-button-icon-right {
+  color: $color-primary;
+}
+
+:host ::ng-deep .p-button.p-button-icon-only {
+  padding: 0.4rem !important;
+  background-color: transparent;
+  color: transparent;
+}
+
+:host ::ng-deep .p-togglebutton.p-button.p-highlight {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #ffffff;
+}
+
+:host ::ng-deep .p-togglebutton.p-button.p-highlight:hover {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  color: #ffffff;
+}
+
+:host
+  ::ng-deep
+  .p-togglebutton.p-button:not(.p-disabled):not(.p-highlight):hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #495057;
+}
+
+//--------------------------- ADD TO WISHLIST END------------------------

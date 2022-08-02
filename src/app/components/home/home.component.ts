@@ -7,6 +7,7 @@ import { Brand, ProductCategory, ProductItem } from 'src/app/interfaces/store';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  quantity: number = 1;
   responsiveOptions = [
     {
       breakpoint: '1024px',
