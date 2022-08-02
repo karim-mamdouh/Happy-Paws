@@ -37,6 +37,15 @@ export class DatabaseService {
     return this.afs.collection(FireStoreCollections.Wishlist).doc(userID).update(obj)
   }
 
+    // remove from wishlist 
+    removeFromWishlist(userID: string, products: Array<ProductItem>) {
+      const obj:any = {} as ProductItem;
+      for (const key of products) {
+        obj[key.id] = key;
+      }
+      return this.afs.collection(FireStoreCollections.Wishlist).doc(userID).set(obj)
+    }
+
   //fetch user cart
   fetchUserCart(userID: string) {
     return this.afs.collection(FireStoreCollections.Cart).doc(userID).snapshotChanges();

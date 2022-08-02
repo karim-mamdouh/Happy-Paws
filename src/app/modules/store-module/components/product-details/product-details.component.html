@@ -32,7 +32,7 @@
             class="p-button-raised p-button-secondary me-3 cart-button">
             <i class="fa-solid fa-cart-shopping me-3"></i>
           </button>
-          <p-toggleButton [(ngModel)]="checked1" [onIcon]="'pi pi-heart-fill'" offIcon="pi pi-heart"></p-toggleButton>
+          <p-toggleButton (click)="$event.stopPropagation();onAddToWishlistClick($event,product)" [ngModel]="product.wishList" [onIcon]="'pi pi-heart-fill'" offIcon="pi pi-heart"></p-toggleButton>
         </div>
       </div>
     </div>
