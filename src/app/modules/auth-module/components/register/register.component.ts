@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/profile';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmPasswordValidator } from './validators/confirm-password.validator';
 import { MessageService } from 'primeng/api';
+import { flatMap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -14,26 +14,27 @@ import { MessageService } from 'primeng/api';
 })
 export class RegisterComponent implements OnInit {
   showErrors: boolean = false; //Flag that shows all form errors
+  disableButtons: boolean = false; // FLag to disable buttons during network requests
   gender = [
-    { name: 'Male', value: 'm' },
-    { name: 'Female', value: 'f' },
+    { name: 'Male', value: 'Male' },
+    { name: 'Female', value: 'Female' },
   ]; //List of genders
   registerForm: FormGroup = this._registerFormBuilder.group(
     {
       firstName: [
         '',
         [Validators.required, Validators.pattern(/^[\S][A-Za-z]{2,}$/)],
-      ],
+      ], // No whitespaces or numbers and at least two characters
       date: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       lastName: [
         '',
         [Validators.required, Validators.pattern(/^[\S][A-Za-z]{2,}$/)],
-      ],
+      ], // No whitespaces or numbers and at least two characters
       userName: [
         '',
         [Validators.required, Validators.pattern(/^[\S][A-Za-z0-9]{5,}$/)],
-      ], //no spaces,6 char or more,no special character
+      ], //No spaces,6 char or more,no special character
       email: [
         '',
         [
@@ -41,7 +42,7 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
           ),
-        ],
+        ], // Should have email format
       ],
       password: [
         '',
@@ -71,6 +72,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+  //Resets form data on destroy
   ngOnDestroy(): void {
     this.registerForm.reset();
   }
@@ -81,7 +83,6 @@ export class RegisterComponent implements OnInit {
       //create user details object
       let user: User = {
         email: this.registerForm.value['email'],
-        password: this.registerForm.value['password'],
         firstName: this.registerForm.value['firstName'],
         lastName: this.registerForm.value['lastName'],
         birthdate: `${this.registerForm.value['date']}`,
@@ -91,8 +92,12 @@ export class RegisterComponent implements OnInit {
       // 1- save user data in the database,
       // 2- take the id from firebase and save it in the user id defined in the object
       // 3- Navigate to login page
+      this.disableButtons = true;
       this._authService
-        .register(user)
+        .register(
+          this.registerForm.value['email'],
+          this.registerForm.value['password']
+        )
         .then((response) => {
           user.id = response.user?.uid;
           this._authService.saveUserToFireStore(user).then((response) => {
@@ -101,14 +106,15 @@ export class RegisterComponent implements OnInit {
             })
           });
         })
-        .then((response) => {
+        .then(() => {
           this.showSuccessToast();
           setTimeout(() => {
-            this._router.navigate(['/auth']);
+            this._router.navigate(['/auth/login']);
           }, 1500);
         })
-        .catch((error) => {
+        .catch(() => {
           this.showErrorToast();
+          this.disableButtons = false;
         });
     } else {
       this.showErrors = true;

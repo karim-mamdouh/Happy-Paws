@@ -1,1 +1,85 @@
-<p>footer works!</p>
+<footer class="bg-footer text-white">
+  <!-- main container -->
+  <div class="container py-2">
+    <!-- logo  -->
+    <div class="logo">
+      <a
+        class="navbar-brand d-flex align-items-center mx-auto mt-3"
+        routerLink="/"
+      >
+        <figure class="d-inline-block m-0">
+          <img
+            src="assets/icons/icon-72x72.png"
+            class="img-fluid"
+            alt="logo-image"
+          />
+        </figure>
+        <h1 class="d-inline-block my-0 ms-3 text-light fs-3 login__logo-text">
+          <b>Happy Paws</b>
+        </h1>
+      </a>
+    </div>
+    <!-- info container -->
+    <div class="infoContainer d-md-flex justify-content-between mt-3">
+      <div class="important-links ms-5 px-4">
+        <p class="fs-4 m-1">Account</p>
+        <ul class="p-0">
+          <ng-template [ngIf]="loggedIn === ''" [ngIfElse]="elseBlock">
+            <div class="ms-3">
+              <li class="mb-2"><a routerLink="/auth/login">LogIn</a></li>
+              <li class=""><a routerLink="/auth/register">Register</a></li>
+            </div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div class="ms-3">
+              <li class="mb-2">
+                <a routerLink="" (click)="logout()">Logout</a>
+              </li>
+              <li class="mb-2"><a routerLink="/auth/profile">Profile</a></li>
+              <li class="mb-2"><a routerLink="/store/cart">Cart</a></li>
+              <li class=""><a routerLink="/store/wishlist">Wishlist</a></li>
+            </div>
+          </ng-template>
+        </ul>
+      </div>
+      <div class="important-links ms-5 px-4">
+        <p class="fs-4 m-1">Store</p>
+        <ul class="p-0">
+          <div class="ms-3">
+            <li class="mb-2"><a routerLink="/store">Cat</a></li>
+            <li><a routerLink="/store">Dog</a></li>
+          </div>
+        </ul>
+      </div>
+      <div class="important-links ms-5 px-4">
+        <p class="fs-4 m-1">Others</p>
+        <ul class="p-0">
+          <div class="ms-3">
+            <li class="mb-2"><a routerLink="/blog">Blog</a></li>
+            <li><a routerLink="/adoption">Adoption</a></li>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <!-- social media -->
+    <hr />
+    <div class="socialMedia d-flex justify-content-center">
+      <a href="https://www.facebook.com/" target="_blank"
+        ><i class="pi pi-facebook"></i
+      ></a>
+      <a href="https://www.instagram.com/" target="_blank"
+        ><i class="pi pi-instagram"></i
+      ></a>
+      <a href="https://www.youtube.com/" target="_blank"
+        ><i class="pi pi-youtube" target="_blank"></i
+      ></a>
+      <a href="https://twitter.com/" target="_blank"
+        ><i class="pi pi-twitter" target="_blank"></i
+      ></a>
+    </div>
+    <!-- copyright -->
+    <div class="copyrights text-center m-3">
+      <p class="__copyrights">©Copyright All rights reserved 2022</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,40 @@
+<div
+  class="animal-card d-md-block d-flex justify-content-center flex-column align-items-center"
+>
+  <!-- Animal image -->
+  <figure class="d-flex justify-content-center">
+    <img [src]="animal.image!" class="img-fluid d-lg-none" />
+    <p-image
+      [src]="animal.image!"
+      class="d-none d-lg-block img-fluid"
+      [alt]="animal.name"
+      [preview]="true"
+    ></p-image>
+  </figure>
+  <div class="d-flex justify-content-between w-100">
+    <!-- Animal data -->
+    <div class="ms-3">
+      <h5>{{ animal.name }}</h5>
+      <p>{{ animal.age }} Months | {{ animal.type }}</p>
+    </div>
+    <!-- Details button -->
+    <div>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Details"
+        class="p-button-raised p-button-outlined animal-card__btn me-3"
+        (click)="showDetails = true"
+      ></button>
+    </div>
+  </div>
+  <!-- Animal details dialog -->
+  <p-dialog
+    header="{{ animal.name }}"
+    [(visible)]="showDetails"
+    styleClass="dialog"
+  >
+    <app-animal-details [animal]="animal"></app-animal-details>
+  </p-dialog>
+</div>

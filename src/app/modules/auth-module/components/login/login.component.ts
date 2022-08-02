@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   showErrors: boolean = false; //Flag to show form errors
+  disableButtons: boolean = false; //Flag to disable buttons during network requests
   loginForm: FormGroup = this._loginFormBuilder.group({
     email: [
       '',
@@ -20,8 +21,8 @@ export class LoginComponent implements OnInit {
           /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
         ),
       ],
-    ],
-    password: ['', [Validators.required]],
+    ], // Should have email format
+    password: ['', [Validators.required]], // Password should be entered
   }); //Form group having all inputs with validators
 
   get controlValidation() {
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+  //Restes form on destroy
   ngOnDestroy(): void {
     this.loginForm.reset();
   }
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
       //2- Then return the tokenId from the database
       //3- Save the response in the local storage
       //4- Navigate to home page.
+      this.disableButtons = true;
       this._authService
         .login(this.loginForm.value['email'], this.loginForm.value['password'])
         .then((response) => {
@@ -64,8 +67,9 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['/']);
           }, 1500);
         })
-        .catch((error) => {
+        .catch(() => {
           this.showErrorToast('Wrong email or password');
+          this.disableButtons = false;
         });
     }
   }
@@ -75,7 +79,7 @@ export class LoginComponent implements OnInit {
       key: 'Successtoast',
       severity: 'success',
       summary: '',
-      detail: 'Account created successfully',
+      detail: 'Welcome back to Happy Paws',
     });
   }
   //Function that shows error toaster

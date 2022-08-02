@@ -18,6 +18,7 @@ export class NavBarComponent implements OnInit {
       command: () => {
         this._router.navigate(['/store/products'], {
           queryParams: { animalType: AnimalType.Cat },
+          fragment: 'anchor',
         });
       },
       items: [
@@ -149,7 +150,7 @@ export class NavBarComponent implements OnInit {
           label: 'Sign In',
           icon: 'pi pi-sign-in',
           command: () => {
-            this._router.navigate(['/auth']);
+            this._router.navigate(['/auth/login']);
           },
         },
         {

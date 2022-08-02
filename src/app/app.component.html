@@ -1,8 +1,12 @@
-<app-nav-bar *ngIf="!activeURL.includes('auth')"></app-nav-bar>
+<!-- Navbar (shown in any page except login and register) -->
+<app-nav-bar *ngIf="showNavbarFooter"></app-nav-bar>
+<!-- Main section -->
 <main class="main">
   <router-outlet></router-outlet>
 </main>
-<app-footer *ngIf="!activeURL.includes('auth')"></app-footer>
+<!-- Footer (shown in any page except login and register) -->
+<app-footer *ngIf="showNavbarFooter"></app-footer>
+<!-- Scroll to top button -->
 <p-scrollTop
   [threshold]="100"
   icon="fa-solid fa-circle-arrow-up"

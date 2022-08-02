@@ -1,0 +1,16 @@
+.blog-card {
+  border-radius: 25px;
+  &__title {
+    color: var(--dark-grey-color);
+  }
+  &__sub-title {
+    color: var(--grey-color);
+  }
+  img {
+    border-radius: 25px 25px 0 0;
+  }
+}
+.blog-card:hover {
+  box-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.15) !important;
+  cursor: pointer;
+}

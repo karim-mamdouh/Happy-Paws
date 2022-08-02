@@ -1,13 +1,15 @@
 .navbar {
-  background-color: rgb(251, 248, 248);
+  background-color: var(--auth-background);
   figure {
     font-size: 0;
     width: 20%;
   }
-  .navbar__logo-text b{
-    color:rgb(103, 102, 102)
+  .navbar__logo-text b {
+    color: var(--dark-grey-color);
   }
-  
+  .active {
+    background-color: var(--pink-color);
+  }
 }
 
 :host ::ng-deep .p-button-label {
@@ -18,39 +20,53 @@
 }
 :host ::ng-deep .navbar__user-btn {
   background-color: white;
-  color: rgb(115, 115, 115);
-  border: 1px solid #ecada6;
+  color: var(--dark-grey-color);
+  border: 1px solid var(--pink-color);
 }
 :host ::ng-deep .navbar__user-btn:hover,
 :host ::ng-deep .navbar__user-btn:active {
-  background-color: #ecada6;
+  background-color: var(--pink-color);
   color: white;
-  border: 2px solid #ecada6;
+  border: 2px solid var(--pink-color);
 }
 :host ::ng-deep .navbar__user-btn:hover:active,
 :host ::ng-deep .navbar__user-btn:hover:focus {
-  background-color: #ecada6;
+  background-color: var(--pink-color);
   color: white;
-  border: 2px solid #ecada6;
+  border: 2px solid var(--pink-color);
 }
 :host ::ng-deep .navbar__user-btn:focus {
-  outline: #ecada6;
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ecada6, 0 1px 2px 0 black;
-  color: #999;
+  outline: var(--pink-color);
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--pink-color), 0 1px 2px 0 black;
+  color: var(--grey-color);
 }
 :host ::ng-deep .p-tieredmenu .p-menuitem.p-menuitem-active > .p-menuitem-link {
   background: #e9ecef;
 }
-:host ::ng-deep .p-tieredmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-text ,
-:host ::ng-deep .p-tieredmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-icon,
-:host ::ng-deep .p-tieredmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-submenu-icon  {
+:host
+  ::ng-deep
+  .p-tieredmenu
+  .p-menuitem.p-menuitem-active
+  > .p-menuitem-link
+  .p-menuitem-text,
+:host
+  ::ng-deep
+  .p-tieredmenu
+  .p-menuitem.p-menuitem-active
+  > .p-menuitem-link
+  .p-menuitem-icon,
+:host
+  ::ng-deep
+  .p-tieredmenu
+  .p-menuitem.p-menuitem-active
+  > .p-menuitem-link
+  .p-submenu-icon {
   color: #495057;
 }
 :host ::ng-deep .p-tieredmenu .p-menuitem-link:focus {
   box-shadow: none;
 }
 :host ::ng-deep .p-menu .p-menuitem-link:focus {
-
   box-shadow: none;
 }
 :host ::ng-deep .navbar__store-btn {
@@ -72,12 +88,13 @@
 @media (min-width: 992px) {
   .navbar__links {
     border-radius: 20px;
-    background-color: #999;
+    background-color: var(--grey-color);
     a {
       color: white;
     }
-    .nav-item:focus,.nav-item:hover{
-      background-color:#ecada6
+    .nav-item:focus,
+    .nav-item:hover {
+      background-color: var(--pink-color);
     }
   }
   :host ::ng-deep .navbar__store-btn {
