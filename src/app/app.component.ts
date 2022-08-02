@@ -29,18 +29,6 @@ export class AppComponent {
         this.activeURL = event.url;
     });
 
-    // get Wishlist from firebase and save inside the store
-    this._firestoreService.fetchAllWishlistItems(localStorage.getItem('userID')!).pipe(
-      map((snapshot) => {
-        return snapshot.payload.data();
-      })
-    ).subscribe(res => {
-      this._store.dispatch(resetWishList());
-      let temp = res as Array<ProductItem>;
-      let tempToArray: Array<ProductItem> = Object.values(temp);
-      this._store.dispatch(fillWishList({ payload: tempToArray }))
-    })
-
     // get Products from firebase and save inside the store and cache it locally
     if (sessionStorage.getItem('product') == null) {
       this._firestoreService.fetchAllStoreItems().pipe(
@@ -61,24 +49,40 @@ export class AppComponent {
       this._store.dispatch(fillProducts({ payload: temp }));
     }
 
-    // Change the local products wishlist status based on user`s wishlist 
-    this._store.select('store').pipe(take(3)).subscribe(res => {
-      if (res.wishList.length > 0) {
-        // Creating Deep Copies of products,wishlist to be able to modify properties
-        let tempProducts: Array<ProductItem> = JSON.parse(JSON.stringify(res.products));
-        let tempWishList: Array<ProductItem> = JSON.parse(JSON.stringify(res.wishList));
-        // looping to change the wishlist status inside products
-        for (let i: number = 0; i < tempProducts.length; i++) {
-          for (let j: number = 0; j < tempWishList.length; j++) {
-            if (tempProducts[i].id == tempWishList[j].id) {
-              tempProducts[i].wishList = true;
+    // If User is logged in
+    if (localStorage.getItem('userID')) {
+      // get Wishlist from firebase and save inside the store
+      this._firestoreService.fetchAllWishlistItems(localStorage.getItem('userID')!).pipe(
+        map((snapshot) => {
+          return snapshot.payload.data();
+        })
+      ).subscribe(res => {
+        this._store.dispatch(resetWishList());
+        let temp = res as Array<ProductItem>;
+        let tempToArray: Array<ProductItem> = Object.values(temp);
+        this._store.dispatch(fillWishList({ payload: tempToArray }))
+      })
+
+      // Change the local products wishlist status based on user`s wishlist 
+      this._store.select('store').pipe(take(3)).subscribe(res => {
+        if (res.wishList.length > 0) {
+          // Creating Deep Copies of products,wishlist to be able to modify properties
+          let tempProducts: Array<ProductItem> = JSON.parse(JSON.stringify(res.products));
+          let tempWishList: Array<ProductItem> = JSON.parse(JSON.stringify(res.wishList));
+          // looping to change the wishlist status inside products
+          for (let i: number = 0; i < tempProducts.length; i++) {
+            for (let j: number = 0; j < tempWishList.length; j++) {
+              if (tempProducts[i].id == tempWishList[j].id) {
+                tempProducts[i].wishList = true;
+              }
             }
           }
+          // saving the new state in ngrx store
+          this._store.dispatch(resetProducts());
+          this._store.dispatch(fillProducts({ payload: tempProducts }));
         }
-        // saving the new state in ngrx store
-        this._store.dispatch(resetProducts());
-        this._store.dispatch(fillProducts({ payload: tempProducts }));
-      }
-    })
+      });
+
+    }
   }
 }
