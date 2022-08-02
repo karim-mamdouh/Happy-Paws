@@ -72,7 +72,17 @@ section {
       border-radius: 3px;
     }
   }
-  .CardContainer {
+  table {
+    tbody {
+      td {
+        .title {
+          width: 500px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
     .card__title {
       margin-bottom: 0.5rem !important;
     }

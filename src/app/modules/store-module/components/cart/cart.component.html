@@ -4,7 +4,7 @@
   <!-- Empty cart Page -->
   <h2 class="emptyCart mt-5 text-center p-5 border rounded bg-light">
     <figure class="img-fluid">
-      <img src="{assets/images/Dog.png}" alt="Dog" />
+      <img src="assets/images/Dog.png" alt="Dog" />
     </figure>
     <p>Your Happy Paws Cart Is Empty</p>
     <p-button
@@ -22,12 +22,14 @@
   <section class="mt-5 container border rounded">
     <!-- Empty Cart Button -->
     <div class="d-flex justify-content-end">
-      <button class="btn btn-danger my-3 mx-4" (click)="onEmptyCartClick()">Empty Cart</button>
+      <button class="btn btn-danger my-3 mx-4" (click)="onEmptyCartClick()">
+        Empty Cart
+      </button>
     </div>
 
     <!-- Cart items table in large screens-->
     <div class="d-none d-lg-block">
-      <table class="table" *ngFor="let item of cart">
+      <table class="table">
         <thead>
           <!-- Table header -->
           <tr>
@@ -38,20 +40,24 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let item of cart">
           <!-- Table Item -->
           <tr>
             <td class="w-25 align-middle">
               <figure class="m-0">
                 <img
-                  src="{{item.images[0]}}"
+                  src="{{ item.images[0] }}"
                   alt="Item Image"
                   class="img-fluid"
                 />
               </figure>
             </td>
-            <td class="align-middle"><p class="fs-5">{{item.title}}</p></td>
-            <td class="align-middle"><p class="fs-5">{{item.price}} EGP</p></td>
+            <td class="align-middle">
+              <p class="fs-5 title">{{ item.title }}</p>
+            </td>
+            <td class="align-middle">
+              <p class="fs-5">{{ item.price }} EGP</p>
+            </td>
             <td class="align-middle">
               <button
                 class="fs-5 text-secondary btn btn-light QuantityBtn"
@@ -68,8 +74,9 @@
               </button>
             </td>
             <td class="text-center align-middle">
-              <button class="btn btn-light removeBtn"
-              (click)="removeCartItem(item)"
+              <button
+                class="btn btn-light removeBtn"
+                (click)="removeCartItem(item)"
               >
                 <i class="fa-solid fa-trash-can fs-3"></i>
               </button>
@@ -82,22 +89,22 @@
     <!-- Cart items Cards in medium and small screens-->
     <div class="p-2 d-flex flex-wrap CardContainer d-lg-none">
       <div class="col-12 p-2">
-        <p-card styleClass="p-card-shadow  card p-2 "  *ngFor="let item of cart">
+        <p-card styleClass="p-card-shadow  card p-2 " *ngFor="let item of cart">
           <ng-template pTemplate="header">
             <div class="d-flex card__detailsContainer">
               <figure>
                 <img
                   alt="Itam Image"
                   class="card__img img-fluid"
-                  src="{{item.images[0]}}"
+                  src="{{ item.images[0] }}"
                 />
               </figure>
               <div class="mx-3">
                 <p class="card__title fw-md-bold fs-md-6">
-                  {{item.title}}
+                  {{ item.title }}
                 </p>
                 <p class="card__price fw-bold my-1 fs-6" style="color: #ecada6">
-                  {{item.price}} EGP
+                  {{ item.price }} EGP
                 </p>
               </div>
             </div>
@@ -106,8 +113,9 @@
           <ng-template pTemplate="footer">
             <div class="d-flex justify-content-between card__buttonsContainer">
               <div>
-                <button class="btn btn-light removeBtn"
-                (click)="removeCartItem(item)"
+                <button
+                  class="btn btn-light removeBtn"
+                  (click)="removeCartItem(item)"
                 >
                   <i class="fa-solid fa-trash-can fs-3"></i>
                 </button>
@@ -135,6 +143,6 @@
     </div>
 
     <!-- Total price -->
-    <h4 class="mt-4 text-end mb-5">Total Price: {{totalCartPrice}} EGP</h4>
+    <h4 class="mt-4 text-end mb-5">Total Price: {{ totalCartPrice }} EGP</h4>
   </section>
 </ng-template>
