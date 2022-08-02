@@ -9,9 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class FilterationComponent implements OnInit {
-  categories: string[] = Object.keys(ProductCategory);
-  brands: string[] = Object.keys(Brand);
-  animals: string[] = Object.keys(AnimalType);
+  categories: string[] = Object.values(ProductCategory);
+  brands: string[] = Object.values(Brand);
+  animals: string[] = Object.values(AnimalType);
 
   selectedAnimalType: string[] = [];
   selectedCategory: string[] = [];
