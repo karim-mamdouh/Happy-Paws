@@ -39,7 +39,6 @@ export enum Brand {
   Josera = 'Josera',
   RoyalCanin = 'Royal Canin',
   Belcando = 'Belcando',
-  Mera = 'Mera',
   OmniGuard = 'Omni Guard',
   Bewi = 'Bewi',
   PetMatter = 'Pet Matters',
