@@ -1,1 +1,52 @@
-<p>footer works!</p>
+<footer class="bg-dark text-white">
+  <!-- main container -->
+  <div class="container py-2">
+    <!-- logo  -->
+    <div class="logo my-2 text-center">
+      <a routerLink="/">Yummy🍽Taste</a>
+      <p class="footerText w-50 m-auto">
+        Recipes you want to make. In this site you can find all recipes for your
+        favourite category and favourite dish and you can make it easily at
+        home.
+      </p>
+    </div>
+    <!-- info container -->
+    <div class="infoContainer d-flex my-2 justify-content-center">
+      <div class="important-links text-center">
+        <p class="my-4 fs-4">Links</p>
+        <ul class="d-flex">
+          <ng-template [ngIf]="!loggedIn" [ngIfElse]="elseBlock">
+            <li class="mx-3"><a routerLink="/auth/login">LogIn</a></li>
+            <li class="mx-3"><a routerLink="/auth/register">Register</a></li>
+          </ng-template>
+          <ng-template #elseBlock>
+            <li class="mx-3">
+              <a routerLink="" (click)="logout()">Logout</a>
+            </li>
+          </ng-template>
+          <li class="mx-3"><a routerLink="/food/homepage">Category</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- social media -->
+    <hr />
+    <div class="socialMedia d-flex justify-content-center">
+      <a href="https://www.facebook.com/" target="_blank"
+        ><i class="pi pi-facebook"></i
+      ></a>
+      <a href="https://www.instagram.com/" target="_blank"
+        ><i class="pi pi-instagram"></i
+      ></a>
+      <a href="https://www.youtube.com/" target="_blank"
+        ><i class="pi pi-youtube" target="_blank"></i
+      ></a>
+      <a href="https://twitter.com/" target="_blank"
+        ><i class="pi pi-twitter" target="_blank"></i
+      ></a>
+    </div>
+    <!-- copyright -->
+    <div class="copyrights text-center m-3">
+      <p class="__copyrights">©Copyright All rights reserved 2022</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,34 @@
+footer {
+  li {
+    list-style: none;
+    a {
+      text-decoration: none;
+      color: darkgray;
+    }
+  }
+  .logo {
+    a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 30px;
+    }
+    .footerText {
+      color: darkgray;
+    }
+  }
+  .socialMedia {
+    a {
+      margin: 10px;
+      i {
+        font-size: 30px;
+        color: #fff;
+      }
+    }
+  }
+  .copyrights {
+    .__copyrights {
+      font-size: 0.75rem;
+      color: darkgray;
+    }
+  }
+}
