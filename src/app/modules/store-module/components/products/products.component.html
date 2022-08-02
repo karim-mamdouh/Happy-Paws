@@ -1,25 +1,49 @@
-<main class="container-fluid">
+<!-- Main Section -->
+<section>
+  <!-- Main Container -->
   <div class="container">
-    <section class="wrapper__store d-flex justify-content-between">
-      <div style="height: 100%" class="wrapper__store__filter col-lg-3">
-        <app-filteration class="col-lg-12 d-lg-block d-none"></app-filteration>
+    <!-- Product Page Content -->
+    <div class="wrapper__store d-flex justify-content-between">
+      <!-- Filter Container -->
+      <div class="wrapper__store__filter col-lg-3">
+        <app-filteration
+          (filterOptions)="onFilterOptionsChange($event)"
+          class="col-lg-12 d-lg-block d-none"
+        ></app-filteration>
       </div>
-      <div
-        style="height: 100%"
-        class="wrapper__store__content col-lg-9 d-block"
-      >
+      <!-- Cards Container -->
+      <div class="wrapper__store__content col-lg-9 d-block">
         <div class="p-4 d-flex flex-wrap">
           <div
             class="col-lg-4 col-md-6 col-12 p-2"
-            *ngFor="let product of (productsObservable | async)?.products"
+            *ngFor="let product of displayFilteredProductList"
           >
             <app-product-card [product]="product"> </app-product-card>
           </div>
         </div>
-        <div>
-          <p-paginator [rows]="10" [totalRecords]="120"></p-paginator>
+      </div>
+    </div>
+
+    <!-- Paginators Container-->
+    <div class="paginator">
+      <!-- Paginator in Large Screens -->
+      <div class="d-lg-block d-none">
+        <p-paginator [rows]="10" [totalRecords]="120"></p-paginator>
+      </div>
+      <!-- Paginator in Small Screens -->
+      <div
+        class="grid d-flex justify-content-center align-items-center d-lg-none"
+      >
+        <div class="col-10">
+          <p-paginator
+            [rows]="1"
+            [first]="1"
+            [totalRecords]="12"
+            [showJumpToPageDropdown]="true"
+            [showPageLinks]="false"
+          ></p-paginator>
         </div>
       </div>
-    </section>
+    </div>
   </div>
-</main>
+</section>

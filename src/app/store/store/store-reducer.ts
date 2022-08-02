@@ -5,6 +5,7 @@ import {
   addToCart,
   addToWishList,
   decrementCartItem,
+  fillCartList,
   fillProducts,
   fillWishList,
   incrementCartItem,
@@ -82,6 +83,13 @@ export const storeReducer = createReducer(
     return {
       ...state,
       wishList: [] as Array<ProductItem>,
+    };
+  }),
+  //Fill cart list items action
+  on(fillCartList, (state, action) => {
+    return {
+      ...state,
+      cart: [...state.cart, ...action.payload],
     };
   }),
   //Add product item to cart action

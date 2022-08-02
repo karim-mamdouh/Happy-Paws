@@ -1,0 +1,163 @@
+//--------------------------- VARIABLES ------------------------
+$color-primary: #ecada6;
+$color-secondary: #999999;
+$color-accent: #ffcdd2;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-main: rgb(251, 248, 248);
+$color-gold: #e5b80b;
+$color-danger: #c63737;
+$color-green: #256029;
+$color-lightgreen: #c8e6c9;
+
+//--------------------------- Main Section ------------------------
+section {
+  background-color: $color-main;
+  .hero-container {
+    background-image: url("../../../assets/images/ui.png"),
+      url("../../../assets/images/paw.png"),
+      url("../../../assets/images/paw.png"),
+      url("../../../assets/images/paw.png");
+    background-size: 50% 95%, 7% 15%, 7% 15%, 7% 15%;
+    height: 635px;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    background-position: center, 303px 0px, 1250px 200px, 103px 500px;
+    background-color: $color-main;
+    .hero {
+      &__content {
+        &__text {
+          font-size: 60px;
+        }
+      }
+    }
+  }
+
+  .type {
+    .typesButtons {
+      img {
+        width: 10rem;
+        height: 15rem;
+        border-radius: 10px;
+      }
+      .CategoryRouter {
+        &__content {
+          box-shadow: 5px 10px 18px #888888;
+          background-color: #e5e5e5;
+          // background-color: #d3d3d3;
+        }
+        a {
+          text-decoration: none;
+          color: #000;
+        }
+      }
+    }
+  }
+
+  .services {
+    &__text {
+      background-image: url("../../../assets/images/paw.png");
+      background-size: 10% 100%;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      background-position: 600px 0px;
+      background-color: transparent;
+    }
+    &__card {
+      background-color: $color-white;
+      border-radius: 40px;
+
+      .icon-container {
+        i {
+          color: $color-white;
+        }
+        border-radius: 50%;
+        background-color: $color-primary;
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    &__card:hover {
+      background-color: $color-primary;
+      .icon-container {
+        i {
+          color: $color-primary;
+        }
+
+        background-color: $color-white;
+      }
+      p {
+        color: $color-white;
+      }
+    }
+  }
+  .product-item {
+    .product-item-content {
+      border: 1px solid var(--surface-d);
+      border-radius: 3px;
+      margin: 0.3rem;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .product-image {
+      width: 50%;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+  }
+}
+
+//--------------------------- Shop Now BUTTON START------------------------
+
+:host ::ng-deep .p-button {
+  background: $color-secondary;
+  border: 1px solid $color-secondary;
+}
+
+:host ::ng-deep .p-button:enabled:hover {
+  background: $color-primary;
+  color: $color-white;
+  border-color: $color-accent;
+}
+
+:host ::ng-deep .p-button:focus {
+  background-color: none;
+  box-shadow: 0 0 0 0.1rem transparent !important;
+}
+
+:host ::ng-deep .p-button:enabled:focus {
+  box-shadow: 0 0 0 0.2rem !important;
+  border-color: none !important;
+}
+
+//--------------------------- Shop Now BUTTON END------------------------
+
+@media screen and (max-width: 992px) {
+  section {
+    .hero-container {
+      background-image: url("../../../assets/images/ui.png"),
+        url("../../../assets/images/paw.png"),
+        url("../../../assets/images/paw.png"),
+        url("../../../assets/images/paw.png");
+      background-size: 60% 70%, 12% 15%, 12% 15%, 12% 15%;
+      height: 635px;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      background-position: center, 3.125rem 0rem, 21.9rem 12.5rem, center;
+      background-color: $color-main;
+      .hero {
+        &__content {
+          &__text {
+            font-size: 30px !important;
+            margin: 3px;
+          }
+          &__para {
+            font-size: 20px;
+            margin: 5px;
+          }
+        }
+      }
+    }
+  }
+}

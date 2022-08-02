@@ -1,1 +1,224 @@
-<p>home works!</p>
+<Section>
+  <!-- Hero Container -->
+  <div class="hero-container">
+    <!-- Hero Section -->
+    <div class="hero container d-flex justify-content-center">
+      <div class="hero__content my-1">
+        <p class="hero__content__text mt-lg-4 text-center">
+          Your Pet is Part of Your Family
+        </p>
+        <p class="hero__content__para fs-5 mt-lg-4 text-center">
+          Let us treat your pet like our own family with best services and
+          packages.
+        </p>
+        <div class="text-center">
+          <p-button
+            styleClass="card__addToCart mt-4 rounded-5 "
+            label="Shop Now"
+            icon="pi pi-shopping-bag"
+          >
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animal type -->
+  <div class="type container py-5">
+    <h3 class="text-center mb-5">Types</h3>
+    <div class="typesButtons d-lg-flex justify-content-center my-5 d-md-block">
+      <div class="CategoryRouter text-center mx-5 my-3">
+        <a routerLink="/store">
+          <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
+            <img src="assets/images/Cat_November.png" alt="Cat Image" />
+            <p class="p-3 m-auto"><b>Cats Shop</b></p>
+          </div>
+        </a>
+      </div>
+      <div class="CategoryRouter text-center mx-5 my-3">
+        <a routerLink="/store">
+          <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
+            <img src="assets/images/bg-dog.png" alt="Dog Image" />
+            <p class="p-3 m-auto"><b> Dogs Shop</b></p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- What We Can Do (Services)-->
+  <div class="services container my-5">
+    <!-- heading text -->
+    <div class="services__text my-5">
+      <h2 class="text-center fs-1 mb-4">What We Can Do</h2>
+      <p class="text-center pb-4 m-auto fs-4">
+        We look after your pet, we ensure that we will give the best treatment
+        for your pet.
+      </p>
+    </div>
+    <!-- services cards container -->
+    <div
+      class="services__container container d-lg-flex my-5 justify-content-center align-items-center;"
+    >
+      <!-- store card -->
+      <div class="services__card m-4 col-lg-4 col-md-12 p-5 shadow">
+        <div class="icon-container m-auto shadow d-flex">
+          <i class="fa-solid fa-store m-auto fs-2"></i>
+        </div>
+        <p class="text-center fs-3 m-4">Store</p>
+        <p class="text-center fs-6 px-4">
+          You can find Supplies, Accessories, Toys all stuff for your pet.
+        </p>
+      </div>
+      <!-- Adoption card -->
+      <div class="services__card col-lg-4 col-md-12 m-4 p-5 shadow">
+        <div class="icon-container m-auto shadow d-flex">
+          <i class="fa-solid fa-paw m-auto fs-1"></i>
+        </div>
+        <p class="text-center fs-3 m-4">Adoption</p>
+        <p class="text-center fs-6 px-4">
+          You can add a new member of your family or find someone to adopt your
+          pet.
+        </p>
+      </div>
+      <!-- Blog card -->
+      <div class="services__card m-4 col-lg-4 col-md-12 p-5 shadow">
+        <div class="icon-container m-auto shadow d-flex">
+          <i class="fa-solid fa-blog m-auto fs-1"></i>
+        </div>
+        <p class="text-center fs-3 m-4">Blog</p>
+        <p class="text-center fs-6 px-4">
+          You can find very useful articals about pets and know more about its
+          health and food.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products -->
+  <p-carousel
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+  >
+    <ng-template let-product pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="p-mb-3"></div>
+          <div>
+            <h4 class="p-mb-1">{{ product.name }}</h4>
+            <h6 class="p-mt-0 p-mb-3">${{ product.price }}</h6>
+            <span
+              [class]="
+                'product-badge status-' + product.inventoryStatus.toLowerCase()
+              "
+              >{{ product.inventoryStatus }}</span
+            >
+            <div class="car-buttons p-mt-5">
+              <p-button
+                type="button"
+                styleClass="p-button p-button-rounded p-mr-2"
+                icon="pi pi-search"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-success p-button-rounded p-mr-2"
+                icon="pi pi-star"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-help p-button-rounded"
+                icon="pi pi-cog"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+  <!-- blog -->
+  <p-carousel
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+  >
+    <ng-template let-product pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="p-mb-3"></div>
+          <div>
+            <h4 class="p-mb-1">{{ product.name }}</h4>
+            <h6 class="p-mt-0 p-mb-3">${{ product.price }}</h6>
+            <span
+              [class]="
+                'product-badge status-' + product.inventoryStatus.toLowerCase()
+              "
+              >{{ product.inventoryStatus }}</span
+            >
+            <div class="car-buttons p-mt-5">
+              <p-button
+                type="button"
+                styleClass="p-button p-button-rounded p-mr-2"
+                icon="pi pi-search"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-success p-button-rounded p-mr-2"
+                icon="pi pi-star"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-help p-button-rounded"
+                icon="pi pi-cog"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+  <!-- Adoption -->
+  <p-carousel
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+    [responsiveOptions]="responsiveOptions"
+  >
+    <ng-template let-product pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="p-mb-3"></div>
+          <div>
+            <h4 class="p-mb-1">{{ product.name }}</h4>
+            <h6 class="p-mt-0 p-mb-3">${{ product.price }}</h6>
+            <span
+              [class]="
+                'product-badge status-' + product.inventoryStatus.toLowerCase()
+              "
+              >{{ product.inventoryStatus }}</span
+            >
+            <div class="car-buttons p-mt-5">
+              <p-button
+                type="button"
+                styleClass="p-button p-button-rounded p-mr-2"
+                icon="pi pi-search"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-success p-button-rounded p-mr-2"
+                icon="pi pi-star"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-help p-button-rounded"
+                icon="pi pi-cog"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</Section>

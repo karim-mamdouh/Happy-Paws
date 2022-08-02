@@ -2,6 +2,7 @@ import { AnimalType } from './adoption';
 
 export interface Review {
   userID: string;
+  userName:string;
   rate: number;
   comment?: string;
 }
@@ -30,7 +31,7 @@ export enum ProductCategory {
   Accessories = 'Accessories',
   Toys = 'Toys',
   Litter = 'Litter',
-  Grooming = 'Gromming',
+  Grooming = 'Grooming',
 }
 
 export enum Brand {

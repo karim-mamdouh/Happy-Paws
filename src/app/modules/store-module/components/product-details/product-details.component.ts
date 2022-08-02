@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { CartItem, ProductItem, Review } from 'src/app/interfaces/store';
+import { DatabaseService } from 'src/app/services/database.service';
+import { resetCart, resetWishList } from 'src/app/store/store/store-actions';
 
 @Component({
   selector: 'app-product-details',
@@ -6,13 +11,96 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  val: number = 0;
-  val1: number = 4;
-  quantity: number = 1;
-  checked1: boolean = false;
-  checked2: boolean = true;
+  cartlist: Array<CartItem> = [];
+  product: ProductItem = {} as ProductItem;
+  // Add review
+  reviewRating: number = 3;
+  comment?: string = '';
+  // wishlist
+  wishlist: Array<ProductItem> = [];
 
-  constructor() {}
+  constructor(private _router: ActivatedRoute,
+    private _firestoreService: DatabaseService,
+    private _store: Store<{
+      store: { cart: Array<CartItem>, products: Array<ProductItem>, wishList: Array<ProductItem> }
+    }>) {
+    this._store.select('store').subscribe(res => {
+      this.wishlist = JSON.parse(JSON.stringify(res.wishList));
+      this.cartlist = JSON.parse(JSON.stringify(res.cart));
+    });
+  }
+  ngOnInit(): void {
+    this._router.queryParams.subscribe((res) => {
+      this.product = JSON.parse(res['product']);
+    });
 
-  ngOnInit(): void {}
+  }
+  onAddToWishlistClick(event: Event, product: ProductItem) {
+
+    // if product already in wishlist 
+    // Remove the product
+    if (product.wishList) {
+      // Get index of the product inside wishlist
+      const index = this.wishlist.findIndex(item => item.id === product.id);
+      this.product.wishList = false;
+      // remove from local wishlist
+      this.wishlist.splice(index, 1);
+
+      // update firebase with the new wishlist state
+      this._firestoreService.removeFromWishlist(localStorage.getItem('userID')!, this.wishlist).then(res => {
+        this._store.dispatch(resetWishList());
+      })
+
+    }
+    // if product is not in wishlist 
+    else {
+      this.product.wishList = true;
+      // Add the product to local wishlist
+      this.wishlist = [...this.wishlist, product];
+      // update firebase with the new wishlist state
+      this._firestoreService.addToWishlist(localStorage.getItem('userID')!, this.wishlist).then(res => {
+        this._store.dispatch(resetWishList());
+      })
+    }
+
+  }
+  addToCart(product: ProductItem) {
+    let cartObj = JSON.parse(JSON.stringify(product)) as CartItem;
+    cartObj.count = 1;
+    this.cartlist = [...this.cartlist, cartObj]
+    this._firestoreService.addToCart(localStorage.getItem('userID')!, this.cartlist).then(() => {
+      this._store.dispatch(resetCart());
+    })
+  }
+  reset() {
+    this.reviewRating = 3;
+    this.comment = '';
+  }
+  onSubmitReviewClick(event: Event) {
+    if (localStorage.getItem('userID') != null) {
+      // Create a new Review object
+      let reviewObject: Review = {} as Review;
+      reviewObject.rate = this.reviewRating;
+      reviewObject.userID = localStorage.getItem('userID')!;
+      reviewObject.userName = 'Mahmoud Badawy';
+      reviewObject.comment = this.comment ? this.comment : undefined;
+
+      // get the old reviews array and add the new review to it 
+      let oldReviews = this.product.reviews;
+      this.product.reviews = [...oldReviews, reviewObject];
+
+      // update the product reviews in the database
+      this._firestoreService.addReviewToProductItem(this.product).then(res => {
+        alert("Successfually added Review");
+        this.reset();
+
+      }).catch(err => {
+        alert(`Error adding your review, Please contact the support ${err}`);
+      })
+    }
+    else {
+      alert("Please Login first !");
+    }
+
+  }
 }
