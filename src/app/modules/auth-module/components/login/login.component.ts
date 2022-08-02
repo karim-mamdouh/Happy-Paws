@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   showErrors: boolean = false; //Flag to show form errors
+  disableButtons: boolean = false; //Flag to disable buttons during network requests
   loginForm: FormGroup = this._loginFormBuilder.group({
     email: [
       '',
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
       //2- Then return the tokenId from the database
       //3- Save the response in the local storage
       //4- Navigate to home page.
+      this.disableButtons = true;
       this._authService
         .login(this.loginForm.value['email'], this.loginForm.value['password'])
         .then((response) => {
@@ -67,6 +69,7 @@ export class LoginComponent implements OnInit {
         })
         .catch(() => {
           this.showErrorToast('Wrong email or password');
+          this.disableButtons = false;
         });
     }
   }

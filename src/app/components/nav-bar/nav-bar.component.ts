@@ -18,6 +18,7 @@ export class NavBarComponent implements OnInit {
       command: () => {
         this._router.navigate(['/store/products'], {
           queryParams: { animalType: AnimalType.Cat },
+          fragment: 'anchor',
         });
       },
       items: [

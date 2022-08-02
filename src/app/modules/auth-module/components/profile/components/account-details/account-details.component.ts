@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/profile';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-account-details',
@@ -11,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./account-details.component.scss'],
 })
 export class AccountDetailsComponent implements OnInit {
+  @Input() disableButtons: boolean = false; //Flag to disable all buttons during network requests
   @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData with data from parent
   @Output() profileEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   @Output() changePasswordEmitter = new EventEmitter(); // Event emitter to notify parent to change password

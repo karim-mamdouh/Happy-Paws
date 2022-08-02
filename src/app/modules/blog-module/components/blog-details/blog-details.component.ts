@@ -8,12 +8,10 @@ import { Article } from 'src/app/interfaces/blog';
   styleUrls: ['./blog-details.component.scss'],
 })
 export class BlogDetailsComponent implements OnInit {
-  article = {} as Article;
+  article = {} as Article; //Article object to be viewed
   constructor(private _activeRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // this.article = this._activeRoute.snapshot.queryParams['article'] as Article;
-    // console.log(this._activeRoute.snapshot.queryParams['article']);
     this.article = {
       author: 'Yasmeen',
       body: [{ data: 'aaaaaaaa' }],

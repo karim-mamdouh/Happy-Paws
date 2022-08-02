@@ -9,6 +9,7 @@ import { User } from 'src/app/interfaces/profile';
   styleUrls: ['./my-pets.component.scss'],
 })
 export class MyPetsComponent implements OnInit {
+  @Input() disableButtons: boolean = false; //Flag to disable all buttons during network requests
   @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData.pet with data from parent
   @Output() petEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   userData = {} as User; // User object to be viewed and editied

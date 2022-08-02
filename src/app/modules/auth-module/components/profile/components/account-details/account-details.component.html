@@ -154,6 +154,7 @@
       <!-- Save button -->
       <button
         pButton
+        [disabled]="disableButtons"
         pRipple
         type="submit"
         label="Save Changes"
@@ -161,6 +162,7 @@
       ></button>
       <!-- Change password button -->
       <button
+        [disabled]="disableButtons"
         pButton
         pRipple
         type="button"
@@ -171,6 +173,7 @@
       <!-- Delete account button -->
       <button
         pButton
+        [disabled]="disableButtons"
         (click)="showPasswordDialog = true"
         pRipple
         type="button"

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
-import { Address, User } from '../interfaces/profile';
+import { User } from '../interfaces/profile';
+import { doc, updateDoc, deleteField } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -64,25 +65,6 @@ export class AuthService {
       );
     });
   }
-
-  // // current logged in user
-  // getCurrentUser() {
-  //   this._fireAuth.authState.subscribe(
-  //     (user) => {
-  //       if (user) {
-  //         // User = the current logged in user
-  //         // call user.id to get he UID
-  //         // this.fetchUserProfile(user.uid);
-  //       } else {
-  //         // No user is logged in
-  //         console.log('AUTHSTATE USER EMPTY', user);
-  //       }
-  //     },
-  //     (err) => {
-  //       console.log('Please try again');
-  //     }
-  //   );
-  // }
 }
 
 enum FireStoreCollections {

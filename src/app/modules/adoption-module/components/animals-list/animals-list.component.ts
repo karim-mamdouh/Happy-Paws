@@ -29,6 +29,8 @@ export class AnimalsListComponent implements OnInit {
       type: 'cat',
       weight: 10,
       image: 'assets/images/animals/cat4.jpg',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fugiat expedita distinctio dolorem odit voluptas minus rem accusamus laudantium debitis ex repellendus facilis deleniti in, cumque magnam aliquid delectus? Aliquam. Error labore nesciunt recusandae commodi eius vitae, laudantium dolorem, fugit aliquid possimus assumenda.',
     },
     {
       name: 'Meow',
@@ -38,6 +40,8 @@ export class AnimalsListComponent implements OnInit {
       type: 'cat',
       weight: 10,
       image: 'assets/images/animals/cat4.jpg',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fugiat expedita distinctio dolorem odit voluptas minus rem accusamus laudantium debitis ex repellendus facilis deleniti in, cumque magnam aliquid delectus? Aliquam. Error labore nesciunt recusandae commodi eius vitae, laudantium dolorem, fugit aliquid possimus assumenda.',
     },
     {
       name: 'Meow',
@@ -47,6 +51,8 @@ export class AnimalsListComponent implements OnInit {
       type: 'cat',
       weight: 10,
       image: 'assets/images/animals/cat4.jpg',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fugiat expedita distinctio dolorem odit voluptas minus rem accusamus laudantium debitis ex repellendus facilis deleniti in, cumque magnam aliquid delectus? Aliquam. Error labore nesciunt recusandae commodi eius vitae, laudantium dolorem, fugit aliquid possimus assumenda.',
     },
     {
       name: 'Meow',
@@ -56,6 +62,8 @@ export class AnimalsListComponent implements OnInit {
       type: 'cat',
       weight: 10,
       image: 'assets/images/animals/cat4.jpg',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fugiat expedita distinctio dolorem odit voluptas minus rem accusamus laudantium debitis ex repellendus facilis deleniti in, cumque magnam aliquid delectus? Aliquam. Error labore nesciunt recusandae commodi eius vitae, laudantium dolorem, fugit aliquid possimus assumenda.',
     },
   ];
 }

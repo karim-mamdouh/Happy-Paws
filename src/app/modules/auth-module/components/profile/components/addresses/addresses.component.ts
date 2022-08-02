@@ -9,6 +9,7 @@ import { User } from 'src/app/interfaces/profile';
   styleUrls: ['./addresses.component.scss'],
 })
 export class AddressesComponent implements OnInit {
+  @Input() disableButtons: boolean = false; //Flag to disable all buttons during network requests
   @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData.address? with data from parent
   @Output() addressEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   userData = {} as User; // User object to be viewed and editied

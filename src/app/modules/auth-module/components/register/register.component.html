@@ -1,5 +1,6 @@
 <section class="container-fluid register">
   <div class="row">
+    <!-- Register image -->
     <div class="register__img col-6 d-none d-lg-block"></div>
     <div class="col-xl-6 col-12 register__form">
       <!-- Logo section -->
@@ -19,6 +20,7 @@
         </h1>
       </a>
       <h2 class="pt-4 ps-4 register__sub-title mb-2">Create new account</h2>
+      <!-- Register form -->
       <form
         [formGroup]="registerForm"
         (ngSubmit)="submitReactiveForm()"
@@ -319,6 +321,7 @@
           <button
             pButton
             pRipple
+            [disabled]="disableButtons"
             type="submit"
             label="Sign up"
             class="p-button-raised register__button w-75 mx-auto"

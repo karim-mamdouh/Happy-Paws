@@ -1,5 +1,7 @@
+//Modules
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+//Components
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 

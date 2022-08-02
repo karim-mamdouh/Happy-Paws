@@ -8,21 +8,15 @@ import { Article } from 'src/app/interfaces/blog';
   styleUrls: ['./blog-card.component.scss'],
 })
 export class BlogCardComponent implements OnInit {
-  @Input() article = {} as Article;
+  @Input() article = {} as Article; //Article object to be viewed
 
-  constructor(private _router: Router) {
-    this.article = {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: '',
-      type: 'Cat',
-    };
-  }
-  goToBlogDetails() {
+  constructor(private _router: Router) {}
+
+  ngOnInit(): void {}
+  // Navigates to details page
+  goToBlogDetails(): void {
     this._router.navigate(['/blog/details'], {
-      queryParams: { article: this.article.author },
+      queryParams: { id: this.article.id },
     });
   }
-  ngOnInit(): void {}
 }

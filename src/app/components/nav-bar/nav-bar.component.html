@@ -77,18 +77,18 @@
         <!-- Home link -->
         <li
           class="nav-item px-2 d-lg-flex justify-content-center align-items-center"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
         >
-          <a
-            class="nav-link active"
-            aria-current="page"
-            routerLink="/"
-            routerLinkActive="active"
+          <a class="nav-link" aria-current="page" routerLink="/home"
             ><i class="fa-solid fa-house me-1"></i> Home</a
           >
         </li>
         <!-- Store drop down menu -->
         <li
           class="nav-item d-lg-flex justify-content-center align-items-center px-lg-3 px-2"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
         >
           <button
             #btn
@@ -110,16 +110,18 @@
         <!-- Adoption link -->
         <li
           class="nav-item px-2 d-lg-flex justify-content-center align-items-center"
+          routerLinkActive="active"
         >
-          <a class="nav-link" routerLink="/adoption" routerLinkActive="active"
+          <a class="nav-link" routerLink="/adoption"
             ><i class="fa-solid fa-hand-holding-heart me-1"></i> Adoption</a
           >
         </li>
         <!-- Blog link -->
         <li
           class="nav-item px-2 d-lg-flex justify-content-center align-items-center"
+          routerLinkActive="active"
         >
-          <a class="nav-link" routerLink="/blog" routerLinkActive="active"
+          <a class="nav-link" routerLink="/blog"
             ><i class="fa-solid fa-newspaper"></i> Blog</a
           >
         </li>
