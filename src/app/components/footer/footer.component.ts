@@ -6,12 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  loggedIn: boolean = false; //Login flag for local storage
+  loggedIn: string = ''; //Login flag for local storage
 
   constructor() {}
 
   ngOnInit(): void {
-    this.loggedIn = JSON.parse(localStorage.getItem('token')!);
+    this.loggedIn = localStorage.getItem('token')!;
   }
   //Function to logout user by setting token to false and refreshing page
   logout(): void {
