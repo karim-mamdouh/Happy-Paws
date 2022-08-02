@@ -1,19 +1,18 @@
 interface Owner {
   name: string;
   phone: number;
-  location?: string;
+  location: string;
 }
 
 export interface Animal {
   name: string;
-  id: string;
   owner: Owner;
-  age: number;
-  vaccines?: Array<string>;
-  images: Array<string>;
+  age: string;
+  gender: string;
+  type: string;
+  id?: string;
+  images?: Array<string>;
   description?: string;
-  color?: string;
-  type: AnimalType;
 }
 
 export enum AnimalType {

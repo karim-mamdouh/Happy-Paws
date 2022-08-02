@@ -5,23 +5,23 @@
   background-position: center;
   background-repeat: no-repeat;
   .login__logo-text b {
-    color: rgb(103, 102, 102);
+    color: var(--dark-grey-color);
   }
 
   .login__form {
     width: 80%;
     color: white;
     opacity: 0.96;
-    background-color: rgb(251, 248, 248);
+    background-color: var(--auth-background);
     height: 80vh;
     border: none;
   }
   .login__text {
-    color: #999;
+    color: var(--grey-color);
   }
   .login__sub-title {
     font-size: 1.6rem;
-    color: rgb(103, 102, 102);
+    color: var(--dark-grey-color);
   }
 
   @media (min-width: 768px) {
@@ -37,13 +37,13 @@
 }
 
 :host ::ng-deep .p-divider .p-divider-content {
-  background-color: rgb(251, 248, 248) !important;
+  background-color: var(--auth-background) !important;
 }
 :host ::ng-deep .login__button {
-  background-color: #999;
-  border: #999;
+  background-color: var(--grey-color);
+  border: var(--grey-color);
   font-size: 1.25rem;
 }
 :host ::ng-deep .login__button:hover {
-  background-color: #999;
+  background-color: var(--grey-color);
 }

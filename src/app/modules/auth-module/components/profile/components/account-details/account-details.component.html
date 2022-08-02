@@ -1,0 +1,218 @@
+<section class="px-md-5">
+  <h3><b>Profile Account</b></h3>
+  <form [formGroup]="detailsForm" (ngSubmit)="submitDetailsForm()">
+    <!-- First name -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <input
+                type="text"
+                placeholder="First name"
+                pInputText
+                class="p-inputtext-md"
+                formControlName="firstName"
+              />
+            </div>
+          </div>
+          <!-- First name validation -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['firstName'].valid &&
+                controlValidation['firstName'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['firstName'].errors?.['required']"
+              >This field is required.</small
+            >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['firstName'].errors?.['pattern']"
+              >Wrong name format.</small
+            >
+          </ng-template>
+        </div>
+      </div>
+      <!-- Last name -->
+      <div class="col-md-6 mt-md-0 mt-3">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <input
+                type="text"
+                placeholder="Last name"
+                pInputText
+                class="p-inputtext-md"
+                formControlName="lastName"
+              />
+            </div>
+          </div>
+          <!-- Last name validation -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['lastName'].valid &&
+                controlValidation['lastName'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['lastName'].errors?.['required']"
+              >This field is required.</small
+            >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['lastName'].errors?.['pattern']"
+              >Wrong name format.</small
+            >
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <!-- User name  -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <input
+                type="text"
+                placeholder="User name"
+                pInputText
+                class="p-inputtext-md"
+                formControlName="userName"
+              />
+            </div>
+          </div>
+          <!-- User name validation -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['userName'].valid &&
+                controlValidation['userName'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              class="p-error block m-0 p-0"
+              *ngIf="controlValidation['userName'].errors?.['required']"
+              >This field is required.</small
+            >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['userName'].errors?.['pattern']"
+              >Wrong name format.</small
+            >
+          </ng-template>
+        </div>
+      </div>
+      <!-- Phone number -->
+      <div class="col-md-6 mt-md-0 mt-3">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <input
+                type="number"
+                placeholder="Phone number"
+                pInputText
+                class="p-inputtext-md"
+                formControlName="phoneNumber"
+              />
+            </div>
+          </div>
+          <!-- Phonenumber validation -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['phoneNumber'].valid &&
+                controlValidation['phoneNumber'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              class="p-error block m-0 p-0"
+              *ngIf="controlValidation['phoneNumber'].errors?.['required']"
+              >This field is required.</small
+            >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['phoneNumber'].errors?.['minlength']"
+              >Phone number must be 11 numbers</small
+            >
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <!-- Buttons -->
+    <div class="row mt-md-5 mt-3">
+      <!-- Save button -->
+      <button
+        pButton
+        pRipple
+        type="submit"
+        label="Save Changes"
+        class="p-button-outlined p-button-rounded col-md-5 col-lg-3 col-11 mx-auto mt-md-auto mt-3"
+      ></button>
+      <!-- Change password button -->
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Change Password"
+        (click)="changePassword()"
+        class="p-button-outlined p-button-rounded p-button-warning col-md-5 col-lg-4 col-11 mx-auto mt-md-auto mt-3"
+      ></button>
+      <!-- Delete account button -->
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Delete Account"
+        class="p-button-outlined p-button-rounded p-button-danger col-lg-3 col-11 mx-auto mt-lg-auto mt-3"
+      ></button>
+    </div>
+  </form>
+  <!-- Toasts -->
+  <!-- Change password success toast -->
+  <p-toast key="changePassword" [hideTransitionOptions]="'25ms'"></p-toast>
+  <!-- Error toast -->
+  <p-toast key="errorToast"></p-toast>
+  <!-- Confirm saving changes toaster -->
+  <p-toast
+    position="bottom-center"
+    key="confirm"
+    (onClose)="onToastReject()"
+    [baseZIndex]="5000"
+  >
+    <ng-template let-message pTemplate="message">
+      <div class="flex flex-column" style="flex: 1">
+        <div class="text-center">
+          <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+          <h4>{{ message.summary }}</h4>
+        </div>
+        <div class="grid p-fluid row pt-3">
+          <div class="col-6">
+            <button
+              type="button"
+              pButton
+              (click)="onToastConfirm()"
+              label="Yes"
+              class="p-button-success"
+            ></button>
+          </div>
+          <div class="col-6">
+            <button
+              type="button"
+              pButton
+              (click)="onToastReject()"
+              label="No"
+              class="p-button-secondary"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+</section>
