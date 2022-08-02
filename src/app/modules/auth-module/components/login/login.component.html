@@ -6,7 +6,11 @@
       routerLink="/"
     >
       <figure class="d-inline-block m-0">
-        <img src="assets/icons/icon-72x72.png" class="img-fluid" />
+        <img
+          src="assets/icons/icon-72x72.png"
+          class="img-fluid"
+          alt="logo-image"
+        />
       </figure>
       <h1 class="d-inline-block my-0 ms-3 text-dark fs-3 login__logo-text">
         <b>Happy Paws</b>
@@ -17,6 +21,7 @@
     >
       Sign-in to your account
     </h2>
+    <!-- Login form -->
     <form
       [formGroup]="loginForm"
       class="p-1 pt-2 h-100 d-flex flex-column justify-content-evenly"
@@ -70,7 +75,6 @@
             formControlName="password"
           />
         </div>
-
         <!-- Password errors -->
         <ng-template
           [ngIf]="
@@ -90,6 +94,7 @@
       <button
         pButton
         pRipple
+        [disabled]="disableButtons"
         type="submit"
         label="Sign in"
         class="p-button-raised login__button w-100 mt-3"

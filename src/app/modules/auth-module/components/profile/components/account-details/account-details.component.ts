@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/profile';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-account-details',
@@ -11,11 +10,15 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./account-details.component.scss'],
 })
 export class AccountDetailsComponent implements OnInit {
+  @Input() disableButtons: boolean = false; //Flag to disable all buttons during network requests
   @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData with data from parent
   @Output() profileEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   @Output() changePasswordEmitter = new EventEmitter(); // Event emitter to notify parent to change password
+  @Output() deleteUserEmitter = new EventEmitter<string>(); // Event emitter to notify parent to remove user account
+  confirmedPassword: string = ''; // Input password value for removing account
   userData = {} as User; // User object to be viewed and editied
   showErrors: boolean = false; //Flag to show form errors
+  showPasswordDialog: boolean = false; // Flag to show enter password window
   detailsForm: FormGroup = this._detailsBuilder.group({
     firstName: [
       '',
@@ -29,7 +32,7 @@ export class AccountDetailsComponent implements OnInit {
       '',
       [Validators.required, Validators.pattern(/^[\S][A-Za-z0-9]{5,}$/)],
     ], //Should have no whitespaces and at least 5 characters
-    phoneNumber: ['', [Validators.required, Validators.minLength(11)]],
+    phoneNumber: ['', [Validators.maxLength(11), Validators.minLength(11)]],
   }); // Form controls
 
   get controlValidation() {
@@ -90,5 +93,10 @@ export class AccountDetailsComponent implements OnInit {
   // Calls changepasswordemitter to notify parent with event
   changePassword(): void {
     this.changePasswordEmitter.emit();
+  }
+  // Calls deleteUserEmitter to notify parent with event
+  deleteAccount(): void {
+    this.showPasswordDialog = false;
+    this.deleteUserEmitter.emit(this.confirmedPassword);
   }
 }

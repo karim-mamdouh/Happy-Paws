@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { User } from '../interfaces/profile';
 import { ProductItem } from '../interfaces/store';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -67,7 +66,6 @@ export class AuthService {
       );
     });
   }
-
   createUserWishlist(userID: string){
     let initialState:ProductItem = {} as ProductItem
     initialState.id= '-999';
@@ -85,6 +83,7 @@ export class AuthService {
     .collection(FireStoreCollections.Cart)
     .doc(userID)
     .set(obj)}
+
 }
 
 enum FireStoreCollections {

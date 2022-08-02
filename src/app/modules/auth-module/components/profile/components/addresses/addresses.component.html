@@ -5,16 +5,17 @@
     <div class="row mt-3">
       <div class="col-md-6">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
-                placeholder="City"
+                id="city"
                 type="text"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="city"
               />
-            </div>
+              <label for="city">City</label>
+            </span>
           </div>
           <!-- City validation -->
           <ng-template
@@ -35,16 +36,17 @@
       <!-- Area -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
+                id="area"
                 type="text"
-                placeholder="Area"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="area"
               />
-            </div>
+              <label for="area">Area</label>
+            </span>
           </div>
           <!-- Area validation -->
           <ng-template
@@ -66,16 +68,17 @@
     <!-- Street  -->
     <div class="row mt-3">
       <div class="grid p-fluid">
-        <div class="col-12 md:col-4">
-          <div class="p-inputgroup">
+        <div class="col-12 md:col-4 field">
+          <span class="p-float-label mt-3">
             <input
               type="text"
-              placeholder="Street"
+              id="street"
               pInputText
               class="p-inputtext-md"
               formControlName="street"
             />
-          </div>
+            <label for="street">Street</label>
+          </span>
         </div>
         <!-- Street validation -->
         <ng-template
@@ -97,16 +100,17 @@
     <div class="row mt-3">
       <div class="col-md-4">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
                 type="text"
-                placeholder="Building No."
                 pInputText
+                id="bulidingno"
                 class="p-inputtext-md"
                 formControlName="buildingNumber"
               />
-            </div>
+              <label for="bulidingno">Building No.</label>
+            </span>
           </div>
           <!-- Building number validation -->
           <ng-template
@@ -127,16 +131,17 @@
       <!-- Apartment number -->
       <div class="col-md-4 mt-md-0 mt-3">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
+                id="apartment"
                 type="text"
-                placeholder="Apartment No."
                 pInputText
                 class="p-inputtext-md"
                 formControlName="apartment"
               />
-            </div>
+              <label for="apartment">Apartment No.</label>
+            </span>
           </div>
           <!-- Apartment number validation -->
           <ng-template
@@ -157,16 +162,17 @@
       <!-- Floor number  -->
       <div class="col-md-4 mt-md-0 mt-3">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
+                id="floorno"
                 type="number"
-                placeholder="Floor No."
                 pInputText
                 class="p-inputtext-md"
                 formControlName="floor"
               />
-            </div>
+              <label for="floorno">Floor No.</label>
+            </span>
           </div>
           <!-- Floor number validation -->
           <ng-template
@@ -189,6 +195,7 @@
     <div class="row justify-content-center mt-md-5 mt-3">
       <button
         pButton
+        [disabled]="disableButtons"
         pRipple
         type="submit"
         label="Save Changes"

@@ -1,17 +1,18 @@
 interface Owner {
   name: string;
-  phone: number;
+  phone: string;
   location: string;
 }
 
 export interface Animal {
   name: string;
   owner: Owner;
-  age: string;
+  age: number;
   gender: string;
   type: string;
+  weight: number;
   id?: string;
-  images?: Array<string>;
+  image?: string;
   description?: string;
 }
 

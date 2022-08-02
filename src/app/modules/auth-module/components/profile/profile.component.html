@@ -1,25 +1,33 @@
-<section class="pt-4 profile">
+<section class="py-4 profile">
   <div class="container">
-    <h3 class="pb-2">Welcome Back, {{ user.firstName }}</h3>
+    <!-- Title -->
+    <h3 class="pb-2">Welcome Back, {{ user!.firstName }}</h3>
     <h6>Welcome to your Happy Paws account!</h6>
     <h6 class="pb-3">Here you can modify your information.</h6>
+    <!-- Tabview -->
     <p-tabView>
       <!-- Profile tab -->
       <p-tabPanel header="Profile" leftIcon="fa-regular fa-circle-user">
         <app-account-details
           (profileEmitter)="profileUpdated($event)"
+          (deleteUserEmitter)="deleteUser($event)"
           (changePasswordEmitter)="changePassword()"
+          [disableButtons]="disableChildButtons"
         ></app-account-details>
       </p-tabPanel>
       <!-- Address tab -->
       <p-tabPanel header="My Address" leftIcon="pi pi-map-marker">
         <app-addresses
           (addressEmitter)="profileUpdated($event)"
+          [disableButtons]="disableChildButtons"
         ></app-addresses>
       </p-tabPanel>
       <!-- My pet tab -->
       <p-tabPanel header="My Pet" leftIcon="fa-solid fa-paw">
-        <app-my-pets (petEmitter)="profileUpdated($event)"></app-my-pets>
+        <app-my-pets
+          (petEmitter)="profileUpdated($event)"
+          [disableButtons]="disableChildButtons"
+        ></app-my-pets>
       </p-tabPanel>
     </p-tabView>
   </div>

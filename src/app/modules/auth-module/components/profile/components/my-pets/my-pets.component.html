@@ -5,16 +5,16 @@
     <div class="row mt-3">
       <div class="col-md-6">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
+                id="petname"
                 type="text"
-                placeholder="Name"
                 pInputText
                 formControlName="petName"
                 class="p-inputtext-md"
-              />
-            </div>
+              /><label for="petname">Name</label>
+            </span>
           </div>
           <!-- Pet name validation -->
           <ng-template
@@ -40,15 +40,16 @@
       <!-- Type -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div>
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <p-dropdown
+                id="pettype"
                 [options]="petType"
                 optionLabel="name"
-                placeholder="Select Type"
                 formControlName="type"
               ></p-dropdown>
-            </div>
+              <label for="pettype">Type</label>
+            </span>
           </div>
         </div>
         <!-- Type validation -->
@@ -68,20 +69,24 @@
       </div>
     </div>
     <div class="row mt-md-3">
-      <!-- Birthdate calender-->
-      <div class="col-md-6 mt-3 mt-md-0">
+      <!-- Age -->
+      <div class="col-md-4 mt-3 mt-md-0">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
-              <p-calendar
-                styleClass="p-input-icon-right ui-datepicker"
-                placeholder="Birthdate"
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
+              <input
+                type="number"
+                pInputText
+                id="petage"
+                class="p-inputtext-md"
                 formControlName="birthdate"
-              ></p-calendar>
-            </div>
+                min="1"
+              />
+              <label for="petage">Age (Months)</label>
+            </span>
           </div>
         </div>
-        <!-- Birthdate calender validation -->
+        <!-- Age validation -->
         <ng-template
           [ngIf]="
             (!controlValidation['birthdate'].valid &&
@@ -90,25 +95,63 @@
           "
         >
           <small
-            id="username2-help"
             class="p-error block m-0 p-0"
             *ngIf="controlValidation['birthdate'].errors?.['required']"
             >This field is required.</small
           >
         </ng-template>
       </div>
-      <!-- Gender -->
-      <div class="col-md-6 mt-3 mt-md-0">
+      <!-- Weight-->
+      <div class="col-md-4 mt-3 mt-md-0">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div>
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
+              <input
+                type="number"
+                pInputText
+                id="petweight"
+                class="p-inputtext-md"
+                formControlName="weight"
+                min="0.5"
+                step="0.25"
+              />
+              <label for="petweight">Weight (KGs)</label>
+            </span>
+          </div>
+        </div>
+        <!-- Weight validation -->
+        <ng-template
+          [ngIf]="
+            (!controlValidation['weight'].valid &&
+              controlValidation['weight'].touched) ||
+            showErrors
+          "
+        >
+          <small
+            class="p-error block m-0 p-0"
+            *ngIf="controlValidation['weight'].errors?.['required']"
+            >This field is required.</small
+          >
+          <small
+            class="p-error block m-0 p-0"
+            *ngIf="controlValidation['weight'].errors?.['min']"
+            >Minimum weight is 0.5 KG</small
+          >
+        </ng-template>
+      </div>
+      <!-- Gender -->
+      <div class="col-md-4 mt-3 mt-md-0">
+        <div class="grid p-fluid">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <p-dropdown
                 [options]="gender"
+                id="petgender"
                 optionLabel="name"
                 formControlName="gender"
-                placeholder="Select Gender"
               ></p-dropdown>
-            </div>
+              <label for="petgender">Gender</label>
+            </span>
           </div>
         </div>
         <!-- Gender validation -->
@@ -120,7 +163,6 @@
           "
         >
           <small
-            id="username2-help"
             class="p-error block m-0 p-0"
             *ngIf="controlValidation['gender'].errors?.['required']"
             >This field is required.</small
@@ -132,12 +174,15 @@
     <div class="row mt-3">
       <div class="col-12">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <textarea
-              pInputTextarea
-              placeholder="Describe your pet"
-              formControlName="description"
-            ></textarea>
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
+              <textarea
+                pInputTextarea
+                formControlName="description"
+                id="petdesc"
+              ></textarea>
+              <label for="petdesc">Description</label>
+            </span>
           </div>
           <!-- Pet description validation -->
           <ng-template
@@ -162,16 +207,17 @@
       <!-- Owner name -->
       <div class="col-md-6">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
                 type="text"
-                placeholder="Name"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="ownerName"
+                id="ownername"
               />
-            </div>
+              <label for="ownername">Name</label>
+            </span>
           </div>
           <!-- Owner name validation -->
           <ng-template
@@ -192,16 +238,17 @@
       <!-- Phone number -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
-                type="number"
-                placeholder="Phone Number"
+                type="tel"
+                id="ownerphone"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="phoneNumber"
               />
-            </div>
+              <label for="ownerphone">Phone Number</label>
+            </span>
           </div>
           <!-- Phone number validation -->
           <ng-template
@@ -212,10 +259,14 @@
             "
           >
             <small
-              id="username2-help"
               class="p-error block"
               *ngIf="controlValidation['phoneNumber'].errors?.['required']"
               >This field is required.</small
+            >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['phoneNumber'].errors?.['minlength'] || controlValidation['phoneNumber'].errors?.['maxlength']"
+              >Phone number should be 11 digits</small
             >
           </ng-template>
         </div>
@@ -225,16 +276,17 @@
     <div class="row mt-3">
       <div class="col-12">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
                 type="text"
-                placeholder="Location"
+                id="ownerlocation"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="location"
               />
-            </div>
+              <label for="ownerlocation">Location</label>
+            </span>
           </div>
           <!-- Location validation -->
           <ng-template
@@ -256,6 +308,7 @@
     <!-- Save button -->
     <div class="row mt-lg-5 mt-3">
       <button
+        [disabled]="disableButtons"
         pButton
         pRipple
         type="submit"

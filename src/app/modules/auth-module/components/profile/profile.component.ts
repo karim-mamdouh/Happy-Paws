@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Animal } from 'src/app/interfaces/adoption';
-import { Address, User } from 'src/app/interfaces/profile';
+import { User } from 'src/app/interfaces/profile';
 import { AuthService } from 'src/app/services/auth.service';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
 import { AddressesComponent } from './components/addresses/addresses.component';
@@ -14,6 +13,7 @@ import { MyPetsComponent } from './components/my-pets/my-pets.component';
 })
 export class ProfileComponent implements OnInit {
   user = {} as User; // User object holding user data from database
+  disableChildButtons: boolean = false; // Flag to disable child buttons on network requests
   @ViewChild(AccountDetailsComponent) private _profile =
     {} as AccountDetailsComponent; // Profile object to access profile observable and update it
   @ViewChild(AddressesComponent) private _address = {} as AddressesComponent; // Address object to access address observable and update it
@@ -28,23 +28,34 @@ export class ProfileComponent implements OnInit {
     // Fetches user profile from database and send it to all childeren
     this._authService
       .fetchUserProfile(localStorage.getItem('userID')!)
-      .subscribe((response) => {
-        this.user = response as User;
-        this._profile.user.next(this.user);
-        this._address.user.next(this.user);
-        this._pet.user.next(this.user);
-      });
+      .subscribe(
+        (response) => {
+          this.user = response as User;
+          this._profile.user.next(this.user);
+          this._address.user.next(this.user);
+          this._pet.user.next(this.user);
+        },
+        () => {
+          this.showErrorToast('Failed to fetch data, please contact support');
+        }
+      );
   }
   // Function called when user profile is updated to update it in database
   profileUpdated(event: User): void {
+    this.disableChildButtons = true;
     this.user = event;
+    if (this.user.phoneNumber === undefined) {
+      this.user.phoneNumber = '';
+    }
     this._authService
       .saveUserToFireStore(this.user)
       .then(() => {
         this.showSuccessToast();
+        this.disableChildButtons = false;
       })
       .catch(() => {
         this.showErrorToast();
+        this.disableChildButtons = false;
       });
   }
   // Function called when user clicks on change password in child to send password reset email
@@ -54,12 +65,30 @@ export class ProfileComponent implements OnInit {
       .then(() => {
         this.showSuccessToast(
           'Forget your password?',
-          'No worries! we will send you a reset password link, follow link to reset your password'
+          'No worries! we will send you a reset password link, follow link to reset your password (please check your spam)'
         );
       })
       .catch(() => {
         this.showErrorToast(
           'Error sending password reset email, please contact support!'
+        );
+      });
+  }
+  // Function called when user clicks on remove account in child
+  deleteUser(password: string): void {
+    this._authService
+      .login(this.user.email, password)
+      .then(() => {
+        return this._authService.removeUser();
+      })
+      .then(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userID');
+        window.location.href = '/';
+      })
+      .catch(() => {
+        this.showErrorToast(
+          'Failed to remove account, please contact support!'
         );
       });
   }

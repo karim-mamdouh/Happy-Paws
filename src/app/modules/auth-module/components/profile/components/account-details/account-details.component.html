@@ -5,16 +5,17 @@
     <div class="row mt-3">
       <div class="col-md-6">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
+                id="firstname"
                 type="text"
-                placeholder="First name"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="firstName"
               />
-            </div>
+              <label for="firstname">First Name</label>
+            </span>
           </div>
           <!-- First name validation -->
           <ng-template
@@ -40,16 +41,17 @@
       <!-- Last name -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
                 type="text"
-                placeholder="Last name"
+                id="lastname"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="lastName"
               />
-            </div>
+              <label for="lastname">Last Name</label>
+            </span>
           </div>
           <!-- Last name validation -->
           <ng-template
@@ -77,16 +79,17 @@
     <div class="row mt-3">
       <div class="col-md-6">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
+                id="username"
                 type="text"
-                placeholder="User name"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="userName"
               />
-            </div>
+              <label for="username">User Name</label>
+            </span>
           </div>
           <!-- User name validation -->
           <ng-template
@@ -112,16 +115,17 @@
       <!-- Phone number -->
       <div class="col-md-6 mt-md-0 mt-3">
         <div class="grid p-fluid">
-          <div class="col-12 md:col-4">
-            <div class="p-inputgroup">
+          <div class="col-12 md:col-4 field">
+            <span class="p-float-label mt-3">
               <input
-                type="number"
-                placeholder="Phone number"
+                type="tel"
+                id="phonenumber"
                 pInputText
                 class="p-inputtext-md"
                 formControlName="phoneNumber"
               />
-            </div>
+              <label for="phonenumber">Phone Number</label>
+            </span>
           </div>
           <!-- Phonenumber validation -->
           <ng-template
@@ -138,7 +142,7 @@
             >
             <small
               class="p-error block"
-              *ngIf="controlValidation['phoneNumber'].errors?.['minlength']"
+              *ngIf="controlValidation['phoneNumber'].errors?.['minlength'] || controlValidation['phoneNumber'].errors?.['maxlength']"
               >Phone number must be 11 numbers</small
             >
           </ng-template>
@@ -150,6 +154,7 @@
       <!-- Save button -->
       <button
         pButton
+        [disabled]="disableButtons"
         pRipple
         type="submit"
         label="Save Changes"
@@ -157,6 +162,7 @@
       ></button>
       <!-- Change password button -->
       <button
+        [disabled]="disableButtons"
         pButton
         pRipple
         type="button"
@@ -167,6 +173,8 @@
       <!-- Delete account button -->
       <button
         pButton
+        [disabled]="disableButtons"
+        (click)="showPasswordDialog = true"
         pRipple
         type="button"
         label="Delete Account"
@@ -215,4 +223,37 @@
       </div>
     </ng-template>
   </p-toast>
+  <!-- Enter password dialog -->
+  <p-dialog
+    header="Please re-enter your password"
+    [(visible)]="showPasswordDialog"
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="p-inputgroup mt-3">
+      <input
+        type="password"
+        placeholder="Password"
+        pInputText
+        class="p-inputtext-md"
+        [(ngModel)]="confirmedPassword"
+      />
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button
+        icon="fa-solid fa-xmark"
+        (click)="showPasswordDialog = false"
+        label="Cancel"
+        styleClass="p-button-text"
+      ></p-button>
+      <p-button
+        icon="pi pi-check"
+        (click)="deleteAccount()"
+        label="Ok"
+        styleClass="p-button-text"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
 </section>

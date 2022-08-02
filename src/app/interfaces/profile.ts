@@ -19,7 +19,7 @@ export interface User {
   birthdate: string;
   id?: string;
   pet?: Animal;
-  phoneNumber?: number;
+  phoneNumber?: string;
   address?: Address;
   previousOrders?: Array<ProductItem>;
 }

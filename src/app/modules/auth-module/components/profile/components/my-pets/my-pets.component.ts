@@ -9,6 +9,7 @@ import { User } from 'src/app/interfaces/profile';
   styleUrls: ['./my-pets.component.scss'],
 })
 export class MyPetsComponent implements OnInit {
+  @Input() disableButtons: boolean = false; //Flag to disable all buttons during network requests
   @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData.pet with data from parent
   @Output() petEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   userData = {} as User; // User object to be viewed and editied
@@ -28,9 +29,13 @@ export class MyPetsComponent implements OnInit {
     type: ['', [Validators.required]],
     gender: ['', [Validators.required]],
     birthdate: ['', [Validators.required]],
+    weight: ['', [Validators.required, Validators.min(0.5)]],
     ownerName: ['', [Validators.required]],
     location: ['', [Validators.required]],
-    phoneNumber: ['', [Validators.required]],
+    phoneNumber: [
+      '',
+      [Validators.required, Validators.minLength(11), Validators.maxLength(11)],
+    ], // Phone number should be exactly 10 digits
     description: ['', [Validators.required]],
   }); // Form controls
 
@@ -68,6 +73,7 @@ export class MyPetsComponent implements OnInit {
         this.petForm.controls['description'].setValue(
           this.userData.pet?.description
         );
+        this.petForm.controls['weight'].setValue(this.userData.pet?.weight);
       }
     });
   }
@@ -85,13 +91,14 @@ export class MyPetsComponent implements OnInit {
         name: this.petForm.value['petName'],
         type: this.petForm.value['type']['name'],
         gender: this.petForm.value['gender']['name'],
-        age: `${this.petForm.value['birthdate']}`,
+        age: this.petForm.value['birthdate'],
         owner: {
           name: this.petForm.value['ownerName'],
           location: this.petForm.value['location'],
           phone: this.petForm.value['phoneNumber'],
         },
         description: this.petForm.value['description'],
+        weight: this.petForm.value['weight'],
       };
       this.petEmitter.emit(this.userData);
     }
