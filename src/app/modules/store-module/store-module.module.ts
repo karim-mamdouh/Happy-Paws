@@ -13,6 +13,7 @@ import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PaginatorModule } from 'primeng/paginator';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 //Components
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -46,6 +47,7 @@ import { StoreModuleRoutingModule } from './store-module-routing.module';
     CardModule,
     CheckboxModule,
     PaginatorModule,
+    MultiSelectModule,
   ],
 })
 export class StoreModuleModule {}

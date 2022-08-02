@@ -4,7 +4,7 @@
   <!-- Empty cart Page -->
   <h2 class="emptyCart mt-5 text-center p-5 border rounded bg-light">
     <figure class="img-fluid">
-      <img src="assets/images/Dog.png" alt="Dog" />
+      <img src="assets/images/Dog-removebg.png" alt="Dog" />
     </figure>
     <p>Your Happy Paws Cart Is Empty</p>
     <p-button
@@ -89,7 +89,10 @@
     <!-- Cart items Cards in medium and small screens-->
     <div class="p-2 d-flex flex-wrap CardContainer d-lg-none">
       <div class="col-12 p-2">
-        <p-card styleClass="p-card-shadow  card p-2 " *ngFor="let item of cart">
+        <p-card
+          styleClass="p-card-shadow  card p-2 my-4"
+          *ngFor="let item of cart"
+        >
           <ng-template pTemplate="header">
             <div class="d-flex card__detailsContainer">
               <figure>
