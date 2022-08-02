@@ -1,30 +1,136 @@
 import { Component, OnInit } from '@angular/core';
+import { AnimalType } from 'src/app/interfaces/adoption';
+import { Brand, ProductCategory, ProductItem } from 'src/app/interfaces/store';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  responsiveOptions;
-  constructor() {
-    this.responsiveOptions = [
-      {
-        breakpoint: '1024px',
-        numVisible: 3,
-        numScroll: 3,
-      },
-      {
-        breakpoint: '768px',
-        numVisible: 2,
-        numScroll: 2,
-      },
-      {
-        breakpoint: '560px',
-        numVisible: 1,
-        numScroll: 1,
-      },
-    ];
-  }
+  responsiveOptions = [
+    {
+      breakpoint: '1024px',
+      numVisible: 3,
+      numScroll: 3,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 2,
+      numScroll: 2,
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
+  products: Array<ProductItem> = [
+    {
+      animalType: AnimalType.Cat,
+      brand: Brand.Alpha,
+      category: ProductCategory.Accessories,
+      price: 50,
+      title: 'ABC',
+      images: [''],
+      id: '',
+      rate: 5,
+      description: '',
+      wishList: false,
+      reviews: [],
+    },
+    {
+      animalType: AnimalType.Cat,
+      brand: Brand.Alpha,
+      category: ProductCategory.Accessories,
+      price: 50,
+      title: 'ABC',
+      images: [''],
+      id: '',
+      rate: 5,
+      description: '',
+      wishList: false,
+      reviews: [],
+    },
+    {
+      animalType: AnimalType.Cat,
+      brand: Brand.Alpha,
+      category: ProductCategory.Accessories,
+      price: 50,
+      title: 'ABC',
+      images: [''],
+      id: '',
+      rate: 5,
+      description: '',
+      wishList: false,
+      reviews: [],
+    },
+    {
+      animalType: AnimalType.Cat,
+      brand: Brand.Alpha,
+      category: ProductCategory.Accessories,
+      price: 50,
+      title: 'ABC',
+      images: [''],
+      id: '',
+      rate: 5,
+      description: '',
+      wishList: false,
+      reviews: [],
+    },
+    {
+      animalType: AnimalType.Cat,
+      brand: Brand.Alpha,
+      category: ProductCategory.Accessories,
+      price: 50,
+      title: 'ABC',
+      images: [''],
+      id: '',
+      rate: 5,
+      description: '',
+      wishList: false,
+      reviews: [],
+    },
+    {
+      animalType: AnimalType.Cat,
+      brand: Brand.Alpha,
+      category: ProductCategory.Accessories,
+      price: 50,
+      title: 'ABC',
+      images: [''],
+      id: '',
+      rate: 5,
+      description: '',
+      wishList: false,
+      reviews: [],
+    },
+    {
+      animalType: AnimalType.Cat,
+      brand: Brand.Alpha,
+      category: ProductCategory.Accessories,
+      price: 50,
+      title: 'ABC',
+      images: [''],
+      id: '',
+      rate: 5,
+      description: '',
+      wishList: false,
+      reviews: [],
+    },
+    {
+      animalType: AnimalType.Cat,
+      brand: Brand.Alpha,
+      category: ProductCategory.Accessories,
+      price: 50,
+      title: 'ABC',
+      images: [''],
+      id: '',
+      rate: 5,
+      description: '',
+      wishList: false,
+      reviews: [],
+    },
+  ];
+  constructor() {}
 
   ngOnInit(): void {}
 }

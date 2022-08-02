@@ -97,48 +97,36 @@
 
   <!-- Products -->
   <p-carousel
+    [value]="products"
+    styleClass="custom-carousel"
     [numVisible]="3"
-    [numScroll]="3"
-    [circular]="false"
+    [numScroll]="1"
+    [circular]="true"
+    [autoplayInterval]="3000"
     [responsiveOptions]="responsiveOptions"
   >
     <ng-template let-product pTemplate="item">
       <div class="product-item">
+        <!-- (click)="onSearchResultItemClick(recipe.recipe_id)" -->
+
         <div class="product-item-content">
-          <div class="p-mb-3"></div>
-          <div>
-            <h4 class="p-mb-1">{{ product.name }}</h4>
-            <h6 class="p-mt-0 p-mb-3">${{ product.price }}</h6>
-            <span
-              [class]="
-                'product-badge status-' + product.inventoryStatus.toLowerCase()
-              "
-              >{{ product.inventoryStatus }}</span
-            >
-            <div class="car-buttons p-mt-5">
-              <p-button
-                type="button"
-                styleClass="p-button p-button-rounded p-mr-2"
-                icon="pi pi-search"
-              ></p-button>
-              <p-button
-                type="button"
-                styleClass="p-button-success p-button-rounded p-mr-2"
-                icon="pi pi-star"
-              ></p-button>
-              <p-button
-                type="button"
-                styleClass="p-button-help p-button-rounded"
-                icon="pi pi-cog"
-              ></p-button>
-            </div>
+          <div class="mb-3">
+            <img
+              [src]="product.images[0]"
+              [alt]="product.title"
+              class="product-image"
+            />
+          </div>
+          <div class="container">
+            <h5 class="mb-1">{{ product.title }}</h5>
+            <h6 class="mb-3">{{ product.price }}</h6>
           </div>
         </div>
       </div>
     </ng-template>
   </p-carousel>
   <!-- blog -->
-  <p-carousel
+  <!-- <p-carousel
     [numVisible]="3"
     [numScroll]="3"
     [circular]="false"
@@ -178,9 +166,9 @@
         </div>
       </div>
     </ng-template>
-  </p-carousel>
+  </p-carousel> -->
   <!-- Adoption -->
-  <p-carousel
+  <!-- <p-carousel
     [numVisible]="3"
     [numScroll]="3"
     [circular]="false"
@@ -220,5 +208,5 @@
         </div>
       </div>
     </ng-template>
-  </p-carousel>
+  </p-carousel> -->
 </Section>
