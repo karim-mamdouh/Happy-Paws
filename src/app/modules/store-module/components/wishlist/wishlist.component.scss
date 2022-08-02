@@ -24,7 +24,6 @@ $color-lightgreen: #c8e6c9;
 
 //---------------- Item List Card Start--------------------
 .product-item {
-  height: 250px;
   background-color: $color-white;
   display: flex;
   align-items: center;
@@ -126,22 +125,16 @@ $color-lightgreen: #c8e6c9;
 }
 
 //--------------- Media Query For Meduim Screens  -------------------
-@media screen and (max-width: 992px) {
-  :host ::ng-deep .p-virtualscroller-item {
-    height: 16rem !important;
-  }
-}
 
 @media screen and (max-width: 786px) {
   :host ::ng-deep .p-virtualscroller-item {
-    height: 40rem !important;
+    height: 45rem !important;
   }
   .product-item {
     border: 1px solid lightgrey;
     border-radius: 10px;
     box-shadow: 5px 10px 18px $color-secondary;
     width: 80%;
-    height: 100%;
     display: block;
     margin-bottom: 6rem;
     margin-top: 1rem;
