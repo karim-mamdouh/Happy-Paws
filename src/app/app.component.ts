@@ -5,7 +5,7 @@ import { map, take } from 'rxjs/operators';
 import { DatabaseService } from 'src/app/services/database.service';
 import { Store } from '@ngrx/store';
 import { CartItem, ProductItem } from 'src/app/interfaces/store';
-import { fillProducts, fillWishList, resetProducts, resetWishList } from 'src/app/store/store/store-actions';
+import { fillCartList, fillProducts, fillWishList, resetCart, resetProducts, resetWishList } from 'src/app/store/store/store-actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -83,6 +83,17 @@ export class AppComponent {
         }
       });
 
+      // get Cartlist from firebase and save inside the store
+      this._firestoreService.fetchUserCart(localStorage.getItem('userID')!).pipe(
+        map((snapshot) => {
+          return snapshot.payload.data();
+        })
+      ).subscribe(res => {
+        this._store.dispatch(resetCart());
+        let temp = res as Array<CartItem>;
+        let tempToArray: Array<CartItem> = Object.values(temp);
+        this._store.dispatch(fillCartList({ payload: tempToArray }))
+      })
     }
   }
 }

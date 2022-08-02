@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CartItem, ProductItem } from 'src/app/interfaces/store';
 import { DatabaseService } from 'src/app/services/database.service';
-import { addToCart, resetWishList } from 'src/app/store/store/store-actions';
+import { addToCart, resetCart, resetWishList } from 'src/app/store/store/store-actions';
 
 @Component({
   selector: 'app-product-card',
@@ -14,6 +14,7 @@ export class ProductCardComponent implements OnInit {
   private _product: ProductItem = {} as ProductItem;
   rating: number | undefined = 0;
   wishlist: Array<ProductItem> = [];
+  cartlist: Array<CartItem> = [];
   @Input('product')
   set product(product: ProductItem) {
     this.rating = product.rate;
@@ -32,6 +33,7 @@ export class ProductCardComponent implements OnInit {
     this.rating = this.product?.rate;
     this._store.select('store').subscribe(res => {
       this.wishlist = JSON.parse(JSON.stringify(res.wishList));
+      this.cartlist = JSON.parse(JSON.stringify(res.cart));
     })
   }
 
@@ -39,11 +41,13 @@ export class ProductCardComponent implements OnInit {
   }
 
   onAddToCartClick(event: Event, product: ProductItem) {
-    console.log("add to Cart Button clicked");
-
-    let temp = JSON.parse(JSON.stringify(product)) as CartItem;
-    temp.count = 1;
-    this._store.dispatch(addToCart({ payload: temp }))
+    let cartObj = JSON.parse(JSON.stringify(product)) as CartItem;
+    // set default value
+    cartObj.count = 1;
+    this.cartlist = [...this.cartlist, cartObj]
+    this._firestoreService.addToCart(localStorage.getItem('userID')!, this.cartlist).then(() => {
+      this._store.dispatch(resetCart());
+    })
   }
 
   onAddToWishlistClick(event: Event, product: ProductItem) {
@@ -58,7 +62,7 @@ export class ProductCardComponent implements OnInit {
 
       // update firebase with the new wishlist state
 
-      this._firestoreService.removeFromWishlist(localStorage.getItem('userID')!, this.wishlist).then(res => {
+      this._firestoreService.removeFromWishlist(localStorage.getItem('userID')!, this.wishlist).then(() => {
         this._store.dispatch(resetWishList());
       })
 
@@ -70,7 +74,7 @@ export class ProductCardComponent implements OnInit {
       // Add the product to local wishlist
       this.wishlist = [...this.wishlist, product];
       // update firebase with the new wishlist state
-      this._firestoreService.addToWishlist(localStorage.getItem('userID')!, this.wishlist).then(res => {
+      this._firestoreService.addToWishlist(localStorage.getItem('userID')!, this.wishlist).then(() => {
         this._store.dispatch(resetWishList());
       })
     }

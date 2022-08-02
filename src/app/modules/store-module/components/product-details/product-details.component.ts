@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CartItem, ProductItem, Review } from 'src/app/interfaces/store';
 import { DatabaseService } from 'src/app/services/database.service';
-import { resetWishList } from 'src/app/store/store/store-actions';
+import { resetCart, resetWishList } from 'src/app/store/store/store-actions';
 
 @Component({
   selector: 'app-product-details',
@@ -11,7 +11,7 @@ import { resetWishList } from 'src/app/store/store/store-actions';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-
+  cartlist: Array<CartItem> = [];
   product: ProductItem = {} as ProductItem;
   // Add review
   reviewRating: number = 3;
@@ -26,6 +26,7 @@ export class ProductDetailsComponent implements OnInit {
     }>) {
     this._store.select('store').subscribe(res => {
       this.wishlist = JSON.parse(JSON.stringify(res.wishList));
+      this.cartlist = JSON.parse(JSON.stringify(res.cart));
     });
   }
   ngOnInit(): void {
@@ -62,6 +63,14 @@ export class ProductDetailsComponent implements OnInit {
       })
     }
 
+  }
+  addToCart(product: ProductItem) {
+    let cartObj = JSON.parse(JSON.stringify(product)) as CartItem;
+    cartObj.count = 1;
+    this.cartlist = [...this.cartlist, cartObj]
+    this._firestoreService.addToCart(localStorage.getItem('userID')!, this.cartlist).then(() => {
+      this._store.dispatch(resetCart());
+    })
   }
   reset() {
     this.reviewRating = 3;

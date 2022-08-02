@@ -28,7 +28,7 @@ export class DatabaseService {
     return this.afs.collection(FireStoreCollections.Wishlist).doc(userID).snapshotChanges()
   }
 
-  // add to wishlist 
+  //add to wishlist 
   addToWishlist(userID: string, products: Array<ProductItem>) {
     const obj:any = {} as ProductItem;
     for (const key of products) {
@@ -37,7 +37,7 @@ export class DatabaseService {
     return this.afs.collection(FireStoreCollections.Wishlist).doc(userID).update(obj)
   }
 
-    // remove from wishlist 
+    //remove from wishlist 
     removeFromWishlist(userID: string, products: Array<ProductItem>) {
       const obj:any = {} as ProductItem;
       for (const key of products) {
@@ -50,19 +50,23 @@ export class DatabaseService {
   fetchUserCart(userID: string) {
     return this.afs.collection(FireStoreCollections.Cart).doc(userID).snapshotChanges();
   }
-  //modify (add to/delete from) User Cart
-  modifyCart(userID: string) {
-    let cartItems: Array<CartItem> = [];
-    this.store.select('cart').subscribe(res => {
-      cartItems = res;
-    })
-    return this.afs.collection(FireStoreCollections.Cart).doc(userID).set(cartItems);
+  //add to User Cart
+  addToCart(userID: string,cart: Array<CartItem>) {
+    const obj:any = {} as CartItem;
+    for (const key of cart) {
+      obj[key.id] = key;
+    }
+    return this.afs.collection(FireStoreCollections.Cart).doc(userID).update(obj);
   }
 
-  //order history
-  //add address
-  //fetch all animals
-
+  //remove from user cart
+  removeFromCart(userID: string,cart: Array<CartItem>) {
+    const obj:any = {} as CartItem;
+    for (const key of cart) {
+      obj[key.id] = key;
+    }
+    return this.afs.collection(FireStoreCollections.Cart).doc(userID).set(obj);
+  }
 
 }
 
