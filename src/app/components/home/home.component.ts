@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimalType } from 'src/app/interfaces/adoption';
 import { Brand, ProductCategory, ProductItem } from 'src/app/interfaces/store';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -131,7 +132,41 @@ export class HomeComponent implements OnInit {
       reviews: [],
     },
   ];
-  constructor() {}
+  constructor(private _router: Router) {
+  }
 
   ngOnInit(): void {}
+  onShopNowClick() {
+    this._router.navigate([`/store/products`]);
+  }
+
+  onTypeClick(animal: string) {
+    switch (animal) {
+      case 'cats':
+        this._router.navigate(['/store/products'], {
+          queryParams: { animalType: AnimalType.Cat }
+        });
+        break;
+      case 'dogs':
+        this._router.navigate(['/store/products'], {
+          queryParams: { animalType: AnimalType.Dog }
+        });
+        break;
+    }
+  }
+
+
+  onWhatWeCanDoCardsClick(feature: string) {
+    switch (feature) {
+      case 'store':
+        this._router.navigate(['/store/products']);
+        break;
+      case 'adoption':
+        this._router.navigate(['/adoption']);
+        break;
+      case 'blog':
+        this._router.navigate(['/blog']);
+        break;
+    }
+  }
 }
