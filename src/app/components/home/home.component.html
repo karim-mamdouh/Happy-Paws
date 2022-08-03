@@ -28,7 +28,7 @@
   <div class="type container py-5">
     <h3 class="text-center mb-5">Types</h3>
     <div class="typesButtons d-lg-flex justify-content-center my-5 d-md-block">
-      <div class="CategoryRouter text-center mx-5 my-3">
+      <div class="CategoryRouter text-center mx-5 my-5">
         <a (click)="onTypeClick('cats')">
           <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
             <img src="assets/images/Cat_November.png" alt="Cat Image" />
@@ -36,7 +36,7 @@
           </div>
         </a>
       </div>
-      <div class="CategoryRouter text-center mx-5 my-3">
+      <div class="CategoryRouter text-center mx-5 my-5">
         <a (click)="onTypeClick('dogs')">
           <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
             <img src="assets/images/bg-dog.png" alt="Dog Image" />
@@ -62,7 +62,10 @@
       class="services__container container d-lg-flex my-5 justify-content-center align-items-center;"
     >
       <!-- store card -->
-      <div class="services__card m-4 col-lg-4 col-md-12 p-5 shadow" (click)="onWhatWeCanDoCardsClick('store')">
+      <div
+        class="services__card m-4 col-lg-4 col-md-12 p-5 shadow"
+        (click)="onWhatWeCanDoCardsClick('store')"
+      >
         <div class="icon-container m-auto shadow d-flex">
           <i class="fa-solid fa-store m-auto fs-2"></i>
         </div>
@@ -72,7 +75,10 @@
         </p>
       </div>
       <!-- Adoption card -->
-      <div class="services__card col-lg-4 col-md-12 m-4 p-5 shadow"(click)="onWhatWeCanDoCardsClick('adoption')">
+      <div
+        class="services__card col-lg-4 col-md-12 m-4 p-5 shadow"
+        (click)="onWhatWeCanDoCardsClick('adoption')"
+      >
         <div class="icon-container m-auto shadow d-flex">
           <i class="fa-solid fa-paw m-auto fs-1"></i>
         </div>
@@ -83,7 +89,10 @@
         </p>
       </div>
       <!-- Blog card -->
-      <div class="services__card m-4 col-lg-4 col-md-12 p-5 shadow" (click)="onWhatWeCanDoCardsClick('blog')">
+      <div
+        class="services__card m-4 col-lg-4 col-md-12 p-5 shadow"
+        (click)="onWhatWeCanDoCardsClick('blog')"
+      >
         <div class="icon-container m-auto shadow d-flex">
           <i class="fa-solid fa-blog m-auto fs-1"></i>
         </div>
@@ -104,7 +113,7 @@
       <p-carousel
         [value]="products"
         styleClass="custom-carousel"
-        [numVisible]="3"
+        [numVisible]="4"
         [numScroll]="1"
         [circular]="true"
         [autoplayInterval]="3000"
@@ -154,10 +163,10 @@
       <p-carousel
         [value]="products"
         styleClass="custom-carousel"
-        [numVisible]="3"
+        [numVisible]="4"
         [numScroll]="1"
         [circular]="true"
-        [autoplayInterval]="3000"
+        [autoplayInterval]="2000"
         [responsiveOptions]="responsiveOptions"
       >
         <ng-template let-product pTemplate="item">
@@ -196,7 +205,7 @@
       <p-carousel
         [value]="products"
         styleClass="custom-carousel"
-        [numVisible]="3"
+        [numVisible]="4"
         [numScroll]="1"
         [circular]="true"
         [autoplayInterval]="3000"

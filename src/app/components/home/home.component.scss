@@ -14,17 +14,19 @@ $color-lightgreen: #c8e6c9;
 section {
   background-color: $color-main;
   .hero-container {
-    background-image: url("../../../assets/images/ui.png"),
-      url("../../../assets/images/paw.png"),
-      url("../../../assets/images/paw.png"),
-      url("../../../assets/images/paw.png");
-    background-size: 50% 95%, 7% 15%, 7% 15%, 7% 15%;
-    height: 635px;
+    background-image: url("../../../assets/images/ui.png");
+    background-size: 50% 75%;
+    height: 705px;
     background-repeat: no-repeat;
     border-radius: 20px;
-    background-position: center, 303px 0px, 1250px 200px, 103px 500px;
+    background-position: center;
     background-color: $color-main;
     .hero {
+      background-image: url("../../../assets/images/paw.png"),
+        url("../../../assets/images/paw.png");
+      background-size: 10% 40%, 10% 40%;
+      background-repeat: no-repeat;
+      background-position: left top, right bottom;
       &__content {
         &__text {
           font-size: 60px;
@@ -61,7 +63,7 @@ section {
       background-size: 10% 100%;
       background-repeat: no-repeat;
       border-radius: 20px;
-      background-position: 600px 0px;
+      background-position: center;
       background-color: transparent;
     }
     &__card {
@@ -165,35 +167,6 @@ section {
 
 //--------------------------- Shop Now BUTTON END------------------------
 
-@media screen and (max-width: 992px) {
-  section {
-    .hero-container {
-      background-image: url("../../../assets/images/ui.png"),
-        url("../../../assets/images/paw.png"),
-        url("../../../assets/images/paw.png"),
-        url("../../../assets/images/paw.png");
-      background-size: 60% 70%, 12% 15%, 12% 15%, 12% 15%;
-      height: 635px;
-      background-repeat: no-repeat;
-      border-radius: 20px;
-      background-position: center, 3.125rem 0rem, 21.9rem 12.5rem, center;
-      background-color: $color-main;
-      .hero {
-        &__content {
-          &__text {
-            font-size: 30px !important;
-            margin: 3px;
-          }
-          &__para {
-            font-size: 20px;
-            margin: 5px;
-          }
-        }
-      }
-    }
-  }
-}
-
 //--------------------------- ADD TO WISHLIST START------------------------
 :host ::ng-deep .p-button {
   border: none !important;
@@ -234,3 +207,104 @@ section {
 }
 
 //--------------------------- ADD TO WISHLIST END------------------------
+
+/* Extra small devices (phones, 900px and down) */
+@media only screen and (max-width: 992px) {
+  section {
+    .hero-container {
+      background-image: url("../../../assets/images/ui.png");
+      background-size: 60% 70%;
+      height: 760px;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      background-position: center;
+      background-color: $color-main;
+      .hero {
+        &__content {
+          &__text {
+            font-size: 60px;
+          }
+        }
+      }
+    }
+    .services {
+      &__text {
+        background-image: url("../../../assets/images/paw.png");
+        background-size: 20% 90%;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        background-position: center;
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  section {
+    .hero-container {
+      background-image: url("../../../assets/images/ui.png");
+      background-size: 80% 60%;
+      height: 760px;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      background-position: center;
+      background-color: $color-main;
+      .hero {
+        &__content {
+          &__text {
+            font-size: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  section {
+    .hero-container {
+      .hero {
+        background-image: url("../../../assets/images/paw.png"),
+          url("../../../assets/images/paw.png");
+        background-size: 20% 40%, 20% 40%;
+        background-repeat: no-repeat;
+        background-position: left top, right bottom;
+      }
+    }
+
+    .services {
+      &__text {
+        background-image: url("../../../assets/images/paw.png");
+        background-size: 30% 80%;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        background-position: center;
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 368px) {
+  section {
+    .hero-container {
+      background-image: url("../../../assets/images/ui.png");
+      background-size: 80% 50%;
+      height: 850px;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      background-position: center;
+      background-color: $color-main;
+      .hero {
+        &__content {
+          &__text {
+            font-size: 50px;
+          }
+        }
+      }
+    }
+  }
+}

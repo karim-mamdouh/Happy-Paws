@@ -38,7 +38,7 @@ $color-lightgreen: #c8e6c9;
     margin: 0 !important;
     img {
       width: 12.5rem;
-      max-height: 30rem;
+      height: 14rem;
       margin-right: 1rem;
       border-radius: 10px;
     }
@@ -128,7 +128,7 @@ $color-lightgreen: #c8e6c9;
 
 @media screen and (max-width: 786px) {
   :host ::ng-deep .p-virtualscroller-item {
-    height: 45rem !important;
+    height: 32rem !important;
   }
   .product-item {
     border: 1px solid lightgrey;
@@ -157,8 +157,8 @@ $color-lightgreen: #c8e6c9;
       display: flex;
       justify-content: center;
       img {
-        width: 90%;
-        height: 80%;
+        width: 12.5rem;
+        height: 15rem;
         border-radius: 10px;
         margin: auto;
       }
