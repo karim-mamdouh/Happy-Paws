@@ -13,13 +13,30 @@
       </div>
       <!-- Cards Container -->
       <div class="wrapper__store__content col-lg-9 d-block">
+        <!-- small filter in small screens -->
+        <div class="text-start">
+          <app-small-filter
+            (filterOptions)="onFilterOptionsChange($event)"
+            class="d-lg-none"
+          ></app-small-filter>
+        </div>
         <div class="p-4 d-flex flex-wrap">
-          <div
-            class="col-lg-4 col-md-6 col-12 p-2"
-            *ngFor="let product of displayFilteredProductList"
-          >
-            <app-product-card [product]="product"> </app-product-card>
-          </div>
+          <ng-template [ngIf]="isMobile === false" [ngIfElse]="elseBlock">
+            <div
+              class="col-lg-4 col-md-6 col-12 p-2"
+              *ngFor="let product of displayPaginatorProductsChunk"
+            >
+              <app-product-card [product]="product"> </app-product-card>
+            </div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div
+              class="col-lg-4 col-md-6 col-12 p-2"
+              *ngFor="let product of displayPaginatorProductsChunk_small"
+            >
+              <app-product-card [product]="product"> </app-product-card>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
@@ -28,7 +45,12 @@
     <div class="paginator">
       <!-- Paginator in Large Screens -->
       <div class="d-lg-block d-none">
-        <p-paginator [rows]="10" [totalRecords]="120"></p-paginator>
+        <p-paginator
+          [first]="pageStartIndex"
+          [rows]="numberOfItemsInPage"
+          [totalRecords]="filteredProductList.length"
+          (onPageChange)="paginate($event.first, $event.first + $event.rows)"
+        ></p-paginator>
       </div>
       <!-- Paginator in Small Screens -->
       <div
@@ -36,9 +58,12 @@
       >
         <div class="col-10">
           <p-paginator
-            [rows]="1"
-            [first]="1"
-            [totalRecords]="12"
+            [first]="pageStartIndex"
+            [rows]="numberOfItemsInPage_small"
+            [totalRecords]="filteredProductList.length"
+            (onPageChange)="
+              paginateSmall($event.first, $event.first + $event.rows)
+            "
             [showJumpToPageDropdown]="true"
             [showPageLinks]="false"
           ></p-paginator>

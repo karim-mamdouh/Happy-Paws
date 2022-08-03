@@ -13,6 +13,7 @@
         </p>
         <div class="text-center">
           <p-button
+            (onClick)="onShopNowClick()"
             styleClass="card__addToCart mt-4 rounded-5 "
             label="Shop Now"
             icon="pi pi-shopping-bag"
@@ -27,16 +28,16 @@
   <div class="type container py-5">
     <h3 class="text-center mb-5">Types</h3>
     <div class="typesButtons d-lg-flex justify-content-center my-5 d-md-block">
-      <div class="CategoryRouter text-center mx-5 my-3">
-        <a routerLink="/store">
+      <div class="CategoryRouter text-center mx-5 my-5">
+        <a (click)="onTypeClick('cats')">
           <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
             <img src="assets/images/Cat_November.png" alt="Cat Image" />
             <p class="p-3 m-auto"><b>Cats Shop</b></p>
           </div>
         </a>
       </div>
-      <div class="CategoryRouter text-center mx-5 my-3">
-        <a routerLink="/store">
+      <div class="CategoryRouter text-center mx-5 my-5">
+        <a (click)="onTypeClick('dogs')">
           <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
             <img src="assets/images/bg-dog.png" alt="Dog Image" />
             <p class="p-3 m-auto"><b> Dogs Shop</b></p>
@@ -61,7 +62,10 @@
       class="services__container container d-lg-flex my-5 justify-content-center align-items-center;"
     >
       <!-- store card -->
-      <div class="services__card m-4 col-lg-4 col-md-12 p-5 shadow">
+      <div
+        class="services__card m-4 col-lg-4 col-md-12 p-5 shadow"
+        (click)="onWhatWeCanDoCardsClick('store')"
+      >
         <div class="icon-container m-auto shadow d-flex">
           <i class="fa-solid fa-store m-auto fs-2"></i>
         </div>
@@ -71,7 +75,10 @@
         </p>
       </div>
       <!-- Adoption card -->
-      <div class="services__card col-lg-4 col-md-12 m-4 p-5 shadow">
+      <div
+        class="services__card col-lg-4 col-md-12 m-4 p-5 shadow"
+        (click)="onWhatWeCanDoCardsClick('adoption')"
+      >
         <div class="icon-container m-auto shadow d-flex">
           <i class="fa-solid fa-paw m-auto fs-1"></i>
         </div>
@@ -82,7 +89,10 @@
         </p>
       </div>
       <!-- Blog card -->
-      <div class="services__card m-4 col-lg-4 col-md-12 p-5 shadow">
+      <div
+        class="services__card m-4 col-lg-4 col-md-12 p-5 shadow"
+        (click)="onWhatWeCanDoCardsClick('blog')"
+      >
         <div class="icon-container m-auto shadow d-flex">
           <i class="fa-solid fa-blog m-auto fs-1"></i>
         </div>
@@ -95,130 +105,140 @@
     </div>
   </div>
 
-  <!-- Products -->
-  <p-carousel
-    [numVisible]="3"
-    [numScroll]="3"
-    [circular]="false"
-    [responsiveOptions]="responsiveOptions"
-  >
-    <ng-template let-product pTemplate="item">
-      <div class="product-item">
-        <div class="product-item-content">
-          <div class="p-mb-3"></div>
-          <div>
-            <h4 class="p-mb-1">{{ product.name }}</h4>
-            <h6 class="p-mt-0 p-mb-3">${{ product.price }}</h6>
-            <span
-              [class]="
-                'product-badge status-' + product.inventoryStatus.toLowerCase()
-              "
-              >{{ product.inventoryStatus }}</span
-            >
-            <div class="car-buttons p-mt-5">
-              <p-button
-                type="button"
-                styleClass="p-button p-button-rounded p-mr-2"
-                icon="pi pi-search"
-              ></p-button>
-              <p-button
-                type="button"
-                styleClass="p-button-success p-button-rounded p-mr-2"
-                icon="pi pi-star"
-              ></p-button>
-              <p-button
-                type="button"
-                styleClass="p-button-help p-button-rounded"
-                icon="pi pi-cog"
-              ></p-button>
+  <!-- Carousels -->
+  <div class="Carousels">
+    <!-- Products -->
+    <div class="carousel">
+      <h2 class="text-center mt-5 p-3">Products</h2>
+      <p-carousel
+        [value]="products"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="3000"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-product pTemplate="item">
+          <div class="product-item">
+            <!-- (click)="onSearchResultItemClick(recipe.recipe_id)" -->
+
+            <div class="product-item-content rounded-5">
+              <div class="mb-3">
+                <img
+                  src="assets/images/cat.jpg"
+                  [alt]="product.title"
+                  class="product-image rounded shadow"
+                />
+              </div>
+              <div class="container">
+                <h5 class="mb-1">{{ product.title }}</h5>
+                <h6 class="mb-3">{{ product.price }}</h6>
+
+                <div *ngIf="quantity > 0; then instock; else outofstock"></div>
+                <ng-template #instock>
+                  <p class="card__actions__instock m-auto">In Stock</p>
+                </ng-template>
+                <ng-template #outofstock>
+                  <p class="card__actions__outofstock m-auto">Out Of Stock</p>
+                </ng-template>
+                <div class="card__actions d-flex justify-content-center mt-4">
+                  <p-toggleButton
+                    class="card__actions__addToWishlist mx-3"
+                    [onIcon]="'pi pi-heart-fill'"
+                    offIcon="pi pi-heart"
+                  >
+                  </p-toggleButton>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </ng-template>
-  </p-carousel>
-  <!-- blog -->
-  <p-carousel
-    [numVisible]="3"
-    [numScroll]="3"
-    [circular]="false"
-    [responsiveOptions]="responsiveOptions"
-  >
-    <ng-template let-product pTemplate="item">
-      <div class="product-item">
-        <div class="product-item-content">
-          <div class="p-mb-3"></div>
-          <div>
-            <h4 class="p-mb-1">{{ product.name }}</h4>
-            <h6 class="p-mt-0 p-mb-3">${{ product.price }}</h6>
-            <span
-              [class]="
-                'product-badge status-' + product.inventoryStatus.toLowerCase()
-              "
-              >{{ product.inventoryStatus }}</span
-            >
-            <div class="car-buttons p-mt-5">
-              <p-button
-                type="button"
-                styleClass="p-button p-button-rounded p-mr-2"
-                icon="pi pi-search"
-              ></p-button>
-              <p-button
-                type="button"
-                styleClass="p-button-success p-button-rounded p-mr-2"
-                icon="pi pi-star"
-              ></p-button>
-              <p-button
-                type="button"
-                styleClass="p-button-help p-button-rounded"
-                icon="pi pi-cog"
-              ></p-button>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+    <!-- blog -->
+    <div class="carousel">
+      <h2 class="text-center mt-5 p-3">Blog</h2>
+      <p-carousel
+        [value]="products"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="2000"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-product pTemplate="item">
+          <div class="product-item">
+            <!-- (click)="onSearchResultItemClick(recipe.recipe_id)" -->
+
+            <div class="product-item-content rounded-5">
+              <div class="mb-3">
+                <img
+                  src="../../../assets/images/cat.jpg"
+                  [alt]="product.title"
+                  class="product-image rounded shadow"
+                />
+              </div>
+              <div class="container">
+                <h5 class="mb-1">{{ product.title }}</h5>
+                <h6 class="mb-3">{{ product.price }}</h6>
+
+                <div *ngIf="quantity > 0; then instock; else outofstock"></div>
+                <ng-template #instock>
+                  <p class="card__actions__instock m-auto">In Stock</p>
+                </ng-template>
+                <ng-template #outofstock>
+                  <p class="card__actions__outofstock m-auto">Out Of Stock</p>
+                </ng-template>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </ng-template>
-  </p-carousel>
-  <!-- Adoption -->
-  <p-carousel
-    [numVisible]="3"
-    [numScroll]="3"
-    [circular]="false"
-    [responsiveOptions]="responsiveOptions"
-  >
-    <ng-template let-product pTemplate="item">
-      <div class="product-item">
-        <div class="product-item-content">
-          <div class="p-mb-3"></div>
-          <div>
-            <h4 class="p-mb-1">{{ product.name }}</h4>
-            <h6 class="p-mt-0 p-mb-3">${{ product.price }}</h6>
-            <span
-              [class]="
-                'product-badge status-' + product.inventoryStatus.toLowerCase()
-              "
-              >{{ product.inventoryStatus }}</span
-            >
-            <div class="car-buttons p-mt-5">
-              <p-button
-                type="button"
-                styleClass="p-button p-button-rounded p-mr-2"
-                icon="pi pi-search"
-              ></p-button>
-              <p-button
-                type="button"
-                styleClass="p-button-success p-button-rounded p-mr-2"
-                icon="pi pi-star"
-              ></p-button>
-              <p-button
-                type="button"
-                styleClass="p-button-help p-button-rounded"
-                icon="pi pi-cog"
-              ></p-button>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+    <!-- Adoption -->
+    <div class="carousel">
+      <h2 class="text-center mt-5 p-3">Adoption</h2>
+      <p-carousel
+        [value]="products"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="3000"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-product pTemplate="item">
+          <div class="product-item">
+            <!-- (click)="onSearchResultItemClick(recipe.recipe_id)" -->
+
+            <div class="product-item-content rounded-5">
+              <div class="mb-3">
+                <img
+                  src="../../../assets/images/cat.jpg"
+                  [alt]="product.title"
+                  class="product-image rounded shadow"
+                />
+              </div>
+              <div class="container">
+                <h5 class="mb-1">{{ product.title }}</h5>
+                <h6 class="mb-3">{{ product.price }}</h6>
+
+                <div *ngIf="quantity > 0; then instock; else outofstock"></div>
+                <ng-template #instock>
+                  <p class="card__actions__instock m-auto">In Stock</p>
+                </ng-template>
+                <ng-template #outofstock>
+                  <p class="card__actions__outofstock m-auto">Out Of Stock</p>
+                </ng-template>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </ng-template>
-  </p-carousel>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
 </Section>

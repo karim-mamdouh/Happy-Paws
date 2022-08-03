@@ -11,6 +11,8 @@ import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { CarouselModule } from 'primeng/carousel';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { ListboxModule } from 'primeng/listbox';
 //Components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -44,6 +46,8 @@ import { adoptionReducer } from './store/adoption/adoption-reducer';
     BrowserModule,
     AppRoutingModule,
     CarouselModule,
+    ToggleButtonModule,
+    ListboxModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({
       store: storeReducer,
