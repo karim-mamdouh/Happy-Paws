@@ -68,6 +68,11 @@ export class DatabaseService {
     return this.afs.collection(FireStoreCollections.Cart).doc(userID).set(obj);
   }
 
+  // Add Image to storage 
+  // addImageURLtoUser(userID:string,url:string){
+  //   return this.afs.collection(FireStoreCollections.Pets).doc(userID).set({image:url})
+  // }
+
 }
 
 export enum FireStoreCollections {
@@ -75,5 +80,6 @@ export enum FireStoreCollections {
   Store = '/Store',
   Blog = '/Blog',
   Wishlist = '/Wishlist',
-  Cart = '/Cart'
+  Cart = '/Cart',
+  Pets = '/Pets'
 }
