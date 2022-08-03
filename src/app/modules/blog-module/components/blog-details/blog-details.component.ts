@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Article } from 'src/app/interfaces/blog';
 
 @Component({
@@ -9,15 +11,19 @@ import { Article } from 'src/app/interfaces/blog';
 })
 export class BlogDetailsComponent implements OnInit {
   article = {} as Article; //Article object to be viewed
-  constructor(private _activeRoute: ActivatedRoute) {}
+  blogData: Observable<{ blog: Array<Article> }> = new Observable();
+  constructor(
+    private _activeRoute: ActivatedRoute,
+    private _store: Store<{ blog: { blog: Array<Article> } }>
+  ) {}
 
   ngOnInit(): void {
-    this.article = {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      type: 'Cat',
-      title: 'Protect your pet',
-      image: '',
-    };
+    this.blogData = this._store.select('blog');
+    this.blogData.subscribe((res) => {
+      let result = res.blog.find(
+        (element) => element.id === this._activeRoute.snapshot.queryParams['id']
+      );
+      if (result) this.article = result;
+    });
   }
 }

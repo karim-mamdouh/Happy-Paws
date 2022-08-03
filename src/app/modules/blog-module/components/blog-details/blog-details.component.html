@@ -1,4 +1,4 @@
-<section class="pt-3">
+<section class="py-4 blog-details">
   <div class="container">
     <h1 class="blog-title mb-3">{{ article.title }}</h1>
     <p class="fw-light sub-title">
@@ -10,25 +10,15 @@
     </p>
     <hr />
     <figure class="d-flex justify-content-center mt-4">
-      <img class="img-fluid mb-3" src="assets/images/animals/cat4.jpg" alt="" />
+      <img class="img-fluid mb-3" [src]="article.image" alt="article-image" />
     </figure>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut inventore
-      rerum provident repudiandae fuga deleniti modi ipsam veritatis beatae!
-      Voluptas quod voluptatem aperiam expedita molestias ea odio ipsa
-      asperiores delectus? Placeat accusamus officiis in. Blanditiis fugit, sit
-      recusandae praesentium, magnam delectus dolores eos possimus aperiam
-      laborum ipsam. Autem aperiam magnam dignissimos aut, ab alias in eum? At
-      numquam aliquam dolor! Et, deleniti. Nisi officia reprehenderit quod
-      fugiat earum quasi recusandae provident aperiam iste qui, debitis illo
-      natus quisquam laboriosam odit reiciendis possimus modi esse veritatis
-      eaque ducimus. Culpa, error eaque. Nemo in et quasi autem corporis animi
-      alias ut aut at mollitia nobis sint eos, assumenda quis amet quibusdam
-      earum quas, labore libero quae consectetur rem optio? Cum, magnam iure!
-      Est dolorem, voluptatibus deleniti dolor ducimus consequatur maiores
-      repellendus in earum architecto quis tempora sed quo officiis eius quia?
-      Aspernatur recusandae sunt soluta, consequatur nemo eaque tenetur ipsam
-      nam ut?
-    </p>
+    <div *ngFor="let block of article.body">
+      <figure class="d-flex justify-content-center mt-4" *ngIf="block.image">
+        <img class="img-fluid mb-3" [src]="block.image" alt="article-image" />
+      </figure>
+      <p *ngIf="block.data">
+        {{ block.data }}
+      </p>
+    </div>
   </div>
 </section>

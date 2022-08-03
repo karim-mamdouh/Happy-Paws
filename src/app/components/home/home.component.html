@@ -1,20 +1,26 @@
 <Section>
   <!-- Hero Container -->
-  <div class="hero-container">
-    <!-- Hero Section -->
-    <div class="hero container d-flex justify-content-center">
-      <div class="hero__content my-1">
-        <p class="hero__content__text mt-lg-4 text-center">
+  <div class="row p-0">
+    <div class="col-7 hero-container">
+      <div class="">
+        <!-- Hero Section -->
+      </div>
+    </div>
+    <div class="col-5 d-flex justify-content-center align-items-center">
+      <div
+        class="hero__content my-1 d-flex justify-content-center align-items-center flex-column"
+      >
+        <p class="hero__content__text mt-lg-1 text-center">
           Your Pet is Part of Your Family
         </p>
-        <p class="hero__content__para fs-5 mt-lg-4 text-center">
+        <p class="hero__content__para fs-5 mt-lg-2 text-center">
           Let us treat your pet like our own family with best services and
           packages.
         </p>
         <div class="text-center">
           <p-button
             (onClick)="onShopNowClick()"
-            styleClass="card__addToCart mt-4 rounded-5 "
+            styleClass="card__addToCart mt-1 rounded-5 "
             label="Shop Now"
             icon="pi pi-shopping-bag"
           >
@@ -26,21 +32,35 @@
 
   <!-- Animal type -->
   <div class="type container py-5">
-    <h3 class="text-center mb-5">Types</h3>
-    <div class="typesButtons d-lg-flex justify-content-center my-5 d-md-block">
-      <div class="CategoryRouter text-center mx-5 my-5">
+    <h3 class="text-center mb-5">Shop By Pet</h3>
+    <div
+      class="typesButtons d-lg-flex justify-content-center my-5 d-md-block row"
+    >
+      <div class="CategoryRouter text-center my-5 mx-3 col-5">
         <a (click)="onTypeClick('cats')">
           <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
-            <img src="assets/images/Cat_November.png" alt="Cat Image" />
-            <p class="p-3 m-auto"><b>Cats Shop</b></p>
+            <img src="assets/images/catcard.png" alt="Cat Image" />
+            <div
+              class="flex-grow-1 d-flex flex-column justify-content-center"
+              style="color: var(--dark-grey-color)"
+            >
+              <p class="m-0 fs-2"><b>Cats</b></p>
+              <p class="m-0 fs-2"><b>Shop</b></p>
+            </div>
           </div>
         </a>
       </div>
-      <div class="CategoryRouter text-center mx-5 my-5">
+      <div class="CategoryRouter text-center my-5 col-5">
         <a (click)="onTypeClick('dogs')">
           <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
             <img src="assets/images/bg-dog.png" alt="Dog Image" />
-            <p class="p-3 m-auto"><b> Dogs Shop</b></p>
+            <div
+              class="flex-grow-1 d-flex flex-column justify-content-center"
+              style="color: var(--dark-grey-color)"
+            >
+              <p class="m-0 fs-2"><b>Dogs</b></p>
+              <p class="m-0 fs-2"><b>Shop</b></p>
+            </div>
           </div>
         </a>
       </div>
