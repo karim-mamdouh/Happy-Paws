@@ -23,6 +23,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { FilterationComponent } from './components/filteration/filteration.component';
 import { StoreModuleRoutingModule } from './store-module-routing.module';
+import { SmallFilterComponent } from './components/small-filter/small-filter.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { StoreModuleRoutingModule } from './store-module-routing.module';
     WishlistComponent,
     ProductCardComponent,
     FilterationComponent,
+    SmallFilterComponent,
   ],
   imports: [
     CommonModule,
