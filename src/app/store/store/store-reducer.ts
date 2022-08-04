@@ -40,35 +40,54 @@ export const storeReducer = createReducer(
   }),
   //Add new review to product item in store action
   on(addReview, (state, action) => {
-    let product = state.cart.find(
+    let product = state.products.find(
       (element) => element.id === action.payload.id
     );
     if (product === undefined) {
       throw new Error('Item not found, check item id');
     }
-    product?.reviews.push(action.payload.review);
     return {
       ...state,
       products: [
         ...state.products.filter((element) => element.id !== action.payload.id),
-        product!,
+        { ...product, reviews: [...product.reviews, action.payload.review] },
       ],
     };
   }),
-  //Add product item to wishlist action
+  //Add product item to wishlist action  NEED FIX !!!!!
   on(addToWishList, (state, action) => {
+    let product = state.products.find(
+      (element) => element.id === action.payload.id
+    );
     return {
       ...state,
       wishList: [...state.wishList, action.payload],
+      products: [
+        ...state.products.filter((element) => element.id !== action.payload.id),
+        {
+          ...product!,
+          wishList: true,
+        },
+      ],
     };
   }),
   //Remove product item from wishlist action
   on(removeFromWishList, (state, action) => {
+    let product = state.products.find(
+      (element) => element.id === action.payload.id
+    );
     return {
       ...state,
-      wishList: state.wishList.filter(
-        (element) => element.id !== action.payload.id
-      ),
+      wishList: [
+        ...state.wishList.filter((element) => element.id !== action.payload.id),
+      ],
+      products: [
+        ...state.products.filter((element) => element.id !== action.payload.id),
+        {
+          ...product!,
+          wishList: false,
+        },
+      ],
     };
   }),
   //Fill wishlist items action
@@ -114,12 +133,14 @@ export const storeReducer = createReducer(
     if (cartItem === undefined) {
       throw new Error('Item not found, check item id');
     }
-    cartItem.count = cartItem?.count + 1;
     return {
       ...state,
       cart: [
         ...state.cart.filter((element) => element.id !== action.payload.id),
-        cartItem!,
+        {
+          ...cartItem!,
+          count: cartItem.count + 1,
+        },
       ],
     };
   }),
@@ -137,7 +158,10 @@ export const storeReducer = createReducer(
         ...state,
         cart: [
           ...state.cart.filter((element) => element.id !== action.payload.id),
-          cartItem!,
+          {
+            ...cartItem!,
+            count: cartItem.count - 1,
+          },
         ],
       };
     } else {

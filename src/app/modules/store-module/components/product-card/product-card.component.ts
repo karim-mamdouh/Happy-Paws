@@ -81,11 +81,7 @@ export class ProductCardComponent implements OnInit {
 
   }
 
-  onCardClick(event: Event, product: ProductItem): void {
-    this._router.navigate([`/store/details`], {
-      queryParams: {
-        product: JSON.stringify(product)
-      },
-    });
+  onCardClick(event: Event, productID: string): void {
+    this._router.navigate([`/store/details/${productID}`]);
   }
 }

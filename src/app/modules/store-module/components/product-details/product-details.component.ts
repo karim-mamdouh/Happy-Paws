@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { take } from 'rxjs';
 import { CartItem, ProductItem, Review } from 'src/app/interfaces/store';
 import { DatabaseService } from 'src/app/services/database.service';
-import { resetCart, resetWishList } from 'src/app/store/store/store-actions';
+import { addReview, resetCart, resetWishList } from 'src/app/store/store/store-actions';
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +19,7 @@ export class ProductDetailsComponent implements OnInit {
   comment?: string = '';
   // wishlist
   wishlist: Array<ProductItem> = [];
-
+  productID: string = '';
   constructor(private _router: ActivatedRoute,
     private _firestoreService: DatabaseService,
     private _store: Store<{
@@ -28,10 +29,13 @@ export class ProductDetailsComponent implements OnInit {
       this.wishlist = JSON.parse(JSON.stringify(res.wishList));
       this.cartlist = JSON.parse(JSON.stringify(res.cart));
     });
+    this.productID = this._router.snapshot.paramMap.get('id')!;
   }
   ngOnInit(): void {
-    this._router.queryParams.subscribe((res) => {
-      this.product = JSON.parse(res['product']);
+    this._store.select('store').pipe(take(1)).subscribe(res => {
+      this.product = JSON.parse(JSON.stringify(res.products.find(e => {
+        return e.id === this.productID;
+      })!))
     });
 
   }
@@ -83,14 +87,15 @@ export class ProductDetailsComponent implements OnInit {
       reviewObject.rate = this.reviewRating;
       reviewObject.userID = localStorage.getItem('userID')!;
       reviewObject.userName = 'Mahmoud Badawy';
-      reviewObject.comment = this.comment ? this.comment : undefined;
+      reviewObject.comment = this.comment;
 
-      // get the old reviews array and add the new review to it 
-      let oldReviews = this.product.reviews;
-      this.product.reviews = [...oldReviews, reviewObject];
+      // Add Review to local product object
+      this.product.reviews.push(reviewObject)
 
       // update the product reviews in the database
-      this._firestoreService.addReviewToProductItem(this.product).then(res => {
+      this._firestoreService.addReviewToProductItem(this.product).then(() => {
+        // update the product reviews in ngrx store
+        this._store.dispatch(addReview({ payload: { id: this.productID, review: reviewObject } }));
         alert("Successfually added Review");
         this.reset();
 
