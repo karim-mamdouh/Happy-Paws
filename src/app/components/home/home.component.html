@@ -1,18 +1,14 @@
 <Section>
   <!-- Hero Container -->
-  <div class="row p-0">
-    <div class="col-7 hero-container">
-      <div class="">
-        <!-- Hero Section -->
-      </div>
-    </div>
-    <div class="col-5 d-flex justify-content-center align-items-center">
-      <div
-        class="hero__content my-1 d-flex justify-content-center align-items-center flex-column"
-      >
-        <p class="hero__content__text mt-lg-1 text-center">
-          Your Pet is Part of Your Family
-        </p>
+  <div class="heroo container d-lg-flex d-block mb-5">
+    <figure class="d-flex justify-content-center">
+      <img src="assets/images/pets.png" alt="image" />
+    </figure>
+
+    <div
+      class="d-flex justify-content-center align-items-center flex-column pe-lg-5"
+    >
+      <div class="hero-content">
         <p class="hero__content__para fs-5 mt-lg-2 text-center">
           Let us treat your pet like our own family with best services and
           packages.
@@ -30,13 +26,21 @@
     </div>
   </div>
 
-  <!-- Animal type -->
-  <div class="type container py-5">
-    <h3 class="text-center mb-5">Shop By Pet</h3>
-    <div
-      class="typesButtons d-lg-flex justify-content-center my-5 d-md-block row"
+  <!-- image section -->
+  <div class="imageSectionContainer">
+    <div class="imageSectionContainer__title">
+      <p class="hero__content__text text-center fs-2 p-4">
+        Your Pet is Part of Your Family
+      </p>
+    </div>
     >
-      <div class="CategoryRouter text-center my-5 mx-3 col-5">
+  </div>
+
+  <!-- Animal type -->
+  <div class="type container py-5 my-5">
+    <h3 class="text-center mb-5">Shop By Pet</h3>
+    <div class="typesButtons d-lg-flex justify-content-center my-5 d-block">
+      <div class="CategoryRouter text-center my-5 mx-3 col-lg-5">
         <a (click)="onTypeClick('cats')">
           <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
             <img src="assets/images/catcard.png" alt="Cat Image" />
@@ -50,7 +54,7 @@
           </div>
         </a>
       </div>
-      <div class="CategoryRouter text-center my-5 col-5">
+      <div class="CategoryRouter text-center my-5 mx-3 col-lg-5">
         <a (click)="onTypeClick('dogs')">
           <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
             <img src="assets/images/bg-dog.png" alt="Dog Image" />
