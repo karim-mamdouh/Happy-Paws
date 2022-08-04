@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabViewModule } from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
 //Components
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -51,6 +53,8 @@ import { MessageService } from 'primeng/api';
     CommonModule,
     AuthModuleRoutingModule,
     InputTextareaModule,
+    FileUploadModule,
+    HttpClientModule,
   ],
   providers: [MessageService],
 })

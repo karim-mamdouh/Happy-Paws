@@ -1,6 +1,31 @@
 <section class="px-md-5">
   <h3><b>Pet Profile</b></h3>
   <form [formGroup]="petForm" (ngSubmit)="submitPetForm()">
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <p-fileUpload
+          name="demo[]"
+          [customUpload]="true"
+          (uploadHandler)="onUpload($event)"
+          accept="image/*"
+        >
+          <ng-template pTemplate="content">
+            <ul *ngIf="file">
+              <li>{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+        <!-- <button
+          [disabled]="disableButtons"
+          pButton
+          pRipple
+          type="button"
+          icon="fa-solid fa-camera"
+          label="Upload Image"
+          class="p-button-outlined w-100 camera-btn"
+        ></button> -->
+      </div>
+    </div>
     <!-- Pet name -->
     <div class="row mt-3">
       <div class="col-md-6">

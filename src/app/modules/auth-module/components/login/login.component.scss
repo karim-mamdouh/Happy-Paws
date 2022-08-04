@@ -36,7 +36,13 @@
     }
   }
 }
-
+:host ::ng-deep .p-inputtext:enabled:focus {
+  box-shadow: 0 0 0.2rem 0.07rem var(--pink-color);
+  border-color: var(--pink-color);
+}
+.p-inputtext:enabled:hover {
+  border-color: var(--pink-color);
+}
 :host ::ng-deep .p-divider .p-divider-content {
   background-color: var(--auth-background) !important;
 }
