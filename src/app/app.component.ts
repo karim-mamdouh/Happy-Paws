@@ -15,6 +15,8 @@ import {
 } from 'src/app/store/store/store-actions';
 import { fillBlog } from './store/blog/blog-actions';
 import { Article } from './interfaces/blog';
+import { fillAdoption } from './store/adoption/adoption-actions';
+import { Animal } from './interfaces/adoption';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -38,6 +40,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
+    //Only shows navbar and footer in all pages except login and register
     this._router.events.subscribe((event: any) => {
       if (event.url !== undefined && event.type === 1) {
         if (event.url.includes('login') || event.url.includes('register'))
@@ -45,12 +48,19 @@ export class AppComponent {
         else this.showNavbarFooter = true;
       }
     });
+    //Fetch all blog items and fill store
     this._firestoreService
       .fetchBlogPosts()
       .pipe(map((changes) => changes.map((c) => c.payload.doc.data())))
       .subscribe((res) => {
-        console.log(res);
         this._store.dispatch(fillBlog({ payload: res as Array<Article> }));
+      });
+    //Fetch all animals and fill store
+    this._firestoreService
+      .fetchAllAnimals()
+      .pipe(map((changes) => changes.map((c) => c.payload.doc.data())))
+      .subscribe((res) => {
+        this._store.dispatch(fillAdoption({ payload: res as Array<Animal> }));
       });
     // get Products from firebase and save inside the store and cache it locally
     if (sessionStorage.getItem('product') == null) {

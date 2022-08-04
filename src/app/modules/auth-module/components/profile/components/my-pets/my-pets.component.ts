@@ -13,11 +13,11 @@ export class MyPetsComponent implements OnInit {
   @Input() disableButtons: boolean = false; //Flag to disable all buttons during network requests
   @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData.pet with data from parent
   @Output() petEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
+  @Output() imageUploadEmitter = new EventEmitter<File>(); // Event emiiter to notify parent with uploading image
   userData = {} as User; // User object to be viewed and editied
+  file = {} as File; // Image file object
   showErrors: boolean = false; //Flag to show form errors
-
-  file: any;
-  filePath: string = '';
+  filePath: string = ''; //Image file path
   gender = [
     { name: 'Male', value: 'Male' },
     { name: 'Female', value: 'Female' },
@@ -43,10 +43,7 @@ export class MyPetsComponent implements OnInit {
     description: ['', [Validators.required]],
   }); // Form controls
 
-  constructor(
-    private _petBuilder: FormBuilder,
-    private _uploader: UploadService
-  ) {}
+  constructor(private _petBuilder: FormBuilder) {}
 
   get controlValidation() {
     return this.petForm.controls;
@@ -113,13 +110,9 @@ export class MyPetsComponent implements OnInit {
       this.petEmitter.emit(this.userData);
     }
   }
-  onUpload(event: any) {
+  //Upload image action
+  onUpload(event: any): void {
     this.file = event.files[0];
-    let link = this._uploader.uploadFile(event.files[0]).subscribe((res) => {
-      res.subscribe((res) => {
-        this.filePath = res;
-      });
-    });
+    this.imageUploadEmitter.emit(this.file);
   }
-  onSelect(event: any) {}
 }
