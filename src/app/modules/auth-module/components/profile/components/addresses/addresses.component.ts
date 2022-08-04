@@ -32,8 +32,8 @@ export class AddressesComponent implements OnInit {
   ngOnInit(): void {
     //Subscribes to observable and updates object and form data with new input data
     this.user.subscribe((reposnse) => {
+      this.userData = reposnse!;
       if (reposnse.address) {
-        this.userData = reposnse!;
         this.addressForm.controls['city'].setValue(this.userData.address?.city);
         this.addressForm.controls['area'].setValue(this.userData.address?.area);
         this.addressForm.controls['street'].setValue(

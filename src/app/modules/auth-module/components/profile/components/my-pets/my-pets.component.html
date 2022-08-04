@@ -5,9 +5,9 @@
       <div class="col-md-12">
         <p-fileUpload
           name="demo[]"
-          (onUpload)="onUpload($event)"
+          [customUpload]="true"
+          (uploadHandler)="onUpload($event)"
           accept="image/*"
-          (onSelect)="onUpload($event)"
         >
           <ng-template pTemplate="content">
             <ul *ngIf="file">
