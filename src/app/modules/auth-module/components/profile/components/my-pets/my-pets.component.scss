@@ -1,3 +1,19 @@
 h3 {
   color: var(--dark-grey-color);
 }
+:host ::ng-deep .camera-btn {
+  // background-color: var(--grey-color);
+  color: var(--pink-color);
+  //   border: transparent;
+  border-color: var(--pink-color);
+}
+:host ::ng-deep .camera-btn:hover,
+:host ::ng-deep .camera-btn:active {
+  background-color: var(--pink-color);
+  color: white;
+  border: transparent;
+}
+:host ::ng-deep .p-inputtext:enabled:focus {
+  box-shadow: 0 0 0 0.1rem var(--pink-color);
+  border-color: var(--pink-color);
+}
