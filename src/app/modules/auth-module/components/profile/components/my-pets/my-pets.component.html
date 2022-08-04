@@ -3,7 +3,19 @@
   <form [formGroup]="petForm" (ngSubmit)="submitPetForm()">
     <div class="row mt-3">
       <div class="col-md-12">
-        <button
+        <p-fileUpload
+          name="demo[]"
+          (onUpload)="onUpload($event)"
+          accept="image/*"
+          (onSelect)="onUpload($event)"
+        >
+          <ng-template pTemplate="content">
+            <ul *ngIf="file">
+              <li>{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+        <!-- <button
           [disabled]="disableButtons"
           pButton
           pRipple
@@ -11,7 +23,7 @@
           icon="fa-solid fa-camera"
           label="Upload Image"
           class="p-button-outlined w-100 camera-btn"
-        ></button>
+        ></button> -->
       </div>
     </div>
     <!-- Pet name -->

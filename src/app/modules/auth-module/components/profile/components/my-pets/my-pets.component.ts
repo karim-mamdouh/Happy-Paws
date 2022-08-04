@@ -14,6 +14,8 @@ export class MyPetsComponent implements OnInit {
   @Output() petEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   userData = {} as User; // User object to be viewed and editied
   showErrors: boolean = false; //Flag to show form errors
+
+  file: any;
   gender = [
     { name: 'Male', value: 'Male' },
     { name: 'Female', value: 'Female' },
@@ -102,5 +104,8 @@ export class MyPetsComponent implements OnInit {
       };
       this.petEmitter.emit(this.userData);
     }
+  }
+  onUpload(event: any) {
+    console.log(event);
   }
 }

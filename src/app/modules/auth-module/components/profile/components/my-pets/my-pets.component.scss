@@ -3,9 +3,9 @@ h3 {
 }
 :host ::ng-deep .camera-btn {
   // background-color: var(--grey-color);
-  color: var(--pink-color);
+  color: var(--dark-grey-color);
   //   border: transparent;
-  border-color: var(--pink-color);
+  border-color: var(--dark-grey-color);
 }
 :host ::ng-deep .camera-btn:hover,
 :host ::ng-deep .camera-btn:active {
@@ -13,7 +13,69 @@ h3 {
   color: white;
   border: transparent;
 }
+
+.p-button:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px transparent, 0 1px 2px 0 black;
+}
 :host ::ng-deep .p-inputtext:enabled:focus {
-  box-shadow: 0 0 0 0.1rem var(--pink-color);
+  box-shadow: 0 0 0.2rem 0.07rem var(--pink-color);
   border-color: var(--pink-color);
+}
+:host ::ng-deep .p-inputtext:enabled:hover,
+:host ::ng-deep .p-dropdown:not(.p-disabled):hover,
+:host ::ng-deep .p-dropdown-open,
+:host ::ng-deep .p-focus {
+  border-color: var(--pink-color);
+}
+// p-dropdown.ng-invalid:not(form) > div {
+//   border: 1px solid #d40000;
+// }
+
+// p-dropdown.ng-invalid.ng-touched.ui-inputwrapper-focus:not(form) > div {
+//   box-shadow: 0 0 0 0.05em #f40000;
+//   border: 1px solid #d40000;
+//   border-radius: 2px;
+// }
+
+// p-dropdown.ng-invalid.ng-untouched.ui-inputwrapper-focus:not(form) > div {
+//   box-shadow: 0 0 0 0.05em #f40000;
+//   border: 1px solid #d40000;
+//   border-radius: 2px;
+// }
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar .p-button {
+  background: var(--dark-grey-color);
+  border: 1px solid var(--dark-grey-color);
+}
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar .p-button:hover,
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar .p-button:active,
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar .p-button:focus {
+  background: var(--pink-color);
+  border: 1px solid var(--pink-color);
+}
+:host ::ng-deep .p-fileupload .p-fileupload-content {
+  padding: 2rem 1rem;
+  border: none;
+  border-bottom: 1px solid #dee2e6;
+  color: #495057;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: var(--background-color) !important;
+  background: var(--background-color) !important;
+}
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar {
+  border: none;
+  background-color: var(--background-color) !important;
+  background: var(--background-color) !important;
+}
+
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar .p-button:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--pink-color), 0 1px 2px 0 black;
+}
+
+:host
+  ::ng-deep
+  .p-fileupload
+  .p-fileupload-buttonbar
+  .p-button.p-fileupload-choose.p-focus {
+  box-shadow: 0 0 0 0.2rem var(--pink-color);
 }
