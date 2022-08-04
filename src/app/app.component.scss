@@ -1,4 +1,7 @@
+$color-main: rgb(251, 248, 248);
+
 .main {
+  background-color: $color-main;
   display: flex;
   flex-direction: column;
   flex-grow: 1;

@@ -13,90 +13,10 @@ export class BlogListComponent implements OnInit {
   bloglist: Observable<{ blog: Array<Article> }> = new Observable(); //Observable to access store data
 
   constructor(private _store: Store<{ blog: { blog: Array<Article> } }>) {
-    this._store.dispatch(fillBlog({ payload: this.articles }));
+    //this._store.dispatch(fillBlog({ payload: this.articles }));
   }
 
   ngOnInit(): void {
     this.bloglist = this._store.select('blog');
   }
-
-  articles = [
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat4.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-    {
-      author: 'Yasmeen',
-      body: [{ data: 'aaaaaaaa' }],
-      title: 'Protect your pet',
-      image: 'assets/images/animals/cat2.jpg',
-      type: 'Cat',
-    },
-  ];
 }

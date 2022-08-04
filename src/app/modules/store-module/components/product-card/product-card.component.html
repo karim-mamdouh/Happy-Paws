@@ -1,5 +1,5 @@
 <p-card
-  (click)="$event.stopPropagation(); onCardClick($event, product)"
+  (click)="$event.stopPropagation(); onCardClick($event, product.id)"
   styleClass="p-card-shadow card p-2"
 >
   <ng-template pTemplate="header">

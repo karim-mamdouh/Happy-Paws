@@ -25,7 +25,8 @@
       <!-- My pet tab -->
       <p-tabPanel header="My Pet" leftIcon="fa-solid fa-paw">
         <app-my-pets
-          (petEmitter)="profileUpdated($event)"
+          (petEmitter)="petAdded($event)"
+          (imageUploadEmitter)="uploadImage($event)"
           [disableButtons]="disableChildButtons"
         ></app-my-pets>
       </p-tabPanel>

@@ -11,6 +11,7 @@ $color-green: #256029;
 $color-lightgreen: #c8e6c9;
 
 //---------------- virtualscroller Background Color--------------------
+
 :host ::ng-deep .p-virtualscroller .p-virtualscroller-content {
   background-color: $color-main;
 }
@@ -19,7 +20,7 @@ $color-lightgreen: #c8e6c9;
   border: none;
 }
 :host ::ng-deep .p-virtualscroller-item {
-  height: 15rem !important;
+  height: 14rem !important;
 }
 
 //---------------- Item List Card Start--------------------
@@ -38,7 +39,7 @@ $color-lightgreen: #c8e6c9;
     margin: 0 !important;
     img {
       width: 12.5rem;
-      height: 14rem;
+      height: 13rem;
       margin-right: 1rem;
       border-radius: 10px;
     }
@@ -120,7 +121,7 @@ $color-lightgreen: #c8e6c9;
 
 //--------------- Details & Remove Btns size -------------------
 :host ::ng-deep .p-button {
-  width: 8rem;
+  width: 8.5rem;
   height: 2.5rem;
 }
 

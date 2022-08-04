@@ -1,8 +1,29 @@
 <section class="px-md-5">
   <h3><b>Pet Profile</b></h3>
   <form [formGroup]="petForm" (ngSubmit)="submitPetForm()">
-    <!-- Pet name -->
+    <!-- Upload image -->
     <div class="row mt-3">
+      <div class="col-md-12">
+        <p-fileUpload
+          name="demo[]"
+          [customUpload]="true"
+          (uploadHandler)="onUpload($event)"
+          accept="image/*"
+          [disabled]="disableButtons"
+        >
+          <ng-template pTemplate="content">
+            <ul *ngIf="filePath != ''" class="d-md-flex">
+              <p>Uploaded Image:</p>
+              <li class="d-flex justify-content-center flex-grow-1">
+                <img [src]="filePath" class="uploaded-img" />
+              </li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+      </div>
+    </div>
+    <!-- Pet name -->
+    <div class="row mt-4">
       <div class="col-md-6">
         <div class="grid p-fluid">
           <div class="col-12 md:col-4 field">
@@ -46,6 +67,7 @@
                 id="pettype"
                 [options]="petType"
                 optionLabel="name"
+                placeholder="Select Type"
                 formControlName="type"
               ></p-dropdown>
               <label for="pettype">Type</label>
@@ -148,6 +170,7 @@
                 [options]="gender"
                 id="petgender"
                 optionLabel="name"
+                placeholder="Select Gender"
                 formControlName="gender"
               ></p-dropdown>
               <label for="petgender">Gender</label>

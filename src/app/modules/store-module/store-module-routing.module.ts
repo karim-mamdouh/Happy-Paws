@@ -9,7 +9,7 @@ import { SmallFilterComponent } from './components/small-filter/small-filter.com
 
 const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full' },
-  { path: 'details', component: ProductDetailsComponent },
+  { path: 'details/:id', component: ProductDetailsComponent },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'filter', component: FilterationComponent },
