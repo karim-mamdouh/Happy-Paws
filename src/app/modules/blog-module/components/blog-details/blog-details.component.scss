@@ -1,18 +1,21 @@
-hr {
-  width: 50px;
-}
-img {
-  max-height: 1000px;
-}
-.blog-title {
-  color: var(--dark-grey-color);
-}
-.sub-title {
-  color: var(--grey-color);
-  .author-name {
-    color: #00a9ff;
+.blog-details {
+  background-color: var(--auth-background);
+  hr {
+    width: 50px;
   }
-}
-p {
-  color: var(--dark-grey-color);
+  img {
+    max-height: 1000px;
+  }
+  .blog-title {
+    color: var(--dark-grey-color);
+  }
+  .sub-title {
+    color: var(--grey-color);
+    .author-name {
+      color: #00a9ff;
+    }
+  }
+  p {
+    color: var(--dark-grey-color);
+  }
 }
