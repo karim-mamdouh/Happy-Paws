@@ -29,8 +29,8 @@ section {
   }
 
   .imageSectionContainer {
-    margin-top: 150px;
-    margin-bottom: 150px;
+    margin-top: 200px;
+    margin-bottom: 200px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
       url("../../../assets/images/bg2.jpg");
     height: 900px;
@@ -45,6 +45,7 @@ section {
   }
 
   .type {
+    margin-bottom: 150px !important;
     background-image: url("../../../assets/images/paw.png"),
       url("../../../assets/images/paw.png");
     background-repeat: no-repeat;
