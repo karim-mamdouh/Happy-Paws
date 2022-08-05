@@ -1,11 +1,32 @@
+//--------------------------- VARIABLES ------------------------
+$color-primary: #ecada6;
+$color-secondary: #999999;
+$color-white: #ffffff;
+
+//--------------------------- Button style ------------------------
 .dropdown {
   .btn {
-    background-color: #999;
-    border-color: #999;
-    color: white;
+    background-color: $color-secondary;
+    border-color: $color-secondary;
+    color: $color-white;
   }
   .btn:hover {
-    background-color: #ecada6;
-    border-color: #ecada6;
+    background-color: $color-primary;
+    border-color: $color-primary;
   }
+}
+
+//--------------------------- Checkbox style ------------------------
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+  border-color: $color-primary !important;
+  background: $color-primary !important;
+}
+
+:host ::ng-deep .p-checkbox .p-checkbox-box.p-highlight:hover {
+  background-color: $color-primary !important;
+  border-color: $color-primary !important;
+}
+
+:host ::ng-deep .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+  border-color: $color-primary;
 }
