@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { User } from 'src/app/interfaces/profile';
 import { AuthService } from 'src/app/services/auth.service';
+import { DatabaseService } from 'src/app/services/database.service';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
 import { AddressesComponent } from './components/addresses/addresses.component';
 import { MyPetsComponent } from './components/my-pets/my-pets.component';
@@ -21,7 +22,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private _authService: AuthService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private _fireStore: DatabaseService
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +59,39 @@ export class ProfileComponent implements OnInit {
         this.showErrorToast();
         this.disableChildButtons = false;
       });
+  }
+  petAdded(event: User) {
+    this.disableChildButtons = true;
+    this.user = event;
+    if (this.user.phoneNumber === undefined) {
+      this.user.phoneNumber = '';
+    }
+    if (this.user.pet && this.user.pet.id === undefined)
+      this.user.pet.id = this._fireStore.generateID();
+    this._fireStore
+      .addAnimal(this.user?.pet!)
+      .then(() => {
+        return this._authService.saveUserToFireStore(this.user);
+      })
+      .then(() => {
+        this.showSuccessToast();
+        this.disableChildButtons = false;
+      })
+      .catch(() => {
+        this.showErrorToast();
+        this.disableChildButtons = false;
+      });
+
+    // this._authService
+    //   .saveUserToFireStore(this.user)
+    //   .then(() => {
+    //     this.showSuccessToast();
+    //     this.disableChildButtons = false;
+    //   })
+    //   .catch(() => {
+    //     this.showErrorToast();
+    //     this.disableChildButtons = false;
+    //   });
   }
   // Function called when user clicks on change password in child to send password reset email
   changePassword(): void {

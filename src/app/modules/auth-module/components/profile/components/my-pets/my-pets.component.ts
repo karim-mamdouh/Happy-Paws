@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/interfaces/profile';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-my-pets',
@@ -14,6 +15,9 @@ export class MyPetsComponent implements OnInit {
   @Output() petEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   userData = {} as User; // User object to be viewed and editied
   showErrors: boolean = false; //Flag to show form errors
+
+  file: any;
+  filePath: string = '';
   gender = [
     { name: 'Male', value: 'Male' },
     { name: 'Female', value: 'Female' },
@@ -39,7 +43,10 @@ export class MyPetsComponent implements OnInit {
     description: ['', [Validators.required]],
   }); // Form controls
 
-  constructor(private _petBuilder: FormBuilder) {}
+  constructor(
+    private _petBuilder: FormBuilder,
+    private _uploader: UploadService
+  ) {}
 
   get controlValidation() {
     return this.petForm.controls;
@@ -48,9 +55,9 @@ export class MyPetsComponent implements OnInit {
   ngOnInit(): void {
     // Wait for data then do action
     this.user.subscribe((response) => {
+      this.userData = response;
       if (response.pet) {
         //Fill data from recieved object to form
-        this.userData = response;
         this.petForm.controls['petName'].setValue(this.userData.pet?.name);
         this.petForm.controls['type'].setValue({
           name: this.userData.pet?.type,
@@ -74,6 +81,7 @@ export class MyPetsComponent implements OnInit {
           this.userData.pet?.description
         );
         this.petForm.controls['weight'].setValue(this.userData.pet?.weight);
+        this.filePath = this.userData.pet?.image!;
       }
     });
   }
@@ -88,6 +96,7 @@ export class MyPetsComponent implements OnInit {
       this.showErrors = true;
     } else {
       this.userData.pet = {
+        ...this.userData.pet,
         name: this.petForm.value['petName'],
         type: this.petForm.value['type']['name'],
         gender: this.petForm.value['gender']['name'],
@@ -99,8 +108,18 @@ export class MyPetsComponent implements OnInit {
         },
         description: this.petForm.value['description'],
         weight: this.petForm.value['weight'],
+        image: this.filePath,
       };
       this.petEmitter.emit(this.userData);
     }
   }
+  onUpload(event: any) {
+    this.file = event.files[0];
+    let link = this._uploader.uploadFile(event.files[0]).subscribe((res) => {
+      res.subscribe((res) => {
+        this.filePath = res;
+      });
+    });
+  }
+  onSelect(event: any) {}
 }

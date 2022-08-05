@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ProductItem, CartItem } from '../interfaces/store';
 import { Store } from '@ngrx/store';
+import { Animal } from '../interfaces/adoption';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,19 @@ export class DatabaseService {
   fetchBlogPosts() {
     return this.afs.collection(FireStoreCollections.Blog).snapshotChanges();
   }
-
+  addAnimal(animal: Animal) {
+    return this.afs
+      .collection(FireStoreCollections.Pets)
+      .doc(animal.id)
+      .set(animal);
+  }
+  generateID() {
+    return this.afs.createId();
+  }
+  //fetch all adoption animals
+  fetchAllAnimals() {
+    return this.afs.collection(FireStoreCollections.Pets).snapshotChanges();
+  }
   //fetch all wishlist
   fetchAllWishlistItems(userID: string) {
     return this.afs
@@ -103,4 +116,5 @@ export enum FireStoreCollections {
   Blog = '/Blog',
   Wishlist = '/Wishlist',
   Cart = '/Cart',
+  Pets = '/Pets',
 }
