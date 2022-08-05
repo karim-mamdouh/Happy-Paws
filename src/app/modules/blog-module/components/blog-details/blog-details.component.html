@@ -1,0 +1,24 @@
+<section class="py-4 blog-details">
+  <div class="container">
+    <h1 class="blog-title mb-3">{{ article.title }}</h1>
+    <p class="fw-light sub-title">
+      <i class="fa-regular fa-user me-1"></i> By
+      <span class="author-name me-1">{{ article.author }}</span>
+      |
+      <i class="fa-regular fa-folder-closed ms-2 me-2"></i>
+      <span>{{ article.type }}</span>
+    </p>
+    <hr />
+    <figure class="d-flex justify-content-center mt-4">
+      <img class="img-fluid mb-3" [src]="article.image" alt="article-image" />
+    </figure>
+    <div *ngFor="let block of article.body">
+      <figure class="d-flex justify-content-center mt-4" *ngIf="block.image">
+        <img class="img-fluid mb-3" [src]="block.image" alt="article-image" />
+      </figure>
+      <p *ngIf="block.data">
+        {{ block.data }}
+      </p>
+    </div>
+  </div>
+</section>

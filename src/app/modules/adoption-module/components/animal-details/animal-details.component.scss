@@ -1,0 +1,36 @@
+:host ::ng-deep figure {
+  img,
+  p-image {
+    max-height: 1000px;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    max-width: 100%;
+    object-fit: cover;
+  }
+}
+.title-font {
+  color: var(--grey-color);
+}
+.body-font {
+  color: var(--dark-grey-color);
+}
+.card {
+  border-radius: 15px;
+}
+#details {
+  max-width: 80%;
+}
+.test {
+  margin: auto;
+}
+.sub-title {
+  color: var(--grey-color);
+}
+.blog-title {
+  color: var(--dark-grey-color);
+}
+@media (min-width: 768px) {
+  #details {
+    max-width: 80%;
+  }
+}

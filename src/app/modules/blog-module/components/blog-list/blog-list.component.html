@@ -1,0 +1,13 @@
+<section class="py-5 blog">
+  <div class="container">
+    <!-- Blog cards -->
+    <div class="row">
+      <div
+        class="col-md-6 col-lg-4 p-3"
+        *ngFor="let article of (bloglist | async)?.blog"
+      >
+        <app-blog-card [article]="article"></app-blog-card>
+      </div>
+    </div>
+  </div>
+</section>

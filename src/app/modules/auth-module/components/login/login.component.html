@@ -1,0 +1,112 @@
+<section class="py-4 login d-flex justify-content-center align-items-center">
+  <div class="container card mx-auto login__form shadow py-5 h-auto">
+    <!-- Logo section -->
+    <a class="navbar-brand d-flex align-items-center mx-auto" routerLink="/">
+      <figure class="d-inline-block m-0">
+        <img
+          src="assets/icons/icon-72x72.png"
+          class="img-fluid"
+          alt="logo-image"
+        />
+      </figure>
+      <h1 class="d-inline-block my-0 ms-3 text-dark fs-3 login__logo-text">
+        <b>Happy Paws</b>
+      </h1>
+    </a>
+    <h2
+      class="ms-1 pt-5 pt-xl-5 login__text mt-2 mb-3 mb-xl-0 login__sub-title"
+    >
+      Sign-in to your account
+    </h2>
+    <!-- Login form -->
+    <form
+      [formGroup]="loginForm"
+      class="p-1 pt-2 h-100 d-flex flex-column justify-content-evenly"
+      (ngSubmit)="loginFormSubmit()"
+    >
+      <div>
+        <!-- Email input -->
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon bg-light"
+            ><i class="fa-solid fa-envelope"></i
+          ></span>
+          <input
+            pTooltip="email@address.com"
+            tooltipPosition="top"
+            type="text"
+            pInputText
+            class="p-inputtext-md"
+            placeholder="Email"
+            formControlName="email"
+          />
+        </div>
+        <!-- Email errors -->
+        <ng-template
+          [ngIf]="
+            (!controlValidation['email'].valid &&
+              controlValidation['email'].touched) ||
+            showErrors
+          "
+        >
+          <small
+            class="p-error block"
+            *ngIf="controlValidation['email'].errors?.['required']"
+            >This field is required.</small
+          >
+          <small
+            class="p-error block"
+            *ngIf="controlValidation['email'].errors?.['pattern']"
+            >Wrong email format.</small
+          >
+        </ng-template>
+        <!-- Password input -->
+        <div class="p-inputgroup mt-4">
+          <span class="p-inputgroup-addon bg-light"
+            ><i class="fa-solid fa-lock"></i
+          ></span>
+          <input
+            type="password"
+            pInputText
+            class="p-inputtext-md"
+            placeholder="Password"
+            formControlName="password"
+          />
+        </div>
+        <!-- Password errors -->
+        <ng-template
+          [ngIf]="
+            (!controlValidation['password'].valid &&
+              controlValidation['password'].touched) ||
+            showErrors
+          "
+        >
+          <small
+            class="p-error block"
+            *ngIf="controlValidation['password'].errors?.['required']"
+            >This field is required.</small
+          >
+        </ng-template>
+      </div>
+      <!-- Submit form -->
+      <button
+        pButton
+        pRipple
+        [disabled]="disableButtons"
+        type="submit"
+        label="Sign in"
+        class="p-button-raised login__button w-100 mt-3"
+      ></button>
+    </form>
+    <!-- Form ends -->
+    <!-- Register new account section -->
+    <p-divider align="center" layout="horizontal" class="mb-3">
+      <b class="login__text">OR</b>
+    </p-divider>
+    <p class="text-dark text-center">
+      Don't have an account?
+      <a routerLink="/auth/register" class="login__text"> <b>Sign up</b></a>
+    </p>
+  </div>
+  <p-toast key="Successtoast"></p-toast>
+  <p-toast key="Errortoast"></p-toast>
+</section>

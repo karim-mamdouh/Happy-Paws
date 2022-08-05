@@ -1,0 +1,26 @@
+:host ::ng-deep .save-btn,
+:host ::ng-deep .save-btn:hover {
+  //background-color: var(--grey-color);
+  color: var(--pink-color);
+  //border: transparent;
+  border-color: var(--pink-color);
+}
+
+:host ::ng-deep .save-btn:active {
+  background-color: var(--pink-color);
+  color: white;
+  border: transparent;
+}
+// :host ::ng-deep .p-button:focus {
+//   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--pink-color), 0 1px 2px 0 black;
+// }
+h3 {
+  color: var(--dark-grey-color);
+}
+:host ::ng-deep .p-inputtext:enabled:focus {
+  box-shadow: 0 0 0.2rem 0.07rem var(--pink-color);
+  border-color: var(--pink-color);
+}
+.p-inputtext:enabled:hover {
+  border-color: var(--pink-color);
+}

@@ -7,8 +7,10 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   //Default Route
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  //Home Route
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   //Authentication Module Route
@@ -37,7 +39,7 @@ const routes: Routes = [
   },
   //Adoption Module Route
   {
-    path: '',
+    path: 'adoption',
     loadChildren: () =>
       import('./modules/adoption-module/adoption-module.module').then(
         (module) => module.AdoptionModuleModule

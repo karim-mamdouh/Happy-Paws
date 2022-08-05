@@ -1,22 +1,25 @@
+import { Animal } from './adoption';
 import { ProductItem } from './store';
 
 export interface Address {
   street: string;
-  apartment: string;
   city: string;
-  building: string;
+  area: string;
+  buildingNumber: string;
+  floorNumber: number;
+  apartmentNumber: string;
 }
 
 export interface User {
-  id: string;
   email: string;
-  password: string;
-  phone: number;
   userName: string;
   firstName: string;
   lastName: string;
-  gender: Gender;
+  gender: string;
   birthdate: string;
+  id?: string;
+  pet?: Animal;
+  phoneNumber?: string;
   address?: Address;
   previousOrders?: Array<ProductItem>;
 }

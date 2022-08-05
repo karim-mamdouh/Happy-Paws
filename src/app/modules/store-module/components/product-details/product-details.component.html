@@ -1,0 +1,126 @@
+<section>
+  <div class="container main px-4">
+    <!-- Details Section -->
+    <div class="details-section">
+      <!-- Product Image -->
+      <figure
+        class="my-5 col-lg-5 col-md-12 d-flex justify-content-center img-fluid"
+      >
+        <p-image
+          src="{{ product.images[0] }}"
+          alt="Item Image"
+          [preview]="true"
+        ></p-image>
+      </figure>
+      <!-- Product Details -->
+      <div class="my-5 mx-2 col-lg-7 col-md-12">
+        <h3 class="my-3">
+          {{ product.title }}
+        </h3>
+        <p-rating
+          class="rate-display"
+          [(ngModel)]="product.rate"
+          [readonly]="true"
+          [cancel]="false"
+        ></p-rating>
+
+        <p class="my-2 fs-3 price">
+          <b> {{ product.price }} EGP</b>
+        </p>
+        <p class="fs-4">
+          Category:
+          <span class="fs-5"> {{ product.category }}</span>
+        </p>
+        <p class="fs-4">
+          animal: <span class="fs-5">{{ product.animalType }}</span>
+        </p>
+        <p class="fs-4">
+          Brand: <span class="fs-5">{{ product.brand }}</span>
+        </p>
+        <div *ngIf="product.quantity! > 0; then instock; else outofstock"></div>
+        <ng-template #instock>
+          <p class="instock">In Stock</p>
+        </ng-template>
+        <ng-template #outofstock>
+          <p class="outofstock">Out Of Stock</p>
+        </ng-template>
+        <div class="my-4">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="ADD TO CART"
+            (click)="addToCart(product)"
+            class="p-button-raised p-button-secondary me-3 cart-button"
+          >
+            <i class="fa-solid fa-cart-shopping me-3"></i>
+          </button>
+          <p-toggleButton
+            (click)="
+              $event.stopPropagation(); onAddToWishlistClick($event, product)
+            "
+            [ngModel]="product.wishList"
+            [onIcon]="'pi pi-heart-fill'"
+            offIcon="pi pi-heart"
+          ></p-toggleButton>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description Section  -->
+    <div class="my-5 container col-12">
+      <h4>Description</h4>
+      <hr />
+      <p>
+        {{ product.description }}
+      </p>
+    </div>
+
+    <!-- Review Section -->
+    <div class="my-5 container pb-4 col-12">
+      <h4>Reviews</h4>
+      <hr />
+      <div
+        class="rate-display mb-3 p-2 border rounded"
+        *ngFor="let review of product.reviews"
+      >
+        <p>{{ review.userName }}</p>
+        <p-rating
+          [(ngModel)]="review.rate"
+          [readonly]="true"
+          [cancel]="false"
+        ></p-rating>
+        <p class="my-4">
+          {{ review.comment! }}
+        </p>
+      </div>
+      <div class="user-rate my-5">
+        <div class="d-flex my-3">
+          <span class="me-3">Your Rating:</span>
+          <p-rating [(ngModel)]="reviewRating" [cancel]="false"></p-rating>
+        </div>
+        <span class="p-float-label my-4">
+          <p>Comment:</p>
+          <textarea
+            [(ngModel)]="comment"
+            id="float-input"
+            rows="5"
+            cols="35"
+            pInputTextarea
+            class="comment"
+          ></textarea>
+        </span>
+        <button
+          pButton
+          pRipple
+          (click)="onSubmitReviewClick($event)"
+          type="submit"
+          label="Submit"
+          class="p-button-raised p-button-secondary"
+        ></button>
+      </div>
+    </div>
+  </div>
+  <p-toast key="Successtoast"></p-toast>
+  <p-toast key="Errortoast"></p-toast>
+</section>

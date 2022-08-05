@@ -1,0 +1,45 @@
+<p-card
+  (click)="$event.stopPropagation(); onCardClick($event, product.id)"
+  styleClass="p-card-shadow card p-2"
+>
+  <ng-template pTemplate="header">
+    <div class="card__actions d-flex justify-content-end m-1">
+      <p-toggleButton
+        class="card__actions__addToWishlist"
+        [onIcon]="'pi pi-heart-fill'"
+        offIcon="pi pi-heart"
+        [ngModel]="product.wishList"
+        (click)="
+          $event.stopPropagation(); onAddToWishlistClick($event, product)
+        "
+      >
+      </p-toggleButton>
+    </div>
+    <figure>
+      <img alt="Card" class="card__img p-2" src="{{ product.images[0] }}" />
+    </figure>
+  </ng-template>
+  <p class="card__category">{{ product.category }}</p>
+  <p class="card__title">{{ product.title }}</p>
+  <p-rating [(ngModel)]="rating" [readonly]="true" [cancel]="false"></p-rating>
+  <div class="d-flex justify-content-between mb-2">
+    <p class="card__price fw-bold my-2 fs-5">{{ product.price }} EGP</p>
+    <div *ngIf="product.quantity! > 0; then instock; else outofstock"></div>
+    <ng-template #instock>
+      <p class="card__actions__instock">In Stock</p>
+    </ng-template>
+    <ng-template #outofstock>
+      <p class="card__actions__outofstock">Out Of Stock</p>
+    </ng-template>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      styleClass="card__addToCart"
+      label="Add to Cart"
+      icon="pi pi-shopping-cart"
+      (onClick)="$event.stopPropagation(); onAddToCartClick($event, product)"
+    >
+    </p-button>
+  </ng-template>
+</p-card>

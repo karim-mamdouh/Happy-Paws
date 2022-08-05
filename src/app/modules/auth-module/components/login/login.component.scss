@@ -1,0 +1,56 @@
+.login {
+  flex-grow: 1;
+  background-image: url("../../../../../assets/images/imageedit_3_4787130474.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  .login__logo-text b {
+    color: var(--dark-grey-color);
+    font-family: "Pattaya", sans-serif;
+  }
+
+  .login__form {
+    width: 80%;
+    color: white;
+    opacity: 0.96;
+    background-color: var(--auth-background);
+    height: 80vh;
+    border: none;
+  }
+  .login__text {
+    color: var(--grey-color);
+  }
+  .login__sub-title {
+    font-size: 1.6rem;
+    color: var(--dark-grey-color);
+  }
+
+  @media (min-width: 768px) {
+    .login__form {
+      width: 50%;
+    }
+  }
+  @media (min-width: 992px) {
+    .login__form {
+      width: 50%;
+    }
+  }
+}
+:host ::ng-deep .p-inputtext:enabled:focus {
+  box-shadow: 0 0 0.2rem 0.07rem var(--pink-color);
+  border-color: var(--pink-color);
+}
+.p-inputtext:enabled:hover {
+  border-color: var(--pink-color);
+}
+:host ::ng-deep .p-divider .p-divider-content {
+  background-color: var(--auth-background) !important;
+}
+:host ::ng-deep .login__button {
+  background-color: var(--grey-color);
+  border: var(--grey-color);
+  font-size: 1.25rem;
+}
+:host ::ng-deep .login__button:hover {
+  background-color: var(--grey-color);
+}

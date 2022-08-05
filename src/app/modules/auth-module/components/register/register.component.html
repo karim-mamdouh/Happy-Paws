@@ -1,0 +1,344 @@
+<section class="container-fluid register">
+  <div class="row">
+    <!-- Register image -->
+    <div class="register__img col-6 d-none d-lg-block"></div>
+    <div class="col-xl-6 col-12 register__form">
+      <!-- Logo section -->
+      <a
+        class="navbar-brand d-flex justify-content-center align-items-center mx-auto mt-5"
+        routerLink="/"
+      >
+        <figure class="d-inline-block m-0">
+          <img
+            src="assets/icons/icon-72x72.png"
+            class="img-fluid"
+            alt="logo-image"
+          />
+        </figure>
+        <h1 class="d-inline-block my-0 ms-3 text-dark fs-3 register__logo-text">
+          <b>Happy Paws</b>
+        </h1>
+      </a>
+      <h2 class="pt-4 ps-4 register__sub-title mb-2">Create new account</h2>
+      <!-- Register form -->
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="submitReactiveForm()"
+        class="p-4 pt-2"
+      >
+        <div class="row">
+          <!-- First name input -->
+          <div class="col-sm-6">
+            <div class="grid p-fluid">
+              <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon bg-light"
+                    ><i class="fa-solid fa-user-large"></i
+                  ></span>
+                  <input
+                    type="text"
+                    placeholder="First name"
+                    pTooltip="Characters only"
+                    tooltipPosition="top"
+                    pInputText
+                    class="p-inputtext-md"
+                    formControlName="firstName"
+                  />
+                </div>
+              </div>
+              <!-- First name errors -->
+              <ng-template
+                [ngIf]="
+                  (!controlValidation['firstName'].valid &&
+                    controlValidation['firstName'].touched) ||
+                  showErrors
+                "
+              >
+                <small
+                  class="p-error block"
+                  *ngIf="controlValidation['firstName'].errors?.['required']"
+                  >This field is required.</small
+                >
+                <small
+                  class="p-error block"
+                  *ngIf="controlValidation['firstName'].errors?.['pattern']"
+                  >Wrong name format.</small
+                >
+              </ng-template>
+            </div>
+          </div>
+          <!-- last name input-->
+          <div class="col-sm-6 mt-3 mt-sm-0">
+            <div class="grid p-fluid">
+              <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon bg-light"
+                    ><i class="fa-solid fa-user-large"></i
+                  ></span>
+                  <input
+                    type="text"
+                    placeholder="Last name"
+                    pTooltip="Characters only"
+                    tooltipPosition="top"
+                    pInputText
+                    class="p-inputtext-md"
+                    formControlName="lastName"
+                  />
+                </div>
+              </div>
+              <ng-template
+                [ngIf]="
+                  (!controlValidation['lastName'].valid &&
+                    controlValidation['lastName'].touched) ||
+                  showErrors
+                "
+              >
+                <small
+                  class="p-error block"
+                  *ngIf="controlValidation['lastName'].errors?.['required']"
+                  >This field is required.</small
+                >
+                <small
+                  class="p-error block"
+                  *ngIf="controlValidation['lastName'].errors?.['pattern']"
+                  >Wrong name format.</small
+                >
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <!-- User name input -->
+        <div class="grid p-fluid my-3">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon bg-light"
+                ><i class="fa-solid fa-user-check"></i
+              ></span>
+              <input
+                placeholder="Username"
+                pTooltip="At least 6 characters, no white spaces & no special characters"
+                tooltipPosition="top"
+                type="text"
+                pInputText
+                class="p-inputtext-md"
+                formControlName="userName"
+              />
+            </div>
+          </div>
+          <!-- User name errors -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['userName'].valid &&
+                controlValidation['userName'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              class="p-error block m-0 p-0"
+              *ngIf="controlValidation['userName'].errors?.['required']"
+              >This field is required.</small
+            >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['userName'].errors?.['pattern']"
+              >Wrong name format.</small
+            >
+          </ng-template>
+        </div>
+        <!-- Gender dropdown menu-->
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="grid p-fluid">
+              <div class="col-12 md:col-4">
+                <p-dropdown
+                  [options]="gender"
+                  formControlName="gender"
+                  optionLabel="name"
+                  placeholder="Select Gender"
+                ></p-dropdown>
+              </div>
+            </div>
+            <!-- Gender errors -->
+            <ng-template
+              [ngIf]="
+                (!controlValidation['gender'].valid &&
+                  controlValidation['gender'].touched) ||
+                showErrors
+              "
+            >
+              <small
+                class="p-error block m-0 p-0"
+                *ngIf="controlValidation['gender'].errors?.['required']"
+                >This field is required.</small
+              >
+            </ng-template>
+          </div>
+          <!-- Birthdate calender-->
+          <div class="col-sm-6 mt-3 mt-sm-0">
+            <div class="grid p-fluid">
+              <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                  <p-calendar
+                    styleClass="p-input-icon-right ui-datepicker"
+                    formControlName="date"
+                    placeholder="Birthdate"
+                    styleClass="p-inputtext-md"
+                  ></p-calendar>
+                </div>
+              </div>
+            </div>
+            <!-- Birthdate calender errors -->
+            <ng-template
+              [ngIf]="
+                (!controlValidation['date'].valid &&
+                  controlValidation['date'].touched) ||
+                showErrors
+              "
+            >
+              <small
+                class="p-error block m-0 p-0"
+                *ngIf="controlValidation['date'].errors?.['required']"
+                >This field is required.</small
+              >
+            </ng-template>
+          </div>
+        </div>
+        <!-- Email -->
+        <div class="grid p-fluid my-3">
+          <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon bg-light"
+                ><i class="fa-solid fa-envelope"></i
+              ></span>
+              <input
+                type="text"
+                placeholder="Email"
+                pTooltip="email@address.com"
+                tooltipPosition="bottom"
+                pInputText
+                class="p-inputtext-md"
+                formControlName="email"
+              />
+            </div>
+          </div>
+          <!-- Email errors -->
+          <ng-template
+            [ngIf]="
+              (!controlValidation['email'].valid &&
+                controlValidation['email'].touched) ||
+              showErrors
+            "
+          >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['email'].errors?.['required']"
+              >This field is required.</small
+            >
+            <small
+              class="p-error block"
+              *ngIf="controlValidation['email'].errors?.['pattern']"
+              >Wrong name format.</small
+            >
+          </ng-template>
+        </div>
+        <!-- password -->
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="grid p-fluid">
+              <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                  <p-password
+                    [toggleMask]="true"
+                    formControlName="password"
+                    placeholder="Password"
+                    styleClass="p-input-icon-right w-full p-inputtext-md"
+                    [style]="{ width: '100%' }"
+                    [inputStyle]="{ width: '100%' }"
+                  ></p-password>
+                </div>
+              </div>
+              <!-- Password errors -->
+              <ng-template
+                [ngIf]="
+                  (!controlValidation['password'].valid &&
+                    controlValidation['password'].touched) ||
+                  showErrors
+                "
+              >
+                <small
+                  class="p-error block"
+                  *ngIf="controlValidation['password'].errors?.['required']"
+                  >This field is required.</small
+                >
+                <small
+                  class="p-error block"
+                  *ngIf="controlValidation['password'].errors?.['pattern']"
+                  >Wrong format.</small
+                >
+              </ng-template>
+            </div>
+          </div>
+          <!-- Confirm password -->
+          <div class="col-sm-6 mt-3 mt-sm-0">
+            <div class="grid p-fluid">
+              <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                  <p-password
+                    [feedback]="false"
+                    [toggleMask]="true"
+                    formControlName="confirmPassword"
+                    placeholder="Confirm password"
+                    styleClass="p-input-icon-right"
+                    [style]="{ width: '100%' }"
+                    [inputStyle]="{ width: '100%' }"
+                  ></p-password>
+                </div>
+              </div>
+              <!-- Confirm password errors -->
+              <ng-template
+                [ngIf]="
+                  (!controlValidation['confirmPassword'].valid &&
+                    controlValidation['confirmPassword'].touched) ||
+                  showErrors
+                "
+              >
+                <small
+                  class="p-error block"
+                  *ngIf="controlValidation['confirmPassword'].errors?.['required']"
+                  >This field is required.</small
+                >
+                <small
+                  class="p-error block"
+                  *ngIf="controlValidation['confirmPassword'].errors?.['confirmPasswordValidator']"
+                  >Not Matched.</small
+                >
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <!-- Submit button -->
+        <div class="mt-5 row">
+          <button
+            pButton
+            pRipple
+            [disabled]="disableButtons"
+            type="submit"
+            label="Sign up"
+            class="p-button-raised register__button w-75 mx-auto"
+          ></button>
+        </div>
+      </form>
+      <!-- Form ends -->
+      <!-- Have account section -->
+      <p-divider align="center" layout="horizontal" class="mb-3">
+        <b class="register__text">OR</b>
+      </p-divider>
+      <p class="text-dark text-center mb-5">
+        Already have an account?
+        <a routerLink="/auth/login" class="register__text"> <b>Sign in</b> </a>
+      </p>
+    </div>
+  </div>
+  <p-toast key="Successtoast"></p-toast>
+  <p-toast key="Errortoast"></p-toast>
+</section>

@@ -1,10 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --background-color: rgb(254, 253, 253);
+  --auth-background: rgb(251, 248, 248);
+  --pink-color: #ecada6;
+  --grey-color: #999;
+  --dark-grey-color: rgb(103, 102, 102);
+}
+
 body,
 app-root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Kaisei Opti", serif;
 }
-app-root {
+.p-component {
+  font-family: "Kaisei Opti", serif;
+}
+
+app-root,
+app-login,
+app-register,
+app-profile,
+app-animals-list {
   flex-grow: 1;
+}
+
+app-login,
+app-register,
+app-profile,
+app-animals-list {
+  display: flex;
+  flex-direction: column;
 }

@@ -1,0 +1,133 @@
+//--------------------------- VARIABLES ------------------------
+$color-primary: #ecada6;
+$color-secondary: #999999;
+$color-accent: #ffcdd2;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-main: rgb(251, 248, 248);
+$color-gold: #e5b80b;
+$color-danger: #c63737;
+$color-green: #256029;
+$color-lightgreen: #c8e6c9;
+
+//--------------------------- Main Section ------------------------
+section {
+  background-color: $color-main;
+  //------------------------- Main Container ----------------------
+  .main {
+    background-color: $color-white;
+    padding-top: 0.65rem;
+    //------------------- Add To Cart Button Start-----------------
+    button {
+      background-color: $color-secondary !important;
+      border-color: $color-secondary !important;
+      box-shadow: none !important;
+    }
+    button:hover {
+      background-color: $color-primary !important;
+      border-color: $color-primary !important;
+    }
+    //------------------- Add To Cart Button End-----------------
+
+    //------------------- Details Section Start------------------
+    .details-section {
+      background-color: $color-white;
+      margin-top: 1.25rem;
+      span {
+        color: $color-secondary;
+      }
+      .price {
+        color: $color-primary;
+      }
+      .outofstock {
+        background-color: $color-accent;
+        color: $color-danger;
+        width: 7.5rem;
+        text-align: center;
+        border-radius: 10px;
+        padding: 2px;
+      }
+      .instock {
+        background-color: $color-lightgreen;
+        color: $color-green;
+        width: 7.5rem;
+        text-align: center;
+        border-radius: 10px;
+        padding: 2px;
+      }
+    }
+    //------------------- Details Section End------------------
+  }
+}
+
+//------------------------- Image Dimensions ----------------------
+:host ::ng-deep .p-image img {
+  width: 23rem;
+  height: 28.1rem;
+  box-shadow: 5px 5px 10px $color-secondary;
+  border-radius: 10px;
+}
+
+//------------------------- Stars Icons Size ----------------------
+:host ::ng-deep .rate-display .p-rating .p-rating-icon {
+  font-size: medium;
+  cursor: default !important;
+}
+
+//------------------------- Stars inside colors ----------------------
+:host ::ng-deep .p-rating .p-rating-icon.pi-star-fill {
+  color: $color-gold !important;
+}
+
+//---------------------Stars hover and focus colors ------------------
+:host
+  ::ng-deep
+  .p-rating:not(.p-disabled):not(.p-readonly)
+  .p-rating-icon:hover {
+  color: $color-gold !important;
+}
+:host ::ng-deep .p-rating .p-rating-icon:focus {
+  box-shadow: none !important;
+}
+
+//------------------------- Wishlist Button  Start----------------------
+:host ::ng-deep .p-button.p-button-icon-only {
+  padding: 1rem !important;
+}
+:host ::ng-deep .p-togglebutton.p-button.p-highlight {
+  background: $color-primary;
+  border-color: $color-primary;
+  color: $color-white;
+}
+:host ::ng-deep .p-togglebutton.p-button.p-highlight:hover {
+  background: $color-primary !important;
+  border-color: $color-primary !important;
+  color: $color-white;
+}
+
+:host ::ng-deep .p-button:focus {
+  box-shadow: none !important;
+}
+//------------------------- Wishlist Button End ----------------------
+
+//--------------- TextArea focus and hover Color Start ---------------
+:host ::ng-deep .p-inputtext:enabled:focus {
+  box-shadow: 0 0 0 0.2rem $color-accent !important;
+  border-color: $color-accent !important;
+}
+:host ::ng-deep .p-inputtext:enabled:hover {
+  border-color: none !important;
+}
+//--------------- TextArea focus and hover Color End ---------------
+
+@media screen and (min-width: 992px) {
+  .details-section {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 309px) {
+  .cart-button {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,75 @@
+.register {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--auth-background);
+
+  .register__sub-title {
+    font-size: 1.6rem;
+    color: var(--dark-grey-color);
+  }
+  .register__logo-text b {
+    color: var(--dark-grey-color);
+    font-family: "Pattaya", sans-serif;
+  }
+  .row {
+    flex-grow: 1;
+  }
+  .register__img {
+    background-image: url("../../../../../assets/images/catcat.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .register__form {
+    width: 95%;
+    margin: 0 auto;
+  }
+  .register__text {
+    color: var(--grey-color);
+  }
+
+  @media (min-width: 576px) {
+    .register__form {
+      width: 80%;
+    }
+  }
+  @media (min-width: 992px) {
+    .register__form {
+      width: 50%;
+    }
+  }
+}
+:host ::ng-deep .p-dropdown:not(.p-disabled):hover {
+  border-color: var(--pink-color);
+}
+:host ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0.2rem 0.09rem var(--pink-color);
+}
+:host ::ng-deep .p-inputtext:enabled:focus {
+  box-shadow: 0 0 0.2rem 0.09rem var(--pink-color);
+  border-color: var(--pink-color);
+}
+:host ::ng-deep .p-inputtext:enabled:hover {
+  border-color: var(--pink-color);
+}
+.p-inputtext:enabled:hover {
+  border-color: var(--pink-color);
+}
+:host ::ng-deep .p-divider .p-divider-content {
+  background-color: var(--auth-background) !important;
+}
+:host ::ng-deep .register__button {
+  background-color: var(--grey-color);
+  border: var(--grey-color);
+  font-size: 1.25rem;
+}
+:host ::ng-deep .register__button:hover {
+  background-color: var(--grey-color);
+}
+
+@media (min-width: 576px) {
+  :host ::ng-deep .ui-datepicker {
+    z-index: 99999999999 !important;
+  }
+}

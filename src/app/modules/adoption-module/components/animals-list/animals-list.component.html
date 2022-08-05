@@ -1,0 +1,28 @@
+<section class="animal-list pt-3 pb-5 d-flex flex-column">
+  <div class="container d-flex flex-column flex-grow-1">
+    <!-- Adoption title -->
+    <h1 class="mb-3">
+      <span>Adopt</span> yours now, to be your best friend at all times
+    </h1>
+    <!-- Adoption cards -->
+    <ng-template
+      [ngIf]="(adoptionData | async)?.animals?.length! > 0"
+      [ngIfElse]="elseBlock"
+    >
+      <div class="row">
+        <div
+          class="p-2 col-lg-4 col-md-6"
+          *ngFor="let animal of (adoptionData | async)?.animals"
+        >
+          <app-animal-card [animal]="animal"></app-animal-card>
+        </div>
+      </div>
+    </ng-template>
+    <!-- Loading spinner -->
+    <ng-template #elseBlock>
+      <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <p-progressSpinner></p-progressSpinner>
+      </div>
+    </ng-template>
+  </div>
+</section>

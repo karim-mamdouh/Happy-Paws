@@ -1,3 +1,25 @@
+$color-main: rgb(251, 248, 248);
+
 .main {
+  background-color: $color-main;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
+}
+:host ::ng-deep .floating-btn {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50% 50%;
+  background-color: transparent;
+
+  &:hover {
+    background-color: white;
+    .p-scrolltop-icon {
+      color: #ecada6;
+    }
+  }
+  .p-scrolltop-icon {
+    font-size: 2.5rem;
+    color: #999;
+  }
 }

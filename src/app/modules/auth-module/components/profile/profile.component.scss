@@ -1,0 +1,96 @@
+.profile {
+  background-color: var(--background-color);
+  flex-grow: 1;
+  h3 {
+    color: var(--dark-grey-color);
+  }
+  h6 {
+    color: var(--grey-color);
+  }
+}
+:host ::ng-deep .p-tabview-title {
+  line-height: 1.4;
+  font-size: 0.8rem;
+}
+:host ::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background-color: transparent;
+  border-bottom-color: var(--pink-color);
+  color: var(--pink-color);
+}
+:host
+  ::ng-deep
+  .p-tabview
+  .p-tabview
+  .p-tabview-nav
+  li
+  .p-tabview-nav-link:not(.p-disabled):focus {
+  box-shadow: none;
+}
+:host ::ng-deep .p-tabview-nav,
+.p-tabview-nav-container,
+.p-tabview-nav-content li {
+  background-color: transparent;
+}
+:host ::ng-deep .p-tabview .p-tabview-nav .p-tabview-ink-bar {
+  background-color: var(--pink-color);
+}
+:host::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link,
+:host::ng-deep .p-tabview .p-tabview-nav li:hover,
+:host::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link:focus {
+  background-color: var(--background-color) !important;
+}
+:host
+  ::ng-deep
+  .p-tabview
+  .p-tabview-nav
+  li
+  .p-tabview-nav-link:not(.p-disabled):focus {
+  box-shadow: none;
+}
+:host::ng-deep li.p-tabview-ink-bar {
+  width: 0 !important;
+  left: 0px;
+}
+:host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  border-width: 0 0 5px 0;
+}
+:host ::ng-deep .p-tabview-nav {
+  justify-content: center;
+}
+:host ::ng-deep .p-tabview .p-tabview-nav {
+  border: none;
+}
+@media (min-width: 992px) {
+  :host ::ng-deep .p-tabview-nav {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  :host ::ng-deep .p-tabview {
+    display: flex;
+    background-color: transparent;
+  }
+  :host ::ng-deep .p-tabview-panels {
+    background-color: transparent;
+    flex-grow: 1;
+  }
+  :host ::ng-deep .orientation-right {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    max-height: 800px;
+  }
+  :host ::ng-deep .p-tabview-title {
+    line-height: 1.4;
+    font-size: 1.3rem;
+  }
+  :host ::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    border-right: 5px solid var(--pink-color);
+  }
+  :host::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link,
+  :host::ng-deep .p-tabview .p-tabview-nav li:hover,
+  :host::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link:focus {
+    border-bottom: none;
+    background-color: var(--background-color) !important;
+  }
+}
