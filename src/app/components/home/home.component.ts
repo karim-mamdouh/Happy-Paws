@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AnimalType } from 'src/app/interfaces/adoption';
+import { Animal, AnimalType } from 'src/app/interfaces/adoption';
 import { Brand, ProductCategory, ProductItem } from 'src/app/interfaces/store';
 import { Router } from '@angular/router';
+import { Article } from 'src/app/interfaces/blog';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   quantity: number = 1;
+  articles: Array<Article> = [];
+  animals: Array<Animal> = [];
   responsiveOptions = [
     {
       breakpoint: '1024px',
@@ -132,8 +137,12 @@ export class HomeComponent implements OnInit {
       reviews: [],
     },
   ];
-  constructor(private _router: Router) {
-  }
+  constructor(
+    private _router: Router,
+    private _productStore: Store<{ store: { products: Array<ProductItem> } }>,
+    private _blogStore: Store<{ blog: { blog: Array<Article> } }>,
+    private _animalStore: Store<{ adoption: { animals: Array<Animal> } }>
+  ) {}
 
   ngOnInit(): void {}
   onShopNowClick() {
@@ -144,18 +153,31 @@ export class HomeComponent implements OnInit {
     switch (animal) {
       case 'cats':
         this._router.navigate(['/store/products'], {
-          queryParams: { animalType: AnimalType.Cat }
+          queryParams: { animalType: AnimalType.Cat },
         });
         break;
       case 'dogs':
         this._router.navigate(['/store/products'], {
-          queryParams: { animalType: AnimalType.Dog }
+          queryParams: { animalType: AnimalType.Dog },
         });
         break;
     }
   }
 
-
+  // uniqueCardGenerator<T>(numberOfRecipes: number) {
+  //   let uniqueRecipes: Array<T> = [];
+  //   for (let i = 0; i < numberOfRecipes; ) {
+  //     let recipeIndex: number = Math.floor(Math.random() * recipes.length);
+  //     if (
+  //       uniqueRecipes.filter(
+  //         (element) => element.id === recipes[recipeIndex].recipe_id
+  //       ).length === 0
+  //     ) {
+  //       uniqueRecipes.push(recipes[recipeIndex]);
+  //       i++;
+  //     }
+  //   }
+  // }
   onWhatWeCanDoCardsClick(feature: string) {
     switch (feature) {
       case 'store':

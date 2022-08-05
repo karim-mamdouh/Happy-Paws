@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/profile';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -62,10 +63,25 @@ export class LoginComponent implements OnInit {
         })
         .then((response) => {
           localStorage.setItem('token', `${response}`);
-          this.showSuccessToast();
-          setTimeout(() => {
-            this._router.navigate(['/']);
-          }, 1500);
+          this._authService
+            .fetchUserProfile(localStorage.getItem('userID')!)
+            .subscribe(
+              (response) => {
+                localStorage.setItem(
+                  'userName',
+                  `${(response as User).firstName} ${
+                    (response as User).lastName
+                  }`
+                );
+                this.showSuccessToast();
+                setTimeout(() => {
+                  this._router.navigate(['/']);
+                }, 1500);
+              },
+              () => {
+                this.showErrorToast('Failed to get user data');
+              }
+            );
         })
         .catch(() => {
           this.showErrorToast('Wrong email or password');
