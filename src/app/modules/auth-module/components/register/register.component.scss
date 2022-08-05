@@ -44,10 +44,10 @@
   border-color: var(--pink-color);
 }
 :host ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
-  box-shadow: 0 0 0.2rem 0.07rem var(--pink-color);
+  box-shadow: 0 0 0.2rem 0.09rem var(--pink-color);
 }
 :host ::ng-deep .p-inputtext:enabled:focus {
-  box-shadow: 0 0 0.2rem 0.07rem var(--pink-color);
+  box-shadow: 0 0 0.2rem 0.09rem var(--pink-color);
   border-color: var(--pink-color);
 }
 :host ::ng-deep .p-inputtext:enabled:hover {
