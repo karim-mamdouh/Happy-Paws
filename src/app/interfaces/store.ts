@@ -2,6 +2,7 @@ import { AnimalType } from './adoption';
 
 export interface Review {
   userID: string;
+  userName:string;
   rate: number;
   comment?: string;
 }
@@ -30,22 +31,25 @@ export enum ProductCategory {
   Accessories = 'Accessories',
   Toys = 'Toys',
   Litter = 'Litter',
-  Grooming = 'Gromming',
+  Grooming = 'Grooming',
 }
+
 
 export enum Brand {
   Josera = 'Josera',
   RoyalCanin = 'Royal Canin',
   Belcando = 'Belcando',
-  Mera = 'Mera',
   OmniGuard = 'Omni Guard',
-  Leonardo = 'Leonardo',
-  Friskies = 'Friskies',
   Bewi = 'Bewi',
-  Uarone = 'Uarone',
-  DOCO = 'DOCO',
-  PetsRepublic = 'Pets Republic',
-  Piper = 'Piper',
-  CatZone = 'Cat Zone',
-  SaniCat = 'SaniCat',
+  PetMatter = 'Pet Matters',
+  Nunbell = 'Nunbell',
+  Alpha = 'Alpha',
+  Perfecto = 'Perfecto',
+  Quiko = 'Quiko',
+  Georplast = 'Georplast',
+  GiGwi = 'GiGwi',
+  Ariika = 'Ariika',
+  PetsRepublic = "Pets Republic",
+  WonderCat = "Wonder Cat",
+  RoseFishFood = "Rose Fish Food"
 }

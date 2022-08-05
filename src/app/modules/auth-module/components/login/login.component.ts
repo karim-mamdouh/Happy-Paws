@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/profile';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   showErrors: boolean = false; //Flag to show form errors
+  disableButtons: boolean = false; //Flag to disable buttons during network requests
   loginForm: FormGroup = this._loginFormBuilder.group({
     email: [
       '',
@@ -51,6 +53,7 @@ export class LoginComponent implements OnInit {
       //2- Then return the tokenId from the database
       //3- Save the response in the local storage
       //4- Navigate to home page.
+      this.disableButtons = true;
       this._authService
         .login(this.loginForm.value['email'], this.loginForm.value['password'])
         .then((response) => {
@@ -60,13 +63,29 @@ export class LoginComponent implements OnInit {
         })
         .then((response) => {
           localStorage.setItem('token', `${response}`);
-          this.showSuccessToast();
-          setTimeout(() => {
-            this._router.navigate(['/']);
-          }, 1500);
+          this._authService
+            .fetchUserProfile(localStorage.getItem('userID')!)
+            .subscribe(
+              (response) => {
+                localStorage.setItem(
+                  'userName',
+                  `${(response as User).firstName} ${
+                    (response as User).lastName
+                  }`
+                );
+                this.showSuccessToast();
+                setTimeout(() => {
+                  this._router.navigate(['/']);
+                }, 1500);
+              },
+              () => {
+                this.showErrorToast('Failed to get user data');
+              }
+            );
         })
         .catch(() => {
           this.showErrorToast('Wrong email or password');
+          this.disableButtons = false;
         });
     }
   }

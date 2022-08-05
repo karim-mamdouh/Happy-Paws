@@ -1,1 +1,273 @@
-<p>home works!</p>
+<Section class="home">
+  <!-- Hero Container -->
+  <div class="heroo container d-lg-flex d-block mb-5">
+    <figure class="d-flex justify-content-center">
+      <img src="assets/images/pets.png" alt="image" />
+    </figure>
+
+    <div
+      class="d-flex justify-content-center align-items-center flex-column pe-lg-5"
+    >
+      <div class="hero-content">
+        <p class="hero__content__para fs-3 mt-lg-2 text-center">
+          Let us treat your pet like our own family with best services and
+          packages.
+        </p>
+        <div class="text-center">
+          <p-button
+            (onClick)="onShopNowClick()"
+            styleClass="card__addToCart mt-1 rounded-5 "
+            label="Shop Now"
+            icon="pi pi-shopping-bag"
+          >
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- image section -->
+  <div
+    class="imageSectionContainer d-flex justify-content-center align-items-center"
+  >
+    <div class="imageSectionContainer__title flex-grow-1">
+      <p class="hero__content__text text-center p-4">
+        <b>Your Pet is Part</b>
+      </p>
+      <p class="hero__content__text text-center">
+        <b>of Your Family</b>
+      </p>
+    </div>
+    >
+  </div>
+
+  <!-- Animal type -->
+  <div class="type container py-5">
+    <h3 class="text-center mb-5 fw-bold fs-1">Shop By Pet</h3>
+    <div class="typesButtons d-lg-flex justify-content-center my-5 d-block">
+      <div class="CategoryRouter text-center my-5 mx-3 col-lg-5">
+        <a (click)="onTypeClick('cats')">
+          <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
+            <img src="assets/images/catcard.png" alt="Cat Image" />
+            <div
+              class="flex-grow-1 d-flex flex-column justify-content-center"
+              style="color: var(--dark-grey-color)"
+            >
+              <p class="m-0 fs-2"><b>Cats</b></p>
+              <p class="m-0 fs-2"><b>Shop</b></p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="CategoryRouter text-center my-5 mx-3 col-lg-5">
+        <a (click)="onTypeClick('dogs')">
+          <div class="CategoryRouter__content d-lg-flex border rounded-5 p-2">
+            <img src="assets/images/bg-dog.png" alt="Dog Image" />
+            <div
+              class="flex-grow-1 d-flex flex-column justify-content-center"
+              style="color: var(--dark-grey-color)"
+            >
+              <p class="m-0 fs-2"><b>Dogs</b></p>
+              <p class="m-0 fs-2"><b>Shop</b></p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- What We Can Do (Services)-->
+  <div class="services container my-5">
+    <!-- heading text -->
+    <div class="services__text my-5">
+      <h2 class="text-center fs-1 mb-4 fw-bold">What We Can Do</h2>
+      <p class="text-center pb-4 m-auto fs-4">
+        We look after your pet, we ensure that we will give the best treatment
+        for your pet.
+      </p>
+    </div>
+    <!-- services cards container -->
+    <div
+      class="services__container container d-lg-flex my-5 justify-content-center align-items-center;"
+    >
+      <!-- store card -->
+      <div
+        class="services__card m-4 col-lg-4 col-md-12 p-5 shadow"
+        (click)="onWhatWeCanDoCardsClick('store')"
+      >
+        <div class="icon-container m-auto shadow d-flex">
+          <i class="fa-solid fa-store m-auto fs-2"></i>
+        </div>
+        <p class="text-center fs-3 m-4 fw-bold">Store</p>
+        <p class="text-center fs-6 px-4">
+          You can find Supplies, Accessories, Toys all stuff for your pet.
+        </p>
+      </div>
+      <!-- Adoption card -->
+      <div
+        class="services__card col-lg-4 col-md-12 m-4 p-5 shadow"
+        (click)="onWhatWeCanDoCardsClick('adoption')"
+      >
+        <div class="icon-container m-auto shadow d-flex">
+          <i class="fa-solid fa-paw m-auto fs-1"></i>
+        </div>
+        <p class="text-center fs-3 m-4 fw-bold">Adoption</p>
+        <p class="text-center fs-6 px-4">
+          You can add a new member of your family or find someone to adopt your
+          pet.
+        </p>
+      </div>
+      <!-- Blog card -->
+      <div
+        class="services__card m-4 col-lg-4 col-md-12 p-5 shadow"
+        (click)="onWhatWeCanDoCardsClick('blog')"
+      >
+        <div class="icon-container m-auto shadow d-flex">
+          <i class="fa-solid fa-blog m-auto fs-1"></i>
+        </div>
+        <p class="text-center fs-3 m-4 fw-bold">Blog</p>
+        <p class="text-center fs-6 px-4">
+          You can find very useful articals about pets and know more about its
+          health and food.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousels -->
+  <div class="Carousels container mb-5">
+    <!-- Products -->
+    <div class="carousel productCarousel">
+      <h2 class="text-center mt-5 p-3 fw-bold fs-1">Products</h2>
+      <p-carousel
+        [value]="products"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="3000"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-product pTemplate="item">
+          <div class="product-item">
+            <!-- (click)="onSearchResultItemClick(recipe.recipe_id)" -->
+
+            <div class="product-item-content rounded-5">
+              <div class="mb-3">
+                <img
+                  src="assets/images/cat.jpg"
+                  [alt]="product.title"
+                  class="product-image rounded shadow"
+                />
+              </div>
+              <div class="container">
+                <h5 class="mb-1 fw-bold">{{ product.title }}</h5>
+                <h6 class="mb-3">{{ product.price }}</h6>
+
+                <div *ngIf="quantity > 0; then instock; else outofstock"></div>
+                <ng-template #instock>
+                  <p class="card__actions__instock m-auto">In Stock</p>
+                </ng-template>
+                <ng-template #outofstock>
+                  <p class="card__actions__outofstock m-auto">Out Of Stock</p>
+                </ng-template>
+                <div class="card__actions d-flex justify-content-center mt-4">
+                  <p-toggleButton
+                    class="card__actions__addToWishlist mx-3"
+                    [onIcon]="'pi pi-heart-fill'"
+                    offIcon="pi pi-heart"
+                  >
+                  </p-toggleButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+    <!-- blog -->
+    <div class="carousel blogCarousel">
+      <h2 class="text-center mt-5 p-3 fw-bold fs-1">Blog</h2>
+      <p-carousel
+        [value]="products"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="2000"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-product pTemplate="item">
+          <div class="product-item">
+            <!-- (click)="onSearchResultItemClick(recipe.recipe_id)" -->
+
+            <div class="product-item-content rounded-5">
+              <div class="mb-3">
+                <img
+                  src="../../../assets/images/cat.jpg"
+                  [alt]="product.title"
+                  class="product-image rounded shadow"
+                />
+              </div>
+              <div class="container">
+                <h5 class="mb-1 fw-bold">{{ product.title }}</h5>
+                <h6 class="mb-3">{{ product.price }}</h6>
+
+                <div *ngIf="quantity > 0; then instock; else outofstock"></div>
+                <ng-template #instock>
+                  <p class="card__actions__instock m-auto">In Stock</p>
+                </ng-template>
+                <ng-template #outofstock>
+                  <p class="card__actions__outofstock m-auto">Out Of Stock</p>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+    <!-- Adoption -->
+    <div class="carousel adoptionCarousel">
+      <h2 class="text-center mt-5 p-3 fw-bold fs-1">Adoption</h2>
+      <p-carousel
+        [value]="products"
+        styleClass="custom-carousel"
+        [numVisible]="4"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="3000"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-product pTemplate="item">
+          <div class="product-item">
+            <!-- (click)="onSearchResultItemClick(recipe.recipe_id)" -->
+
+            <div class="product-item-content rounded-5">
+              <div class="mb-3">
+                <img
+                  src="../../../assets/images/cat.jpg"
+                  [alt]="product.title"
+                  class="product-image rounded shadow"
+                />
+              </div>
+              <div class="container">
+                <h5 class="mb-1 fw-bold">{{ product.title }}</h5>
+                <h6 class="mb-3">{{ product.price }}</h6>
+
+                <div *ngIf="quantity > 0; then instock; else outofstock"></div>
+                <ng-template #instock>
+                  <p class="card__actions__instock m-auto">In Stock</p>
+                </ng-template>
+                <ng-template #outofstock>
+                  <p class="card__actions__outofstock m-auto">Out Of Stock</p>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</Section>

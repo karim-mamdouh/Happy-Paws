@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmPasswordValidator } from './validators/confirm-password.validator';
 import { MessageService } from 'primeng/api';
+import { flatMap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,7 @@ import { MessageService } from 'primeng/api';
 })
 export class RegisterComponent implements OnInit {
   showErrors: boolean = false; //Flag that shows all form errors
+  disableButtons: boolean = false; // FLag to disable buttons during network requests
   gender = [
     { name: 'Male', value: 'Male' },
     { name: 'Female', value: 'Female' },
@@ -90,6 +92,7 @@ export class RegisterComponent implements OnInit {
       // 1- save user data in the database,
       // 2- take the id from firebase and save it in the user id defined in the object
       // 3- Navigate to login page
+      this.disableButtons = true;
       this._authService
         .register(
           this.registerForm.value['email'],
@@ -97,7 +100,11 @@ export class RegisterComponent implements OnInit {
         )
         .then((response) => {
           user.id = response.user?.uid;
-          return this._authService.saveUserToFireStore(user);
+          this._authService.saveUserToFireStore(user).then((response) => {
+            this._authService.createUserWishlist(user.id!).then((response) => {
+              return this._authService.createUserCart(user.id!)
+            })
+          });
         })
         .then(() => {
           this.showSuccessToast();
@@ -107,6 +114,7 @@ export class RegisterComponent implements OnInit {
         })
         .catch(() => {
           this.showErrorToast();
+          this.disableButtons = false;
         });
     } else {
       this.showErrors = true;

@@ -30,6 +30,11 @@ export const fillWishList = createAction(
 );
 //Reset wishlist items action
 export const resetWishList = createAction('RESET_WISH_LIST');
+//Fill cartlist items action
+export const fillCartList = createAction(
+  'FILL_CART',
+  props<{ payload: Array<CartItem> }>()
+);
 //Add product item to cart action
 export const addToCart = createAction(
   'ADD_TO_CART',

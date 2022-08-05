@@ -4,12 +4,18 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { ProductsComponent } from './components/products/products.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { FilterationComponent } from './components/filteration/filteration.component';
+import { CartComponent } from './components/cart/cart.component';
+import { SmallFilterComponent } from './components/small-filter/small-filter.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'details', component: ProductDetailsComponent },
-  { path: 'wishlist', component: WishlistComponent },
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: 'details/:id', component: ProductDetailsComponent },
+  { path: 'wishlist', canActivate: [AuthGuard], component: WishlistComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'filter', component: FilterationComponent },
+  { path: 'cart', canActivate: [AuthGuard], component: CartComponent },
+  { path: 'smallfilter', component: SmallFilterComponent },
 ];
 
 @NgModule({

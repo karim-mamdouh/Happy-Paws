@@ -1,105 +1,132 @@
+//--------------------------- VARIABLES ------------------------
+$color-primary: #ecada6;
+$color-secondary: #999999;
+$color-accent: #ffcdd2;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-main: rgb(251, 248, 248);
+$color-gold: #e5b80b;
+$color-danger: #c63737;
+$color-green: #256029;
+$color-lightgreen: #c8e6c9;
+
+//--------------------------- Main Section ------------------------
 section {
-  //   background-color: #f5f0ea;
-  background-color: rgb(251, 248, 248);
+  background-color: $color-main;
+  //------------------------- Main Container ----------------------
   .main {
-    background-color: white;
-    padding-top: 10px;
+    background-color: $color-white;
+    padding-top: 0.65rem;
+    //------------------- Add To Cart Button Start-----------------
     button {
-      background-color: #999 !important;
-      border-color: #999 !important;
+      background-color: $color-secondary !important;
+      border-color: $color-secondary !important;
       box-shadow: none !important;
     }
     button:hover {
-      background-color: #ecada6 !important;
-      border-color: #ecada6 !important;
+      background-color: $color-primary !important;
+      border-color: $color-primary !important;
     }
-    .details-section {
-      background-color: white;
-      margin-top: 1.25rem;
+    //------------------- Add To Cart Button End-----------------
 
+    //------------------- Details Section Start------------------
+    .details-section {
+      background-color: $color-white;
+      margin-top: 1.25rem;
+      span {
+        color: $color-secondary;
+      }
+      .price {
+        color: $color-primary;
+      }
       .outofstock {
-        background-color: #ffcdd2;
-        color: #c63737;
-        width: 120px;
+        background-color: $color-accent;
+        color: $color-danger;
+        width: 7.5rem;
         text-align: center;
         border-radius: 10px;
         padding: 2px;
       }
       .instock {
-        background-color: #c8e6c9;
-        color: #256029;
-        width: 120px;
+        background-color: $color-lightgreen;
+        color: $color-green;
+        width: 7.5rem;
         text-align: center;
         border-radius: 10px;
         padding: 2px;
       }
     }
+    //------------------- Details Section End------------------
   }
 }
 
-// Image Dimensions
+//------------------------- Image Dimensions ----------------------
 :host ::ng-deep .p-image img {
-  width: 350px;
-  height: 450px;
-  box-shadow: 5px 5px 10px #888888;
+  width: 23rem;
+  height: 28.1rem;
+  box-shadow: 5px 5px 10px $color-secondary;
   border-radius: 10px;
 }
 
-//Stars Icons Size
-:host ::ng-deep .p-rating .p-rating-icon {
+//------------------------- Stars Icons Size ----------------------
+:host ::ng-deep .rate-display .p-rating .p-rating-icon {
   font-size: medium;
+  cursor: default !important;
 }
 
-//Stars inside colors
+//------------------------- Stars inside colors ----------------------
 :host ::ng-deep .p-rating .p-rating-icon.pi-star-fill {
-  color: #e5b80b !important;
+  color: $color-gold !important;
 }
 
-//Stars hover and focus colors
+//---------------------Stars hover and focus colors ------------------
 :host
   ::ng-deep
   .p-rating:not(.p-disabled):not(.p-readonly)
   .p-rating-icon:hover {
-  color: #e5b80b !important;
+  color: $color-gold !important;
 }
 :host ::ng-deep .p-rating .p-rating-icon:focus {
   box-shadow: none !important;
 }
 
-//wishlist button
+//------------------------- Wishlist Button  Start----------------------
 :host ::ng-deep .p-button.p-button-icon-only {
   padding: 1rem !important;
 }
 :host ::ng-deep .p-togglebutton.p-button.p-highlight {
-  background: #ecada6;
-  border-color: #ecada6;
-  color: #ffffff;
+  background: $color-primary;
+  border-color: $color-primary;
+  color: $color-white;
 }
 :host ::ng-deep .p-togglebutton.p-button.p-highlight:hover {
-  background: #ecada6 !important;
-  border-color: #ecada6 !important;
-  color: #ffffff;
+  background: $color-primary !important;
+  border-color: $color-primary !important;
+  color: $color-white;
 }
 
 :host ::ng-deep .p-button:focus {
   box-shadow: none !important;
 }
+//------------------------- Wishlist Button End ----------------------
 
-//TextArea focus and hover Color
+//--------------- TextArea focus and hover Color Start ---------------
 :host ::ng-deep .p-inputtext:enabled:focus {
-  box-shadow: 0 0 0 0.2rem #ffcdd2 !important;
-  border-color: #ffcdd2 !important;
+  box-shadow: 0 0 0 0.2rem $color-accent !important;
+  border-color: $color-accent !important;
 }
 :host ::ng-deep .p-inputtext:enabled:hover {
   border-color: none !important;
 }
+//--------------- TextArea focus and hover Color End ---------------
 
 @media screen and (min-width: 992px) {
   .details-section {
     display: flex;
+    justify-content: center;
   }
 }
-@media screen and (max-width: 389px) {
+@media screen and (max-width: 309px) {
   .cart-button {
     margin-bottom: 20px;
   }

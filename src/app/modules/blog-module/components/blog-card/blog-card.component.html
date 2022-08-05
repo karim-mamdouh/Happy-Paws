@@ -1,0 +1,23 @@
+<div
+  class="blog-card d-md-block d-flex justify-content-center flex-column align-items-center pb-3"
+  (click)="goToBlogDetails()"
+>
+  <!-- Blog card image -->
+  <figure>
+    <img [src]="article.image" class="img-fluid" [alt]="article.title" />
+  </figure>
+  <div class="d-flex justify-content-between w-100">
+    <div class="ms-2">
+      <!-- Blog title -->
+      <h5 class="blog-card__title mb-3">{{ article.title }}</h5>
+      <!-- Blog author and animal type -->
+      <p class="fw-light blog-card__sub-title">
+        <i class="fa-regular fa-user me-1"></i> By
+        <span class="author-name me-1">{{ article.author }}</span>
+        |
+        <i class="fa-regular fa-folder-closed ms-2 me-2"></i>
+        <span>{{ article.type }}</span>
+      </p>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,8 @@ import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PaginatorModule } from 'primeng/paginator';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ToastModule } from 'primeng/toast';
 
 //Components
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -22,6 +24,10 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { FilterationComponent } from './components/filteration/filteration.component';
 import { StoreModuleRoutingModule } from './store-module-routing.module';
+import { SmallFilterComponent } from './components/small-filter/small-filter.component';
+
+//Services
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,7 @@ import { StoreModuleRoutingModule } from './store-module-routing.module';
     WishlistComponent,
     ProductCardComponent,
     FilterationComponent,
+    SmallFilterComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +53,9 @@ import { StoreModuleRoutingModule } from './store-module-routing.module';
     CardModule,
     CheckboxModule,
     PaginatorModule,
+    MultiSelectModule,
+    ToastModule
   ],
+  providers: [MessageService],
 })
-export class StoreModuleModule {}
+export class StoreModuleModule { }

@@ -1,1 +1,63 @@
-<p>animal-details works!</p>
+<section class="d-flex justify-content-center align-items-center flex-column">
+  <div class="mt-5 container" id="details">
+    <!-- Animal image -->
+    <figure class="d-flex justify-content-center">
+      <img [src]="animal.image!" class="img-fluid d-lg-none" />
+      <p-image
+        [src]="animal.image!"
+        class="d-none d-lg-block img-fluid"
+        [alt]="animal.name"
+        [preview]="true"
+      ></p-image>
+    </figure>
+    <!-- Content -->
+    <div class="row p-2">
+      <!-- Animal age -->
+      <div class="col-md-4 p-2">
+        <div class="p-2 card">
+          <span class="text-center title-font m-0">Age</span>
+          <span class="text-center body-font m-0">{{ animal.age }} Months</span>
+        </div>
+      </div>
+      <!-- Animal weight -->
+      <div class="col-md-4 p-2">
+        <div class="p-2 card">
+          <span class="text-center title-font m-0">Weight</span>
+          <span class="text-center body-font m-0">{{ animal.weight }} KGs</span>
+        </div>
+      </div>
+      <!-- Animal gender -->
+      <div class="col-md-4 p-2">
+        <div class="p-2 card">
+          <p class="text-center title-font m-0">Gender</p>
+          <p class="text-center body-font m-0">{{ animal.gender }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Animal name -->
+    <div class="ms-3">
+      <h5 class="mt-2 body-font fw-bold">{{ animal.name }}</h5>
+      <p class="title-font">
+        <i class="pi pi-map-marker"></i> {{ animal.owner.location }}
+      </p>
+    </div>
+    <!-- Animal description -->
+    <div class="ms-3 test">
+      <h5 class="mt-2 body-font fw-bold">About</h5>
+      <p>
+        {{ animal.description }}
+      </p>
+    </div>
+    <!-- Owner contact info -->
+    <div class="ms-3">
+      <h5 class="blog-title mb-3 fw-bold">Contact Info</h5>
+      <p class="fw-light sub-title">
+        <i class="fa-regular fa-user me-2"></i>
+        <span class="author-name me-1">{{ animal.owner.name }}</span>
+        |
+        <i class="fa-solid fa-phone ms-2 me-2"></i>
+        <span>{{ animal.owner.phone }}</span>
+      </p>
+    </div>
+  </div>
+</section>

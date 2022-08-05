@@ -4,8 +4,10 @@ interface Content {
 }
 
 export interface Article {
-  id: string;
+  id?: string;
   title: string;
   body: Array<Content>;
   image: string;
+  author: string;
+  type: string;
 }

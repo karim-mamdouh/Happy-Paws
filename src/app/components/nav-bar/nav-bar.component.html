@@ -3,9 +3,15 @@
     <!-- Logo -->
     <a class="navbar-brand d-flex align-items-center" routerLink="/">
       <figure class="d-inline-block m-0">
-        <img src="assets/icons/icon-72x72.png" class="img-fluid" />
+        <img
+          src="assets/icons/icon-72x72.png"
+          class="img-fluid"
+          alt="logo-image"
+        />
       </figure>
-      <p class="d-inline-block my-0 ms-2 navbar__logo-text"><b>Happy Paws</b></p>
+      <p class="d-inline-block my-0 ms-2 navbar__logo-text">
+        <b>Happy Paws</b>
+      </p>
     </a>
     <!-- Small screen button -->
     <button
@@ -24,16 +30,6 @@
       class="collapse navbar-collapse mx-3 mx-lg-0 mt-3 mt-lg-0 justify-content-end"
       id="navbarSupportedContent"
     >
-      <!-- Search section -->
-      <form class="d-flex me-lg-auto ms-lg-5" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
       <!-- User section (large screen) -->
       <div
         class="nav-item mx-2 d-lg-flex justify-content-center align-items-center d-none"
@@ -72,25 +68,27 @@
   <!-- Bottom section -->
   <div class="container my-lg-3">
     <div
-      class="navbar__links collapse navbar-collapse "
+      class="navbar__links collapse navbar-collapse"
       id="navbarSupportedContent"
     >
-      <ul class="navbar-nav mb-2 mb-lg-0 mx-3 d-lg-flex justify-content-center w-100">
+      <ul
+        class="navbar-nav mb-2 mb-lg-0 mx-3 d-lg-flex justify-content-center w-100"
+      >
         <!-- Home link -->
         <li
           class="nav-item px-2 d-lg-flex justify-content-center align-items-center"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
         >
-          <a
-            class="nav-link active"
-            aria-current="page"
-            routerLink="/"
-            routerLinkActive="active"
+          <a class="nav-link" aria-current="page" routerLink="/home"
             ><i class="fa-solid fa-house me-1"></i> Home</a
           >
         </li>
         <!-- Store drop down menu -->
         <li
           class="nav-item d-lg-flex justify-content-center align-items-center px-lg-3 px-2"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
         >
           <button
             #btn
@@ -112,16 +110,18 @@
         <!-- Adoption link -->
         <li
           class="nav-item px-2 d-lg-flex justify-content-center align-items-center"
+          routerLinkActive="active"
         >
-          <a class="nav-link" routerLink="/adoption" routerLinkActive="active"
+          <a class="nav-link" routerLink="/adoption"
             ><i class="fa-solid fa-hand-holding-heart me-1"></i> Adoption</a
           >
         </li>
         <!-- Blog link -->
         <li
           class="nav-item px-2 d-lg-flex justify-content-center align-items-center"
+          routerLinkActive="active"
         >
-          <a class="nav-link" routerLink="/blog" routerLinkActive="active"
+          <a class="nav-link" routerLink="/blog"
             ><i class="fa-solid fa-newspaper"></i> Blog</a
           >
         </li>

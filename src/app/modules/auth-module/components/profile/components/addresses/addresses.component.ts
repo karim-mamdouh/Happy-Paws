@@ -9,6 +9,7 @@ import { User } from 'src/app/interfaces/profile';
   styleUrls: ['./addresses.component.scss'],
 })
 export class AddressesComponent implements OnInit {
+  @Input() disableButtons: boolean = false; //Flag to disable all buttons during network requests
   @Input() user: BehaviorSubject<User> = new BehaviorSubject({} as User); // User observable to fill userData.address? with data from parent
   @Output() addressEmitter = new EventEmitter<User>(); // Event emiiter to notify parent with changes occured by sending modified object
   userData = {} as User; // User object to be viewed and editied
@@ -31,8 +32,8 @@ export class AddressesComponent implements OnInit {
   ngOnInit(): void {
     //Subscribes to observable and updates object and form data with new input data
     this.user.subscribe((reposnse) => {
+      this.userData = reposnse!;
       if (reposnse.address) {
-        this.userData = reposnse!;
         this.addressForm.controls['city'].setValue(this.userData.address?.city);
         this.addressForm.controls['area'].setValue(this.userData.address?.area);
         this.addressForm.controls['street'].setValue(

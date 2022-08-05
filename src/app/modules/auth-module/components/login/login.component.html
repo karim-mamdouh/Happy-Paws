@@ -1,12 +1,13 @@
 <section class="py-4 login d-flex justify-content-center align-items-center">
-  <div class="container card mx-auto login__form shadow">
+  <div class="container card mx-auto login__form shadow py-5 h-auto">
     <!-- Logo section -->
-    <a
-      class="navbar-brand d-flex align-items-center mx-auto mt-5"
-      routerLink="/"
-    >
+    <a class="navbar-brand d-flex align-items-center mx-auto" routerLink="/">
       <figure class="d-inline-block m-0">
-        <img src="assets/icons/icon-72x72.png" class="img-fluid" />
+        <img
+          src="assets/icons/icon-72x72.png"
+          class="img-fluid"
+          alt="logo-image"
+        />
       </figure>
       <h1 class="d-inline-block my-0 ms-3 text-dark fs-3 login__logo-text">
         <b>Happy Paws</b>
@@ -17,6 +18,7 @@
     >
       Sign-in to your account
     </h2>
+    <!-- Login form -->
     <form
       [formGroup]="loginForm"
       class="p-1 pt-2 h-100 d-flex flex-column justify-content-evenly"
@@ -33,7 +35,7 @@
             tooltipPosition="top"
             type="text"
             pInputText
-            class="p-inputtext-sm"
+            class="p-inputtext-md"
             placeholder="Email"
             formControlName="email"
           />
@@ -65,12 +67,11 @@
           <input
             type="password"
             pInputText
-            class="p-inputtext-sm"
+            class="p-inputtext-md"
             placeholder="Password"
             formControlName="password"
           />
         </div>
-
         <!-- Password errors -->
         <ng-template
           [ngIf]="
@@ -90,6 +91,7 @@
       <button
         pButton
         pRipple
+        [disabled]="disableButtons"
         type="submit"
         label="Sign in"
         class="p-button-raised login__button w-100 mt-3"
@@ -100,7 +102,7 @@
     <p-divider align="center" layout="horizontal" class="mb-3">
       <b class="login__text">OR</b>
     </p-divider>
-    <p class="text-dark text-center mb-5">
+    <p class="text-dark text-center">
       Don't have an account?
       <a routerLink="/auth/register" class="login__text"> <b>Sign up</b></a>
     </p>
