@@ -46,8 +46,12 @@
         <p class="fs-4 m-1">Store</p>
         <ul class="p-0">
           <div class="ms-3">
-            <li class="mb-2"><a routerLink="/store">Cat</a></li>
-            <li><a routerLink="/store">Dog</a></li>
+            <li class="mb-2">
+              <a routerLink="/store" [queryParams]="{ animalType: cat }">Cat</a>
+            </li>
+            <li>
+              <a routerLink="/store" [queryParams]="{ animalType: dog }">Dog</a>
+            </li>
           </div>
         </ul>
       </div>

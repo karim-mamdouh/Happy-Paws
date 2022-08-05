@@ -6,14 +6,15 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { FilterationComponent } from './components/filteration/filteration.component';
 import { CartComponent } from './components/cart/cart.component';
 import { SmallFilterComponent } from './components/small-filter/small-filter.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: 'details/:id', component: ProductDetailsComponent },
-  { path: 'wishlist', component: WishlistComponent },
+  { path: 'wishlist', canActivate: [AuthGuard], component: WishlistComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'filter', component: FilterationComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'cart', canActivate: [AuthGuard], component: CartComponent },
   { path: 'smallfilter', component: SmallFilterComponent },
 ];
 
