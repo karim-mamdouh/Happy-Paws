@@ -37,12 +37,8 @@ export class WishlistComponent implements OnInit {
 
   }
 
-  onDetailsClick(product: ProductItem): void {
-    this._router.navigate([`/store/details`], {
-      queryParams: {
-        product: JSON.stringify(product)
-      },
-    });
+  onDetailsClick(productID: string): void {
+    this._router.navigate([`/store/details/${productID}`]);
   }
   onRemoveItemClick(product: ProductItem): void {
     // Get index of the product inside wishlist

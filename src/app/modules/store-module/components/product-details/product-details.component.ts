@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
+import { MessageService } from 'primeng/api';
 import { CartItem, ProductItem, Review } from 'src/app/interfaces/store';
 import { DatabaseService } from 'src/app/services/database.service';
 import { addReview, resetCart, resetWishList } from 'src/app/store/store/store-actions';
@@ -20,7 +21,9 @@ export class ProductDetailsComponent implements OnInit {
   // wishlist
   wishlist: Array<ProductItem> = [];
   productID: string = '';
-  constructor(private _router: ActivatedRoute,
+  constructor(
+    private _messageService: MessageService,
+    private _router: ActivatedRoute,
     private _firestoreService: DatabaseService,
     private _store: Store<{
       store: { cart: Array<CartItem>, products: Array<ProductItem>, wishList: Array<ProductItem> }
@@ -96,16 +99,34 @@ export class ProductDetailsComponent implements OnInit {
       this._firestoreService.addReviewToProductItem(this.product).then(() => {
         // update the product reviews in ngrx store
         this._store.dispatch(addReview({ payload: { id: this.productID, review: reviewObject } }));
-        alert("Successfually added Review");
+        this.showSuccessToast('Review Successfually added');
         this.reset();
 
       }).catch(err => {
-        alert(`Error adding your review, Please contact the support ${err}`);
+        this.showErrorToast(`Error adding your review, Please contact the support ${err}`);
       })
     }
     else {
-      alert("Please Login first !");
+      this.showErrorToast("Please Login first !");
     }
 
   }
+    //Function that shows success toaster
+    showSuccessToast(successMsg: string): void {
+      this._messageService.add({
+        key: 'Successtoast',
+        severity: 'success',
+        summary: '',
+        detail:successMsg,
+      });
+    }
+    //Function that shows error toaster
+    showErrorToast(errorMsg: string): void {
+      this._messageService.add({
+        key: 'Errortoast',
+        severity: 'error',
+        summary: '',
+        detail: errorMsg,
+      });
+    }
 }

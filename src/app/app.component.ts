@@ -48,13 +48,7 @@ export class AppComponent {
         else this.showNavbarFooter = true;
       }
     });
-    //Fetch all blog items and fill store
-    this._firestoreService
-      .fetchBlogPosts()
-      .pipe(map((changes) => changes.map((c) => c.payload.doc.data())))
-      .subscribe((res) => {
-        this._store.dispatch(fillBlog({ payload: res as Array<Article> }));
-      });
+
     //Fetch all animals and fill store
     this._firestoreService
       .fetchAllAnimals()
@@ -78,7 +72,13 @@ export class AppComponent {
       console.log('From Cache', temp);
       this._store.dispatch(fillProducts({ payload: temp }));
     }
-
+    //Fetch all blog items and fill store
+    this._firestoreService
+      .fetchBlogPosts()
+      .pipe(map((changes) => changes.map((c) => c.payload.doc.data())))
+      .subscribe((res) => {
+        this._store.dispatch(fillBlog({ payload: res as Array<Article> }));
+      });
     // If User is logged in
     if (localStorage.getItem('userID')) {
       // get Wishlist from firebase and save inside the store
