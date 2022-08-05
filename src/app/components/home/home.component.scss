@@ -121,6 +121,11 @@ section {
   .Carousels {
     margin-top: 10rem;
     .carousel {
+      background-image: url("../../../assets/images/paw.png"),
+        url("../../../assets/images/paw.png");
+      background-repeat: no-repeat;
+      background-size: 10% 25%;
+      background-position: top right, bottom left;
       margin-top: 8rem;
     }
     .product-item {
@@ -192,10 +197,12 @@ section {
 :host ::ng-deep .p-button {
   border: none !important;
 }
+
 :host ::ng-deep .p-button.p-button-icon-only .p-button-icon-left,
 .p-button.p-button-icon-only .p-button-icon-right {
   font-size: 30px;
 }
+
 :host ::ng-deep .p-togglebutton.p-button.p-highlight .p-button-icon-left,
 .p-togglebutton.p-button.p-highlight .p-button-icon-right {
   color: $color-primary;
@@ -227,6 +234,15 @@ section {
   color: #495057;
 }
 
+//--------------------------- Carousel ------------------------
+:host
+  ::ng-deep
+  .p-carousel
+  .p-carousel-indicators
+  .p-carousel-indicator.p-highlight
+  button {
+  background-color: var(--pink-color);
+}
 //--------------------------- ADD TO WISHLIST END------------------------
 @media only screen and (max-width: 1200px) {
   section {
@@ -245,6 +261,13 @@ section {
 @media only screen and (max-width: 992px) {
   section {
     .type {
+      background-image: url("../../../assets/images/paw.png"),
+        url("../../../assets/images/paw.png");
+      background-repeat: no-repeat;
+      background-size: 12% 12%;
+      background-position: top right, bottom left;
+    }
+    .carousel {
       background-image: url("../../../assets/images/paw.png"),
         url("../../../assets/images/paw.png");
       background-repeat: no-repeat;
@@ -302,6 +325,13 @@ section {
         background-color: transparent;
       }
     }
+    .carousel {
+      background-image: url("../../../assets/images/paw.png"),
+        url("../../../assets/images/paw.png");
+      background-repeat: no-repeat;
+      background-size: 10% 10%;
+      background-position: top right, bottom left;
+    }
   }
 }
 
@@ -348,13 +378,12 @@ section {
         background-color: transparent;
       }
     }
+    .carousel {
+      background-image: url("../../../assets/images/paw.png"),
+        url("../../../assets/images/paw.png");
+      background-repeat: no-repeat;
+      background-size: 10% 10%;
+      background-position: top right, bottom left;
+    }
   }
-}
-:host
-  ::ng-deep
-  .p-carousel
-  .p-carousel-indicators
-  .p-carousel-indicator.p-highlight
-  button {
-  background-color: var(--pink-color);
 }
