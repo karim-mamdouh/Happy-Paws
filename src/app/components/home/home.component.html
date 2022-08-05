@@ -1,4 +1,4 @@
-<Section>
+<Section class="home">
   <!-- Hero Container -->
   <div class="heroo container d-lg-flex d-block mb-5">
     <figure class="d-flex justify-content-center">
@@ -9,7 +9,7 @@
       class="d-flex justify-content-center align-items-center flex-column pe-lg-5"
     >
       <div class="hero-content">
-        <p class="hero__content__para fs-5 mt-lg-2 text-center">
+        <p class="hero__content__para fs-3 mt-lg-2 text-center">
           Let us treat your pet like our own family with best services and
           packages.
         </p>
@@ -27,10 +27,15 @@
   </div>
 
   <!-- image section -->
-  <div class="imageSectionContainer">
-    <div class="imageSectionContainer__title">
-      <p class="hero__content__text text-center fs-2 p-4">
-        Your Pet is Part of Your Family
+  <div
+    class="imageSectionContainer d-flex justify-content-center align-items-center"
+  >
+    <div class="imageSectionContainer__title flex-grow-1">
+      <p class="hero__content__text text-center p-4">
+        <b>Your Pet is Part</b>
+      </p>
+      <p class="hero__content__text text-center">
+        <b>of Your Family</b>
       </p>
     </div>
     >
@@ -38,7 +43,7 @@
 
   <!-- Animal type -->
   <div class="type container py-5">
-    <h3 class="text-center mb-5">Shop By Pet</h3>
+    <h3 class="text-center mb-5 fw-bold fs-1">Shop By Pet</h3>
     <div class="typesButtons d-lg-flex justify-content-center my-5 d-block">
       <div class="CategoryRouter text-center my-5 mx-3 col-lg-5">
         <a (click)="onTypeClick('cats')">
@@ -75,7 +80,7 @@
   <div class="services container my-5">
     <!-- heading text -->
     <div class="services__text my-5">
-      <h2 class="text-center fs-1 mb-4">What We Can Do</h2>
+      <h2 class="text-center fs-1 mb-4 fw-bold">What We Can Do</h2>
       <p class="text-center pb-4 m-auto fs-4">
         We look after your pet, we ensure that we will give the best treatment
         for your pet.
@@ -93,7 +98,7 @@
         <div class="icon-container m-auto shadow d-flex">
           <i class="fa-solid fa-store m-auto fs-2"></i>
         </div>
-        <p class="text-center fs-3 m-4">Store</p>
+        <p class="text-center fs-3 m-4 fw-bold">Store</p>
         <p class="text-center fs-6 px-4">
           You can find Supplies, Accessories, Toys all stuff for your pet.
         </p>
@@ -106,7 +111,7 @@
         <div class="icon-container m-auto shadow d-flex">
           <i class="fa-solid fa-paw m-auto fs-1"></i>
         </div>
-        <p class="text-center fs-3 m-4">Adoption</p>
+        <p class="text-center fs-3 m-4 fw-bold">Adoption</p>
         <p class="text-center fs-6 px-4">
           You can add a new member of your family or find someone to adopt your
           pet.
@@ -120,7 +125,7 @@
         <div class="icon-container m-auto shadow d-flex">
           <i class="fa-solid fa-blog m-auto fs-1"></i>
         </div>
-        <p class="text-center fs-3 m-4">Blog</p>
+        <p class="text-center fs-3 m-4 fw-bold">Blog</p>
         <p class="text-center fs-6 px-4">
           You can find very useful articals about pets and know more about its
           health and food.
@@ -132,8 +137,8 @@
   <!-- Carousels -->
   <div class="Carousels container mb-5">
     <!-- Products -->
-    <div class="carousel">
-      <h2 class="text-center mt-5 p-3">Products</h2>
+    <div class="carousel productCarousel">
+      <h2 class="text-center mt-5 p-3 fw-bold fs-1">Products</h2>
       <p-carousel
         [value]="products"
         styleClass="custom-carousel"
@@ -156,7 +161,7 @@
                 />
               </div>
               <div class="container">
-                <h5 class="mb-1">{{ product.title }}</h5>
+                <h5 class="mb-1 fw-bold">{{ product.title }}</h5>
                 <h6 class="mb-3">{{ product.price }}</h6>
 
                 <div *ngIf="quantity > 0; then instock; else outofstock"></div>
@@ -182,8 +187,8 @@
     </div>
 
     <!-- blog -->
-    <div class="carousel">
-      <h2 class="text-center mt-5 p-3">Blog</h2>
+    <div class="carousel blogCarousel">
+      <h2 class="text-center mt-5 p-3 fw-bold fs-1">Blog</h2>
       <p-carousel
         [value]="products"
         styleClass="custom-carousel"
@@ -206,7 +211,7 @@
                 />
               </div>
               <div class="container">
-                <h5 class="mb-1">{{ product.title }}</h5>
+                <h5 class="mb-1 fw-bold">{{ product.title }}</h5>
                 <h6 class="mb-3">{{ product.price }}</h6>
 
                 <div *ngIf="quantity > 0; then instock; else outofstock"></div>
@@ -224,8 +229,8 @@
     </div>
 
     <!-- Adoption -->
-    <div class="carousel">
-      <h2 class="text-center mt-5 p-3">Adoption</h2>
+    <div class="carousel adoptionCarousel">
+      <h2 class="text-center mt-5 p-3 fw-bold fs-1">Adoption</h2>
       <p-carousel
         [value]="products"
         styleClass="custom-carousel"
@@ -248,7 +253,7 @@
                 />
               </div>
               <div class="container">
-                <h5 class="mb-1">{{ product.title }}</h5>
+                <h5 class="mb-1 fw-bold">{{ product.title }}</h5>
                 <h6 class="mb-3">{{ product.price }}</h6>
 
                 <div *ngIf="quantity > 0; then instock; else outofstock"></div>
