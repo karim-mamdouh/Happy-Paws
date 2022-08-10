@@ -21,7 +21,7 @@ export const addToWishList = createAction(
 //Remove product item from wishlist action
 export const removeFromWishList = createAction(
   'REMOVE_FROM_WISHLIST',
-  props<{ payload: { id: string } }>()
+  props<{ payload: ProductItem }>()
 );
 //Fill wishlist items action
 export const fillWishList = createAction(
