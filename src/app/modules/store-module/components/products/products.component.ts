@@ -18,18 +18,19 @@ import { FilterationComponent } from '../filteration/filteration.component';
 })
 export class ProductsComponent implements OnInit {
   @ViewChild(FilterationComponent) filterComponent = {} as FilterationComponent;
-  pageStartIndex: number = 0;
-  numberOfItemsInPage: number = 9;
-  pageCurrentStartIndex: number = 0;
-  pageCurrentEndIndex: number = 0;
+  pageStartIndex: number = 0; //Start index for paginator
+  numberOfItemsInPage: number = 9; //Number of pages in paginator
+  pageCurrentStartIndex: number = 0; //Current start index for paginator
+  pageCurrentEndIndex: number = 0; //Current end index for paginator
   filters: FilterData = {
     brand: [],
     category: [],
     animalType: [],
-  };
-  subscriptions: Array<Subscription> = [];
-  filteredProducts = [] as Array<ProductItem>;
-  paginatorChunk = [] as Array<ProductItem>;
+  }; //Active filters object
+  subscriptions: Array<Subscription> = []; //Array holding all active subscription to be unsubscribed on destroy
+  originalProducts: Array<ProductItem> = []; //Array holding store data
+  filteredProducts: Array<ProductItem> = []; //Array holding filtered data
+  paginatorChunk: Array<ProductItem> = []; //Array holding current viewed data by paginator
 
   constructor(
     private _store: Store<{
@@ -43,21 +44,29 @@ export class ProductsComponent implements OnInit {
     private _activeRoute: ActivatedRoute
   ) {}
 
+  //Subscribe to store and query params observables
   ngOnInit(): void {
+    this.subscriptions.push(
+      this._store.select('store').subscribe((respose) => {
+        this.storeSubscription(respose);
+      })
+    );
     this.subscriptions.push(
       this._activeRoute.queryParams.subscribe((response) => {
         this.queryParamsSubscription(response);
       })
     );
   }
-
+  //Unsubscribe from all observables on destroy
   ngOnDestroy(): void {
     this.subscriptions.forEach((element) => {
       element.unsubscribe();
     });
   }
+  //Function for store subscription which refills the originalProducts array & holds the paginator in it's position
+  // Also re-applies filters
   storeSubscription(response: any): void {
-    this.filteredProducts = response.products;
+    this.originalProducts = response.products;
     if (window.innerWidth >= 992) {
       this.paginate(
         this.pageCurrentStartIndex,
@@ -73,7 +82,9 @@ export class ProductsComponent implements OnInit {
           : this.pageCurrentEndIndex
       );
     }
+    this.onFilterOptionsChange(this.filters);
   }
+  //Function for query params subscription which fills the selected filters in child and filters viewed data
   queryParamsSubscription(response: any): void {
     this.filters.animalType = [];
     this.filters.category = [];
@@ -86,11 +97,13 @@ export class ProductsComponent implements OnInit {
     this.filterComponent.activeFilters = this.filters;
     this.onFilterOptionsChange(this.filters);
   }
-
+  //Function called when add to cart button is clicked in child to add
+  //product item to cart in store and update database
   addToCart(item: CartItem): void {
     this._store.dispatch(addToCart({ payload: item }));
   }
-
+  //Function called when wishlist button is clicked in child to modify store
+  //and update database
   alterWishlist(item: ProductItem): void {
     if (item.wishList) {
       this._store.dispatch(addToWishList({ payload: item }));
@@ -99,14 +112,11 @@ export class ProductsComponent implements OnInit {
       this._store.dispatch(removeFromWishList({ payload: item }));
     }
   }
-
+  //Function called when filters are altered in child to apply new filters to filtered products array
+  //If no filters applied filtered products array is filled with original products
   onFilterOptionsChange(filters: FilterData) {
     this.filters = filters;
-    this.subscriptions.push(
-      this._store.select('store').subscribe((response) => {
-        this.storeSubscription(response);
-      })
-    );
+    this.filteredProducts = this.originalProducts;
     if (
       filters.animalType.length !== 0 ||
       filters.brand.length !== 0 ||
@@ -130,9 +140,8 @@ export class ProductsComponent implements OnInit {
       });
       this.filteredProducts = newFiltered;
     }
-    this.paginate(0, this.numberOfItemsInPage);
   }
-
+  //Function called to show next data chunck in paginator
   paginate(start: number, end: number): void {
     this.pageCurrentStartIndex = start;
     this.pageCurrentEndIndex = end;

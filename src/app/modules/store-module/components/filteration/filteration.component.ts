@@ -12,16 +12,16 @@ export class FilterationComponent implements OnInit {
     brand: [],
     category: [],
     animalType: [],
-  };
-  @Output() filterOptions = new EventEmitter<FilterData>();
-  categories: string[] = Object.values(ProductCategory);
-  brands: string[] = Object.values(Brand);
-  animals: string[] = Object.values(AnimalType);
+  }; //Filters object holding all filter categories
+  @Output() filterOptions = new EventEmitter<FilterData>(); //Emitter for filter changing action
+  categories: string[] = Object.values(ProductCategory); //ProductCategory enum values
+  brands: string[] = Object.values(Brand); //Brand enum values
+  animals: string[] = Object.values(AnimalType); //AnimalType enum values
 
   constructor() {}
 
   ngOnInit(): void {}
-
+  //Function called when any filter is selected/unseclected to emit event to parent with new filters
   onFilterSelection() {
     this.filterOptions.emit(this.activeFilters);
   }
