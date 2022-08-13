@@ -7,10 +7,10 @@
       <h4>Animals</h4>
       <div *ngFor="let type of animals" class="field-checkbox my-1">
         <p-checkbox
-          (onChange)="onFilterSelection(type, $event)"
+          (onChange)="onFilterSelection()"
           name="group2"
           [value]="type"
-          [(ngModel)]="filters"
+          [(ngModel)]="activeFilters.animalType"
         ></p-checkbox>
         <label class="ms-2">{{ type }}</label>
       </div>
@@ -20,10 +20,10 @@
       <h4>Categories</h4>
       <div *ngFor="let category of categories" class="field-checkbox my-1">
         <p-checkbox
-          (onChange)="onFilterSelection(category, $event)"
+          (onChange)="onFilterSelection()"
           name="group2"
           [value]="category"
-          [(ngModel)]="filters"
+          [(ngModel)]="activeFilters.category"
         ></p-checkbox>
         <label class="ms-2">{{ category }}</label>
       </div>
@@ -33,10 +33,10 @@
       <h4>Brands</h4>
       <div *ngFor="let brand of brands" class="field-checkbox my-1">
         <p-checkbox
-          (onChange)="onFilterSelection(brand, $event)"
+          (onChange)="onFilterSelection()"
           name="group2"
           [value]="brand"
-          [(ngModel)]="filters"
+          [(ngModel)]="activeFilters.brand"
         ></p-checkbox>
         <label class="ms-2">{{ brand }}</label>
       </div>

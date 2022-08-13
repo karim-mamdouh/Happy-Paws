@@ -8,7 +8,7 @@ Pet platform with all supplies and services that any pet owner will need
 - E-commerce store 🛒
 - Product filters ⚙
 - Blog 📃
-- Pet Adoption 🐶🐱
+- Pet adoption 🐶🐱
 - Add/Modify your adoption pet details 🐶✏
 - Cart 💰
 - Wishlist ❤
@@ -37,3 +37,4 @@ Pet platform with all supplies and services that any pet owner will need
 - [@YasmeenMostafa](https://github.com/Yasmeen-Mostafa)
 - [@AbdelRahmanYoussef](https://github.com/Aswani20)
 - [@MahmoudBadawy](https://github.com/MahmoudBadawy4199)
+- [@KarimMamdouh](https://github.com/karim-mamdouh)

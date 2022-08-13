@@ -1,24 +1,15 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { AnimalType } from 'src/app/interfaces/adoption';
-import {
-  Brand,
-  CartItem,
-  ProductCategory,
-  ProductItem,
-} from 'src/app/interfaces/store';
-import { DatabaseService } from 'src/app/services/database.service';
+import { CartItem, FilterData, ProductItem } from 'src/app/interfaces/store';
 import {
   addToCart,
   addToWishList,
   removeFromWishList,
 } from 'src/app/store/store/store-actions';
-import {
-  FilterationComponent,
-  FilterData,
-} from '../filteration/filteration.component';
+import { DatabaseService } from 'src/app/services/database.service';
+import { FilterationComponent } from '../filteration/filteration.component';
 
 @Component({
   selector: 'app-products',
@@ -26,11 +17,16 @@ import {
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
+  @ViewChild(FilterationComponent) filterComponent = {} as FilterationComponent;
   pageStartIndex: number = 0;
   numberOfItemsInPage: number = 9;
   pageCurrentStartIndex: number = 0;
   pageCurrentEndIndex: number = 0;
-  filters: Array<string> = [];
+  filters: FilterData = {
+    brand: [],
+    category: [],
+    animalType: [],
+  };
   subscriptions: Array<Subscription> = [];
   filteredProducts = [] as Array<ProductItem>;
   paginatorChunk = [] as Array<ProductItem>;
@@ -48,28 +44,9 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    Object.values(this._activeRoute.snapshot.queryParams).forEach((element) => {
-      this.filters.push(element);
-    });
-
     this.subscriptions.push(
-      this._store.select('store').subscribe((response) => {
-        this.filteredProducts = response.products;
-        if (window.innerWidth >= 992) {
-          this.paginate(
-            this.pageCurrentStartIndex,
-            this.pageCurrentEndIndex === 0
-              ? this.numberOfItemsInPage
-              : this.pageCurrentEndIndex
-          );
-        } else {
-          this.paginate(
-            this.pageCurrentStartIndex,
-            this.pageCurrentEndIndex === 0
-              ? this.numberOfItemsInPage - 3
-              : this.pageCurrentEndIndex
-          );
-        }
+      this._activeRoute.queryParams.subscribe((response) => {
+        this.queryParamsSubscription(response);
       })
     );
   }
@@ -78,6 +55,36 @@ export class ProductsComponent implements OnInit {
     this.subscriptions.forEach((element) => {
       element.unsubscribe();
     });
+  }
+  storeSubscription(response: any): void {
+    this.filteredProducts = response.products;
+    if (window.innerWidth >= 992) {
+      this.paginate(
+        this.pageCurrentStartIndex,
+        this.pageCurrentEndIndex === 0
+          ? this.numberOfItemsInPage
+          : this.pageCurrentEndIndex
+      );
+    } else {
+      this.paginate(
+        this.pageCurrentStartIndex,
+        this.pageCurrentEndIndex === 0
+          ? this.numberOfItemsInPage - 3
+          : this.pageCurrentEndIndex
+      );
+    }
+  }
+  queryParamsSubscription(response: any): void {
+    this.filters.animalType = [];
+    this.filters.category = [];
+    if (response['animalType'] !== undefined) {
+      this.filters.animalType.push(response['animalType']);
+    }
+    if (response['category'] !== undefined) {
+      this.filters.category.push(response['category']);
+    }
+    this.filterComponent.activeFilters = this.filters;
+    this.onFilterOptionsChange(this.filters);
   }
 
   addToCart(item: CartItem): void {
@@ -93,37 +100,35 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  onFilterOptionsChange(
-    filterOptions: Array<AnimalType | Brand | ProductCategory>
-  ) {
+  onFilterOptionsChange(filters: FilterData) {
+    this.filters = filters;
     this.subscriptions.push(
       this._store.select('store').subscribe((response) => {
-        this.filteredProducts = response.products;
+        this.storeSubscription(response);
       })
     );
-    if (filterOptions.length !== 0) {
-      let newProducts: Array<ProductItem> = [];
-      for (let i = 0; i < filterOptions.length; i++) {
-        for (let j = 0; j < this.filteredProducts.length; j++) {
-          if (
-            newProducts.filter(
-              (element) => element.id === this.filteredProducts[j].id
-            ).length === 0
-          ) {
-            if (this.filteredProducts[j].animalType === filterOptions[i]) {
-              newProducts.push(this.filteredProducts[j]);
-            }
-            if (this.filteredProducts[j].category === filterOptions[i]) {
-              newProducts.push(this.filteredProducts[j]);
-            }
-            if (this.filteredProducts[j].brand === filterOptions[i]) {
-              newProducts.push(this.filteredProducts[j]);
-            }
-          }
+    if (
+      filters.animalType.length !== 0 ||
+      filters.brand.length !== 0 ||
+      filters.category.length !== 0
+    ) {
+      let newFiltered: Array<ProductItem> = [];
+      this.filteredProducts.forEach((element) => {
+        if (
+          (filters.animalType.length !== 0
+            ? filters.animalType.includes(element.animalType)
+            : true) &&
+          (filters.brand.length !== 0
+            ? filters.brand.includes(element.brand)
+            : true) &&
+          (filters.category.length !== 0
+            ? filters.category.includes(element.category)
+            : true)
+        ) {
+          newFiltered.push(element);
         }
-      }
-      console.log(newProducts);
-      this.filteredProducts = newProducts;
+      });
+      this.filteredProducts = newFiltered;
     }
     this.paginate(0, this.numberOfItemsInPage);
   }
