@@ -6,6 +6,7 @@ Pet platform with all supplies and services that any pet owner will need
 
 - User authentication 🗝
 - E-commerce store 🛒
+- Product filters ⚙
 - Blog 📃
 - Pet Adoption 🐶🐱
 - Add/Modify your adoption pet details 🐶✏
