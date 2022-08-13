@@ -22,6 +22,7 @@ Pet platform with all supplies and services that any pet owner will need
 
 ## Technologies
 
+<div>
 <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" />
 <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
 <img src="https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white" />
@@ -29,6 +30,7 @@ Pet platform with all supplies and services that any pet owner will need
 <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white" />
 <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
 <img src="https://img.shields.io/badge/Progressive%20Web%20Application-FF6600?style=for-the-badge&logo=pwa&logoColor=white" />
+</div>
 
 ## Authors
 
