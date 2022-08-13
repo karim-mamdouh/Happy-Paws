@@ -8,6 +8,7 @@
       <div class="wrapper__store__filter col-lg-3">
         <app-filteration
           (filterOptions)="onFilterOptionsChange($event)"
+          [filters]="filters"
           class="col-lg-12 d-lg-block d-none"
         ></app-filteration>
       </div>
@@ -15,10 +16,7 @@
       <div class="wrapper__store__content col-lg-9 d-block flex-grow-1">
         <!-- small filter in small screens -->
         <div class="text-start">
-          <app-small-filter
-            (filterOptions)="onFilterOptionsChange($event)"
-            class="d-lg-none"
-          ></app-small-filter>
+          <app-small-filter class="d-lg-none"></app-small-filter>
         </div>
         <div class="p-4 d-flex flex-wrap">
           <div
