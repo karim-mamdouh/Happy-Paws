@@ -121,6 +121,13 @@ export class DatabaseService {
       .doc(userID)
       .update({ [product.id]: product });
   }
+  //Removes cart items document for logged in user
+  emptyCart(userID: string): Promise<void> {
+    return this._fireStore
+      .collection(FireStoreCollections.Cart)
+      .doc(userID)
+      .delete();
+  }
   //Adds animal to animal collection in database
   addAnimal(animal: Animal): Promise<void> {
     return this._fireStore
@@ -128,8 +135,7 @@ export class DatabaseService {
       .doc(animal.id)
       .set(animal);
   }
-
-  //add review to product item
+  //Add review to product item
   addReviewToProductItem(product: ProductItem) {
     return this._fireStore
       .collection(FireStoreCollections.Store)

@@ -46,14 +46,9 @@ export const removeFromCart = createAction(
   props<{ payload: { id: string } }>()
 );
 //Increase cart quantity action
-export const incrementCartItem = createAction(
-  'INCREMENT_CART_ITEM',
-  props<{ payload: { id: string } }>()
-);
-//Decrement cart quantity action
-export const decrementCartItem = createAction(
-  'DECREMENT_CART_ITEM',
-  props<{ payload: { id: string } }>()
+export const updateCartItem = createAction(
+  'UPDATE_CART_ITEM',
+  props<{ payload: CartItem }>()
 );
 //Reset cart action
 export const resetCart = createAction('RESET_CART');

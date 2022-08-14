@@ -109,13 +109,13 @@ export class ProductsComponent implements OnInit {
   //Function called when add to cart button is clicked in child to add
   //product item to cart in store and update database
   addToCart(item: CartItem): void {
-    this._store.dispatch(addToCart({ payload: item }));
     this._subscriptions.push(
       this._fireStore.checkCartDocExist(this._userID).subscribe(
         (response) => {
           this._fireStore
             .addToCart(this._userID, item, response.exists)
             .then(() => {
+              this._store.dispatch(addToCart({ payload: item }));
               this.showSuccessToast('Item added to cart');
             })
             .catch(() => {
@@ -132,14 +132,13 @@ export class ProductsComponent implements OnInit {
   //and update database
   alterWishlist(item: ProductItem): void {
     if (item.wishList) {
-      this._store.dispatch(addToWishList({ payload: item }));
-
       this._subscriptions.push(
         this._fireStore.checkWishlistDocExist(this._userID).subscribe(
           (response) => {
             this._fireStore
               .addToWishlist(this._userID, item, response.exists)
               .then(() => {
+                this._store.dispatch(addToWishList({ payload: item }));
                 this.showSuccessToast('Item added to wishlist');
               })
               .catch(() => {
@@ -152,11 +151,10 @@ export class ProductsComponent implements OnInit {
         )
       );
     } else {
-      this._store.dispatch(removeFromWishList({ payload: item }));
-
       this._fireStore
         .removeFromWishlist(this._userID, item.id)
         .then(() => {
+          this._store.dispatch(removeFromWishList({ payload: item }));
           this.showSuccessToast('Item removed from wishlist');
         })
         .catch(() => {

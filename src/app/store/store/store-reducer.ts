@@ -4,16 +4,15 @@ import {
   addReview,
   addToCart,
   addToWishList,
-  decrementCartItem,
   fillCartList,
   fillProducts,
   fillWishList,
-  incrementCartItem,
   removeFromCart,
   removeFromWishList,
   resetCart,
   resetProducts,
   resetWishList,
+  updateCartItem,
 } from './store-actions';
 
 const initalState = {
@@ -134,49 +133,19 @@ export const storeReducer = createReducer(
     };
   }),
   //Increment cart item quantity action
-  on(incrementCartItem, (state, action) => {
-    let cartItem = state.cart.find(
+  on(updateCartItem, (state, action) => {
+    let cartCopy: Array<CartItem> = [...state.cart];
+    let index = cartCopy.findIndex(
       (element) => element.id === action.payload.id
     );
-    if (cartItem === undefined) {
-      throw new Error('Item not found, check item id');
-    }
+
+    if (index !== -1) cartCopy[index] = { ...action.payload };
+    else throw new Error('Item not found, check item id');
+
     return {
       ...state,
-      cart: [
-        ...state.cart.filter((element) => element.id !== action.payload.id),
-        {
-          ...cartItem!,
-          count: cartItem.count + 1,
-        },
-      ],
+      cart: cartCopy,
     };
-  }),
-  //Decrement cart item quantity action
-  on(decrementCartItem, (state, action) => {
-    let cartItem = state.cart.find(
-      (element) => element.id === action.payload.id
-    );
-    if (cartItem === undefined) {
-      throw new Error('Item not found, check item id');
-    }
-    if (cartItem.count > 0) {
-      cartItem.count = cartItem?.count - 1;
-      return {
-        ...state,
-        cart: [
-          ...state.cart.filter((element) => element.id !== action.payload.id),
-          {
-            ...cartItem!,
-            count: cartItem.count - 1,
-          },
-        ],
-      };
-    } else {
-      return {
-        ...state,
-      };
-    }
   }),
   //Reset cart action
   on(resetCart, (state, action) => {
