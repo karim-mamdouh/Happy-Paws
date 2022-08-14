@@ -68,11 +68,11 @@ export class ProductDetailsComponent implements OnInit {
       this.wishlist.splice(index, 1);
 
       // update firebase with the new wishlist state
-      this._firestoreService
-        .removeFromWishlist(localStorage.getItem('userID')!, this.wishlist)
-        .then((res) => {
-          this._store.dispatch(resetWishList());
-        });
+      // this._firestoreService
+      //   .removeFromWishlist(localStorage.getItem('userID')!, this.wishlist)
+      //   .then((res) => {
+      //     this._store.dispatch(resetWishList());
+      //   });
     }
     // if product is not in wishlist
     else {
@@ -80,22 +80,22 @@ export class ProductDetailsComponent implements OnInit {
       // Add the product to local wishlist
       this.wishlist = [...this.wishlist, product];
       // update firebase with the new wishlist state
-      this._firestoreService
-        .addToWishlist(localStorage.getItem('userID')!, this.wishlist)
-        .then((res) => {
-          this._store.dispatch(resetWishList());
-        });
+      // this._firestoreService
+      //   .addToWishlist(localStorage.getItem('userID')!, this.wishlist)
+      //   .then((res) => {
+      //     this._store.dispatch(resetWishList());
+      //   });
     }
   }
   addToCart(product: ProductItem) {
     let cartObj = JSON.parse(JSON.stringify(product)) as CartItem;
     cartObj.count = 1;
     this.cartlist = [...this.cartlist, cartObj];
-    this._firestoreService
-      .addToCart(localStorage.getItem('userID')!, this.cartlist)
-      .then(() => {
-        this._store.dispatch(resetCart());
-      });
+    // this._firestoreService
+    //   .addToCart(localStorage.getItem('userID')!, this.cartlist)
+    //   .then(() => {
+    //     this._store.dispatch(resetCart());
+    //   });
   }
   reset() {
     this.reviewRating = 3;

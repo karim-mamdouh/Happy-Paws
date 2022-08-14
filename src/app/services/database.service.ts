@@ -1,112 +1,140 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ProductItem, CartItem } from '../interfaces/store';
-import { Store } from '@ngrx/store';
 import { Animal } from '../interfaces/adoption';
+import { Observable } from 'rxjs';
+import {
+  AngularFirestore,
+  DocumentChangeAction,
+} from '@angular/fire/compat/firestore';
+import { deleteField } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
-  constructor(
-    private fireAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private store: Store<{
-      cart: Array<CartItem>;
-      wishList: Array<ProductItem>;
-      products: Array<ProductItem>;
-    }>
-  ) {}
-  //fetch all store items
-  fetchAllStoreItems() {
-    return this.afs.collection(FireStoreCollections.Store).snapshotChanges();
+  constructor(private _fireStore: AngularFirestore) {}
+
+  //Generate ID from firebase
+  generateID(): string {
+    return this._fireStore.createId();
   }
-  fetchAllBlog() {
-    return this.afs.collection(FireStoreCollections.Blog).snapshotChanges();
-  }
-  //add review to product item
-  addReviewToProductItem(product: ProductItem) {
-    return this.afs
+  //Fetch all store items in database
+  fetchAllStoreItems(): Observable<DocumentChangeAction<unknown>[]> {
+    return this._fireStore
       .collection(FireStoreCollections.Store)
-      .doc(product.id)
-      .update({ reviews: product.reviews });
+      .snapshotChanges();
   }
-  //fetch all blog
-  fetchBlogPosts() {
-    return this.afs.collection(FireStoreCollections.Blog).snapshotChanges();
+  //Fetch all blog posts in database
+  fetchBlogPosts(): Observable<DocumentChangeAction<unknown>[]> {
+    return this._fireStore
+      .collection(FireStoreCollections.Blog)
+      .snapshotChanges();
   }
-  addAnimal(animal: Animal) {
-    return this.afs
+  //Fetch all adoption animals
+  fetchAllAnimals(): Observable<DocumentChangeAction<unknown>[]> {
+    return this._fireStore
+      .collection(FireStoreCollections.Pets)
+      .snapshotChanges();
+  }
+  //Fetch all wishlist items for logged user
+  fetchAllWishlistItems(userID: string): Observable<any> {
+    return this._fireStore
+      .collection(FireStoreCollections.Wishlist)
+      .doc(userID)
+      .snapshotChanges();
+  }
+  //Fetch cart items for logged user
+  fetchUserCart(userID: string): Observable<any> {
+    return this._fireStore
+      .collection(FireStoreCollections.Cart)
+      .doc(userID)
+      .snapshotChanges();
+  }
+  //Checks wether the wishlist document for the current logged in user exists or no
+  checkWishlistDocExist(userID: string): Observable<any> {
+    return this._fireStore
+      .collection(FireStoreCollections.Wishlist)
+      .doc(userID)
+      .get();
+  }
+  //Checks wether the cart document for the current logged in user exists or no
+  checkCartDocExist(userID: string): Observable<any> {
+    return this._fireStore
+      .collection(FireStoreCollections.Cart)
+      .doc(userID)
+      .get();
+  }
+  //Adds item to wishlist doc of current logged in user
+  addToWishlist(
+    userID: string,
+    product: ProductItem,
+    docExist: boolean
+  ): Promise<void> {
+    if (docExist) {
+      return this._fireStore
+        .collection(FireStoreCollections.Wishlist)
+        .doc(userID)
+        .update({ [product.id]: product });
+    } else {
+      return this._fireStore
+        .collection(FireStoreCollections.Wishlist)
+        .doc(userID)
+        .set({ [product.id]: product });
+    }
+  }
+  //Removes item from wishlist doc of current logged in user
+  removeFromWishlist(userID: string, productID: string): Promise<void> {
+    return this._fireStore
+      .collection(FireStoreCollections.Wishlist)
+      .doc(userID)
+      .update({ [productID]: deleteField() });
+  }
+  //Adds item to cart doc of current logged in user
+  addToCart(
+    userID: string,
+    product: CartItem,
+    docExist: boolean
+  ): Promise<void> {
+    if (docExist) {
+      return this._fireStore
+        .collection(FireStoreCollections.Cart)
+        .doc(userID)
+        .update({ [product.id]: product });
+    } else {
+      return this._fireStore
+        .collection(FireStoreCollections.Cart)
+        .doc(userID)
+        .set({ [product.id]: product });
+    }
+  }
+  //Removes item from wishlist doc of current logged in user
+  removeFromCart(userID: string, productID: string): Promise<void> {
+    return this._fireStore
+      .collection(FireStoreCollections.Cart)
+      .doc(userID)
+      .update({ [productID]: deleteField() });
+  }
+  //Updates cart item in cart doc of current logged in user
+  updateCartItem(userID: string, product: CartItem) {
+    return this._fireStore
+      .collection(FireStoreCollections.Cart)
+      .doc(userID)
+      .update({ [product.id]: product });
+  }
+  //Adds animal to animal collection in database
+  addAnimal(animal: Animal): Promise<void> {
+    return this._fireStore
       .collection(FireStoreCollections.Pets)
       .doc(animal.id)
       .set(animal);
   }
-  generateID() {
-    return this.afs.createId();
-  }
-  //fetch all adoption animals
-  fetchAllAnimals() {
-    return this.afs.collection(FireStoreCollections.Pets).snapshotChanges();
-  }
-  //fetch all wishlist
-  fetchAllWishlistItems(userID: string) {
-    return this.afs
-      .collection(FireStoreCollections.Wishlist)
-      .doc(userID)
-      .snapshotChanges();
-  }
 
-  //add to wishlist
-  addToWishlist(userID: string, products: Array<ProductItem>) {
-    const obj: any = {} as ProductItem;
-    for (const key of products) {
-      obj[key.id] = key;
-    }
-    return this.afs
-      .collection(FireStoreCollections.Wishlist)
-      .doc(userID)
-      .update(obj);
-  }
-
-  //remove from wishlist
-  removeFromWishlist(userID: string, products: Array<ProductItem>) {
-    const obj: any = {} as ProductItem;
-    for (const key of products) {
-      obj[key.id] = key;
-    }
-    return this.afs
-      .collection(FireStoreCollections.Wishlist)
-      .doc(userID)
-      .set(obj);
-  }
-
-  //fetch user cart
-  fetchUserCart(userID: string) {
-    return this.afs
-      .collection(FireStoreCollections.Cart)
-      .doc(userID)
-      .snapshotChanges();
-  }
-  //add to User Cart
-  addToCart(userID: string, cart: Array<CartItem>) {
-    const obj: any = {} as CartItem;
-    for (const key of cart) {
-      obj[key.id] = key;
-    }
-    return this.afs
-      .collection(FireStoreCollections.Cart)
-      .doc(userID)
-      .update(obj);
-  }
-
-  //remove from user cart
-  removeFromCart(userID: string, cart: Array<CartItem>) {
-    const obj: any = {} as CartItem;
-    for (const key of cart) {
-      obj[key.id] = key;
-    }
-    return this.afs.collection(FireStoreCollections.Cart).doc(userID).set(obj);
+  //add review to product item
+  addReviewToProductItem(product: ProductItem) {
+    return this._fireStore
+      .collection(FireStoreCollections.Store)
+      .doc(product.id)
+      .update({ reviews: product.reviews });
   }
 }
 

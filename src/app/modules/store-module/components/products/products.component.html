@@ -1,6 +1,4 @@
-<!-- Main Section -->
 <section class="products">
-  <!-- Main Container -->
   <div class="container">
     <!-- Product Page Content -->
     <div class="wrapper__store d-flex justify-content-between">
@@ -9,7 +7,9 @@
         <app-filteration
           [activeFilters]="filters"
           (filterOptions)="
-            onFilterOptionsChange($event); paginate(0, this.numberOfItemsInPage)
+            onFilterOptionsChange($event);
+            paginate(0, this.numberOfItemsInPage);
+            paginator.changePage(0)
           "
           class="col-lg-12 d-lg-block d-none"
         ></app-filteration>
@@ -18,7 +18,15 @@
       <div class="wrapper__store__content col-lg-9 d-block flex-grow-1">
         <!-- small filter in small screens -->
         <div class="text-start">
-          <app-small-filter class="d-lg-none"></app-small-filter>
+          <app-small-filter
+            class="d-lg-none"
+            [activeFilters]="filters"
+            (filterOptions)="
+              onFilterOptionsChange($event);
+              paginate(0, this.numberOfItemsInPage);
+              paginator.changePage(0)
+            "
+          ></app-small-filter>
         </div>
         <div class="p-4 d-flex flex-wrap">
           <div
@@ -44,6 +52,7 @@
           [rows]="numberOfItemsInPage"
           [totalRecords]="filteredProducts.length"
           (onPageChange)="paginate($event.first, $event.first + $event.rows)"
+          #paginator
         ></p-paginator>
       </div>
       <!-- Paginator in Small Screens -->
@@ -53,14 +62,20 @@
         <div class="col-10">
           <p-paginator
             [first]="pageStartIndex"
-            [rows]="numberOfItemsInPage - 3"
+            [rows]="numberOfItemsInPage"
             [totalRecords]="filteredProducts.length"
             (onPageChange)="paginate($event.first, $event.first + $event.rows)"
             [showJumpToPageDropdown]="true"
             [showPageLinks]="false"
+            #paginator
           ></p-paginator>
         </div>
       </div>
     </div>
   </div>
+  <!-- Toasts -->
+  <!-- Success toast -->
+  <p-toast key="database"></p-toast>
+  <!-- Error toast -->
+  <p-toast key="error"></p-toast>
 </section>

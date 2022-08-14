@@ -10,6 +10,9 @@ import {
 } from 'src/app/store/store/store-actions';
 import { DatabaseService } from 'src/app/services/database.service';
 import { FilterationComponent } from '../filteration/filteration.component';
+import { Paginator } from 'primeng/paginator';
+import { MessageService } from 'primeng/api';
+import { SmallFilterComponent } from '../small-filter/small-filter.component';
 
 @Component({
   selector: 'app-products',
@@ -17,18 +20,24 @@ import { FilterationComponent } from '../filteration/filteration.component';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  @ViewChild(FilterationComponent) filterComponent = {} as FilterationComponent;
+  private _userID: string = '';
+  private _pageCurrentStartIndex: number = 0; //Current start index for paginator
+  private _pageCurrentEndIndex: number = 0; //Current end index for paginator
+  private _subscriptions: Array<Subscription> = []; //Array holding all active subscription to be unsubscribed on destroy
+  private _originalProducts: Array<ProductItem> = []; //Array holding store data
+  @ViewChild(FilterationComponent) private _filterComponent =
+    {} as FilterationComponent; //Filteration component object to fill active filters on query params change
+  @ViewChild(SmallFilterComponent) private _smallFilterComponent =
+    {} as SmallFilterComponent; //Small screen filteration component object to fill active filters on query params change
+
+  @ViewChild('paginator') paginator = {} as Paginator; //Paginator object to be used to navigate to page 1 on filter change
   pageStartIndex: number = 0; //Start index for paginator
   numberOfItemsInPage: number = 9; //Number of pages in paginator
-  pageCurrentStartIndex: number = 0; //Current start index for paginator
-  pageCurrentEndIndex: number = 0; //Current end index for paginator
   filters: FilterData = {
     brand: [],
     category: [],
     animalType: [],
   }; //Active filters object
-  subscriptions: Array<Subscription> = []; //Array holding all active subscription to be unsubscribed on destroy
-  originalProducts: Array<ProductItem> = []; //Array holding store data
   filteredProducts: Array<ProductItem> = []; //Array holding filtered data
   paginatorChunk: Array<ProductItem> = []; //Array holding current viewed data by paginator
 
@@ -41,17 +50,19 @@ export class ProductsComponent implements OnInit {
       };
     }>,
     private _fireStore: DatabaseService,
-    private _activeRoute: ActivatedRoute
+    private _activeRoute: ActivatedRoute,
+    private _messageService: MessageService
   ) {}
 
   //Subscribe to store and query params observables
   ngOnInit(): void {
-    this.subscriptions.push(
+    this._userID = localStorage.getItem('userID')!;
+    this._subscriptions.push(
       this._store.select('store').subscribe((respose) => {
         this.storeSubscription(respose);
       })
     );
-    this.subscriptions.push(
+    this._subscriptions.push(
       this._activeRoute.queryParams.subscribe((response) => {
         this.queryParamsSubscription(response);
       })
@@ -59,30 +70,21 @@ export class ProductsComponent implements OnInit {
   }
   //Unsubscribe from all observables on destroy
   ngOnDestroy(): void {
-    this.subscriptions.forEach((element) => {
+    this._subscriptions.forEach((element) => {
       element.unsubscribe();
     });
   }
-  //Function for store subscription which refills the originalProducts array & holds the paginator in it's position
+  //Function for store subscription which refills the _originalProducts array & holds the paginator in it's position
   // Also re-applies filters
   storeSubscription(response: any): void {
-    this.originalProducts = response.products;
-    if (window.innerWidth >= 992) {
-      this.paginate(
-        this.pageCurrentStartIndex,
-        this.pageCurrentEndIndex === 0
-          ? this.numberOfItemsInPage
-          : this.pageCurrentEndIndex
-      );
-    } else {
-      this.paginate(
-        this.pageCurrentStartIndex,
-        this.pageCurrentEndIndex === 0
-          ? this.numberOfItemsInPage - 3
-          : this.pageCurrentEndIndex
-      );
-    }
+    this._originalProducts = response.products;
     this.onFilterOptionsChange(this.filters);
+    this.paginate(
+      this._pageCurrentStartIndex,
+      this._pageCurrentEndIndex === 0
+        ? this.numberOfItemsInPage
+        : this._pageCurrentEndIndex
+    );
   }
   //Function for query params subscription which fills the selected filters in child and filters viewed data
   queryParamsSubscription(response: any): void {
@@ -94,29 +96,79 @@ export class ProductsComponent implements OnInit {
     if (response['category'] !== undefined) {
       this.filters.category.push(response['category']);
     }
-    this.filterComponent.activeFilters = this.filters;
+    this._filterComponent.activeFilters = this.filters;
+    this._smallFilterComponent.activeFilters = this.filters;
     this.onFilterOptionsChange(this.filters);
+    this.paginate(
+      this._pageCurrentStartIndex,
+      this._pageCurrentEndIndex === 0
+        ? this.numberOfItemsInPage
+        : this._pageCurrentEndIndex
+    );
   }
   //Function called when add to cart button is clicked in child to add
   //product item to cart in store and update database
   addToCart(item: CartItem): void {
     this._store.dispatch(addToCart({ payload: item }));
+    this._subscriptions.push(
+      this._fireStore.checkCartDocExist(this._userID).subscribe(
+        (response) => {
+          this._fireStore
+            .addToCart(this._userID, item, response.exists)
+            .then(() => {
+              this.showSuccessToast('Item added to cart');
+            })
+            .catch(() => {
+              this.showErrorToast('Failed to add item to cart');
+            });
+        },
+        () => {
+          this.showErrorToast('Failed to add item to cart');
+        }
+      )
+    );
   }
   //Function called when wishlist button is clicked in child to modify store
   //and update database
   alterWishlist(item: ProductItem): void {
     if (item.wishList) {
       this._store.dispatch(addToWishList({ payload: item }));
-      //  this._fireStore.removeFromWishlist(localStorage.getItem('userID')!);
+
+      this._subscriptions.push(
+        this._fireStore.checkWishlistDocExist(this._userID).subscribe(
+          (response) => {
+            this._fireStore
+              .addToWishlist(this._userID, item, response.exists)
+              .then(() => {
+                this.showSuccessToast('Item added to wishlist');
+              })
+              .catch(() => {
+                this.showErrorToast('Failed to add item to wishlist');
+              });
+          },
+          () => {
+            this.showErrorToast('Failed to add item to wishlist');
+          }
+        )
+      );
     } else {
       this._store.dispatch(removeFromWishList({ payload: item }));
+
+      this._fireStore
+        .removeFromWishlist(this._userID, item.id)
+        .then(() => {
+          this.showSuccessToast('Item removed from wishlist');
+        })
+        .catch(() => {
+          this.showErrorToast('Failed to remove item from wishlist');
+        });
     }
   }
   //Function called when filters are altered in child to apply new filters to filtered products array
   //If no filters applied filtered products array is filled with original products
   onFilterOptionsChange(filters: FilterData) {
     this.filters = filters;
-    this.filteredProducts = this.originalProducts;
+    this.filteredProducts = this._originalProducts;
     if (
       filters.animalType.length !== 0 ||
       filters.brand.length !== 0 ||
@@ -143,8 +195,22 @@ export class ProductsComponent implements OnInit {
   }
   //Function called to show next data chunck in paginator
   paginate(start: number, end: number): void {
-    this.pageCurrentStartIndex = start;
-    this.pageCurrentEndIndex = end;
+    this._pageCurrentStartIndex = start;
+    this._pageCurrentEndIndex = end;
     this.paginatorChunk = this.filteredProducts.slice(start, end);
+  }
+  showSuccessToast(message: string): void {
+    this._messageService.add({
+      key: 'database',
+      severity: 'success',
+      detail: message,
+    });
+  }
+  showErrorToast(message: string): void {
+    this._messageService.add({
+      key: 'database',
+      severity: 'error',
+      detail: message,
+    });
   }
 }
