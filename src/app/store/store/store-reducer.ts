@@ -40,7 +40,7 @@ export const storeReducer = createReducer(
   }),
   //Add new review to product item in store action
   on(addReview, (state, action) => {
-    let productsCopy = [...state.products];
+    let productsCopy: Array<ProductItem> = [...state.products];
     let index = productsCopy.findIndex(
       (element) => element.id === action.payload.id
     );
@@ -59,7 +59,7 @@ export const storeReducer = createReducer(
   }),
   //Add product item to wishlist action
   on(addToWishList, (state, action) => {
-    let productsCopy = [...state.products];
+    let productsCopy: Array<ProductItem> = [...state.products];
     let index = productsCopy.findIndex(
       (element) => element.id === action.payload.id
     );
@@ -75,7 +75,7 @@ export const storeReducer = createReducer(
   }),
   //Remove product item from wishlist action
   on(removeFromWishList, (state, action) => {
-    let productsCopy = [...state.products];
+    let productsCopy: Array<ProductItem> = [...state.products];
     let index = productsCopy.findIndex(
       (element) => element.id === action.payload.id
     );

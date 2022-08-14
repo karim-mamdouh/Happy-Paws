@@ -15,7 +15,7 @@ export class ProductCardComponent implements OnInit {
   constructor(private _router: Router) {}
   //Deep copy for recieved object
   ngOnInit(): void {
-    this.product = JSON.parse(JSON.stringify(this.product));
+    this.product = { ...this.product };
   }
   //Function called when wishlist is clicked to alter wishlist state and emit event to parent
   alterWishlist(): void {

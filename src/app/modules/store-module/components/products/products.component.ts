@@ -20,7 +20,7 @@ import { SmallFilterComponent } from '../small-filter/small-filter.component';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  private _userID: string = '';
+  private _userID: string = ''; //Active user id stored in local storage
   private _pageCurrentStartIndex: number = 0; //Current start index for paginator
   private _pageCurrentEndIndex: number = 0; //Current end index for paginator
   private _subscriptions: Array<Subscription> = []; //Array holding all active subscription to be unsubscribed on destroy
@@ -199,6 +199,7 @@ export class ProductsComponent implements OnInit {
     this._pageCurrentEndIndex = end;
     this.paginatorChunk = this.filteredProducts.slice(start, end);
   }
+  //Success toast message
   showSuccessToast(message: string): void {
     this._messageService.add({
       key: 'database',
@@ -206,6 +207,7 @@ export class ProductsComponent implements OnInit {
       detail: message,
     });
   }
+  //Error toast message
   showErrorToast(message: string): void {
     this._messageService.add({
       key: 'database',
