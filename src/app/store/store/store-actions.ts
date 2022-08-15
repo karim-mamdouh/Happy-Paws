@@ -7,9 +7,9 @@ export const fillProducts = createAction(
   props<{ payload: Array<ProductItem> }>()
 );
 //Add Review to product item action
-export const addReview = createAction(
-  'ADD_REVIEW',
-  props<{ payload: { id: string; review: Review } }>()
+export const alterReview = createAction(
+  'ALTER_REVIEW',
+  props<{ payload: ProductItem }>()
 );
 //Empty product list action
 export const resetProducts = createAction('RESET_PRODUCTS');
@@ -21,7 +21,7 @@ export const addToWishList = createAction(
 //Remove product item from wishlist action
 export const removeFromWishList = createAction(
   'REMOVE_FROM_WISHLIST',
-  props<{ payload: { id: string } }>()
+  props<{ payload: ProductItem }>()
 );
 //Fill wishlist items action
 export const fillWishList = createAction(
@@ -46,14 +46,9 @@ export const removeFromCart = createAction(
   props<{ payload: { id: string } }>()
 );
 //Increase cart quantity action
-export const incrementCartItem = createAction(
-  'INCREMENT_CART_ITEM',
-  props<{ payload: { id: string } }>()
-);
-//Decrement cart quantity action
-export const decrementCartItem = createAction(
-  'DECREMENT_CART_ITEM',
-  props<{ payload: { id: string } }>()
+export const updateCartItem = createAction(
+  'UPDATE_CART_ITEM',
+  props<{ payload: CartItem }>()
 );
 //Reset cart action
 export const resetCart = createAction('RESET_CART');

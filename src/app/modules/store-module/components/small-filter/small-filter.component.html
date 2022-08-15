@@ -8,21 +8,20 @@
     Filter
   </button>
   <ul class="dropdown-menu w-100">
-    <h6 class="m-1">type</h6>
-
+    <!-- Animal Type Filter -->
+    <h6 class="m-1">Animals</h6>
     <div *ngFor="let type of animals" class="field-checkbox my-1">
       <li class="mx-3">
         <p-checkbox
-          [(ngModel)]="selectedAnimalType"
-          (onChange)="onCheckboxValueChange()"
+          (onChange)="onFilterSelection()"
           name="group2"
-          value="type"
           [value]="type"
+          [(ngModel)]="activeFilters.animalType"
         ></p-checkbox>
         <label class="ms-2">{{ type }}</label>
       </li>
     </div>
-
+    <!-- Categories Filter -->
     <h6 class="m-1">Categories</h6>
     <div
       *ngFor="let category of categories; let i = index"
@@ -30,25 +29,23 @@
     >
       <li class="mx-3">
         <p-checkbox
-          [(ngModel)]="selectedCategory"
-          (onChange)="onCheckboxValueChange()"
+          (onChange)="onFilterSelection()"
           name="group2"
-          value="category"
           [value]="category"
+          [(ngModel)]="activeFilters.category"
         ></p-checkbox>
         <label class="ms-2">{{ category }}</label>
       </li>
     </div>
-
+    <!-- Brands Filter -->
     <h6 class="m-1">Brands</h6>
     <div *ngFor="let brand of brands" class="field-checkbox my-1">
       <li class="mx-3">
         <p-checkbox
-          [(ngModel)]="selectedBrand"
-          (onChange)="onCheckboxValueChange()"
+          (onChange)="onFilterSelection()"
           name="group2"
-          value="category"
           [value]="brand"
+          [(ngModel)]="activeFilters.brand"
         ></p-checkbox>
         <label class="ms-2">{{ brand }}</label>
       </li>

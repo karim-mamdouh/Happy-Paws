@@ -1,8 +1,7 @@
+//Modules
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-//PrimeNg Component
 import { ImageModule } from 'primeng/image';
 import { RatingModule } from 'primeng/rating';
 import { ButtonModule } from 'primeng/button';
@@ -15,7 +14,6 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { PaginatorModule } from 'primeng/paginator';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ToastModule } from 'primeng/toast';
-
 //Components
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -25,7 +23,6 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { FilterationComponent } from './components/filteration/filteration.component';
 import { StoreModuleRoutingModule } from './store-module-routing.module';
 import { SmallFilterComponent } from './components/small-filter/small-filter.component';
-
 //Services
 import { MessageService } from 'primeng/api';
 
@@ -54,8 +51,8 @@ import { MessageService } from 'primeng/api';
     CheckboxModule,
     PaginatorModule,
     MultiSelectModule,
-    ToastModule
+    ToastModule,
   ],
   providers: [MessageService],
 })
-export class StoreModuleModule { }
+export class StoreModuleModule {}

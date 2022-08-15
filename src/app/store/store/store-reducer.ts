@@ -1,19 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import { CartItem, ProductItem } from 'src/app/interfaces/store';
 import {
-  addReview,
   addToCart,
   addToWishList,
-  decrementCartItem,
+  alterReview,
   fillCartList,
   fillProducts,
   fillWishList,
-  incrementCartItem,
   removeFromCart,
   removeFromWishList,
   resetCart,
   resetProducts,
   resetWishList,
+  updateCartItem,
 } from './store-actions';
 
 const initalState = {
@@ -39,55 +38,55 @@ export const storeReducer = createReducer(
     };
   }),
   //Add new review to product item in store action
-  on(addReview, (state, action) => {
-    let product = state.products.find(
+  on(alterReview, (state, action) => {
+    let productsCopy: Array<ProductItem> = [...state.products];
+    let index = productsCopy.findIndex(
       (element) => element.id === action.payload.id
     );
-    if (product === undefined) {
-      throw new Error('Item not found, check item id');
-    }
+
+    if (index !== -1) {
+      productsCopy[index] = {
+        ...action.payload,
+      };
+    } else throw new Error('Item not found, check item id');
+
     return {
       ...state,
-      products: [
-        ...state.products.filter((element) => element.id !== action.payload.id),
-        { ...product, reviews: [...product.reviews, action.payload.review] },
-      ],
+      products: productsCopy,
     };
   }),
-  //Add product item to wishlist action  NEED FIX !!!!!
+  //Add product item to wishlist action
   on(addToWishList, (state, action) => {
-    let product = state.products.find(
+    let productsCopy: Array<ProductItem> = [...state.products];
+    let index = productsCopy.findIndex(
       (element) => element.id === action.payload.id
     );
+
+    if (index !== -1) productsCopy[index] = { ...action.payload };
+    else throw new Error('Item not found, check item id');
+
     return {
       ...state,
       wishList: [...state.wishList, action.payload],
-      products: [
-        ...state.products.filter((element) => element.id !== action.payload.id),
-        {
-          ...product!,
-          wishList: true,
-        },
-      ],
+      products: productsCopy,
     };
   }),
   //Remove product item from wishlist action
   on(removeFromWishList, (state, action) => {
-    let product = state.products.find(
+    let productsCopy: Array<ProductItem> = [...state.products];
+    let index = productsCopy.findIndex(
       (element) => element.id === action.payload.id
     );
+
+    if (index !== -1) productsCopy[index] = { ...action.payload };
+    else throw new Error('Item not found, check item id');
+
     return {
       ...state,
       wishList: [
         ...state.wishList.filter((element) => element.id !== action.payload.id),
       ],
-      products: [
-        ...state.products.filter((element) => element.id !== action.payload.id),
-        {
-          ...product!,
-          wishList: false,
-        },
-      ],
+      products: productsCopy,
     };
   }),
   //Fill wishlist items action
@@ -113,10 +112,17 @@ export const storeReducer = createReducer(
   }),
   //Add product item to cart action
   on(addToCart, (state, action) => {
-    return {
-      ...state,
-      cart: [...state.cart, action.payload],
-    };
+    let cartItem = state.cart.find(
+      (element) => element.id === action.payload.id
+    );
+    if (cartItem === undefined) {
+      return {
+        ...state,
+        cart: [...state.cart, action.payload],
+      };
+    } else {
+      return { ...state };
+    }
   }),
   //Remove from cart action
   on(removeFromCart, (state, action) => {
@@ -126,49 +132,19 @@ export const storeReducer = createReducer(
     };
   }),
   //Increment cart item quantity action
-  on(incrementCartItem, (state, action) => {
-    let cartItem = state.cart.find(
+  on(updateCartItem, (state, action) => {
+    let cartCopy: Array<CartItem> = [...state.cart];
+    let index = cartCopy.findIndex(
       (element) => element.id === action.payload.id
     );
-    if (cartItem === undefined) {
-      throw new Error('Item not found, check item id');
-    }
+
+    if (index !== -1) cartCopy[index] = { ...action.payload };
+    else throw new Error('Item not found, check item id');
+
     return {
       ...state,
-      cart: [
-        ...state.cart.filter((element) => element.id !== action.payload.id),
-        {
-          ...cartItem!,
-          count: cartItem.count + 1,
-        },
-      ],
+      cart: cartCopy,
     };
-  }),
-  //Decrement cart item quantity action
-  on(decrementCartItem, (state, action) => {
-    let cartItem = state.cart.find(
-      (element) => element.id === action.payload.id
-    );
-    if (cartItem === undefined) {
-      throw new Error('Item not found, check item id');
-    }
-    if (cartItem.count > 0) {
-      cartItem.count = cartItem?.count - 1;
-      return {
-        ...state,
-        cart: [
-          ...state.cart.filter((element) => element.id !== action.payload.id),
-          {
-            ...cartItem!,
-            count: cartItem.count - 1,
-          },
-        ],
-      };
-    } else {
-      return {
-        ...state,
-      };
-    }
   }),
   //Reset cart action
   on(resetCart, (state, action) => {

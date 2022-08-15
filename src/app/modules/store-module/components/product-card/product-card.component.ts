@@ -1,87 +1,43 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { CartItem, ProductItem } from 'src/app/interfaces/store';
-import { DatabaseService } from 'src/app/services/database.service';
-import { addToCart, resetCart, resetWishList } from 'src/app/store/store/store-actions';
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.scss']
+  styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent implements OnInit {
-  private _product: ProductItem = {} as ProductItem;
-  rating: number | undefined = 0;
-  wishlist: Array<ProductItem> = [];
-  cartlist: Array<CartItem> = [];
-  @Input('product')
-  set product(product: ProductItem) {
-    this.rating = product.rate;
-    this._product = JSON.parse(JSON.stringify(product));;
-  }
+  @Input() product = {} as ProductItem; //Product item to be viewed
+  @Output() alterWishlistEmitter = new EventEmitter<ProductItem>(); //Emitter for wishlist action
+  @Output() addToCartEmitter = new EventEmitter<CartItem>(); //Emiiter for add to cart action
 
-  get product() {
-    return this._product;
-  }
-
-  constructor(
-    private _store: Store<{ store: { products: Array<ProductItem>, wishList: Array<ProductItem>, cart: Array<CartItem> } }>,
-    private _router: Router,
-    private _firestoreService: DatabaseService,
-  ) {
-    this.rating = this.product?.rate;
-    this._store.select('store').subscribe(res => {
-      this.wishlist = JSON.parse(JSON.stringify(res.wishList));
-      this.cartlist = JSON.parse(JSON.stringify(res.cart));
-    })
-  }
-
+  constructor(private _router: Router) {}
+  //Deep copy for recieved object
   ngOnInit(): void {
+    this.product = { ...this.product };
   }
-
-  onAddToCartClick(event: Event, product: ProductItem) {
-    let cartObj = JSON.parse(JSON.stringify(product)) as CartItem;
-    // set default value
-    cartObj.count = 1;
-    this.cartlist = [...this.cartlist, cartObj]
-    this._firestoreService.addToCart(localStorage.getItem('userID')!, this.cartlist).then(() => {
-      this._store.dispatch(resetCart());
-    })
-  }
-
-  onAddToWishlistClick(event: Event, product: ProductItem) {
-    // if product already in wishlist 
-    // Remove the product
-    if (product.wishList) {
-      // Get index of the product inside wishlist
-      const index = this.wishlist.findIndex(item => item.id === product.id);
-
-      // remove from local wishlist
-      this.wishlist.splice(index, 1);
-
-      // update firebase with the new wishlist state
-
-      this._firestoreService.removeFromWishlist(localStorage.getItem('userID')!, this.wishlist).then(() => {
-        this._store.dispatch(resetWishList());
-      })
-
+  //Function called when wishlist is clicked to alter wishlist state and emit event to parent
+  //If user isn't logged in it redirect user to login screen
+  alterWishlist(): void {
+    if (localStorage.getItem('userID')) {
+      this.product.wishList = !this.product.wishList;
+      this.alterWishlistEmitter.emit(this.product);
+    } else {
+      this._router.navigate(['/auth/login']);
     }
-    // if product is not in wishlist 
-    else {
-      // Change wishlist flag state 
-      this.product.wishList = true;
-      // Add the product to local wishlist
-      this.wishlist = [...this.wishlist, product];
-      // update firebase with the new wishlist state
-      this._firestoreService.addToWishlist(localStorage.getItem('userID')!, this.wishlist).then(() => {
-        this._store.dispatch(resetWishList());
-      })
-    }
-
   }
-
-  onCardClick(event: Event, productID: string): void {
-    this._router.navigate([`/store/details/${productID}`]);
+  //Function called when add to cart button is clicked to emit event to paren
+  //If user isn't logged in it redirect user to login screen
+  addToCart(): void {
+    if (localStorage.getItem('userID')) {
+      this.addToCartEmitter.emit({ ...this.product, count: 1 });
+    } else {
+      this._router.navigate(['/auth/login']);
+    }
+  }
+  //Function called when card is clicked to navigate to product details
+  goToDetails(): void {
+    this._router.navigate([`/store/details/${this.product.id}`]);
   }
 }

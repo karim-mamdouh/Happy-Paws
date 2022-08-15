@@ -1,46 +1,48 @@
-<!-- Main Section -->
-<section>
-  <!-- Main Container -->
+<section class="products">
   <div class="container">
     <!-- Product Page Content -->
     <div class="wrapper__store d-flex justify-content-between">
       <!-- Filter Container -->
       <div class="wrapper__store__filter col-lg-3">
         <app-filteration
-          (filterOptions)="onFilterOptionsChange($event)"
+          [activeFilters]="filters"
+          (filterOptions)="
+            onFilterOptionsChange($event);
+            paginate(0, this.numberOfItemsInPage);
+            paginator.changePage(0)
+          "
           class="col-lg-12 d-lg-block d-none"
         ></app-filteration>
       </div>
       <!-- Cards Container -->
-      <div class="wrapper__store__content col-lg-9 d-block">
+      <div class="wrapper__store__content col-lg-9 d-block flex-grow-1">
         <!-- small filter in small screens -->
         <div class="text-start">
           <app-small-filter
-            (filterOptions)="onFilterOptionsChange($event)"
             class="d-lg-none"
+            [activeFilters]="filters"
+            (filterOptions)="
+              onFilterOptionsChange($event);
+              paginate(0, this.numberOfItemsInPage);
+              paginator.changePage(0)
+            "
           ></app-small-filter>
         </div>
         <div class="p-4 d-flex flex-wrap">
-          <ng-template [ngIf]="isMobile === false" [ngIfElse]="elseBlock">
-            <div
-              class="col-lg-4 col-md-6 col-12 p-2"
-              *ngFor="let product of displayPaginatorProductsChunk"
+          <div
+            class="col-lg-4 col-md-6 col-12 p-2"
+            *ngFor="let product of paginatorChunk"
+          >
+            <app-product-card
+              [product]="product"
+              (addToCartEmitter)="addToCart($event)"
+              (alterWishlistEmitter)="alterWishlist($event)"
             >
-              <app-product-card [product]="product"> </app-product-card>
-            </div>
-          </ng-template>
-          <ng-template #elseBlock>
-            <div
-              class="col-lg-4 col-md-6 col-12 p-2"
-              *ngFor="let product of displayPaginatorProductsChunk_small"
-            >
-              <app-product-card [product]="product"> </app-product-card>
-            </div>
-          </ng-template>
+            </app-product-card>
+          </div>
         </div>
       </div>
     </div>
-
     <!-- Paginators Container-->
     <div class="paginator">
       <!-- Paginator in Large Screens -->
@@ -48,8 +50,9 @@
         <p-paginator
           [first]="pageStartIndex"
           [rows]="numberOfItemsInPage"
-          [totalRecords]="filteredProductList.length"
+          [totalRecords]="filteredProducts.length"
           (onPageChange)="paginate($event.first, $event.first + $event.rows)"
+          #paginator
         ></p-paginator>
       </div>
       <!-- Paginator in Small Screens -->
@@ -59,16 +62,20 @@
         <div class="col-10">
           <p-paginator
             [first]="pageStartIndex"
-            [rows]="numberOfItemsInPage_small"
-            [totalRecords]="filteredProductList.length"
-            (onPageChange)="
-              paginateSmall($event.first, $event.first + $event.rows)
-            "
+            [rows]="numberOfItemsInPage"
+            [totalRecords]="filteredProducts.length"
+            (onPageChange)="paginate($event.first, $event.first + $event.rows)"
             [showJumpToPageDropdown]="true"
             [showPageLinks]="false"
+            #paginator
           ></p-paginator>
         </div>
       </div>
     </div>
   </div>
+  <!-- Toasts -->
+  <!-- Success toast -->
+  <p-toast key="database"></p-toast>
+  <!-- Error toast -->
+  <p-toast key="error"></p-toast>
 </section>
