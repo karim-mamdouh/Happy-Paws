@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/profile';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -33,7 +32,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private _loginFormBuilder: FormBuilder,
     private _authService: AuthService,
-    private _router: Router,
     private _messageService: MessageService
   ) {}
 
@@ -75,7 +73,15 @@ export class LoginComponent implements OnInit {
                 );
                 this.showSuccessToast();
                 setTimeout(() => {
-                  this._router.navigate(['/']);
+                  if (window.location.href.includes('github')) {
+                    let temp = window.location.href;
+                    let base = temp.substring(0, temp.indexOf('io/') + 3);
+                    let url = temp.replace(base, '');
+                    window.location.href =
+                      base + url.substring(0, url.indexOf('/') + 1);
+                  } else {
+                    window.location.href = '/';
+                  }
                 }, 1500);
               },
               () => {

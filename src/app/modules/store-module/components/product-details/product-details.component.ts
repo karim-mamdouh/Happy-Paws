@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { CartItem, ProductItem, Review } from 'src/app/interfaces/store';
 import { DatabaseService } from 'src/app/services/database.service';
 import {
-  addReview,
-  resetCart,
-  resetWishList,
+  addToCart,
+  addToWishList,
+  alterReview,
+  removeFromWishList,
 } from 'src/app/store/store/store-actions';
 
 @Component({
@@ -17,18 +17,15 @@ import {
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  cartlist: Array<CartItem> = [];
-  product: ProductItem = {} as ProductItem;
-  // Add review
-  reviewRating: number = 3;
-  comment?: string = '';
-  // wishlist
-  wishlist: Array<ProductItem> = [];
-  productID: string = '';
+  private _userID: string = ''; //Active user id stored in local storage
+  productItem: ProductItem | null = null; //Product item to be viewed
+  newReview = {} as Review; // Review object of current user
+
   constructor(
     private _messageService: MessageService,
-    private _router: ActivatedRoute,
-    private _firestoreService: DatabaseService,
+    private _activeRoute: ActivatedRoute,
+    private _router: Router,
+    private _fireStore: DatabaseService,
     private _store: Store<{
       store: {
         cart: Array<CartItem>;
@@ -36,119 +33,155 @@ export class ProductDetailsComponent implements OnInit {
         wishList: Array<ProductItem>;
       };
     }>
-  ) {
-    this._store.select('store').subscribe((res) => {
-      this.wishlist = JSON.parse(JSON.stringify(res.wishList));
-      this.cartlist = JSON.parse(JSON.stringify(res.cart));
-    });
-    this.productID = this._router.snapshot.paramMap.get('id')!;
-  }
+  ) {}
+
+  //Subscribe to store, fetch userid from local storage and loads review object with current user review if found
   ngOnInit(): void {
-    this._store
-      .select('store')
-      .pipe(take(1))
-      .subscribe((res) => {
-        this.product = JSON.parse(
-          JSON.stringify(
-            res.products.find((e) => {
-              return e.id === this.productID;
-            })!
-          )
+    this._userID = localStorage.getItem('userID')!;
+    if (this._userID) {
+      this.newReview = {
+        rate: 0,
+        userID: this._userID,
+        userName: localStorage.getItem('userName')!,
+        comment: '',
+      };
+    }
+    this._store.select('store').subscribe((response) => {
+      let temp = response.products.find(
+        (element) => element.id === this._activeRoute.snapshot.params['id']
+      );
+
+      if (temp) {
+        this.productItem = JSON.parse(JSON.stringify(temp));
+        if (
+          response.wishList.findIndex(
+            (wishlist) => wishlist.id === this.productItem!.id
+          ) !== -1
+        ) {
+          this.productItem!.wishList = true;
+        }
+        let currentReview = this.productItem!.reviews.find(
+          (review) => this._userID === review.userID
         );
-      });
+        if (currentReview) {
+          this.newReview = JSON.parse(JSON.stringify(currentReview));
+        }
+      }
+    });
   }
-  onAddToWishlistClick(event: Event, product: ProductItem) {
-    // if product already in wishlist
-    // Remove the product
-    if (product.wishList) {
-      // Get index of the product inside wishlist
-      const index = this.wishlist.findIndex((item) => item.id === product.id);
-      this.product.wishList = false;
-      // remove from local wishlist
-      this.wishlist.splice(index, 1);
-
-      // update firebase with the new wishlist state
-      this._firestoreService
-        .removeFromWishlist(localStorage.getItem('userID')!, this.wishlist)
-        .then((res) => {
-          this._store.dispatch(resetWishList());
-        });
+  //Function called when wishlist button is clicked in child to modify store
+  //and update database
+  alterWishlist(): void {
+    if (this._userID) {
+      if (this.productItem!.wishList) {
+        this._fireStore.checkWishlistDocExist(this._userID).subscribe(
+          (response) => {
+            this._fireStore
+              .addToWishlist(this._userID, this.productItem!, response.exists)
+              .then(() => {
+                this._store.dispatch(
+                  addToWishList({ payload: this.productItem! })
+                );
+                this.showSuccessToast('Item added to wishlist');
+              })
+              .catch(() => {
+                this.showErrorToast('Failed to add item to wishlist');
+              });
+          },
+          () => {
+            this.showErrorToast('Failed to add item to wishlist');
+          }
+        );
+      } else {
+        this._fireStore
+          .removeFromWishlist(this._userID, this.productItem!.id)
+          .then(() => {
+            this._store.dispatch(
+              removeFromWishList({ payload: this.productItem! })
+            );
+            this.showSuccessToast('Item removed from wishlist');
+          })
+          .catch(() => {
+            this.showErrorToast('Failed to remove item from wishlist');
+          });
+      }
+    } else {
+      this._router.navigate(['/auth/login']);
     }
-    // if product is not in wishlist
-    else {
-      this.product.wishList = true;
-      // Add the product to local wishlist
-      this.wishlist = [...this.wishlist, product];
-      // update firebase with the new wishlist state
-      this._firestoreService
-        .addToWishlist(localStorage.getItem('userID')!, this.wishlist)
-        .then((res) => {
-          this._store.dispatch(resetWishList());
-        });
+  }
+  //Function called when add to cart button is clicked to add
+  //product item to cart in store and update database
+  addToCart(): void {
+    if (this._userID) {
+      const cartItem: CartItem = { ...this.productItem!, count: 1 };
+      this._fireStore.checkCartDocExist(this._userID).subscribe(
+        (response) => {
+          this._fireStore
+            .addToCart(this._userID, cartItem, response.exists)
+            .then(() => {
+              this._store.dispatch(addToCart({ payload: cartItem }));
+              this.showSuccessToast('Item added to cart');
+            })
+            .catch(() => {
+              this.showErrorToast('Failed to add item to cart');
+            });
+        },
+        () => {
+          this.showErrorToast('Failed to add item to cart');
+        }
+      );
+    } else {
+      this._router.navigate(['/auth/login']);
     }
   }
-  addToCart(product: ProductItem) {
-    let cartObj = JSON.parse(JSON.stringify(product)) as CartItem;
-    cartObj.count = 1;
-    this.cartlist = [...this.cartlist, cartObj];
-    this._firestoreService
-      .addToCart(localStorage.getItem('userID')!, this.cartlist)
-      .then(() => {
-        this._store.dispatch(resetCart());
-      });
-  }
-  reset() {
-    this.reviewRating = 3;
-    this.comment = '';
-  }
-  onSubmitReviewClick(event: Event) {
-    if (localStorage.getItem('userID') != null) {
-      // Create a new Review object
-      let reviewObject: Review = {} as Review;
-      reviewObject.rate = this.reviewRating;
-      reviewObject.userID = localStorage.getItem('userID')!;
-      reviewObject.userName = localStorage.getItem('userName')!;
-      reviewObject.comment = this.comment;
-
-      // Add Review to local product object
-      this.product.reviews.push(reviewObject);
-
-      // update the product reviews in the database
-      this._firestoreService
-        .addReviewToProductItem(this.product)
-        .then(() => {
-          // update the product reviews in ngrx store
-          this._store.dispatch(
-            addReview({ payload: { id: this.productID, review: reviewObject } })
-          );
-          this.showSuccessToast('Review Successfually added');
-          this.reset();
+  //Function called when review submit is clicked to add
+  //new review in store and update database
+  submitNewReview(): void {
+    if (this._userID) {
+      const index = this.productItem!.reviews.findIndex(
+        (review) => review.userID === this._userID
+      );
+      if (index === -1) {
+        this.productItem!.reviews = [
+          ...this.productItem!.reviews,
+          this.newReview,
+        ];
+      } else {
+        this.productItem!.reviews[index] = JSON.parse(
+          JSON.stringify(this.newReview)
+        );
+      }
+      this._store.dispatch(
+        alterReview({
+          payload: JSON.parse(JSON.stringify(this.productItem)),
         })
-        .catch((err) => {
-          this.showErrorToast(
-            `Error adding your review, Please contact the support ${err}`
-          );
+      );
+      this._fireStore
+        .addReviewToProductItem(JSON.parse(JSON.stringify(this.productItem)))
+        .then(() => {
+          this.showSuccessToast('Review added');
+        })
+        .catch(() => {
+          this.showErrorToast('Failed to add review');
         });
     } else {
-      this.showErrorToast('Please Login first !');
+      this._router.navigate(['/auth/login']);
     }
   }
-  //Function that shows success toaster
-  showSuccessToast(successMsg: string): void {
+  //Success toast message
+  showSuccessToast(message: string): void {
     this._messageService.add({
-      key: 'Successtoast',
+      key: 'database',
       severity: 'success',
-      summary: '',
-      detail: successMsg,
+      detail: message,
     });
   }
-  //Function that shows error toaster
-  showErrorToast(errorMsg: string): void {
+  //Error toast message
+  showErrorToast(message: string): void {
     this._messageService.add({
-      key: 'Errortoast',
+      key: 'database',
       severity: 'error',
-      summary: '',
-      detail: errorMsg,
+      detail: message,
     });
   }
 }

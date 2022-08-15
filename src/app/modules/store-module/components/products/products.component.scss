@@ -7,7 +7,7 @@ $color-white: #ffffff;
 $color-main: rgb(251, 248, 248);
 
 //--------------------------- Main Container ------------------------
-section {
+.products {
   .wrapper__store {
     &__filter {
       height: 100%;
@@ -62,4 +62,3 @@ section {
   color: $color-primary;
   background: #eeeeee;
 }
-//---------------- pagination in small screens start -----------------

@@ -2,7 +2,7 @@ import { AnimalType } from './adoption';
 
 export interface Review {
   userID: string;
-  userName:string;
+  userName: string;
   rate: number;
   comment?: string;
 }
@@ -26,6 +26,12 @@ export interface CartItem extends ProductItem {
   count: number;
 }
 
+export interface FilterData {
+  animalType: Array<string>;
+  category: Array<string>;
+  brand: Array<string>;
+}
+
 export enum ProductCategory {
   Supplies = 'Supplies',
   Accessories = 'Accessories',
@@ -33,7 +39,6 @@ export enum ProductCategory {
   Litter = 'Litter',
   Grooming = 'Grooming',
 }
-
 
 export enum Brand {
   Josera = 'Josera',
@@ -49,7 +54,7 @@ export enum Brand {
   Georplast = 'Georplast',
   GiGwi = 'GiGwi',
   Ariika = 'Ariika',
-  PetsRepublic = "Pets Republic",
-  WonderCat = "Wonder Cat",
-  RoseFishFood = "Rose Fish Food"
+  PetsRepublic = 'Pets Republic',
+  WonderCat = 'Wonder Cat',
+  RoseFishFood = 'Rose Fish Food',
 }

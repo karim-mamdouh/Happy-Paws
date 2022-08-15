@@ -100,11 +100,7 @@ export class RegisterComponent implements OnInit {
         )
         .then((response) => {
           user.id = response.user?.uid;
-          this._authService.saveUserToFireStore(user).then((response) => {
-            this._authService.createUserWishlist(user.id!).then((response) => {
-              return this._authService.createUserCart(user.id!)
-            })
-          });
+          return this._authService.saveUserToFireStore(user);
         })
         .then(() => {
           this.showSuccessToast();

@@ -1,27 +1,27 @@
-<!-- main card container -->
-<div class="card">
-  <!-- condetion -->
-  <ng-template [ngIf]="wishlist.length! > 0" [ngIfElse]="elseBlock">
-    <!-- primeNg container -->
+<section class="card">
+  <ng-template
+    [ngIf]="((storeObserve | async)?.wishList)!.length > 0"
+    [ngIfElse]="elseBlock"
+  >
+    <!-- Container -->
     <p-virtualScroller
       scrollHeight="1000px"
       [itemSize]="100"
       styleClass="mb-5"
-      [value]="wishlist!"
+      [value]="(storeObserve | async)?.wishList!"
     >
       <!-- Header -->
       <ng-template pTemplate="header">
         <h2 class="text-center">WishList</h2>
       </ng-template>
-
       <!-- item list container -->
       <ng-template pTemplate="item" let-wishlist>
         <div class="product-item container my-5">
           <!-- product image -->
           <figure class="image-container">
             <img
-              src="{{ wishlist.images[0] }}"
-              alt="Item Image"
+              [src]="wishlist.images[0]"
+              [alt]="wishlist.title"
               class="product-image img-fluid"
             />
           </figure>
@@ -53,14 +53,14 @@
               <p-button
                 styleClass="me-3"
                 class="pp-button"
-                (onClick)="$event.stopPropagation(); onDetailsClick(wishlist.id)"
+                (onClick)="$event.stopPropagation(); goToDetails(wishlist.id)"
                 ><i class="fa-solid fa-circle-info"></i> &nbsp;
                 Details</p-button
               >
               <p-button
                 styleClass="p-button-danger"
                 (onClick)="
-                  $event.stopPropagation(); onRemoveItemClick(wishlist)
+                  $event.stopPropagation(); removeFromWishlist(wishlist)
                 "
                 ><i class="fa-solid fa-ban"></i> &nbsp; Remove</p-button
               >
@@ -70,14 +70,14 @@
               <button
                 type="button"
                 class="favButton btn btn-primary me-4"
-                (click)="$event.stopPropagation(); onDetailsClick(wishlist)"
+                (click)="$event.stopPropagation(); goToDetails(wishlist)"
               >
                 <i class="fa-solid fa-circle-info"></i>
               </button>
               <button
                 type="button"
                 class="favButton btn btn-danger"
-                (click)="$event.stopPropagation(); onRemoveItemClick(wishlist)"
+                (click)="$event.stopPropagation(); removeFromWishlist(wishlist)"
               >
                 <i class="fa-solid fa-ban"></i>
               </button>
@@ -88,10 +88,15 @@
     </p-virtualScroller>
   </ng-template>
 
-  <!-- Text When list is Empty -->
+  <!-- When list is Empty -->
   <ng-template #elseBlock>
     <h1 class="text-center d-flex justify-content-center align-items-center">
       Start adding items to be shown
     </h1>
   </ng-template>
-</div>
+  <!-- Toasts -->
+  <!-- Success toast -->
+  <p-toast key="database"></p-toast>
+  <!-- Error toast -->
+  <p-toast key="error"></p-toast>
+</section>
