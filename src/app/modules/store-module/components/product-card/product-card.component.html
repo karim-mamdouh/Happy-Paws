@@ -1,44 +1,56 @@
 <p-card
-  (click)="$event.stopPropagation(); onCardClick($event, product.id)"
+  (click)="$event.stopPropagation(); goToDetails()"
   styleClass="p-card-shadow card p-2"
 >
   <ng-template pTemplate="header">
     <div class="card__actions d-flex justify-content-end m-1">
+      <!-- Wishlist button -->
       <p-toggleButton
         class="card__actions__addToWishlist"
         [onIcon]="'pi pi-heart-fill'"
         offIcon="pi pi-heart"
         [ngModel]="product.wishList"
-        (click)="
-          $event.stopPropagation(); onAddToWishlistClick($event, product)
-        "
+        (click)="$event.stopPropagation(); alterWishlist()"
       >
       </p-toggleButton>
     </div>
+    <!-- Product item image -->
     <figure>
-      <img alt="Card" class="card__img p-2" src="{{ product.images[0] }}" />
+      <img
+        [alt]="product.title"
+        class="card__img p-2"
+        [src]="product.images[0]"
+      />
     </figure>
   </ng-template>
+  <!-- Product category -->
   <p class="card__category">{{ product.category }}</p>
+  <!-- Product title -->
   <p class="card__title">{{ product.title }}</p>
-  <p-rating [(ngModel)]="rating" [readonly]="true" [cancel]="false"></p-rating>
+  <!-- Product rating -->
+  <p-rating
+    [(ngModel)]="product.rate"
+    [readonly]="true"
+    [cancel]="false"
+  ></p-rating>
   <div class="d-flex justify-content-between mb-2">
+    <!-- Product price -->
     <p class="card__price fw-bold my-2 fs-5">{{ product.price }} EGP</p>
-    <div *ngIf="product.quantity! > 0; then instock; else outofstock"></div>
-    <ng-template #instock>
+    <!-- Product stock status -->
+    <ng-template [ngIf]="product.quantity! > 0" [ngIfElse]="outofstock">
       <p class="card__actions__instock">In Stock</p>
     </ng-template>
     <ng-template #outofstock>
       <p class="card__actions__outofstock">Out Of Stock</p>
     </ng-template>
   </div>
-
+  <!-- Add to cart button -->
   <ng-template pTemplate="footer">
     <p-button
       styleClass="card__addToCart"
-      label="Add to Cart"
+      label="Add To Cart"
       icon="pi pi-shopping-cart"
-      (onClick)="$event.stopPropagation(); onAddToCartClick($event, product)"
+      (onClick)="$event.stopPropagation(); addToCart()"
     >
     </p-button>
   </ng-template>

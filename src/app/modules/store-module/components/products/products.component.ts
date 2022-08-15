@@ -1,141 +1,228 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { CartItem, ProductItem } from 'src/app/interfaces/store';
-import { FilterData } from '../filteration/filteration.component';
+import { Subscription } from 'rxjs';
+import { CartItem, FilterData, ProductItem } from 'src/app/interfaces/store';
+import {
+  addToCart,
+  addToWishList,
+  removeFromWishList,
+} from 'src/app/store/store/store-actions';
+import { DatabaseService } from 'src/app/services/database.service';
+import { FilterationComponent } from '../filteration/filteration.component';
+import { Paginator } from 'primeng/paginator';
+import { MessageService } from 'primeng/api';
+import { SmallFilterComponent } from '../small-filter/small-filter.component';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
-
 export class ProductsComponent implements OnInit {
-  // Filteration
-  originalDataList: Array<ProductItem> = [];
-  filteredProductList: Array<ProductItem> = [];
+  private _userID: string = ''; //Active user id stored in local storage
+  private _pageCurrentStartIndex: number = 0; //Current start index for paginator
+  private _pageCurrentEndIndex: number = 0; //Current end index for paginator
+  private _subscriptions: Array<Subscription> = []; //Array holding all active subscription to be unsubscribed on destroy
+  private _originalProducts: Array<ProductItem> = []; //Array holding store data
+  @ViewChild(FilterationComponent) private _filterComponent =
+    {} as FilterationComponent; //Filteration component object to fill active filters on query params change
+  @ViewChild(SmallFilterComponent) private _smallFilterComponent =
+    {} as SmallFilterComponent; //Small screen filteration component object to fill active filters on query params change
 
- // Paginator Large screen
- numberOfItemsInPage: number = 9;
- pageStartIndex: number = 0;
- pageEndIndex: number = this.pageStartIndex + this.numberOfItemsInPage;
- displayPaginatorProductsChunk: Array<ProductItem> = [];
+  @ViewChild('paginator') paginator = {} as Paginator; //Paginator object to be used to navigate to page 1 on filter change
+  pageStartIndex: number = 0; //Start index for paginator
+  numberOfItemsInPage: number = 9; //Number of pages in paginator
+  filters: FilterData = {
+    brand: [],
+    category: [],
+    animalType: [],
+  }; //Active filters object
+  filteredProducts: Array<ProductItem> = []; //Array holding filtered data
+  paginatorChunk: Array<ProductItem> = []; //Array holding current viewed data by paginator
 
- // Paginator Small screen
- numberOfItemsInPage_small: number = 3;
- pageEndIndex_small: number = this.pageStartIndex + this.numberOfItemsInPage_small;
- displayPaginatorProductsChunk_small: Array<ProductItem> = [];
+  constructor(
+    private _store: Store<{
+      store: {
+        products: Array<ProductItem>;
+        wishList: Array<ProductItem>;
+        cart: Array<CartItem>;
+      };
+    }>,
+    private _fireStore: DatabaseService,
+    private _activeRoute: ActivatedRoute,
+    private _messageService: MessageService
+  ) {}
 
- // Detect if its a mobile screen size
- isMobile = false;
- getIsMobile(): boolean {
-   const width = document.documentElement.clientWidth;
-   const breakpoint = 992;
-   if (width < breakpoint) {
-     return true;
-   } else {
-     return false;
-   }
- }
-  constructor(private _store: Store<{ store: { cart: Array<CartItem>, products: Array<ProductItem>, wishList: Array<ProductItem> } }>) {
-    this._store.select('store').subscribe(res => {
-      this.originalDataList = res.products;
-      this.filteredProductList = this.originalDataList;
-      if(this.isMobile){
-        this.paginateSmall(0,this.pageEndIndex_small);
-      }else{
-        this.paginate(0,this.pageEndIndex);
-      }
-    });
-  }
-
-  onFilterOptionsChange(filterOptions: FilterData) {
-    this.filterData(filterOptions);
-  }
-
-  filterData(filterOptions: FilterData) {
-    // Reset if no selected options
-    if (filterOptions.animalType.length === 0
-      && filterOptions.category.length === 0
-      && filterOptions.brand.length === 0) {
-      this.filteredProductList = this.originalDataList;
-      this.paginate(this.pageStartIndex, this.pageEndIndex);
-      this.paginateSmall(this.pageStartIndex, this.pageEndIndex_small);
-    }
-    // Step 1: Check for Animal options
-    if (filterOptions.animalType.length > 0) {
-      // first: filter based on selected animal from original data
-      this.filterAnimal(this.originalDataList, filterOptions);
-      // if category selected
-      if (filterOptions.category.length > 0) {
-        // filter category based on the previous filtered list of ( animals only / animals + brand )
-        let prevList = this.filteredProductList;
-        this.filterCategory(prevList, filterOptions);
-      }
-      // Check if brand selected
-      if (filterOptions.brand.length > 0) {
-        // filter brand based on the previous filtered list of ( animals only / animals + category )
-        let prevList = this.filteredProductList;
-        this.filterBrand(prevList, filterOptions);
-      }
-    } else {
-      // If no Animal selected then we enter this scope
-      // Then check for Category options
-      if (filterOptions.category.length > 0) {
-        // if category selected then we enter this scope
-        // first: filter based on selected category from original data
-        this.filterCategory(this.originalDataList, filterOptions);
-        // if brand selected
-        if (filterOptions.brand.length > 0) {
-          // filter brand based on the previous filtered list of ( category only )
-          let prevList = this.filteredProductList;
-          this.filterBrand(prevList, filterOptions);
-        }
-      } else {
-        // If no Category selected then we enter this scope
-        // Then check for Brand options
-        if (filterOptions.brand.length > 0) {
-          // first: filter based on selected brand from original data
-          this.filterBrand(this.originalDataList, filterOptions);
-          // other cases are handled by the previous scopes
-        }
-      }
-    }
-
-  }
-
-  paginate(start: number, end: number) {
-    this.displayPaginatorProductsChunk = this.filteredProductList.slice(start, end);
-  }
-  paginateSmall(start: number, end: number) {
-    this.displayPaginatorProductsChunk_small = this.filteredProductList.slice(start, end);
-  }
-
+  //Subscribe to store and query params observables
   ngOnInit(): void {
-    this.isMobile = this.getIsMobile();
-    window.onresize = () => {
-      this.isMobile = this.getIsMobile();
-    };
+    this._userID = localStorage.getItem('userID')!;
+    this._subscriptions.push(
+      this._store.select('store').subscribe((respose) => {
+        this.storeSubscription(respose);
+      })
+    );
+    this._subscriptions.push(
+      this._activeRoute.queryParams.subscribe((response) => {
+        this.queryParamsSubscription(response);
+      })
+    );
   }
+  //Unsubscribe from all observables on destroy
+  ngOnDestroy(): void {
+    this._subscriptions.forEach((element) => {
+      element.unsubscribe();
+    });
+  }
+  //Function for store subscription which refills the _originalProducts array & holds the paginator in it's position
+  // Also re-applies filters
+  storeSubscription(response: any): void {
+    this._originalProducts = JSON.parse(JSON.stringify(response.products)).map(
+      (product: any) => {
+        if (
+          response.wishList.findIndex(
+            (wishlist: any) => wishlist.id === product.id
+          ) !== -1
+        ) {
+          product.wishList = true;
+        }
+        return product;
+      }
+    );
 
-  filterAnimal(data: Array<ProductItem>, filterOptions: FilterData) {
-    this.filteredProductList = data.filter((product: ProductItem) => {
-      return filterOptions.animalType.includes(product.animalType);
-    });
-    this.paginate(this.pageStartIndex, this.pageEndIndex);
-    this.paginateSmall(this.pageStartIndex, this.pageEndIndex_small);
+    this.onFilterOptionsChange(this.filters);
+    this.paginate(
+      this._pageCurrentStartIndex,
+      this._pageCurrentEndIndex === 0
+        ? this.numberOfItemsInPage
+        : this._pageCurrentEndIndex
+    );
   }
-  filterCategory(data: Array<ProductItem>, filterOptions: FilterData) {
-    this.filteredProductList = data.filter((product: ProductItem) => {
-      return filterOptions.category.includes(product.category);
-    });
-    this.paginate(this.pageStartIndex, this.pageEndIndex);
-    this.paginateSmall(this.pageStartIndex, this.pageEndIndex_small);
+  //Function for query params subscription which fills the selected filters in child and filters viewed data
+  queryParamsSubscription(response: any): void {
+    this.filters.animalType = [];
+    this.filters.category = [];
+    if (response['animalType'] !== undefined) {
+      this.filters.animalType.push(response['animalType']);
+    }
+    if (response['category'] !== undefined) {
+      this.filters.category.push(response['category']);
+    }
+    this._filterComponent.activeFilters = this.filters;
+    this._smallFilterComponent.activeFilters = this.filters;
+    this.onFilterOptionsChange(this.filters);
+    this.paginate(
+      this._pageCurrentStartIndex,
+      this._pageCurrentEndIndex === 0
+        ? this.numberOfItemsInPage
+        : this._pageCurrentEndIndex
+    );
   }
-  filterBrand(data: Array<ProductItem>, filterOptions: FilterData) {
-    this.filteredProductList = data.filter((product: ProductItem) => {
-      return filterOptions.brand.includes(product.brand);
+  //Function called when add to cart button is clicked in child to add
+  //product item to cart in store and update database
+  addToCart(item: CartItem): void {
+    this._subscriptions.push(
+      this._fireStore.checkCartDocExist(this._userID).subscribe(
+        (response) => {
+          this._fireStore
+            .addToCart(this._userID, item, response.exists)
+            .then(() => {
+              this._store.dispatch(addToCart({ payload: item }));
+              this.showSuccessToast('Item added to cart');
+            })
+            .catch(() => {
+              this.showErrorToast('Failed to add item to cart');
+            });
+        },
+        () => {
+          this.showErrorToast('Failed to add item to cart');
+        }
+      )
+    );
+  }
+  //Function called when wishlist button is clicked in child to modify store
+  //and update database
+  alterWishlist(item: ProductItem): void {
+    if (item.wishList) {
+      this._subscriptions.push(
+        this._fireStore.checkWishlistDocExist(this._userID).subscribe(
+          (response) => {
+            this._fireStore
+              .addToWishlist(this._userID, item, response.exists)
+              .then(() => {
+                this._store.dispatch(addToWishList({ payload: item }));
+                this.showSuccessToast('Item added to wishlist');
+              })
+              .catch(() => {
+                this.showErrorToast('Failed to add item to wishlist');
+              });
+          },
+          () => {
+            this.showErrorToast('Failed to add item to wishlist');
+          }
+        )
+      );
+    } else {
+      this._fireStore
+        .removeFromWishlist(this._userID, item.id)
+        .then(() => {
+          this._store.dispatch(removeFromWishList({ payload: item }));
+          this.showSuccessToast('Item removed from wishlist');
+        })
+        .catch(() => {
+          this.showErrorToast('Failed to remove item from wishlist');
+        });
+    }
+  }
+  //Function called when filters are altered in child to apply new filters to filtered products array
+  //If no filters applied filtered products array is filled with original products
+  onFilterOptionsChange(filters: FilterData) {
+    this.filters = filters;
+    this.filteredProducts = this._originalProducts;
+    if (
+      filters.animalType.length !== 0 ||
+      filters.brand.length !== 0 ||
+      filters.category.length !== 0
+    ) {
+      let newFiltered: Array<ProductItem> = [];
+      this.filteredProducts.forEach((element) => {
+        if (
+          (filters.animalType.length !== 0
+            ? filters.animalType.includes(element.animalType)
+            : true) &&
+          (filters.brand.length !== 0
+            ? filters.brand.includes(element.brand)
+            : true) &&
+          (filters.category.length !== 0
+            ? filters.category.includes(element.category)
+            : true)
+        ) {
+          newFiltered.push(element);
+        }
+      });
+      this.filteredProducts = newFiltered;
+    }
+  }
+  //Function called to show next data chunck in paginator
+  paginate(start: number, end: number): void {
+    this._pageCurrentStartIndex = start;
+    this._pageCurrentEndIndex = end;
+    this.paginatorChunk = this.filteredProducts.slice(start, end);
+  }
+  //Success toast message
+  showSuccessToast(message: string): void {
+    this._messageService.add({
+      key: 'database',
+      severity: 'success',
+      detail: message,
     });
-    this.paginate(this.pageStartIndex, this.pageEndIndex);
-    this.paginateSmall(this.pageStartIndex, this.pageEndIndex_small);
+  }
+  //Error toast message
+  showErrorToast(message: string): void {
+    this._messageService.add({
+      key: 'database',
+      severity: 'error',
+      detail: message,
+    });
   }
 }
