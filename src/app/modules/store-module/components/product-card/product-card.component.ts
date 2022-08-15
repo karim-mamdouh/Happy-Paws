@@ -18,13 +18,23 @@ export class ProductCardComponent implements OnInit {
     this.product = { ...this.product };
   }
   //Function called when wishlist is clicked to alter wishlist state and emit event to parent
+  //If user isn't logged in it redirect user to login screen
   alterWishlist(): void {
-    this.product.wishList = !this.product.wishList;
-    this.alterWishlistEmitter.emit(this.product);
+    if (localStorage.getItem('userID')) {
+      this.product.wishList = !this.product.wishList;
+      this.alterWishlistEmitter.emit(this.product);
+    } else {
+      this._router.navigate(['/auth/login']);
+    }
   }
-  //Function called when add to cart button is clicked to emit event to parent
+  //Function called when add to cart button is clicked to emit event to paren
+  //If user isn't logged in it redirect user to login screen
   addToCart(): void {
-    this.addToCartEmitter.emit({ ...this.product, count: 1 });
+    if (localStorage.getItem('userID')) {
+      this.addToCartEmitter.emit({ ...this.product, count: 1 });
+    } else {
+      this._router.navigate(['/auth/login']);
+    }
   }
   //Function called when card is clicked to navigate to product details
   goToDetails(): void {

@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import { CartItem, ProductItem } from 'src/app/interfaces/store';
 import {
-  addReview,
   addToCart,
   addToWishList,
+  alterReview,
   fillCartList,
   fillProducts,
   fillWishList,
@@ -38,18 +38,17 @@ export const storeReducer = createReducer(
     };
   }),
   //Add new review to product item in store action
-  on(addReview, (state, action) => {
+  on(alterReview, (state, action) => {
     let productsCopy: Array<ProductItem> = [...state.products];
     let index = productsCopy.findIndex(
       (element) => element.id === action.payload.id
     );
 
-    if (index !== -1)
+    if (index !== -1) {
       productsCopy[index] = {
-        ...productsCopy[index],
-        reviews: [...productsCopy[index].reviews, action.payload.review],
+        ...action.payload,
       };
-    else throw new Error('Item not found, check item id');
+    } else throw new Error('Item not found, check item id');
 
     return {
       ...state,

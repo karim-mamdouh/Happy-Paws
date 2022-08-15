@@ -77,7 +77,19 @@ export class ProductsComponent implements OnInit {
   //Function for store subscription which refills the _originalProducts array & holds the paginator in it's position
   // Also re-applies filters
   storeSubscription(response: any): void {
-    this._originalProducts = response.products;
+    this._originalProducts = JSON.parse(JSON.stringify(response.products)).map(
+      (product: any) => {
+        if (
+          response.wishList.findIndex(
+            (wishlist: any) => wishlist.id === product.id
+          ) !== -1
+        ) {
+          product.wishList = true;
+        }
+        return product;
+      }
+    );
+
     this.onFilterOptionsChange(this.filters);
     this.paginate(
       this._pageCurrentStartIndex,

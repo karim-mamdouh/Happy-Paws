@@ -7,9 +7,9 @@ export const fillProducts = createAction(
   props<{ payload: Array<ProductItem> }>()
 );
 //Add Review to product item action
-export const addReview = createAction(
-  'ADD_REVIEW',
-  props<{ payload: { id: string; review: Review } }>()
+export const alterReview = createAction(
+  'ALTER_REVIEW',
+  props<{ payload: ProductItem }>()
 );
 //Empty product list action
 export const resetProducts = createAction('RESET_PRODUCTS');

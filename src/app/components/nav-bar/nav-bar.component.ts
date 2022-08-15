@@ -166,7 +166,7 @@ export class NavBarComponent implements OnInit {
   }
   // Function that logs user out and reloads app
   logout(): void {
-    this._authService.logout().then((response) => {
+    this._authService.logout().then(() => {
       localStorage.clear();
       if (window.location.href.includes('github')) {
         let temp = window.location.href;

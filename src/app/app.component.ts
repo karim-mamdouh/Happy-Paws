@@ -18,6 +18,7 @@ import { Article } from './interfaces/blog';
 import { fillAdoption } from './store/adoption/adoption-actions';
 import { Animal } from './interfaces/adoption';
 import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -146,30 +147,6 @@ export class AppComponent {
           let temp = response as Array<ProductItem>;
           let tempToArray: Array<ProductItem> = Object.values(temp);
           this._store.dispatch(fillWishList({ payload: tempToArray }));
-        })
-    );
-    // Change the local products wishlist status based on user`s wishlist
-    this._subscription.push(
-      this._store
-        .select('store')
-        .pipe(take(3))
-        .subscribe((response) => {
-          if (response.wishList.length > 0) {
-            // Creating Deep Copies of products,wishlist to be able to modify properties
-            let tempProducts: Array<ProductItem> = [...response.products];
-            let tempWishList: Array<ProductItem> = [...response.wishList];
-            // looping to change the wishlist status inside products
-            for (let i: number = 0; i < tempProducts.length; i++) {
-              for (let j: number = 0; j < tempWishList.length; j++) {
-                if (tempProducts[i].id == tempWishList[j].id) {
-                  tempProducts[i].wishList = true;
-                }
-              }
-            }
-            // saving the new state in ngrx store
-            this._store.dispatch(resetProducts());
-            this._store.dispatch(fillProducts({ payload: tempProducts }));
-          }
         })
     );
   }
