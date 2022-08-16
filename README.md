@@ -20,7 +20,7 @@ Pet platform with all supplies and services that any pet owner will need
 - Pet hosting locations 🏠
 - Bird & Fish products 🐟🐦
 
-## Technologies
+## Technologies & Packages Used
 
 <div>
 <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" />
