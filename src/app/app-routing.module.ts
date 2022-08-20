@@ -53,7 +53,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled', //Returns position to top of page
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
