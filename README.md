@@ -2,7 +2,7 @@
 
 Pet platform with all supplies and services that any pet owner will need
 
-## Current Features
+## 📝 Current Features
 
 - User authentication 🗝
 - E-commerce store 🛒
@@ -13,14 +13,14 @@ Pet platform with all supplies and services that any pet owner will need
 - Cart 💰
 - Wishlist ❤
 
-## Future Upgrades
+## 🔭 Future Upgrades
 
 - Vet appointments 👨‍⚕️
 - Grooming reservations ✂
 - Pet hosting locations 🏠
 - Bird & Fish products 🐟🐦
 
-## Technologies & Packages Used
+## 🛠 Technologies & Packages Used
 
 <div>
 <a href="https://angular.io/"><img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" /></a>
